@@ -1,0 +1,19 @@
+{
+    "name": "dev-alamin/book-review",
+    "description": "This is a wordpress plugin",
+    "type": "wordpress-plugin",
+    "license": "GPLv2",
+    "autoload": {
+        "psr-4": {
+            "Book\\Review\\": "includes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "AL AMIN",
+            "email": "hmalaminmb4@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

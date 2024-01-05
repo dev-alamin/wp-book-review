@@ -1,6 +1,6 @@
 <?php 
 /**
- * Plugin Name: Book Review
+ * Plugin Name: WP Book Review
  * Plugin URI:  
  * Description: This plugin will help you to take user review like forum. It will increase engangement and thus boost sale.
  * Version:     1.0
@@ -80,7 +80,7 @@ final class Book_Review {
         define( 'BOOK_REVIEW_FILE', __FILE__ );
         define( 'BOOK_REVIEW_PATH', __DIR__ );
         define( 'BOOK_REVIEW_URL', plugins_url( '', BOOK_REVIEW_FILE ) );
-        define( 'BOOK_REVIEW_ASSETS', WD_ACADEMY_URL . '/assets' );
+        define( 'BOOK_REVIEW_ASSETS', BOOK_REVIEW_URL . '/assets' );
     }
 
     /**
@@ -118,9 +118,9 @@ final class Book_Review {
  *
  * @return \Book_Review
  */
-function Book_Review() {
+function book_review() {
     return Book_Review::init();
 }
 
 // kick-off the plugin
-Book_Review();
+book_review();

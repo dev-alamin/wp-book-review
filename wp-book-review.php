@@ -90,7 +90,7 @@ final class Book_Review {
      */
     public function init_plugin() {
 
-        // new Book\Review\Assets();
+        new Book\Review\Assets();
 
         // if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
         //     new Book\Review\Ajax();

@@ -1,5 +1,9 @@
+.page-id-846 {
+    background: #eee;
+}
 .wpr-card {
     min-height: 450px;
+    background: #fff;
 }
 
 .wpr-card > .title {
@@ -21,4 +25,38 @@
     display: flex;
     gap: 10px;
     justify-content: space-between;
+}
+.wpr-review-product-thumb img {
+    max-width: 70px;
+}
+.wpr-review-product-thumb {
+    display: flex;
+    justify-content: end;
+    align-items: baseline;
+    max-width: 80px;
+}
+.wpr-book-info p {
+    margin-bottom: 5px;
+}
+
+.wpr-book-info {
+    margin-top: 12px;
+}
+.wpr-card-header h5 a {
+    text-decoration: none;
+}
+
+.wpr-single-comment {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+/* Style for filled stars */
+.wpr-single-comment .star-filled {
+    color: gold; /* You can use any color you prefer */
+}
+
+/* Style for empty stars */
+.wpr-single-comment .star-empty {
+    color: #ccc; /* Adjust the color for empty stars */
 }

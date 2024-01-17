@@ -124,3 +124,132 @@ function book_review() {
 
 // kick-off the plugin
 book_review();
+
+
+
+
+function cptui_register_my_taxes_authors() {
+
+	/**
+	 * Taxonomy: Authors.
+	 */
+
+	$labels = [
+		"name" => esc_html__( "Authors", "custom-post-type-ui" ),
+		"singular_name" => esc_html__( "Author", "custom-post-type-ui" ),
+	];
+
+	
+	$args = [
+		"label" => esc_html__( "Authors", "custom-post-type-ui" ),
+		"labels" => $labels,
+		"public" => true,
+		"publicly_queryable" => true,
+		"hierarchical" => true,
+		"show_ui" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"query_var" => true,
+		"rewrite" => [ 'slug' => '/books/author', 'with_front' => true, ],
+		"show_admin_column" => false,
+		"show_in_rest" => true,
+		"show_tagcloud" => false,
+		"rest_base" => "authors",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"rest_namespace" => "wp/v2",
+		"show_in_quick_edit" => false,
+		"sort" => false,
+		"show_in_graphql" => false,
+	];
+	register_taxonomy( "authors", [ "product" ], $args );
+}
+add_action( 'init', 'cptui_register_my_taxes_authors' );
+
+function cptui_register_my_taxes_publisher() {
+
+	/**
+	 * Taxonomy: Publishers.
+	 */
+
+	$labels = [
+		"name" => esc_html__( "Publishers", "custom-post-type-ui" ),
+		"singular_name" => esc_html__( "Publisher", "custom-post-type-ui" ),
+	];
+
+	
+	$args = [
+		"label" => esc_html__( "Publishers", "custom-post-type-ui" ),
+		"labels" => $labels,
+		"public" => true,
+		"publicly_queryable" => true,
+		"hierarchical" => true,
+		"show_ui" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"query_var" => true,
+		"rewrite" => [ 'slug' => '/books/publisher', 'with_front' => true, ],
+		"show_admin_column" => false,
+		"show_in_rest" => true,
+		"show_tagcloud" => false,
+		"rest_base" => "publisher",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"rest_namespace" => "wp/v2",
+		"show_in_quick_edit" => false,
+		"sort" => false,
+		"show_in_graphql" => false,
+	];
+	register_taxonomy( "publisher", [ "product" ], $args );
+}
+add_action( 'init', 'cptui_register_my_taxes_publisher' );
+
+/**
+ * Add a custom product data tab
+ */
+add_filter('woocommerce_product_tabs', 'hhbs_new_product_tab');
+function hhbs_new_product_tab($tabs)
+{
+
+    unset($tabs['additional_information']);
+
+    // Adds the new tab
+
+    $tabs['test_tab'] = array(
+        'title'     => __('Author', 'woocommerce'),
+        'priority'     => 50,
+        'callback'     => 'hhbs_new_product_tab_content'
+    );
+
+    return $tabs;
+}
+function hhbs_new_product_tab_content()
+{
+
+    // The new tab content
+    $author = get_the_terms(get_the_ID(), ['authors']);
+    $single_author = $author[0];
+    $author_name = [];
+    $author_desc = [];
+    foreach ($author as $a) {
+        $author_name[] = $a->name;
+        $author_desc[] = $a->description;
+    }
+
+    echo '<h2>' . esc_html($author_name[0]) . '</h2>';
+    echo '<p>' . esc_html($author_desc[0]) . '</p>';
+}
+
+
+
+// do_action( 'astra_woo_shop_title_after' );
+
+
+add_action('astra_woo_shop_title_after', function () {
+    $author = get_field('book_author', get_the_ID());
+
+    echo '<p style="opacity:.7;font-size:13px !important;margin-top:-5px;" class="hhbs-book-author-shop">';
+    foreach ($author as $a) {
+        print_r($a->name);
+    }
+    echo '</p>';
+
+}, 9);

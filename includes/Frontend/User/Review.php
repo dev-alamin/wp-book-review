@@ -10,13 +10,13 @@ class Review {
         ob_start();
         $review = true;
 
+        // Display review submission form
+        //$this->display_review_submission_form();
+        
         if( $review ) {
             // Display existing reviews
             $this->review_list();
         }
-    
-        // Display review submission form
-        $this->display_review_submission_form();
     
         return ob_get_clean();
     }
@@ -61,6 +61,21 @@ class Review {
         
         $comments = get_comments( $args );
         
+        // Create an associative array to group comments by product
+        $product_comments = array();
+        
+        foreach ( $comments as $comment ) {
+            $post = $comment->comment_post_ID;
+        
+            // Group comments by product ID
+            if ( ! isset( $product_comments[ $post ] ) ) {
+                $product_comments[ $post ] = array();
+            }
+        
+            $product_comments[ $post ][] = $comment;
+        }
+        
+        
         $file = __DIR__ . '/../views/review-list.php';
 
         if( file_exists( $file ) ) {
@@ -69,4 +84,29 @@ class Review {
             echo __( 'review-list.php file could not be found. Please ask developer to fix.', 'wpr' );
         }
     }
+
+    /**
+     * Display star ratings based on a numerical rating.
+     *
+     * @param int $rating The numerical rating.
+     */
+    public function display_star_rating( $rating ) {
+        // Maximum rating possible (adjust if needed)
+        $max_rating = 5;
+
+        // Calculate the filled and empty stars
+        $filled_stars = round( $rating, 1 );
+        $empty_stars = max( 0, $max_rating - $filled_stars );
+
+        // Display filled stars
+        for ( $i = 0; $i < $filled_stars; $i++ ) {
+            echo '<span class="star-filled">&#9733;</span>';
+        }
+
+        // Display empty stars
+        for ( $i = 0; $i < $empty_stars; $i++ ) {
+            echo '<span class="star-empty">&#9733;</span>';
+        }
+    }
+
 }

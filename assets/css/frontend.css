@@ -60,3 +60,24 @@
 .wpr-single-comment .star-empty {
     color: #ccc; /* Adjust the color for empty stars */
 }
+
+.wpr-single-comment .show-more-btn, .wpr-single-comment .show-less-btn {
+    border: none;
+    padding: 5px 10px;
+    text-decoration: underline;
+    color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));
+    display: inline-block;
+    margin-left: auto;
+    margin-right: 0;
+    width: 100px;
+    padding-left: 0;
+}
+
+.wpr-single-comment .show-more-btn:hover, .wpr-single-comment .show-less-btn:hover {
+    background: none;
+    text-decoration: none;
+}
+
+.truncated-comment {
+    margin-bottom: 0;
+}

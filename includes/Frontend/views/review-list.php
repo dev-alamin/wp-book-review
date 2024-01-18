@@ -7,7 +7,6 @@ if ( $product_comments ) {
         $thumbnail  = wp_get_attachment_image_src( get_post_thumbnail_id( $post ), 'single-post-thumbnail' );
         $price      = get_post_meta( $post, '_price', true );
         $permalink  = get_the_permalink( $post );
-        $price      = get_post_meta( $post, '_price', true );
 
         // Get the publisher and author terms
         $publishers = get_the_terms( $post, 'publisher' );
@@ -23,7 +22,7 @@ if ( $product_comments ) {
                                 <div class="wpr-book-info">
                                     <p>Price : <?php echo  wc_price( $price ); ?> </p>
                                     <?php
-                                    if ($authors) :
+                                    if ($authors && is_countable( $authors ) && ! is_wp_error( $authors ) ) :
                                         $authors_count = count($authors);
                                         $authors_names = array();
 
@@ -40,7 +39,7 @@ if ( $product_comments ) {
                                         </p>
                                     <?php endif; ?>
 
-                                <?php if ( $publishers ) : ?>
+                                <?php if ( $publishers && ! is_wp_error( $publishers ) ) : ?>
                                 <p>Publisher: <?php echo esc_html( $publishers[0]->name ); ?></p>
                                 <?php endif; ?>
                                 </div>
@@ -61,6 +60,7 @@ if ( $product_comments ) {
                             <?php
                             $author_name = get_comment_author( $comment );
                             $author_url  = get_author_posts_url( $comment->user_id );
+                            $comment_content = wp_kses_post( $comment->comment_content ); // Sanitize content
 
                             echo 'Reviewer: ' . ( $author_url ? '<a href="' . $author_url . '">' . esc_html( $author_name ) . '</a>' : esc_html( $author_name ) );
 
@@ -68,8 +68,20 @@ if ( $product_comments ) {
                             echo '<div class="rating">';
                             $this->display_star_rating( $comment_rating );
                             echo '</div>';
+                            
+                            $truncated_content = wp_trim_words( $comment_content, 20, '...' );
+
+                            // Display a truncated version of the comment content with a "Read More" button
+                            echo '<p class="card-text truncated-comment">' . esc_html( $truncated_content ) . '</p>';
+                
+                            // Check if the full comment content should be hidden
+                            if (strlen($comment_content) > strlen($truncated_content)) {
+                                echo '<button class="show-more-btn" data-comment-id="' . esc_attr( $comment->comment_ID ) . '">'. esc_html__( 'Read More', 'wpr' ) .'</button>';
+                                echo '<div class="full-comment" style="display: none;">' . esc_html( $comment_content ) . '</div>'; // Container for full comment content
+                                echo '<button class="show-less-btn" data-comment-id="' . esc_attr( $comment->comment_ID ) . '" style="display: none;">'. esc_html__( 'Show Less', 'wpr' ) .'</button>';
+                            }
+                
                             ?>
-                            <p class="card-text"><?php echo esc_html( $comment->comment_content ); ?></p>
                         </div>
                     <?php endforeach; ?>
                     <a href="<?php echo esc_url( $permalink ); ?>" class="btn btn-primary">Buy Book</a>

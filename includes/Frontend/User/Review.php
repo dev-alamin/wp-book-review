@@ -49,6 +49,8 @@ class Review {
         wp_enqueue_style( 'wpr-bootstrap' );
         wp_enqueue_style( 'wpr-style' );
 
+        wp_enqueue_script( 'wbr-script' );
+
         $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
         $args = array(
             'number'    => get_option( 'comments_per_page' ),
@@ -67,7 +69,6 @@ class Review {
         foreach ( $comments as $comment ) {
             $post = $comment->comment_post_ID;
         
-            // Group comments by product ID
             if ( ! isset( $product_comments[ $post ] ) ) {
                 $product_comments[ $post ] = array();
             }

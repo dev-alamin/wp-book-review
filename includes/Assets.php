@@ -22,17 +22,17 @@ class Assets {
      */
     public function get_scripts() {
         return [
-            'academy-script' => [
+            'wbr-script' => [
                 'src'     => BOOK_REVIEW_ASSETS . '/js/frontend.js',
                 'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/frontend.js' ),
                 'deps'    => [ 'jquery' ]
             ],
-            // 'academy-enquiry-script' => [
-            //     'src'     => BOOK_REVIEW_ASSETS . '/js/enquiry.js',
-            //     'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/enquiry.js' ),
-            //     'deps'    => [ 'jquery' ]
-            // ],
-            // 'academy-admin-script' => [
+            'wbr-admin-script' => [
+                'src'     => BOOK_REVIEW_ASSETS . '/js/admin.js',
+                'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/admin.js' ),
+                'deps'    => [ 'jquery' ]
+            ],
+            // 'wbr-admin-script' => [
             //     'src'     => BOOK_REVIEW_ASSETS . '/js/admin.js',
             //     'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/admin.js' ),
             //     'deps'    => [ 'jquery', 'wp-util' ]
@@ -82,5 +82,14 @@ class Assets {
             
             wp_register_style( $handle, $style['src'], $deps, $style['version'] );
         }
+
+        wp_localize_script( 
+            'wbr-script',
+            'wbrFrontendScripts',
+            [
+                'ajaxUrl' => admin_url( 'admin-ajax.php'),
+                'nonce'    => wp_create_nonce( 'wbr_readmore' )
+            ]
+        );
     }
 }

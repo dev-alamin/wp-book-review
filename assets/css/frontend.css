@@ -81,3 +81,53 @@
 .truncated-comment {
     margin-bottom: 0;
 }
+
+.wpr-card-body {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.wpr-card-header {
+    height: 210px;
+    overflow-y: scroll;
+}
+
+.wpr-single-comment:last-child {
+    border-bottom: none;
+}
+
+
+/**
+* Reinstate scrolling for non-JS clients
+*/
+.simplebar-content-wrapper {
+    scrollbar-width: auto;
+    -ms-overflow-style: auto;
+    }
+
+.simplebar-content-wrapper::-webkit-scrollbar,
+.simplebar-hide-scrollbar::-webkit-scrollbar {
+display: initial;
+width: initial;
+height: initial;
+}
+
+/* Hide scrollbar track (background) */
+.wpr-card-body::-webkit-scrollbar, .wpr-card-header::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+/* Hide scrollbar handle (thumb) */
+.wpr-card-body::-webkit-scrollbar-thumb, .wpr-card-header::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+/* Optional: Specify scrollbar width */
+.wpr-card-body::-webkit-scrollbar, .wpr-card-header::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.wpr-book-info p i {
+    color: purple;
+    margin-right: 10px;
+}

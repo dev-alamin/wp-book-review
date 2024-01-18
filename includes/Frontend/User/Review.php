@@ -6,7 +6,7 @@ class Review {
         add_shortcode('display_reviews', [ $this, 'display_reviews' ] );   
     }
 
-    function display_reviews( $atts ) {
+    public function display_reviews( $atts ) {
         ob_start();
         $review = true;
 
@@ -46,9 +46,12 @@ class Review {
     }
 
     public function review_list() {
+        wp_enqueue_style( 'wpr-simplebar' );
         wp_enqueue_style( 'wpr-bootstrap' );
+        wp_enqueue_style( 'wpr-fontawesome' );
         wp_enqueue_style( 'wpr-style' );
 
+        wp_enqueue_script( 'wbr-nicescroll' );
         wp_enqueue_script( 'wbr-script' );
 
         $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
@@ -76,13 +79,18 @@ class Review {
             $product_comments[ $post ][] = $comment;
         }
         
-        
         $file = __DIR__ . '/../views/review-list.php';
+
+        $error_message = sprintf(
+            'The file %s at line %d could not be found. Please ask the developer to fix this issue.',
+            __FILE__,
+            __LINE__
+        );
 
         if( file_exists( $file ) ) {
             include $file;
         }else{
-            echo __( 'review-list.php file could not be found. Please ask developer to fix.', 'wpr' );
+           echo esc_html_e( $error_message, 'wbr' );
         }
     }
 
@@ -92,19 +100,15 @@ class Review {
      * @param int $rating The numerical rating.
      */
     public function display_star_rating( $rating ) {
-        // Maximum rating possible (adjust if needed)
         $max_rating = 5;
 
-        // Calculate the filled and empty stars
         $filled_stars = round( $rating, 1 );
         $empty_stars = max( 0, $max_rating - $filled_stars );
 
-        // Display filled stars
         for ( $i = 0; $i < $filled_stars; $i++ ) {
             echo '<span class="star-filled">&#9733;</span>';
         }
 
-        // Display empty stars
         for ( $i = 0; $i < $empty_stars; $i++ ) {
             echo '<span class="star-empty">&#9733;</span>';
         }

@@ -6,7 +6,8 @@
     "autoload": {
         "psr-4": {
             "Book\\Review\\": "includes/"
-        }
+        },
+        "files": [ "includes/functions.php" ]
     },
     "authors": [
         {

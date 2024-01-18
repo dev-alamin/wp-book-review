@@ -12,7 +12,7 @@ class Assets {
      */
     function __construct() {
         add_action( 'wp_enqueue_scripts', [ $this, 'register_assets' ] );
-        // add_action( 'admin_enqueue_scripts', [ $this, 'register_assets' ] );
+        add_action( 'admin_enqueue_scripts', [ $this, 'register_assets' ] );
     }
 
     /**
@@ -32,11 +32,11 @@ class Assets {
                 'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/admin.js' ),
                 'deps'    => [ 'jquery' ]
             ],
-            // 'wbr-admin-script' => [
-            //     'src'     => BOOK_REVIEW_ASSETS . '/js/admin.js',
-            //     'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/admin.js' ),
-            //     'deps'    => [ 'jquery', 'wp-util' ]
-            // ],
+            'wbr-simplebar' => [
+                'src'     => '//unpkg.com/simplebar@latest/dist/simplebar.min.js',
+                'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/frontend.js' ),
+                'deps'    => [ 'jquery', 'wp-util' ]
+            ],
         ];
     }
 
@@ -58,6 +58,14 @@ class Assets {
             'wpr-bootstrap' => [
                 'src'     => BOOK_REVIEW_ASSETS . '/css/bootstrap.min.css',
                 'version' => filemtime( BOOK_REVIEW_PATH . '/assets/css/bootstrap.min.css' )
+            ],
+            'wpr-simplebar' => [
+                'src'     => '//unpkg.com/simplebar@latest/dist/simplebar.css',
+                'version' => filemtime( BOOK_REVIEW_PATH . '/assets/css/frontend.css' )
+            ],
+            'wpr-fontawesome' => [
+                'src'     => BOOK_REVIEW_ASSETS . '/fontawesome/css/all.min.css',
+                'version' => filemtime( BOOK_REVIEW_PATH . '/assets/css/frontend.css' )
             ],
         ];
     }

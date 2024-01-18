@@ -40,4 +40,9 @@ jQuery(document).ready(function($) {
         button.siblings('.show-more-btn').toggle();
         button.hide();
     });
+
+    $(document).ready(function() {
+        new SimpleBar($('.wpr-card-body'));
+        new SimpleBar($('.wpr-card-header'));
+      });
 });

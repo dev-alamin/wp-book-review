@@ -1,3 +1,12 @@
+:root{
+    --wbr-primary-color:#9003fc;
+    --wbr-secondary-color:#5a009e;
+    --wbr-white-color: #eee;
+    --wbr-link-color: #9003fc;
+}
+a, button, .btn-primary{
+    color: var(--wbr-link-color);
+}
 .page-id-846 {
     background: #eee;
 }
@@ -16,7 +25,22 @@
 .wpr-card > .details {
     margin-bottom: 4px;
 }
+.header-buy-btn {
+    font-size: 13px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    color: var(--wbr-primary-color);
+    display: block;
+    margin-right: 0;
+    margin-left: auto;
+    margin-top: 10px;
+}
 
+.header-buy-btn:hover {
+    background: transparent;
+    color: #333;
+}
 .wpr-card h2 {
     margin-top: 0;
 }
@@ -30,22 +54,31 @@
     max-width: 70px;
 }
 .wpr-review-product-thumb {
-    display: flex;
-    justify-content: end;
-    align-items: baseline;
     max-width: 80px;
 }
 .wpr-book-info p {
     margin-bottom: 5px;
+    padding-left: 35px;
+    position: relative;
+    margin-top: 8px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+.wpr-book-info p i {
+    position: absolute;
+    left: 0;
 }
 
+.wpr-book-info p:last-child {
+    border: none;
+}
 .wpr-book-info {
     margin-top: 12px;
 }
 .wpr-card-header h5 a {
     text-decoration: none;
-}
-
+    font-weight: 700;
+}   
 .wpr-single-comment {
     border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
@@ -65,7 +98,6 @@
     border: none;
     padding: 5px 10px;
     text-decoration: underline;
-    color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));
     display: inline-block;
     margin-left: auto;
     margin-right: 0;
@@ -76,6 +108,7 @@
 .wpr-single-comment .show-more-btn:hover, .wpr-single-comment .show-less-btn:hover {
     background: none;
     text-decoration: none;
+    color: #333;
 }
 
 .truncated-comment {
@@ -84,12 +117,12 @@
 
 .wpr-card-body {
     max-height: 400px;
-    overflow-y: scroll;
 }
 
 .wpr-card-header {
     height: 210px;
     overflow-y: scroll;
+    background: #eef;
 }
 
 .wpr-single-comment:last-child {
@@ -127,7 +160,77 @@ height: initial;
     width: 0.5em;
 }
 
+.simplebar-scrollbar::before {
+    background-color: var(--wbr-primary-color);
+}
+
 .wpr-book-info p i {
-    color: purple;
+    color: var(--wbr-white-color);
     margin-right: 10px;
+    height: 25px;
+    width: 25px;
+    background: var(--wbr-primary-color);
+    text-align: center;
+    line-height: 25px;
+    border-radius: 3px;
+}
+.wpr-single-comment .comment-actions button i{
+    font-size: 22px;
+}
+.wpr-single-comment .comment-actions button {
+    border: none;
+    padding: 5px 10px;
+    transition: .3s;
+}
+
+.wpr-single-comment .comment-actions button:hover {
+    background: none;
+    color: var(--wbr-primary-color);
+    transform: scale(1.2);
+}
+
+.wpr-single-comment .comment-actions {
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+    padding: 5px 0;
+    margin: 15px 0;
+}
+
+.wpr-single-comment {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.wpr-card-body {
+    background: #eef;
+    padding: 0;
+}
+.wpr-single-comment:first-child {
+    margin-top: 10px;
+}
+
+.wpr-single-comment .comment-actions button i {
+    margin-right: 8px;
+}
+
+.wpr-single-comment .comment-actions button {
+    font-size: 12px;
+}
+
+.wpr-single-comment .comment-actions {
+    display: flex;
+    justify-content: space-between;
+}
+.wpr-single-comment .comment-actions button:focus {
+    background: none;
+    color: var(--wbr-primary-color);
+}
+.wpr-single-comment .comment-actions button {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
 }

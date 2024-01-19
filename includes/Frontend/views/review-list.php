@@ -8,22 +8,22 @@ if ( $product_comments ) {
         $permalink  = get_the_permalink( $post );
         ?>
 
-        <div class="col-lg-4 col-sm-6">
-            <div class="card wpr-card mb-3">
+        <div class="col-lg-4 col-sm-6 col-xs-12">
+            <div class="card wpr-card mb-5">
                 <div class="card-header wpr-card-header">
                     <div class="row">
                         <div class="col">
                             <h5> <a href="<?php echo esc_url( $permalink ); ?>"><?php echo esc_html( $post_title ); ?></a></h5>
                             <div class="wpr-book-info">
-                                <p><i class="fa-solid fa-bangladeshi-taka-sign"></i> <?php echo esc_html__( 'Price : ', 'wpr' ) . wc_price( $price ); ?> </p>
+                                <p><i class="fa-solid fa-bangladeshi-taka-sign"></i> <?php echo wc_price( $price ); ?> </p>
                                 <p> <i class="fa-solid fa-pen-to-square"></i><?php echo wbr_get_author( $post ); ?> </p>
                                 <p> <i class="fas fa-newspaper"></i> <?php echo wbr_get_publisher( $post, '' ); ?></p>
                             </div>
                         </div>
                         <div class="wpr-review-product-thumb col">
                             <?php echo wbr_get_book_cover( $post ); ?>
+                            <a href="<?php echo esc_url( $permalink ); ?>" class="header-buy-btn btn btn-primary"><?php esc_html_e( 'Buy Book', 'wbr' ); ?></a>
                         </div>
-                        <a href="<?php echo esc_url( $permalink ); ?>" class="btn btn-primary"><?php esc_html_e( 'Buy Book', 'wbr' ); ?></a>
                     </div>
                 </div>
 

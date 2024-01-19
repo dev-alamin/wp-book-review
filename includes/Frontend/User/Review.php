@@ -46,12 +46,12 @@ class Review {
     }
 
     public function review_list() {
-        wp_enqueue_style( 'wpr-simplebar' );
-        wp_enqueue_style( 'wpr-bootstrap' );
-        wp_enqueue_style( 'wpr-fontawesome' );
-        wp_enqueue_style( 'wpr-style' );
+        wp_enqueue_style( 'wbr-simplebar' );
+        wp_enqueue_style( 'wbr-bootstrap' );
+        wp_enqueue_style( 'wbr-fontawesome' );
+        wp_enqueue_style( 'wbr-style' );
 
-        wp_enqueue_script( 'wbr-nicescroll' );
+        wp_enqueue_script( 'wbr-simplebar' );
         wp_enqueue_script( 'wbr-script' );
 
         $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;

@@ -47,23 +47,23 @@ class Assets {
      */
     public function get_styles() {
         return [
-            'wpr-style' => [
+            'wbr-style' => [
                 'src'     => BOOK_REVIEW_ASSETS . '/css/frontend.css',
                 'version' => filemtime( BOOK_REVIEW_PATH . '/assets/css/frontend.css' )
             ],
-            'wpr-admin-style' => [
+            'wbr-admin-style' => [
                 'src'     => BOOK_REVIEW_ASSETS . '/css/admin.css',
                 'version' => filemtime( BOOK_REVIEW_PATH . '/assets/css/admin.css' )
             ],
-            'wpr-bootstrap' => [
+            'wbr-bootstrap' => [
                 'src'     => BOOK_REVIEW_ASSETS . '/css/bootstrap.min.css',
                 'version' => filemtime( BOOK_REVIEW_PATH . '/assets/css/bootstrap.min.css' )
             ],
-            'wpr-simplebar' => [
+            'wbr-simplebar' => [
                 'src'     => '//unpkg.com/simplebar@latest/dist/simplebar.css',
                 'version' => filemtime( BOOK_REVIEW_PATH . '/assets/css/frontend.css' )
             ],
-            'wpr-fontawesome' => [
+            'wbr-fontawesome' => [
                 'src'     => BOOK_REVIEW_ASSETS . '/fontawesome/css/all.min.css',
                 'version' => filemtime( BOOK_REVIEW_PATH . '/assets/css/frontend.css' )
             ],

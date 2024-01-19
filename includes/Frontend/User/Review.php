@@ -7,6 +7,14 @@ class Review {
     }
 
     public function display_reviews( $atts ) {
+        wp_enqueue_style( 'wbr-simplebar' );
+        wp_enqueue_style( 'wbr-bootstrap' );
+        wp_enqueue_style( 'wbr-fontawesome' );
+        wp_enqueue_style( 'wbr-style' );
+
+        wp_enqueue_script( 'wbr-simplebar' );
+        wp_enqueue_script( 'wbr-script' );
+        
         ob_start();
         $review = true;
 
@@ -46,14 +54,6 @@ class Review {
     }
 
     public function review_list() {
-        wp_enqueue_style( 'wbr-simplebar' );
-        wp_enqueue_style( 'wbr-bootstrap' );
-        wp_enqueue_style( 'wbr-fontawesome' );
-        wp_enqueue_style( 'wbr-style' );
-
-        wp_enqueue_script( 'wbr-simplebar' );
-        wp_enqueue_script( 'wbr-script' );
-
         $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
         $args = array(
             'number'    => get_option( 'comments_per_page' ),

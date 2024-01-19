@@ -8,7 +8,7 @@ if ( $product_comments ) {
         $permalink  = get_the_permalink( $post );
         ?>
 
-        <div class="col-lg-4 col-sm-6 col-xs-12">
+        <div class="col-lg-6 col-sm-6 col-xs-12">
             <div class="card wpr-card mb-5">
                 <div class="card-header wpr-card-header">
                     <div class="row">
@@ -22,7 +22,7 @@ if ( $product_comments ) {
                         </div>
                         <div class="wpr-review-product-thumb col">
                             <?php echo wbr_get_book_cover( $post ); ?>
-                            <a href="<?php echo esc_url( $permalink ); ?>" class="header-buy-btn btn btn-primary"><?php esc_html_e( 'Buy Book', 'wbr' ); ?></a>
+                            <a href="<?php echo esc_url( $permalink ); ?>" class="header-buy-btn btn btn-primary"><?php esc_html_e( 'Buy Book', 'wbr' ); ?> <i class="fa fa-long-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>

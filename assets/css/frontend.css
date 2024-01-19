@@ -25,36 +25,72 @@ a, button, .btn-primary{
 .wpr-card > .details {
     margin-bottom: 4px;
 }
+.wpr-card-header h5 {
+    font-size: 18px;
+}
 .header-buy-btn {
-    font-size: 13px;
-    padding: 0;
-    background-color: transparent;
+    font-size: 11px;
+    padding: 5px;
+    background-color: #fff;
     border: none;
-    color: var(--wbr-primary-color);
+    color: #333;
     display: block;
     margin-right: 0;
     margin-left: auto;
     margin-top: 10px;
+    text-decoration: none !important;
+    border-radius: 0;
+    border: 1px solid var(--wbr-primary-color);
+    position: relative;
+    z-index: 1;
+    text-transform: uppercase;
+    font-weight: 500;
 }
-
+.header-buy-btn > i{
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    transform: scale(0);
+}
+.header-buy-btn:after {
+    content: '';
+    background: var(--wbr-primary-color);
+    height: 100%;
+    width: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: .4s ease-out;
+    z-index: -1;
+}
+.header-buy-btn:hover:after {
+    width: 100%;
+}
 .header-buy-btn:hover {
     background: transparent;
-    color: #333;
+    color: #fff;
+    border-color: var(--wbr-primary-color);
 }
 .wpr-card h2 {
     margin-top: 0;
 }
-
+.header-buy-btn:hover > i{
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    transform-origin: left;
+    
+}
 .book-and-author{
     display: flex;
     gap: 10px;
     justify-content: space-between;
 }
 .wpr-review-product-thumb img {
-    max-width: 70px;
+    max-width: 100px;
 }
 .wpr-review-product-thumb {
-    max-width: 80px;
+    max-width: 110px;
 }
 .wpr-book-info p {
     margin-bottom: 5px;
@@ -122,7 +158,8 @@ a, button, .btn-primary{
 .wpr-card-header {
     height: 210px;
     overflow-y: scroll;
-    background: #eef;
+    background: #fff;
+    padding: 20px 12px;
 }
 
 .wpr-single-comment:last-child {
@@ -167,12 +204,13 @@ height: initial;
 .wpr-book-info p i {
     color: var(--wbr-white-color);
     margin-right: 10px;
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
     background: var(--wbr-primary-color);
     text-align: center;
-    line-height: 25px;
+    line-height: 20px;
     border-radius: 3px;
+    font-size: 12px;
 }
 .wpr-single-comment .comment-actions button i{
     font-size: 22px;
@@ -212,7 +250,10 @@ height: initial;
 .wpr-single-comment:first-child {
     margin-top: 10px;
 }
-
+.wpr-single-comment {
+    margin-left: 10px;
+    margin-right: 10px;
+}
 .wpr-single-comment .comment-actions button i {
     margin-right: 8px;
 }

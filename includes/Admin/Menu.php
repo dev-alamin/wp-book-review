@@ -38,7 +38,8 @@ class Menu {
             'manage_options',
             'wp-book-review',
             [ $this, 'menu_cb' ],
-            'dashicons-star-filled'
+            'dashicons-star-filled',
+            99
         );
     }
 

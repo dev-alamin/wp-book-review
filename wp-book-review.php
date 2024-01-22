@@ -92,6 +92,8 @@ final class Book_Review {
 
         new Book\Review\Assets();
         new Book\Review\Taxonomy();
+        new Book\Review\Custom_Post();
+        new Book\Review\Woocommerce\Create_Post();
 
         if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
             new Book\Review\Ajax();

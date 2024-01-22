@@ -10,6 +10,9 @@ a, button, .btn-primary{
 .page-id-846 {
     background: #eee;
 }
+.wpr-card-header h5 a {
+    color: #333;
+}
 .wpr-card {
     min-height: 450px;
     background: #fff;
@@ -26,14 +29,14 @@ a, button, .btn-primary{
     margin-bottom: 4px;
 }
 .wpr-card-header h5 {
-    font-size: 18px;
+    font-size: 22px;
 }
 .header-buy-btn {
     font-size: 11px;
     padding: 5px;
     background-color: #fff;
     border: none;
-    color: #333;
+    color: var(--wbr-primary-color);
     display: block;
     margin-right: 0;
     margin-left: auto;
@@ -153,19 +156,56 @@ a, button, .btn-primary{
 
 .wpr-card-body {
     max-height: 400px;
+    min-height: 280px;
 }
 
 .wpr-card-header {
     height: 210px;
     overflow-y: scroll;
-    background: #fff;
     padding: 20px 12px;
 }
+/** 
+** New CSS
+**/
+.wpr-card-header .header-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
+.wpr-card-header .header-banner .thumbnail {
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    width: 35%;
+}
+
+.wpr-card-header .header-banner .right-title {
+    width: 65%;
+}
+
+.wpr-card-header {
+    background: rgba(144, 3, 252,0.2);
+    /* border: 3px solid rgba(144, 3, 252);
+    border-radius: 12px !important; */
+}
+.wpr-card-header .header-banner .right-title .label-text {
+    background: #333;
+    color: #fff;
+    text-align: center;
+}
 .wpr-single-comment:last-child {
     border-bottom: none;
 }
+.wpr-card-body .title-description a {
+    text-decoration: none;
+    color: #333;
+    line-height: 30px;
+    font-weight: 600;
+}
 
+.wpr-card-body .title-description {
+    padding: 10px;
+    margin-top: 12px;
+}
 
 /**
 * Reinstate scrolling for non-JS clients
@@ -236,15 +276,34 @@ height: initial;
 
 .wpr-single-comment {
     margin-bottom: 10px;
-    border: 1px solid #ddd;
-    background: #fff;
-    padding: 10px;
-    border-radius: 10px;
+    /* border: 1px solid #ddd; */
+    /* background: #fff; */
+    /* padding: 10px; */
+    /* border-radius: 10px; */
 }
 
+.wpr-single-comment .author-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
 
+.wpr-single-comment .author-meta .author-avatar, .wpr-single-comment .author-meta .author-avatar img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.wpr-single-comment .author-meta .author-and-count a {
+    text-decoration: none;
+    margin-top: 10px;
+    display: block;
+}
+
+.wpr-single-comment .author-meta  .author-and-count {
+    margin-left: 15px;
+}
 .wpr-card-body {
-    background: #eef;
     padding: 0;
 }
 .wpr-single-comment:first-child {

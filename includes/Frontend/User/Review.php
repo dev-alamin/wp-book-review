@@ -60,24 +60,11 @@ class Review {
             'post_type' => 'product',
             'paged'     => $paged,
             'parent'    => 0,
-            'orderby'   => 'date',
-            'order'     => 'DESC',
+            'orderby'   => 'comment_date',
+            'order'     => 'ASC',
         );
         
         $comments = get_comments( $args );
-        
-        // Create an associative array to group comments by product
-        $product_comments = array();
-        
-        foreach ( $comments as $comment ) {
-            $post = $comment->comment_post_ID;
-        
-            if ( ! isset( $product_comments[ $post ] ) ) {
-                $product_comments[ $post ] = array();
-            }
-        
-            $product_comments[ $post ][] = $comment;
-        }
         
         $file = __DIR__ . '/../views/review-list.php';
 

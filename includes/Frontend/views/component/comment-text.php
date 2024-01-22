@@ -1,4 +1,5 @@
 <?php 
+$comment_content = wp_kses_post($comment->comment_content); // Sanitize content
 $truncated_content = wp_trim_words( $comment_content, 20, '...' );
 
 // Display a truncated version of the comment content with a "Read More" button

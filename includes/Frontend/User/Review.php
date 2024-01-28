@@ -74,8 +74,12 @@ class Review {
             __LINE__
         );
 
+
+        $rev_file =__DIR__ . '/../views/review-archive.php';
+
         if( file_exists( $file ) ) {
-            include $file;
+            include $rev_file;
+            // include $file;
         }else{
            echo esc_html_e( $error_message, 'wbr' );
         }

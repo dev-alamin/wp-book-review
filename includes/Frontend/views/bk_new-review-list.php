@@ -73,5 +73,5 @@ if ($comments) {
     }
     echo '</div></div>';
 } else {
-    // echo 'No comments found.';
+    echo 'No comments found.';
 }

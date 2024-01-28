@@ -14,7 +14,7 @@ a, button, .btn-primary{
     color: #333;
 }
 .wpr-card {
-    min-height: 450px;
+    min-height: 390px;
     background: #fff;
 }
 
@@ -156,7 +156,7 @@ a, button, .btn-primary{
 
 .wpr-card-body {
     max-height: 400px;
-    min-height: 280px;
+    min-height: 180px;
 }
 
 .wpr-card-header {
@@ -333,4 +333,14 @@ height: initial;
     font-size: 12px;
     display: flex;
     align-items: center;
+}
+
+/* // Review CPT  */
+.load-more-rev-container{
+    margin: auto;
+}
+#load-more-reviews{
+    width: auto;
+    display: block;
+    margin: auto;
 }

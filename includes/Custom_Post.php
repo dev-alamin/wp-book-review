@@ -8,6 +8,7 @@ class Custom_Post {
         add_filter('manage_review_posts_columns', [ $this, 'custom_reviews_columns' ]);
         add_action('manage_review_posts_custom_column', [ $this, 'custom_reviews_column_content' ], 10, 2);
 
+        add_filter('template_include', [ $this, 'custom_post_type_template' ]);
     }
 
      /**
@@ -90,6 +91,22 @@ class Custom_Post {
                 echo esc_html($trimmed_content);
                 break;
         }
+    }
+
+    public function custom_post_type_template($template) {
+        global $post;
+    
+        if ($post->post_type == 'review') {
+            $custom_template = __DIR__ . '/Frontend/single-review.php';
+    
+            if (file_exists($custom_template)) {
+                return $custom_template;
+            }else{
+                echo 'No single template found for review';
+            }
+        }
+    
+        return $template;
     }
 
 }

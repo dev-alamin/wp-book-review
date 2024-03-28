@@ -2,6 +2,7 @@
     <div class="row">
             <div class="col-lg-12">
                 <div class="wbr-review-form-toggler">
+                    <button>Write a review</button>
                     <?php 
                     $current_user_has_post = count_user_posts( get_current_user_id(), 'review', true );
                     if( $current_user_has_post > 0 ): ?>

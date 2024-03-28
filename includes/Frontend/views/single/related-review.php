@@ -19,20 +19,22 @@
                 if ($related_reviews_query->have_posts()) {
                     while ($related_reviews_query->have_posts()) {
                         $related_reviews_query->the_post(); ?>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="card mb-3">
                                 <?php if (has_post_thumbnail()): ?>
                                     <img src="<?php the_post_thumbnail_url('thumbnail'); ?>" class="card-img-top img-fluid" alt="<?php the_title(); ?>">
                                 <?php endif; ?>
-                                <div class="card-body">
+                                <div class="card-body product-user">
                                     <h5 class="card-title"><?php the_title(); ?></h5>
                                     <p class="card-text"><?php echo esc_html(wp_trim_words(get_the_content(), 10)); ?></p>
-                                    <div class="d-flex align-items-center">
-                                        <?php echo get_avatar(get_the_author_meta('ID'), 32, '', '', array('class' => 'rounded-circle mr-2')); ?>
-                                        <div>
-                                            <p class="m-0"><?php echo esc_html(get_the_author()); ?></p>
-                                            <p class="m-0"><?php echo count_user_posts(get_the_author_meta('ID')); ?> Posts</p>
+                                    
+                                    <div class="wbr-product-user">
+                                        <?php echo get_avatar( $author_id, 32, '', '', ); ?>
+                                        <div class="wbr-product-team">
+                                            <h3>ফজর ফায়ার টীম</h3>
+                                            <p>মোট ২৩টি  রিভিউ লিখেছেন </p>
                                         </div>
+                                        <button>বাটন থাকেত পাের</button>
                                     </div>
                                 </div>
                             </div>

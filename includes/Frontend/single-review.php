@@ -17,7 +17,7 @@ $sale_price          = get_post_meta( $product_id, '_sale_price', true );
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <div class="wbr-review-content">
                 <h2><?php echo wp_kses_post(get_the_title()); ?></h2>
                
@@ -102,15 +102,11 @@ $sale_price          = get_post_meta( $product_id, '_sale_price', true );
                 </div>
             </div>
             <?php 
-            // Comment Form
-            comment_form(array(
-                'title_reply' => 'Leave a Review',
-                'comment_notes_after' => '',
-                'class_form' => 'wbr-comment-form',
-                'class_submit' => 'btn btn-primary',
-                'comment_field' => '<div class="form-group"><label for="comment" class="wbr-comment-label">Your Review:</label><textarea id="comment" name="comment" class="form-control" cols="45" rows="8" required></textarea></div>',
-            ));
+            if ( comments_open() || get_comments_number() ) :
+                comments_template();
+            endif;
             ?>
+
         </div>
     </div>
 </div>

@@ -262,8 +262,63 @@ $(document).on('click', '#load-more-reviews', function () {
          * Review form toggler btn
          * 
          */
-        $('.wbr-review-form-toggler button').on('click', function(){
-            // alert('Hello world');
+        $('.wbr-review-form-toggler button.old-user').on('click', function(){
             $('#review-submission-form').slideToggle();
         });
+
+        /**
+         * Handle user agreement form / Popup
+         * 
+         */
+        $('#ff_user_agreement_form').on('submit', function(event) {
+            // Prevent default form submission
+            event.preventDefault();
+            
+            // Check if the agreement checkbox is checked
+            if ($('#agreement').is(':checked')) {
+                $.ajax({
+                    url: wbrFrontendScripts.ajaxUrl, // WordPress AJAX URL
+                    type: 'POST',
+                    data: {
+                        action: 'update_user_agreement', // Custom AJAX action name
+                        user_agreement_consent: 1, // Value to be saved in the metadata
+                        ff_user_agreement_nonce_field: $('#ff_user_agreement_nonce_field').val(), // Include nonce value
+                    },
+                    success: function(response) {
+                        $('#wbrUserAgreement').modal('hide');
+
+                        if( response.success == true ){
+                            setTimeout(() => {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success!',
+                                    text: 'Thank you for your confirmation. Now you can submit your reviews.',
+                                });
+
+                                $('#review-submission-form').slideToggle();
+                                $('.first-reviewer').removeClass('first-reviewer').addClass('old-user');    
+                            }, 1000); 
+
+                        }else{
+                            setTimeout(() => {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: response.data,
+                                });
+                            }, 1000); 
+                        }
+                                               
+                    },
+                    error: function(error) {
+                        swal("Error!", "An error occurred while saving agreement.", "error");
+                    }
+                });
+            } else {
+                // If agreement checkbox is not checked, display SweetAlert error message
+                swal("Error!", "Please check the agreement checkbox before proceeding.", "error");
+            }
+        });
+        
+        
 });

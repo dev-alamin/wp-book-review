@@ -22,7 +22,9 @@ class Ajax {
         add_action('wp_ajax_nopriv_load_more_reviews', [ $this, 'load_more_reviews' ] );
 
         add_action( 'wp_ajax_submit_review', [ $this, 'submit_review_callback' ] );
-        add_action( 'wp_ajax_nopriv_submit_review', [ $this, 'submit_review_callback' ] );
+        // add_action( 'wp_ajax_nopriv_submit_review', [ $this, 'submit_review_callback' ] );
+
+        add_action('wp_ajax_update_user_agreement', [ $this, 'update_user_agreement_callback' ]);
     }
 
     /**
@@ -175,5 +177,37 @@ class Ajax {
         }
         wp_die();
     }
-    
+
+    // Callback function to update user metadata
+    public function update_user_agreement_callback() {
+        // Verify nonce
+        if ( ! isset( $_POST['ff_user_agreement_nonce_field'] ) || ! wp_verify_nonce( $_POST['ff_user_agreement_nonce_field'], 'ff_user_agreement_nonce' ) ) {
+            wp_send_json_error( 'Nonce verification failed.' );
+        }
+
+        // Check if the agreement checkbox is checked
+        $user_consent = isset( $_POST['user_agreement_consent'] ) ? $_POST['user_agreement_consent'] : false;
+        if ( ! $user_consent ) {
+            wp_send_json_error( 'Please check the agreement checkbox before proceeding.' );
+        }
+
+        $user_id = get_current_user_id();
+        $existing_user_consent = get_user_meta( $user_id, 'user_agreement_consent', true );
+
+        // $deleted = delete_user_meta( $user_id, 'user_agreement_consent', 'user_agreement_consent');
+        if ( ! empty( $existing_user_consent ) ) {
+            wp_send_json_error( 'User has already submitted the agreement form.' );
+        }else {
+            $meta_saved = update_user_meta( $user_id, 'user_agreement_consent', $user_consent );
+            if ( $meta_saved ) {
+                wp_send_json_success( 'You\'ve already agreed with our terms and conditions.' );
+            } else {
+                wp_send_json_error( 'Failed to save user agreement consent.' );
+            }
+        }
+
+
+
+        wp_die();
+    }   
 }

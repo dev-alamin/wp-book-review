@@ -2,12 +2,20 @@
     <div class="row">
             <div class="col-lg-12">
                 <div class="wbr-review-form-toggler">
-                    <?php 
+                    <?php
                     $current_user_has_post = count_user_posts( get_current_user_id(), 'review', true );
-                    if( $current_user_has_post > 0 ): ?>
-                    <button>Write a review</button>
-                    <?php else: ?>
-                    <button class="first-reviewer">Write a review</button>
+                    $user_has_consent = get_user_meta( get_current_user_id(), 'user_agreement_consent', true );
+
+                    if( true == $user_has_consent || ! empty( $user_has_consent ) ): ?>
+
+                        <button class="old-user">Write a review</button>
+
+                        <?php elseif( empty( $user_has_consent ) || false == $user_has_consent ): ?>
+
+                        <?php include __DIR__ . '/views/user-agreement-modal.php'; ?>
+
+                        <button class="first-reviewer" data-bs-toggle="modal" data-bs-target="#wbrUserAgreement">Start Writing Review</button>
+
                     <?php endif; ?>
                 </div>
             </div>

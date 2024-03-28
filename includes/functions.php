@@ -96,25 +96,20 @@ function wbr_get_comment_author_name( $comment ) {
  */
 function wbr_output_review_card( $post_id, $user_id = '' ) {
     $post_title          = get_the_title($post_id);
-    $author_id           = get_post_meta($post_id, '_comment_author_id', true);
+    $author_id           = get_post_field('post_author', $post_id);
     $comment_author_data = get_userdata($author_id);
     $author_url          = get_author_posts_url($author_id);
-    $author_avatar       = get_avatar($author_id, 96); // Adjust the size as needed
-    $comments            = get_comments(array('post_id' => $post_id));
+    $author_avatar       = get_avatar($author_id, 96); 
     $product_id          = get_post_meta($post_id, '_associated_product_id', true);
     $remove_review       = str_replace('Review', ' ', $post_title);
     $comment_author_id   = get_post_meta($post_id, '_comment_author_id', true);
-    $author_url          = get_author_posts_url($comment_author_id);
-    $author_avatar       = get_avatar($comment_author_id, 96);
+    $author_avatar       = get_avatar($author_id, 96);
     $comment_author_name = get_post_meta($post_id, '_comment_author_name', true);
     $comment_author_url  = get_post_meta($post_id, '_comment_author_url', true);
-    $comment_count       = get_post_meta($post_id, '_comment_count', true);
+    $comment_count       = count_user_posts( $author_id, 'review' );
     $author_name         = $comment_author_data ? $comment_author_data->display_name : 'Anonymous';
     $authors             = get_the_terms($product_id, 'authors');
     $product             = wc_get_product($product_id);
-    $book_rating         = get_post_meta($post_id, '_comment_rating', true);
-    // $average_rating      = $product->get_average_rating();
-    // echo 'Average Rating: ' . $average_rating;
     ?>
 
     <div class="col-lg-4 col-sm-6 col-xs-12">
@@ -160,7 +155,7 @@ function wbr_output_review_card( $post_id, $user_id = '' ) {
                        echo '<a href="' . esc_url($comment_author_url) . '">';
                        echo esc_html( $comment_author_name ? $comment_author_name : $author_name );
                        echo '</a>';
-                       echo '<p>মোট ' . count_user_posts($comment_author_id, 'review', true ) . ' টি পর্যালোচনা লিখেছেন</p>';
+                       echo '<p>মোট ' . $comment_count . ' টি পর্যালোচনা লিখেছেন</p>';
                     echo '</div>';
                     echo '</div>';
                     ?>

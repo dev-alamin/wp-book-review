@@ -100,19 +100,21 @@ class Assets {
             ]
         );
 
-        if (is_singular()) {
-            // Get the current post object
-            global $post;
-    
-            // Check if the post type is 'review'
-            if ($post->post_type === 'review') {
-            wp_enqueue_style( 'wbr-simplebar' );
-            wp_enqueue_style( 'wbr-bootstrap' );
-            wp_enqueue_style( 'wbr-fontawesome' );
-            wp_enqueue_style( 'wbr-style' );
-
-            wp_enqueue_script( 'wbr-simplebar' );
-            wp_enqueue_script( 'wbr-script' );
+        if( ! is_admin() ) {
+            if (is_singular() || is_archive() ) {
+                    // Get the current post object
+                global $post;
+                
+                // Check if the post type is 'review'
+                if ( $post && $post->post_type === 'review') {
+                    wp_enqueue_style( 'wbr-simplebar' );
+                    wp_enqueue_style( 'wbr-bootstrap' );
+                    wp_enqueue_style( 'wbr-fontawesome' );
+                    wp_enqueue_style( 'wbr-style' );
+                    
+                wp_enqueue_script( 'wbr-simplebar' );
+                wp_enqueue_script( 'wbr-script' );
+                }
             }
         }
     }

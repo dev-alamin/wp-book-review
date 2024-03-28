@@ -9,6 +9,11 @@ class Custom_Post {
         add_action('manage_review_posts_custom_column', [ $this, 'custom_reviews_column_content' ], 10, 2);
 
         add_filter('template_include', [ $this, 'custom_post_type_template' ]);
+        add_filter('template_include', array($this, 'review_archive_template') );
+
+        add_action('pre_get_posts', array($this, 'modify_archive_query'));
+
+        add_action('init', [ $this, 'custom_product_statuses' ] );
     }
 
      /**
@@ -40,12 +45,12 @@ class Custom_Post {
                 'slug'       => _x( 'book-review', 'slug', 'wbr' ),
                 'with_front' => false,
             ),
-            'has_archive'        => false,
+            'has_archive'        => true,
             'capability_type'    => 'post',
             'hierarchical'       => false,
             'menu_position'      => 99,
             'menu_icon'          => 'dashicons-star-filled', // https://developer.wordpress.org/resource/dashicons/.
-            'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions' ),
+            'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'comments' ),
         );
         register_post_type( 'review', $args );
     }
@@ -96,17 +101,45 @@ class Custom_Post {
     public function custom_post_type_template($template) {
         global $post;
     
-        if ($post->post_type == 'review') {
-            $custom_template = __DIR__ . '/Frontend/single-review.php';
-    
-            if (file_exists($custom_template)) {
-                return $custom_template;
-            }else{
-                echo 'No single template found for review';
+        if ( isset ( $post->post_type ) && $post->post_type == 'review' ) {
+            if( is_singular( 'review' ) ) {
+                $custom_template = __DIR__ . '/Frontend/single-review.php';
+                if ( file_exists( $custom_template ) ) {
+                    return $custom_template;
+                }
             }
         }
     
         return $template;
     }
 
+    public function review_archive_template($template) {
+        if (is_post_type_archive('review')) { // Adjust 'review' to your custom post type slug
+            // Check if the template file exists in your plugin directory
+            $plugin_template = __DIR__ . '/Frontend/views/archive-review.php';
+
+            if (file_exists($plugin_template)) {
+                return $plugin_template;
+            }
+        }
+        return $template;
+    }
+
+    public function modify_archive_query($query) {
+        if( ! is_admin() ) {
+            if ($query->is_post_type_archive('review') && $query->is_main_query()) {
+                $query->set('posts_per_page', 3);
+            }
+        }
+    }
+
+    public function custom_product_statuses() {
+        register_post_status('wc-pending-approval', array(
+            'label' => _x('Pending Approval', 'Product status', 'woocommerce'),
+            'public' => true,
+            'show_in_admin_all_list' => true,
+            'show_in_admin_status_list' => true,
+            'label_count' => _n_noop('Pending Approval <span class="count">(%s)</span>', 'Pending Approval <span class="count">(%s)</span>', 'woocommerce'),
+        ));
+    }
 }

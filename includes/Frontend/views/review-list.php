@@ -2,10 +2,10 @@
 if ($comments) {
     echo '<div class="container mt-3"><div class="row">';
     foreach ($comments as $comment) {
-        $post       = $comment->comment_post_ID;
-        $post_title = get_the_title($post);
-        $price      = get_post_meta($post, '_price', true);
-        $permalink  = get_the_permalink($post);
+        $post         = $comment->comment_post_ID;
+        $post_title   = get_the_title($post);
+        $price        = get_post_meta($post, '_price', true);
+        $permalink    = get_the_permalink($post);
         $comment_link = get_comment_link( $comment );
         ?>
         <div class="col-lg-4 col-sm-6 col-xs-12">
@@ -38,14 +38,13 @@ if ($comments) {
                         <?php
                         $author_url  = get_author_posts_url($comment->user_id);
                         $author_avatar = get_avatar($comment->user_id, 96); // Get the author's avatar (adjust the size as needed)
-                       
-                       // Get the comments from the user
-                       $comments = get_comments(array(
-                           'user_id' => get_the_author_meta('ID', $comment->user_id ),
-                       ));
-                       
-                       // Get the comment count
-                       $comment_count = count($comments);
+
+                       $args = array(
+                            'user_id' => $comment->user_id,
+                            'count'   => true,
+                        );
+                        
+                        $comment_count = get_comments( $args );
 
                         include __DIR__ . '/component/comment-text.php';
 

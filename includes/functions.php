@@ -94,7 +94,7 @@ function wbr_get_comment_author_name( $comment ) {
  * @since 1.0.0
  * @param int $post Post ID.
  */
-function wbr_output_review_card( $post_id ) {
+function wbr_output_review_card( $post_id, $user_id = '' ) {
     $post_title          = get_the_title($post_id);
     $author_id           = get_post_meta($post_id, '_comment_author_id', true);
     $comment_author_data = get_userdata($author_id);
@@ -113,7 +113,7 @@ function wbr_output_review_card( $post_id ) {
     $authors             = get_the_terms($product_id, 'authors');
     $product             = wc_get_product($product_id);
     $book_rating         = get_post_meta($post_id, '_comment_rating', true);
-    $average_rating      = $product->get_average_rating();
+    // $average_rating      = $product->get_average_rating();
     // echo 'Average Rating: ' . $average_rating;
     ?>
 
@@ -158,9 +158,9 @@ function wbr_output_review_card( $post_id ) {
                     echo '<div class="author-avatar"> <a href="' . esc_url($comment_author_url) . '"> ' . $author_avatar . '</a></div>';
                     echo '<div class="author-and-count">';
                        echo '<a href="' . esc_url($comment_author_url) . '">';
-                       echo esc_html( $author_name );
+                       echo esc_html( $comment_author_name ? $comment_author_name : $author_name );
                        echo '</a>';
-                       echo '<p>মোট ' . $comment_count . ' টি পর্যালোচনা লিখেছেন</p>';
+                       echo '<p>মোট ' . count_user_posts($comment_author_id, 'review', true ) . ' টি পর্যালোচনা লিখেছেন</p>';
                     echo '</div>';
                     echo '</div>';
                     ?>
@@ -170,3 +170,41 @@ function wbr_output_review_card( $post_id ) {
     </div>
     <?php
 }
+
+/**
+ * Retrieves the total reviews count and average rating for a given product ID.
+ *
+ * @param int $product_id The ID of the product for which to retrieve reviews.
+ * @return array An array containing the total reviews count and the average rating.
+ */
+function wpr_get_total_review_and_average($product_id) {
+    $total_rating = 0;
+    $total_reviews = 0;
+
+    $args = array(
+        'post_type' => 'review', // Assuming 'review' is the custom post type for reviews
+        'meta_key' => '_product_id',
+        'meta_value' => $product_id,
+        'meta_compare' => '=',
+        'posts_per_page' => -1, // Retrieve all reviews
+    );
+
+    $reviews_query = new WP_Query($args);
+
+    while ($reviews_query->have_posts()) {
+        $reviews_query->the_post();
+        $rating = intval(get_post_meta(get_the_ID(), '_review_rating', true));
+        $total_rating += $rating; // Sum the ratings
+        $total_reviews++;
+    }
+
+    $average_rating = $total_reviews > 0 ? round($total_rating / $total_reviews, 2) : 0;
+
+    wp_reset_postdata();
+
+    return array(
+        'total_reviews' => $total_reviews,
+        'average_rating' => $average_rating
+    );
+}
+

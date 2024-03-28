@@ -93,7 +93,7 @@ final class Book_Review {
         new Book\Review\Assets();
         new Book\Review\Taxonomy();
         new Book\Review\Custom_Post();
-        new Book\Review\Woocommerce\Create_Post();
+        // new Book\Review\Woocommerce\Create_Post();
 
         if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
             new Book\Review\Ajax();
@@ -127,3 +127,29 @@ function book_review() {
 
 // kick-off the plugin
 book_review();
+
+function enqueue_select2_assets() {
+    // Enqueue Select2 CSS
+    wp_enqueue_style('select2-css', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css', array(), '4.0.13');
+
+    // Enqueue jQuery (if not already included)
+    wp_enqueue_script('jquery');
+
+    // Enqueue Select2 JS
+    wp_enqueue_script('select2-js', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js', array('jquery'), '4.0.13', true);
+
+    wp_enqueue_script( 'tiny-mce', 'https://cdn.tiny.cloud/1/6ab4ikdk4qmkiuookatavsi3nas1irrmrnf5e9allzgj3o2l/tinymce/7/tinymce.min.js', ['jquery'], time(), true );
+
+    wp_enqueue_script( 'wb-sweet-alert', 'https://cdn.jsdelivr.net/npm/sweetalert2@11', [], '1.0.0', true );
+}
+add_action('wp_enqueue_scripts', 'enqueue_select2_assets');
+
+
+function default_comments_on( $data ) {
+    if( $data['post_type'] == 'your_custom_post_name' ) {
+        $data['comment_status'] = 1;
+    }
+
+    return $data;
+}
+add_filter( 'wp_insert_post_data', 'default_comments_on' );

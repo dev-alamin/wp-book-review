@@ -70,14 +70,19 @@ class Taxonomy {
         register_taxonomy( "publisher", [ "product" ], $args );
     }
 
+    /**
+     * Taxonomy For Review Book
+     *
+     * @return void
+     */
     public function rev_athor() {
         $labels = [
-            "name" => esc_html__( "Review authors", "custom-post-type-ui" ),
-            "singular_name" => esc_html__( "Publisher", "custom-post-type-ui" ),
+            "name" => esc_html__( "Books", "custom-post-type-ui" ),
+            "singular_name" => esc_html__( "Book", "custom-post-type-ui" ),
         ];
 
         $args = [
-            "label" => esc_html__( "Review authors", "custom-post-type-ui" ),
+            "label" => esc_html__( "Books", "custom-post-type-ui" ),
             "labels" => $labels,
             "public" => true,
             "publicly_queryable" => true,
@@ -86,17 +91,17 @@ class Taxonomy {
             "show_in_menu" => true,
             "show_in_nav_menus" => true,
             "query_var" => true,
-            "rewrite" => [ 'slug' => '/reviews/author', 'with_front' => true, ],
+            "rewrite" => [ 'slug' => '/reviews/books', 'with_front' => true, ],
             "show_admin_column" => false,
             "show_in_rest" => true,
             "show_tagcloud" => false,
-            "rest_base" => "publisher",
+            "rest_base" => "books",
             "rest_controller_class" => "WP_REST_Terms_Controller",
             "rest_namespace" => "wp/v2",
             "show_in_quick_edit" => false,
             "sort" => false,
             "show_in_graphql" => false,
         ];
-        register_taxonomy( "review_author", [ "review" ], $args );
+        register_taxonomy( "review_book", [ "review" ], $args );
     }
 }

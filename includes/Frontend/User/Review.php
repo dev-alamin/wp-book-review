@@ -18,39 +18,28 @@ class Review {
         ob_start();
         $review = true;
 
-        // Display review submission form
-        //$this->display_review_submission_form();
+        $has_review = current_user_can( 'submit_review' ); // Need to add cap
+        
+        if( is_user_logged_in() ) {
+            $this->display_review_submission_form();
+        }
         
         if( $review ) {
             // Display existing reviews
             $this->review_list();
         }
-    
+        
         return ob_get_clean();
     }
 
     public function display_review_submission_form() {
-        // Custom form for submitting reviews
-        ?>
-        <div id="review-submission-form">
-            <h2>Submit a Review</h2>
-            <form id="review-form" action="" method="post">
-                <label for="review-title">Review Title:</label>
-                <input type="text" name="review-title" id="review-title" required>
-    
-                <label for="review-content">Your Review:</label>
-                <textarea name="review-content" id="review-content" required></textarea>
-    
-                <label for="review-rating">Rating:</label>
-                <select name="review-rating" id="review-rating" required>
-                    <option value="5">5 Stars</option>
-                    <!-- Add other rating options as needed -->
-                </select>
-    
-                <input type="submit" value="Submit Review">
-            </form>
-        </div>
-        <?php
+        $file = __DIR__ . '/../review-form.php';
+        
+        if( file_exists( $file ) ) {
+            include $file;
+            wp_enqueue_script( 'wbr-script' );
+        }
+
     }
 
     public function review_list() {
@@ -67,13 +56,12 @@ class Review {
         $comments = get_comments( $args );
         
         $file = __DIR__ . '/../views/review-list.php';
-
+        
         $error_message = sprintf(
             'The file %s at line %d could not be found. Please ask the developer to fix this issue.',
             __FILE__,
             __LINE__
         );
-
 
         $rev_file =__DIR__ . '/../views/review-archive.php';
 

@@ -27,5 +27,3 @@ if ($rev_posts->have_posts()) {
 } else {
     esc_html_e('No review found.', 'wpr');
 }
-?>
-

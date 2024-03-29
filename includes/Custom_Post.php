@@ -22,37 +22,68 @@ class Custom_Post {
      * @return void
      **/
     public function cpt_cb(){
-        $labels = array(
-            'name'               => __( 'Book Review', 'wbr' ),
-            'singular_name'      => __( 'Review', 'wbr' ),
-            'add_new'            => __( 'Add New Review', 'wbr' ),
-            'add_new_item'       => __( 'Add New Review', 'wbr' ),
-            'edit_item'          => __( 'Edit Review', 'wbr' ),
-            'new_item'           => __( 'New Review', 'wbr' ),
-            'view_item'          => __( 'View Review', 'wbr' ),
-            'search_items'       => __( 'Search Book Review', 'wbr' ),
-            'not_found'          => __( 'Not found Book Review', 'wbr' ),
-            'not_found_in_trash' => __( 'Not found Book Review in trash', 'wbr' ),
-        );
-        $args   = array(
-            'labels'             => $labels,
-            'public'             => true,
-            'publicly_queryable' => true,
-            'show_ui'            => true,
-            'show_in_rest'       => true, // Adds gutenberg support.
-            'query_var'          => true,
-            'rewrite'            => array(
-                'slug'       => _x( 'book-review', 'slug', 'wbr' ),
-                'with_front' => false,
-            ),
-            'has_archive'        => true,
-            'capability_type'    => 'post',
-            'hierarchical'       => false,
-            'menu_position'      => 99,
-            'menu_icon'          => 'dashicons-star-filled', // https://developer.wordpress.org/resource/dashicons/.
-            'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'comments' ),
-        );
-        register_post_type( 'review', $args );
+    $common_labels = array(
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_rest'       => true, // Adds Gutenberg support.
+        'query_var'          => true,
+        'has_archive'        => true,
+        'capability_type'    => 'post',
+        'hierarchical'       => false,
+        'menu_position'      => 99,
+        'menu_icon'          => 'dashicons-star-filled', // https://developer.wordpress.org/resource/dashicons/.
+        'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'comments' ),
+    );
+
+    $review_labels = array(
+        'name'               => __( 'Book Reviews', 'wbr' ),
+        'singular_name'      => __( 'Review', 'wbr' ),
+        'add_new'            => __( 'Add New Review', 'wbr' ),
+        'add_new_item'       => __( 'Add New Review', 'wbr' ),
+        'edit_item'          => __( 'Edit Review', 'wbr' ),
+        'new_item'           => __( 'New Review', 'wbr' ),
+        'view_item'          => __( 'View Review', 'wbr' ),
+        'search_items'       => __( 'Search Book Reviews', 'wbr' ),
+        'not_found'          => __( 'No Book Reviews found', 'wbr' ),
+        'not_found_in_trash' => __( 'No Book Reviews found in trash', 'wbr' ),
+    );
+
+    $review_args = array_merge( $common_labels, array(
+        'labels'  => $review_labels,
+        'rewrite' => array(
+            'slug'       => _x( 'book-review', 'slug', 'wbr' ),
+            'with_front' => false,
+        ),
+    ));
+
+    $campaign_labels = array(
+        'name'               => __( 'Campaigns', 'wbr' ),
+        'singular_name'      => __( 'Campaign', 'wbr' ),
+        'add_new'            => __( 'Add New Campaign', 'wbr' ),
+        'add_new_item'       => __( 'Add New Campaign', 'wbr' ),
+        'edit_item'          => __( 'Edit Campaign', 'wbr' ),
+        'new_item'           => __( 'New Campaign', 'wbr' ),
+        'view_item'          => __( 'View Campaign', 'wbr' ),
+        'search_items'       => __( 'Search Campaigns', 'wbr' ),
+        'not_found'          => __( 'No Campaigns found', 'wbr' ),
+        'not_found_in_trash' => __( 'No Campaigns found in Trash', 'wbr' ),
+        'parent_item_colon'  => __( 'Parent Campaign:', 'wbr' ),
+        'menu_name'          => __( 'Campaigns', 'wbr' ),
+    );
+    
+    $campaign_args = array_merge( $common_labels, array(
+        'labels'  => $campaign_labels,
+        'supports' => array( 'title', 'editor', 'thumbnail', 'revisions' ),
+        'rewrite' => array(
+            'slug'       => _x( 'review-campaign', 'slug', 'wbr' ),
+            'with_front' => false,
+        ),
+    ));
+    
+    register_post_type( 'review', $review_args );
+    register_post_type( 'review-campaign', $campaign_args );
+
     }
 
 
@@ -70,7 +101,7 @@ class Custom_Post {
     public function custom_reviews_column_content($column, $post_id) {
         switch ($column) {
             case 'comment_author':
-                $comment_author_id = get_post_meta($post_id, '_comment_author_id', true);
+                $comment_author_id = get_the_author_meta( 'ID' );
     
                 if ($comment_author_id) {
                     $comment_author_data = get_userdata($comment_author_id);

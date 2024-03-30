@@ -37,7 +37,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="visually-hidden" for="product-id">Select Product:</label>
                                     <select class="form-select select2 js-example-basic-single js-states form-control" style="width: 100%" name="product-id" id="product-id" required>
@@ -63,7 +63,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="visually-hidden" for="review-rating">Rating:</label>
                                     <select class="form-select" name="review-rating" id="review-rating" required>
@@ -77,12 +77,10 @@
                                 </div>
                             </div>
 
-                            <?php include __DIR__ . '/views/component/image-uploader.php'; ?>
-
-                            <input type="hidden" name="user-id" id="user-id" value="<?php echo get_current_user_id(); ?>">
-                            <input type="hidden" name="_comment_author_name" id="_comment_author_name" value="<?php echo get_user_meta(get_current_user_id(), 'first_name', true); ?>">
-
-                            
+                            <div class="col-lg-4">
+                                <?php include __DIR__ . '/views/component/image-uploader.php'; ?> 
+                                <input type="hidden" name="user-id" id="user-id" value="<?php echo get_current_user_id(); ?>">
+                            </div>
                             <div class="col-auto">
                             <label class="visually-hidden" for="publish-status">Publish later:</label>
                                     <select class="form-select" name="publish-status" id="publish-status">

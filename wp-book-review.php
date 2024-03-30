@@ -131,13 +131,10 @@ function book_review() {
 book_review();
 
 function enqueue_select2_assets() {
-    // Enqueue Select2 CSS
     wp_enqueue_style('select2-css', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css', array(), '4.0.13');
 
-    // Enqueue jQuery (if not already included)
     wp_enqueue_script('jquery');
 
-    // Enqueue Select2 JS
     wp_enqueue_script('select2-js', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js', array('jquery'), '4.0.13', true);
 
     wp_enqueue_script( 'tiny-mce', 'https://cdn.tiny.cloud/1/6ab4ikdk4qmkiuookatavsi3nas1irrmrnf5e9allzgj3o2l/tinymce/7/tinymce.min.js', ['jquery'], time(), true );

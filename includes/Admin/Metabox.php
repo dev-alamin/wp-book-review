@@ -75,6 +75,7 @@ class Metabox {
             ) );
 
             Container::make( 'post_meta', 'Campaign Details' )
+<<<<<<< HEAD
         ->where( 'post_type', '=', 'review-campaign' )
         ->add_fields( array(
             // Repeater field for prizes
@@ -89,6 +90,22 @@ class Metabox {
             // Select field to choose WooCommerce product
             Field::make( 'select', 'wc_product_id', __( 'Choose Product' ) )
                 ->set_options( $this->get_all_product() ),
+=======
+            ->where( 'post_type', '=', 'review-campaign' )
+            ->add_fields( array(
+                // Repeater field for prizes
+                Field::make( 'text', 'campaign_name', 'Campaign Name' ),
+                Field::make( 'complex', 'prizes', 'Prizes' )
+                    ->set_layout( 'tabbed-horizontal' )
+                    ->add_fields( array(
+                        Field::make( 'text', 'prize_name', 'Prize' ),
+                    ) ),
+                Field::make( 'date', 'first_submission_date', 'Campaign Start Date' ),
+                Field::make( 'date', 'last_submission_date', 'Last Date of Submission' ),
+                // Select field to choose WooCommerce product
+                Field::make( 'select', 'wc_product_id', __( 'Choose Product' ) )
+                    ->set_options( $this->get_all_product() ),
+>>>>>>> 88c235c
             
         ) );
 

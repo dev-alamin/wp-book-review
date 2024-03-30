@@ -180,7 +180,6 @@ $(document).on('click', '#load-more-reviews', function () {
                     console.log(response);
                     form[0].reset();
                     form.find(':input').not(':button, :submit, :reset, :hidden').val('');
-
                 }
             },
             error: function(xhr, status, error) {
@@ -319,6 +318,9 @@ $(document).on('click', '#load-more-reviews', function () {
                 swal("Error!", "Please check the agreement checkbox before proceeding.", "error");
             }
         });
+<<<<<<< HEAD
         
         
+=======
+>>>>>>> 88c235c
 });

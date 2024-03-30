@@ -14,6 +14,8 @@ class Custom_Post {
         add_action('pre_get_posts', array($this, 'modify_archive_query'));
 
         add_action('init', [ $this, 'custom_product_statuses' ] );
+
+        add_action('save_post', [ $this, 'update_post_author_info' ], 10, 3);
     }
 
      /**
@@ -32,7 +34,11 @@ class Custom_Post {
         'capability_type'    => 'post',
         'hierarchical'       => false,
         'menu_position'      => 99,
+<<<<<<< HEAD
         'menu_icon'          => 'dashicons-star-filled', // https://developer.wordpress.org/resource/dashicons/.
+=======
+        'menu_icon'          => 'dashicons-grid-view', // https://developer.wordpress.org/resource/dashicons/.
+>>>>>>> 88c235c
         'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'comments' ),
     );
 
@@ -70,6 +76,10 @@ class Custom_Post {
         'not_found_in_trash' => __( 'No Campaigns found in Trash', 'wbr' ),
         'parent_item_colon'  => __( 'Parent Campaign:', 'wbr' ),
         'menu_name'          => __( 'Campaigns', 'wbr' ),
+<<<<<<< HEAD
+=======
+        'menu_icon'          => 'dashicons-grid-view',
+>>>>>>> 88c235c
     );
     
     $campaign_args = array_merge( $common_labels, array(
@@ -159,7 +169,7 @@ class Custom_Post {
     public function modify_archive_query($query) {
         if( ! is_admin() ) {
             if ($query->is_post_type_archive('review') && $query->is_main_query()) {
-                $query->set('posts_per_page', 3);
+                $query->set('posts_per_page', 6);
             }
         }
     }
@@ -173,4 +183,23 @@ class Custom_Post {
             'label_count' => _n_noop('Pending Approval <span class="count">(%s)</span>', 'Pending Approval <span class="count">(%s)</span>', 'woocommerce'),
         ));
     }
+
+    public function update_post_author_info($post_id, $post, $update) {
+        // Check if this is an autosave or the action has already been triggered.
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE  ) {
+            return;
+        }
+    
+        // Check if the current user is an administrator.
+        if ( current_user_can( 'administrator' ) ) {
+            // This is an admin editing the post, so we prevent author change.
+            remove_action( 'save_post', array( $this, 'update_post_author_info' ), 10 );
+            wp_update_post( array(
+                'ID'          => $post_id,
+                'post_author' => $post->post_author, // Revert back to the original author.
+            ) );
+            add_action( 'save_post', array( $this, 'update_post_author_info' ), 10, 3 ); // Restore the action for future saves.
+        }
+    }
+    
 }

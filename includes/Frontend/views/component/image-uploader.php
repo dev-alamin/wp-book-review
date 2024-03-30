@@ -1,18 +1,36 @@
-<div class="wpb-upload-holder" style="position: relative; height:265px">
-        <div class="frame">
-            <div class="center">
-                    <div class="bar"></div>
-                    <div class="title">Drop file to upload</div>
-                    <div class="dropzone">
-                        <div class="content">
-                            <img src="https://100dayscss.com/codepen/upload.svg" class="upload">
-                            <span class="filename"></span>
-                            <input name="product-image-id" id="product-image-id" type="file" class="input" accept="image/*">
-                        </div>
-                    </div>
-                    <img src="https://100dayscss.com/codepen/syncing.svg" class="syncing">
-                    <img src="https://100dayscss.com/codepen/checkmark.svg" class="done">
-                    <div class="upload-btn">Upload image</div>
-            </div>
-        </div>
-        </div>
+<div class="wbr-featured-image-container">
+    <label for="product-image-id" class="custom-file-upload">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" transform="rotate(180)">
+        <path fill="none" d="M0 0h24v24H0z"/>
+        <path d="M18 12v-2h-5V5h-2v5H6l6 6 6-6zm-6 8h4v2H8v-2z"/>
+    </svg>
+
+        <span id="selected-file-name">Choose featured image</span>
+        <input onchange="previewImage(this)" 
+                class="file-input-custom form-control"  
+                name="product-image-id" 
+                id="product-image-id" 
+                type="file" 
+                class="input" 
+                accept="image/*">
+    </label>
+
+    <div id="image-preview-container">
+        <img id="image-preview" src="#" alt="Preview" style="display: none; width: 100px; height: 60px;">
+    </div>  
+</div>                  
+    <script> 
+            function previewImage(input) {
+                var file = input.files[0];
+                var reader = new FileReader();
+            
+                reader.onload = function(e) {
+                var imagePreview = document.getElementById('image-preview');
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+                };
+            
+                reader.readAsDataURL(file);
+                document.getElementById('selected-file-name').textContent = file.name;
+            }
+    </script>

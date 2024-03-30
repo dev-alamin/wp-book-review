@@ -119,28 +119,23 @@ class Ajax {
         }
 
 
-        if ( isset( $_FILES['product-image-id'] ) && ! empty( $_FILES['product-image-id']['tmp_name'] ) ) {
-
-            $file = $_FILES['product-image-id'];
-            $file_type = wp_check_filetype_and_ext($file['tmp_name'], $file['name']);
-            if (!$file_type['type'] || !in_array($file_type['type'], array('image/jpeg', 'image/png', 'image/gif'))) {
-                wp_send_json_error('Invalid file type. Please upload a JPEG, PNG, or GIF image.');
-            }
-    
-            $attachment_id = media_handle_upload('product-image-id', 0); // 0 means no parent post
-    
-            if ( is_wp_error($attachment_id ) ) {
-                wp_send_json_error('Failed to upload image. Please try again.');
-            } else {
+        // Usage
+        if (isset($_FILES['product-image-id']) && !empty($_FILES['product-image-id']['tmp_name'])) {
+            $file_validation_result = validate_image_and_upload($_FILES['product-image-id']);
+            if (is_int($file_validation_result)) {
                 // Upload successful
-                $product_image_id = $attachment_id;
+                $product_image_id = $file_validation_result;
+            } else {
+                // Validation failed
+                wp_send_json_error($file_validation_result);
             }
         } else {
+            // No file uploaded
             wp_send_json_error('Please upload a product image.');
         }
-        
+
         $review_post = array(
-            'post_title'             => get_the_title($product_id),
+            'post_title'             => $review_title,
             'post_content'           => $review_content,
             'post_status'            => $post_status,
             'post_type'              => 'review',

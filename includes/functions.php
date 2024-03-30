@@ -112,38 +112,40 @@ function wbr_output_review_card( $post_id, $user_id = '' ) {
     $product             = wc_get_product($product_id);
     ?>
 
-    <div class="col-lg-4 col-sm-6 col-xs-12">
-        <div class="card wpr-card mb-5">
-            <div class="card-header wpr-card-header">
-                <div class="header-banner">
-                    <div class="thumbnail">
-                       <a href="<?php echo get_the_permalink( $product_id ); ?>">
-                        <?php the_post_thumbnail(); ?>
-                       </a>
-                    </div>
-                    <div class="right-title">
-                    <h5> <a href="<?php the_permalink(); ?>" target="_balnk"><?php echo $remove_review ? esc_html( $remove_review ) : esc_html( $post_title); ?></a></h5>
-                        <p class="label-text"> <?php esc_html_e( 'বই নিয়ে টুকেরা কথা', 'wpr' ); ?></p>
-                        <?php 
-                        if ($authors && !is_wp_error($authors)) {
-                            echo '<p class="author-list"><i class="fa-solid fa-pen-to-square ml-3"></i>';
-                            $author_links = array();
+        <div class="wpr-card mb-5">
+            <div class="wpr-card-header" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'large' ) ); ?>);">
+                <a href="<?php the_permalink(); ?>">
 
-                            foreach ($authors as $author) {
-                                $author_links[] = '<a href="' . esc_url(get_term_link($author)) . '">' . esc_html($author->name) . '</a>';
-                            }
-
-                            echo implode(', ', $author_links);
-                            echo '</p>';
-                        }
-                        ?>
-                    </div>
-                </div>
+                </a>
             </div>
-            <div class="card-body wpr-card-body" data-simplebar>
+            <div class="wpr-card-body">
+            <div class="right-title">
+                <h2> 
+                    <a href="<?php the_permalink(); ?>" target="_balnk">
+                    <?php 
+                    $title = $remove_review ? esc_html( $remove_review ) : esc_html( $post_title);
+                    
+                    echo wp_trim_words( $title, 15 );
+                    ?>
+                    </a>
+                </h2>
+                    <?php 
+                    if ($authors && !is_wp_error($authors)) {
+                        echo '<p class="author-list"><i class="fa-solid fa-pen-to-square ml-3"></i>';
+                        $author_links = array();
+
+                        foreach ($authors as $author) {
+                            $author_links[] = '<a href="' . esc_url(get_term_link($author)) . '">' . esc_html($author->name) . '</a>';
+                        }
+
+                        echo implode(', ', $author_links);
+                        echo '</p>';
+                    }
+                    ?>
+                </div>
                 <div class="title-description">
                     <a href="<?php the_permalink(); ?>" target="_blank">
-                        <?php echo wp_trim_words( get_the_content(), 12, '...' ); ?>
+                        <?php echo wp_trim_words( get_the_content(), 20, '...' ); ?>
                     </a>
                 </div>
                 <!-- Display the individual comment -->
@@ -153,7 +155,7 @@ function wbr_output_review_card( $post_id, $user_id = '' ) {
                     echo '<div class="author-avatar"> <a href="' . esc_url($comment_author_url) . '"> ' . $author_avatar . '</a></div>';
                     echo '<div class="author-and-count">';
                        echo '<a href="' . esc_url($comment_author_url) . '">';
-                       echo esc_html( $comment_author_name ? $comment_author_name : $author_name );
+                       echo '<strong>' . esc_html( strtoupper( $comment_author_name ? $comment_author_name : $author_name ) ) . '</strong>';
                        echo '</a>';
                        echo '<p>মোট ' . $comment_count . ' টি পর্যালোচনা লিখেছেন</p>';
                     echo '</div>';
@@ -162,7 +164,6 @@ function wbr_output_review_card( $post_id, $user_id = '' ) {
                 </div>
             </div>
         </div>
-    </div>
     <?php
 }
 
@@ -203,3 +204,68 @@ function wpr_get_total_review_and_average($product_id) {
     );
 }
 
+
+function validate_image_and_upload($file) {
+    $file_type = wp_check_filetype_and_ext($file['tmp_name'], $file['name']);
+
+    if (!$file_type['type'] || !in_array($file_type['type'], array('image/jpeg', 'image/png', 'image/gif'))) {
+        return 'Invalid file type. Please upload a JPEG, PNG, or GIF image.';
+    }
+
+    if ($file['size'] > 2 * 1024 * 1024) {
+        return 'File size exceeds the maximum limit of 2MB.';
+    }
+
+    list($width, $height) = getimagesize($file['tmp_name']);
+    // if ($width < 1280 || $height < 720) {
+    //     return 'Image resolution must be at least 1280x720 pixels.';
+    // }
+
+    // Crop the image if larger than 1280x720, keeping the aspect ratio
+    if ($width > 1280 || $height > 720) {
+        $editor = wp_get_image_editor($file['tmp_name']);
+        if (!is_wp_error($editor)) {
+            $editor->resize(1280, 720, true); // Crop to 1280x720
+            $resized_file = $editor->save(); // Save the resized image
+            $file['tmp_name'] = $resized_file['path']; // Update the temporary file path
+            return 'Image cropped at proper size';
+        } else {
+            return 'Failed to resize image. Please try again.';
+        }
+    }
+
+    $attachment_id = media_handle_upload('product-image-id', 0); // 0 means no parent post
+    if (is_wp_error($attachment_id)) {
+        return 'Failed to upload image. Please try again.';
+    }
+
+    return $attachment_id;
+}
+
+
+if( ! function_exists( 'ff_english_to_bengali' ) ) {
+    // Convert Arabic numbers to Bengali numbers
+    function ff_english_to_bengali( $number = '' ) {
+        $bengali_numbers = array('০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯');
+        return str_replace(range(0, 9), $bengali_numbers, $number);
+    }
+}
+
+function ff_get_term_link( $post_id ) {
+    $terms = get_the_terms( $post_id, 'review_book');
+
+    if ($terms && !is_wp_error($terms)) {
+        $term_slugs = array(); 
+
+        foreach ($terms as $term) {
+            $term_slugs[] = urldecode($term->slug);
+        }
+
+        $archive_link = get_term_link(  $term_slugs[0], 'review_book');
+        $archive_link = urldecode( $archive_link );
+
+        if (!is_wp_error($archive_link) ) {
+            return '<a class="btn" style="background:var(--wd-primary-color);max-width:200px;margin:10px auto;" href="' . esc_url($archive_link) . '">এই বইটির সকল রিভিউ দেখুন</a>';
+        }
+    }
+ }

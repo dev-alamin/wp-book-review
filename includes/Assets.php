@@ -37,6 +37,11 @@ class Assets {
                 'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/frontend.js' ),
                 'deps'    => [ 'jquery', 'wp-util' ]
             ],
+            'wbr-select2' => [
+                'src'     => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js',
+                'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/frontend.js' ),
+                'deps'    => [ 'jquery' ]
+            ],
         ];
     }
 
@@ -67,6 +72,10 @@ class Assets {
                 'src'     => BOOK_REVIEW_ASSETS . '/fontawesome/css/all.min.css',
                 'version' => filemtime( BOOK_REVIEW_PATH . '/assets/css/frontend.css' )
             ],
+            'wbr-select2' => [
+                'src' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css',
+                'verson' => '4.0.13'
+            ]
         ];
     }
 
@@ -115,6 +124,14 @@ class Assets {
                 wp_enqueue_script( 'wbr-simplebar' );
                 wp_enqueue_script( 'wbr-script' );
                 }
+            }
+        }
+
+        if( is_admin()){
+            global $post;
+            if( $post->post_type === 'review-campaign' ){
+                wp_enqueue_style( 'wbr-select2' );
+                wp_enqueue_script( 'wbr-select2' );
             }
         }
     }

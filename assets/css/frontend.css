@@ -1,0 +1,1356 @@
+:root{
+    --wbr-primary-color:#9003fc;
+    --wbr-secondary-color:#5a009e;
+    --wbr-white-color: #eee;
+    --wbr-link-color: #9003fc;
+}
+a, button, .btn-primary{
+    color: var(--wbr-link-color);
+	text-decoration:none;
+}
+.wd-nav.wd-style-default{
+    margin-bottom: 0;
+}
+.page-id-846 {
+    background: #eee;
+}
+.wpr-card-header h5 a {
+    color: #333;
+}
+.wpr-card {
+    min-height: 390px;
+    background: #fff;
+}
+
+.wpr-card > .title {
+    margin-bottom: 8px;
+}
+
+.wpr-card > .author,
+.wpr-card > .publisher,
+.wpr-card > .subject,
+.wpr-card > .details {
+    margin-bottom: 4px;
+}
+.wpr-card-header h5 {
+    font-size: 22px;
+}
+.header-buy-btn {
+    font-size: 11px;
+    padding: 5px;
+    background-color: #fff;
+    border: none;
+    color: var(--wbr-primary-color);
+    display: block;
+    margin-right: 0;
+    margin-left: auto;
+    margin-top: 10px;
+    text-decoration: none !important;
+    border-radius: 0;
+    border: 1px solid var(--wbr-primary-color);
+    position: relative;
+    z-index: 1;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.header-buy-btn > i{
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    transform: scale(0);
+}
+.header-buy-btn:after {
+    content: '';
+    background: var(--wbr-primary-color);
+    height: 100%;
+    width: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: .4s ease-out;
+    z-index: -1;
+}
+.header-buy-btn:hover:after {
+    width: 100%;
+}
+.header-buy-btn:hover {
+    background: transparent;
+    color: #fff;
+    border-color: var(--wbr-primary-color);
+}
+.wpr-card h2 {
+    margin-top: 0;
+}
+.header-buy-btn:hover > i{
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    transform-origin: left;
+    
+}
+.book-and-author{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+.wpr-review-product-thumb img {
+    max-width: 100px;
+}
+.wpr-review-product-thumb {
+    max-width: 110px;
+}
+.wpr-book-info p {
+    margin-bottom: 5px;
+    padding-left: 35px;
+    position: relative;
+    margin-top: 8px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+.wpr-book-info p i {
+    position: absolute;
+    left: 0;
+}
+
+.wpr-book-info p:last-child {
+    border: none;
+}
+.wpr-book-info {
+    margin-top: 12px;
+}
+.wpr-card-header h5 a {
+    text-decoration: none;
+    font-weight: 700;
+}   
+.wpr-single-comment {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+/* Style for filled stars */
+.wpr-single-comment .star-filled {
+    color: gold; /* You can use any color you prefer */
+}
+
+/* Style for empty stars */
+.wpr-single-comment .star-empty {
+    color: #ccc; /* Adjust the color for empty stars */
+}
+
+.wpr-single-comment .show-more-btn, .wpr-single-comment .show-less-btn {
+    border: none;
+    padding: 5px 10px;
+    text-decoration: underline;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: 0;
+    width: 100px;
+    padding-left: 0;
+}
+
+.wpr-single-comment .show-more-btn:hover, .wpr-single-comment .show-less-btn:hover {
+    background: none;
+    text-decoration: none;
+    color: #333;
+}
+
+.truncated-comment {
+    margin-bottom: 0;
+}
+
+.wpr-card-body {
+    max-height: 400px;
+    min-height: 180px;
+}
+
+.wpr-card-header {
+    height: 230px;
+    overflow-y: scroll;
+    overflow: hidden;
+    /* padding: 20px 12px; */
+}
+/** 
+** New CSS
+**/
+.wpr-card-header .header-banner {
+    /* display: flex; */
+    align-items: center;
+    gap: 10px;
+}
+
+.wpr-card-header .header-banner .thumbnail {
+    /* box-shadow: 0 0 15px rgba(0,0,0,0.2); */
+    /* width: 35%; */
+}
+/* 
+.wpr-card-header .header-banner .right-title {
+    width: 65%;
+} */
+
+.wpr-card-header {
+    background: rgba(144, 3, 252,0.2);
+    background-size: cover;
+    background-position: center center;
+    border: 2px solid var(--wd-primary-color);
+    margin-bottom: 20px;
+}
+.wpr-card-header .header-banner .right-title .label-text {
+    background: #333;
+    color: #fff;
+    text-align: center;
+}
+.wpr-single-comment:last-child {
+    border-bottom: none;
+}
+.wpr-card-body .title-description a {
+    text-decoration: none;
+    color: #333;
+    line-height: 30px;
+    font-weight: 600;
+}
+
+.wpr-card-body .title-description {
+    /* padding: 10px; */
+    margin-top: 12px;
+}
+.wpr-card-body .right-title {
+    min-height: 101px;
+}
+.wpr-card-header a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+/**
+* Reinstate scrolling for non-JS clients
+*/
+.simplebar-content-wrapper {
+    scrollbar-width: auto;
+    -ms-overflow-style: auto;
+    }
+
+.simplebar-content-wrapper::-webkit-scrollbar,
+.simplebar-hide-scrollbar::-webkit-scrollbar {
+display: initial;
+width: initial;
+height: initial;
+}
+
+/* Hide scrollbar track (background) */
+.wpr-card-body::-webkit-scrollbar, .wpr-card-header::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+/* Hide scrollbar handle (thumb) */
+.wpr-card-body::-webkit-scrollbar-thumb, .wpr-card-header::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+/* Optional: Specify scrollbar width */
+.wpr-card-body::-webkit-scrollbar, .wpr-card-header::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.simplebar-scrollbar::before {
+    background-color: var(--wbr-primary-color);
+}
+
+.wpr-book-info p i {
+    color: var(--wbr-white-color);
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+    background: var(--wbr-primary-color);
+    text-align: center;
+    line-height: 20px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+.wpr-single-comment .comment-actions button i{
+    font-size: 22px;
+}
+.wpr-single-comment .comment-actions button {
+    border: none;
+    padding: 5px 10px;
+    transition: .3s;
+}
+
+.wpr-single-comment .comment-actions button:hover {
+    background: none;
+    color: var(--wbr-primary-color);
+    transform: scale(1.2);
+}
+
+.wpr-single-comment .comment-actions {
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+    padding: 5px 0;
+    margin: 15px 0;
+}
+
+.wpr-single-comment {
+    margin-bottom: 10px;
+    /* border: 1px solid #ddd; */
+    /* background: #fff; */
+    /* padding: 10px; */
+    /* border-radius: 10px; */
+}
+
+.wpr-single-comment .author-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.wpr-single-comment .author-meta .author-avatar, .wpr-single-comment .author-meta .author-avatar img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.wpr-single-comment .author-meta .author-and-count a {
+    text-decoration: none;
+    margin-top: 10px;
+    display: block;
+}
+
+.wpr-single-comment .author-meta  .author-and-count {
+    margin-left: 15px;
+}
+.wpr-card-body {
+    padding: 10px;
+}
+.wpr-single-comment:first-child {
+    margin-top: 10px;
+}
+.wpr-single-comment {
+    /* margin-left: 10px; */
+    margin-right: 10px;
+}
+.wpr-single-comment .comment-actions button i {
+    margin-right: 8px;
+}
+
+.wpr-single-comment .comment-actions button {
+    font-size: 12px;
+}
+
+.wpr-single-comment .comment-actions {
+    display: flex;
+    justify-content: space-between;
+}
+.wpr-single-comment .comment-actions button:focus {
+    background: none;
+    color: var(--wbr-primary-color);
+}
+.wpr-single-comment .comment-actions button {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+/* // Review CPT  */
+.load-more-rev-container{
+    margin: auto;
+}
+#load-more-reviews{
+    width: auto;
+    display: block;
+    margin: auto;
+}
+
+#review-submission-form {
+    display: none;
+}
+.custom-file-upload {
+    display: inline-block;
+    padding: 8px 20px;
+    cursor: pointer;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #242424;
+    max-width: 70%;
+    overflow: hidden;
+    margin-left: 8px;
+}
+  
+  .custom-file-upload span {
+    margin-right: 10px;
+  }
+  
+  /* Hide default file input */
+  .custom-file-upload input[type="file"] {
+    display: none;
+  }
+  .custom-file-upload svg {
+    width: 24px;
+    height: 24px;
+    fill: #242424;
+    vertical-align: middle;
+    margin-right: 8px;
+  }  
+  /* #image-preview-container {
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+} */
+.wbr-featured-image-container {
+    position: relative;
+    height: 100px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+/*****************
+ Review Single Page Custom CSS Code By Masud
+*******************/
+
+.wp-single-wbr .wbr-review-content {
+    text-align: center;
+}
+.wp-single-wbr .wbr-review-content .wbr-review-image img{
+    border: 3px solid #5a009e;
+    border-radius: 7px;
+    margin-top: 60px;
+}
+
+.wp-single-wbr .wbr-review-content h2 {
+    font-size: 50px;
+    line-height: 65px;
+    color: #333333;
+    font-weight: 600;
+    font-family: "Hind Siliguri";
+    margin-top: 35px;
+}
+
+.wp-single-wbr .wbr-review-content .wbr-product-user{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.wp-single-wbr .wbr-review-content .wbr-product-user img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team{
+    margin-top: 15px;
+    text-align: left;
+}
+.wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team h3{
+    font-size: 30px;
+    line-height: 12px;
+    color: #333333;
+    font-weight: 500;
+    font-family: "Hind Siliguri";
+}
+.wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team p{
+    font-size: 16px;
+    line-height: 12px;
+    color: #333333;
+    font-weight: 300;
+    font-family: "Hind Siliguri";
+    display: inline-block;
+    margin-top: 10px ;
+}
+
+.wp-single-wbr .wbr-review-content .wbr-product-user button{
+    border-radius: 8px;
+    background-color: #520099;
+    font-size: 10px;
+    line-height: 13px;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Hind Siliguri";
+}
+
+.wp-single-wbr .wbr-review-content .wbr-book-meta-info{
+    margin: 50px 0;
+}
+.wp-single-wbr .wbr-review-content .wbr-book-meta-info .reviewer-rating h4{
+    font-size: 28px;
+    line-height: 13px;
+    color: #000000;
+    font-weight: 500;
+    font-family: "Hind Siliguri";
+}
+
+.wp-single-wbr .wbr-review-content .wbr-book-meta-info .reviewer-rating i.text-warning{
+    color: #520099 !important;
+    font-size: 40px;
+    margin-top: 10px;
+}
+.wp-single-wbr .wbr-review-content .wbr-book-review-box{
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    border: 3px solid #5a009e;
+    border-radius: 10px;
+    gap: 40px;
+    position: relative;
+}
+
+.wp-single-wbr .wbr-review-content .wbr-book-review-box .review-header{
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #520099;
+    padding: 16px 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wp-single-wbr .wbr-review-content .wbr-book-review-box .review-header h5{
+    font-size: 24px;
+    line-height: 0px;
+    color: #ffffff;
+    font-weight: 500;
+    font-family: "Hind Siliguri";
+    margin: 0px;
+}
+
+
+.wp-single-wbr .wbr-review-content .wbr-book-review-box .review-book-img{
+    width: 180px;
+    height: 220px;
+    position: relative;
+}
+
+.wp-single-wbr .wbr-review-content .wbr-book-review-box .review-book-img::before{
+    content: "উইলিস্ট আইকন";
+    width: 50px;
+    height: 50px;
+    background-color: #520099;
+    position: absolute;
+    top: -12px;
+    right: -15px;
+    border-radius: 50%;
+    font-size: 10px;
+    color: #ffffff;
+    font-weight: 300;
+    font-family: "Hind Siliguri";
+    line-height: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.wp-single-wbr .wbr-review-content .wbr-book-review-box .review-book-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wp-single-wbr .wbr-review-content .wbr-book-review-box .book-info ul, .wp-single-wbr .wbr-review-content .wbr-book-review-box .book-price ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.wp-single-wbr .wbr-review-content .wbr-book-review-box .book-info ul li, 
+.wp-single-wbr .wbr-review-content .wbr-book-review-box .book-price ul li {
+    font-size: 25px;
+    line-height: 35px;
+    color: #000000;
+    font-weight: 300;
+    font-family: "Hind Siliguri";
+}
+
+.wp-single-wbr .wbr-review-content .wbr-book-review-box .book-price .price-btn{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.wp-single-wbr .wbr-review-content .wbr-book-review-box .book-price button{
+    border-radius: 8px;
+    background-color: #520099;
+    font-size: 18px;
+    line-height: 13px;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Hind Siliguri";
+    padding: 18px 40px;
+}
+
+.wp-single-wbr .wbr-review-content .wbr-review-text p {
+    font-size: 20px;
+    line-height: 32px;
+    color: #000000;
+    font-weight: 300;
+    font-family: "Hind Siliguri";
+    margin-top: 30px;
+    text-align: justify;
+}
+
+.wp-single-wbr .comment-respond .wbr-comment-form textarea.form-control{
+    border: 3px solid #520099 !important;
+    border-radius: 15px;
+    height: 450px;
+    max-height: 400px !important;
+    background-color: transparent;
+}
+
+.wp-single-wbr .comment-respond .wbr-comment-form p.form-submit{
+    margin-top: 20px;
+}
+.wp-single-wbr .comment-respond .wbr-comment-form p.form-submit input.btn.btn-primary{
+    border-radius: 8px;
+    background-color: #520099 !important;
+    font-size: 18px;
+    line-height: 13px;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Hind Siliguri";
+    padding: 18px 40px;
+    display: inline-block;
+}
+
+.wp-single-wbr .ast-comment-formwrap{
+    margin-top: 30px;
+}
+
+.wp-single-wbr .ast-comment-formwrap p input{
+    border: 2px solid #520099;
+    border-radius: 7px;
+    background-color: transparent;
+}
+
+.wp-single-wbr .comment-respond h3.comment-reply-title{
+    font-size: 48px !important;
+    color: #520099 !important;
+    font-weight: 500;
+    font-family: "Hind Siliguri";
+}
+
+.wp-single-wbr .card{
+    border: none;
+    background-color: transparent;
+}
+
+.wp-single-wbr .card .thumbnail {
+    border: 3px solid #5a009e;
+    border-radius: 7px;
+    max-height: 180px;
+    width: auto;
+    overflow: hidden;
+}
+
+.wp-single-wbr .card .card-body .card-title{
+    font-size: 23px;
+    line-height: 30px;
+    color: #333333;
+    font-weight: 600;
+    font-family: "Hind Siliguri";
+}
+.wp-single-wbr .card .card-body .card-text{
+    font-size: 14px;
+    color: #000000;
+    font-weight: 300;
+    font-family: "Hind Siliguri";
+}
+
+.wp-single-wbr .product-user .wbr-product-user{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 15px;
+}
+
+.wp-single-wbr .product-user .wbr-product-user img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.wp-single-wbr .product-user .wbr-product-user .wbr-product-team{
+    /* margin-top: 15px; */
+    text-align: left;
+}
+.wp-single-wbr .product-user .wbr-product-user .wbr-product-team h3 {
+    font-size: 18px;
+    color: #333333;
+    font-family: "Hind Siliguri";
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.wp-single-wbr .product-user .wbr-product-user .wbr-product-team p{
+    font-size: 12px;
+    color: #333333;
+    font-weight: 300;
+    font-family: "Hind Siliguri";
+}
+
+.wp-single-wbr .product-user .wbr-product-user button{
+    font-size: 10px;
+    border-radius: 8px;
+    background-color: #520099;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Hind Siliguri";
+    padding: 10px;
+}
+
+.wp-single-wbr .ast-comment-formwrap p label{
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .wp-single-wbr .wbr-review-content h2 {
+        font-size: 54px;
+        line-height: 45px;
+        margin-top: 25px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team h3 {
+        font-size: 24px;
+        line-height: 12px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team p {
+        font-size: 14px;
+        line-height: 12px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-meta-info .reviewer-rating h4 {
+        font-size: 24px;
+        line-height: 13px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-meta-info .reviewer-rating i.text-warning {
+        font-size: 32px;
+        margin: 10px 3px 0 3px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-review-box .book-info ul li, .wp-single-wbr .wbr-review-content .wbr-book-review-box .book-price ul li {
+        font-size: 24px;
+        line-height: 40px;
+        font-weight: 500;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-review-box .book-price button {
+        font-size: 16px;
+        line-height: 13px;
+        padding: 16px 32px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-review-text p {
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .wp-single-wbr .comment-respond .wbr-comment-form textarea.form-control{
+        height: auto;
+    }
+
+    .wp-single-wbr .product-user .wbr-product-user .wbr-product-team h3 {
+        font-size: 14px;
+    }
+
+    .wp-single-wbr .product-user .wbr-product-user .wbr-product-team p {
+        font-size: 8px;
+    }
+
+    .wp-single-wbr .product-user .wbr-product-user button {
+        font-size: 8px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .wp-single-wbr .wbr-review-content .wbr-review-image img {
+        margin-top: 40px;
+    }
+
+    .wp-single-wbr .wbr-review-content h2 {
+        font-size: 40px;
+        line-height: 40px;
+        margin-top: 15px;
+    }
+    .wp-single-wbr .wbr-review-content .wbr-book-review-box {
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-review-box .book-info ul li, .wp-single-wbr .wbr-review-content .wbr-book-review-box .book-price ul {
+        font-size: 20px;
+        line-height: 30px;
+        font-weight: 500;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-review-box .book-info ul li, .wp-single-wbr .wbr-review-content .wbr-book-review-box .book-price ul li {
+        font-size: 16px;
+        line-height: 28px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-review-box .book-price button {
+        font-size: 10px;
+        line-height: 10px;
+        padding: 14px 32px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-review-text p {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-review-box .review-header h5 {
+        font-size: 14px;
+    }
+
+    .wp-single-wbr .product-user .wbr-product-user{
+        justify-content: start;
+    }
+
+    .wp-single-wbr .comment-respond h3.comment-reply-title {
+        font-size: 40px !important;
+    }
+
+    .wp-single-wbr .card {
+        margin-bottom: 25px !important;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .wp-single-wbr .wbr-review-content h2 {
+        font-size: 32px;
+    }
+    .wp-single-wbr .wbr-review-content .wbr-product-user {
+        gap: 15px;
+    }
+    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team h3 {
+        font-size: 20px;
+        line-height: 10px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team p {
+        font-size: 12px;
+        line-height: 10px;
+    }
+    .wp-single-wbr .wbr-review-content .wbr-product-user button {
+        padding: 15px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-review-box {
+        flex-direction: column;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-review-box .review-book-img {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-review-box .book-price .price-btn{
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-review-text p {
+        font-size: 20px;
+        word-spacing: 0px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-review-box .review-header h5 {
+        font-size: 9px;
+    }
+
+    .wp-single-wbr .ast-comment-formwrap {
+        margin-top: 15px;
+    }
+    .wp-single-wbr .ast-comment-formwrap p{
+        width: 100%;
+    }
+
+    .wp-single-wbr .ast-comment-formwrap p label{
+        width: 100%;
+    }
+
+    .wp-single-wbr .comment-respond h3.comment-reply-title {
+        font-size: 20px !important;
+    }
+
+    .wp-single-wbr .comment-respond{
+        padding: 0 !important;
+    }
+
+    .wp-single-wbr .wbr-review-content .comment-respond .wbr-comment-form p span{
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team h3 {
+        font-size: 17px;
+    }
+    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team p {
+        font-size: 10px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-product-user button {
+        padding: 12px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-review-box .review-header {
+        width: 72%;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .wp-single-wbr .wbr-review-content .wbr-product-user img {
+        width: 70px;
+        height: 70px;
+    }
+    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team h3 {
+        font-size: 12px;
+    }
+    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team p {
+        font-size: 8px;
+    }
+    .wp-single-wbr .wbr-review-content .wbr-product-user button {
+        padding: 8px;
+    }
+
+    .wp-single-wbr .comment-respond h3.comment-reply-title {
+        font-size: 18px !important;
+        margin-top: 36px;
+        line-height: 0;
+    }
+}
+
+/** Review page archive**/
+.section-padding {
+    padding: 50px 0;
+}
+
+.wbr-archive-featured-promo .featured-review-top-desc {
+    display: flex;
+    gap: 10px;
+}
+
+.wbr-archive-featured-promo .featured-review-top-desc h2 {
+    font-size: 30px;
+}
+
+.wbr-archive-featured-promo .featured-review-top-desc p {
+    font-size: 18px;
+}
+
+.wbr-archive-featured-promo .featured-review-top-desc .right a {
+    background: var(--wd-primary-color);
+    display: block;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 16px;
+    padding: 12px;
+    text-align: center;
+    margin-top: 14px;
+}
+
+.wbr-archive-featured-promo .featured-review-top-desc .right {
+    min-width: 200px;
+}
+
+.archive-promo-wrapper .title h2 {
+    font-size: 40px;
+    color: #fff;
+}
+
+.archive-promo-wrapper {
+    background: var(--wd-primary-color);
+    padding: 25px;
+    border-radius: 25px;
+    color: #fff;
+}
+
+.archive-promo-wrapper .description {
+    font-size: 20px;
+}
+
+.archive-promo-wrapper .cta a {
+    background: #eee;
+    padding: 12px;
+    display: inline-block;
+    margin: 12px auto;
+    border-radius: 25px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.archive-promo-wrapper .cta {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.archive-promo-wrapper .review-outcome {
+    margin-top: 20px;
+}
+
+.archive-promo-wrapper .review-outcome h4 {
+    color: #fff;
+}
+
+.archive-promo-wrapper .review-outcome ul {
+    list-style: none;
+    margin: 0;
+}
+
+.archive-promo-wrapper .review-outcome ul li {
+    padding-left: 20px;
+    position: relative;
+    font-size: 16px;
+}
+
+.archive-promo-wrapper .review-outcome ul li:before {
+    content: '-';
+    position: absolute;
+    left: 10px;
+}
+
+.wbr-featured-campaign-archive {
+    border-radius: 35px;
+    border: 5px solid var(--wd-primary-color);
+}
+
+.wbr-featured-campaign-archive .campaign-benefit h2 {
+    font-size: 45px;
+    text-align: center;
+}
+
+
+.wbr-featured-campaign-archive .campaign-benefit {
+    padding: 12px;
+}
+
+.wbr-featured-campaign-archive .fetured-campaign-info {
+    text-align: center;
+}
+
+.wbr-featured-campaign-archive .fetured-campaign-info h4, 
+.wbr-featured-campaign-archive .fetured-campaign-info .featured-sub-last-date {
+    font-size: 25px;
+}
+
+.wbr-featured-campaign-archive .fetured-campaign-info h4 {
+    margin-bottom: 0;
+}
+
+
+.wbr-featured-campaign-archive .fetured-campaign-info .featured-sub-last-date {
+    margin-bottom: 25px;
+}
+
+.wbr-featured-campaign-archive .fetured-campaign-info h2 {
+    font-size: 35px;
+}
+
+.wbr-featured-campaign-archive .fetured-campaign-info .timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wbr-featured-campaign-archive .fetured-campaign-info .timer > div {
+    font-size: 25px;
+    margin: 8px;
+    padding: 10px;
+    background: var(--wd-primary-color);
+    color: #fff;
+    border-radius: 10px;
+    min-width: 70px;
+}
+
+.wbr-featured-campaign-archive .fetured-campaign-info .featured-campaing-cta a {
+    background: var(--wd-primary-color);
+    margin-top: 20px;
+    display: block;
+    width: 140px;
+    padding: 12px;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.wbr-featured-campaign-archive .fetured-campaign-info .featured-campaing-cta {
+    display: flex;
+    justify-content: end;
+}
+
+
+
+.wbr-archive-page-leaderboard .leaderboard-title h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.wbr-archive-page-leaderboard .single-leaderboard {
+    border: 3px solid var(--wd-primary-color);
+    padding: 30px;
+    border-radius: 35px;
+}
+
+.wbr-archive-page-leaderboard .single-leaderboard h4 {
+    text-align: center;
+    font-size: 22px;
+}
+
+.wbr-archive-page-leaderboard .single-leaderboard ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wbr-archive-page-leaderboard .single-leaderboard ul li {
+    font-size: 20px;
+    /* text-align: center; */
+}
+
+.wbr-archive-page-leaderboard .single-leaderboard ul li a {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    padding-bottom: 15px;
+    transition: .3s;
+}
+
+.wbr-archive-page-leaderboard .single-leaderboard ul li:last-child a {
+    border-bottom: none;
+}
+
+.wbr-archive-page-leaderboard .single-leaderboard ul li a:hover {
+    margin-left: 10px;
+}
+
+.wbr-archive-page-leaderboard .single-leaderboard ul li a i, .wbr-archive-page-leaderboard .single-leaderboard ul li a svg {
+    fill: var(--wd-primary-color);
+    color: var(--wd-primary-color);
+    margin-right: 10px;
+}
+
+
+.sing-review-campaign-container .thumb {
+    position: relative;
+}
+
+.sing-review-campaign-container .thumb:after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: #000;
+    opacity: .4;
+}
+
+.sing-review-campaign-container .desc {
+    position: absolute;
+    z-index: 99;
+    top: 65%;
+    left: 18px;
+    max-width: 90%;
+    color: #fff;
+}
+
+.sing-review-campaign-container .desc h2 {
+    color: #fff;
+    font-size: 30px;
+}
+
+.review-campaign-meta-info {
+    background: #171717;
+    padding: 15px;
+    padding-left: 30px;
+    color: #fff;
+    border-radius: 15px;
+}
+.sing-review-campaign-container .content {
+    font-size: 18px;
+    margin-top: 30px;
+    line-height: 30px;
+}
+.review-campaign-meta-info h2, .review-campaign-meta-info h3, 
+.review-campaign-meta-info h4, .review-campaign-meta-info h6 {
+    color: #fff;
+}
+
+.review-campaign-meta-info .join-cta > a {
+    background: var(--wd-primary-color);
+    padding: 12px 20px;
+    display: block;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.review-campaign-meta-info .join-cta p {
+    margin-top: 20px;
+    font-size: 110%;
+}
+
+.review-campaign-meta-info .join-cta p a {
+    text-decoration: underline;
+    color: #fff;
+}
+
+.review-campaign-meta-info .time-table h3 {
+    font-size: 13px;
+    margin-bottom: 0;
+}
+
+.review-campaign-meta-info .time-table p {
+    margin-bottom: 7px;
+}
+
+.review-campaign-meta-info .schedule-headline {
+    text-transform: capitalize;
+}
+
+.review-campaign-meta-info .prize-details ul {
+    padding: 0;
+    list-style: none;
+}
+
+.review-campaign-meta-info .prize-details ul li {
+    margin-bottom: 2px;
+}
+
+.review-campaign-meta-info .prize-details {
+    display: flex;
+}
+
+.review-campaign-meta-info .prize-details .icon i, .review-campaign-meta-info .time-table .icon i {
+    font-size: 30px;
+    margin-right: 12px;
+    padding: 5px;
+}
+
+.review-campaign-meta-info .time-table {
+    display: flex;
+}
+
+.css-1iq6df2-Stack {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 30px;
+  }
+
+  .css-clqcwg-WinningSubmissionsItem {
+    display: flex;
+    margin-bottom: 20px; 
+  }
+  
+  .css-xbbxo2-Image {
+    margin-right: 10px;
+  }
+  
+  .css-xry9lh-Heading {
+    margin: 0;
+  }
+  
+  .css-edl77t-TextLink-TextLink {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .css-8qj45b-TimeAgo {
+    margin-left: 5px;
+    color: #6c757d;
+  }
+  
+  .css-edl77t-TextLink-TextLink + .css-8qj45b-TimeAgo::before {
+    content: " • ";
+  }
+  
+  .css-hxndjc-Track-TextLink {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .css-clqcwg-WinningSubmissionsItem .css-135czbg-Box {
+    margin-right: 15px;
+}
+
+.css-xbbxo2-Image img {
+    max-width: 32px;
+}
+
+.css-hxndjc-Track-TextLink .css-12xm57y-Flex-Track {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.featured-campaign-cta {
+    display: flex;
+    justify-content: end;
+}
+
+.featured-campaign-cta a {
+    background: var(--wd-primary-color);
+    padding: 12px 22px;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.wbr-review-form-toggler button {
+    background: var(--wd-primary-color);
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+
+body.author .author-info {
+    display: none;
+}
+
+/* Custom CSS */
+.author-profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.author-avatar {
+    margin-right: 20px;
+}
+
+.author-details {
+    flex-grow: 1;
+}
+
+.author-name {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.join-date, .author-bio, .review-count {
+    margin-bottom: 5px;
+}
+
+
+.write-review-button {
+    margin-top: 20px;
+	margin-bottom:50px;
+}
+
+.write-review-button a{
+    margin-top: 20px;
+    background: var(--wd-primary-color);
+    color: #fff;
+	border:none;
+	border-radius:5px;
+	display:inline-flex;
+}

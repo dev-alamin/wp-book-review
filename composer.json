@@ -1,0 +1,27 @@
+{
+    "name": "dev-alamin/book-review",
+    "description": "This is a wordpress plugin",
+    "type": "wordpress-plugin",
+    "license": "GPLv2",
+    "autoload": {
+        "psr-4": {
+            "Book\\Review\\": "includes/"
+        },
+        "files": [ "includes/functions.php" ]
+    },
+    "authors": [
+        {
+            "name": "AL AMIN",
+            "email": "hmalaminmb4@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "htmlburger/carbon-fields-plugin": "dev-master"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}

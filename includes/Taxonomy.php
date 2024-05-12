@@ -1,0 +1,138 @@
+<?php 
+namespace Book\Review;
+
+class Taxonomy {
+
+    public function __construct() {
+        add_action( 'init', [ $this, 'author_tax' ] );
+        add_action( 'init', [ $this, 'publisher_tax' ] );
+        add_action( 'init', [ $this, 'rev_athor' ] );
+        add_action( 'init', [ $this, 'campaign_to_reviews' ] );
+    }
+    
+    public function author_tax() {
+        $labels = [
+            "name" => esc_html__( "Authors", "custom-post-type-ui" ),
+            "singular_name" => esc_html__( "Author", "custom-post-type-ui" ),
+        ];
+
+        $args = [
+            "label" => esc_html__( "Authors", "custom-post-type-ui" ),
+            "labels" => $labels,
+            "public" => true,
+            "publicly_queryable" => true,
+            "hierarchical" => true,
+            "show_ui" => true,
+            "show_in_menu" => true,
+            "show_in_nav_menus" => true,
+            "query_var" => true,
+            "rewrite" => [ 'slug' => '/books/author', 'with_front' => true, ],
+            "show_admin_column" => false,
+            "show_in_rest" => true,
+            "show_tagcloud" => false,
+            "rest_base" => "authors",
+            "rest_controller_class" => "WP_REST_Terms_Controller",
+            "rest_namespace" => "wp/v2",
+            "show_in_quick_edit" => false,
+            "sort" => false,
+            "show_in_graphql" => false,
+        ];
+        register_taxonomy( "authors", [ "product" ], $args );
+    }
+
+
+    public function publisher_tax() {
+        $labels = [
+            "name" => esc_html__( "Publishers", "custom-post-type-ui" ),
+            "singular_name" => esc_html__( "Publisher", "custom-post-type-ui" ),
+        ];
+
+        $args = [
+            "label" => esc_html__( "Publishers", "custom-post-type-ui" ),
+            "labels" => $labels,
+            "public" => true,
+            "publicly_queryable" => true,
+            "hierarchical" => true,
+            "show_ui" => true,
+            "show_in_menu" => true,
+            "show_in_nav_menus" => true,
+            "query_var" => true,
+            "rewrite" => [ 'slug' => '/books/publisher', 'with_front' => true, ],
+            "show_admin_column" => false,
+            "show_in_rest" => true,
+            "show_tagcloud" => false,
+            "rest_base" => "publisher",
+            "rest_controller_class" => "WP_REST_Terms_Controller",
+            "rest_namespace" => "wp/v2",
+            "show_in_quick_edit" => false,
+            "sort" => false,
+            "show_in_graphql" => false,
+        ];
+        register_taxonomy( "publisher", [ "product" ], $args );
+    }
+
+    /**
+     * Taxonomy For Review Book
+     *
+     * @return void
+     */
+    public function rev_athor() {
+        $labels = [
+            "name" => esc_html__( "Books", "custom-post-type-ui" ),
+            "singular_name" => esc_html__( "Book", "custom-post-type-ui" ),
+        ];
+
+        $args = [
+            "label" => esc_html__( "Books", "custom-post-type-ui" ),
+            "labels" => $labels,
+            "public" => true,
+            "publicly_queryable" => true,
+            "hierarchical" => true,
+            "show_ui" => true,
+            "show_in_menu" => true,
+            "show_in_nav_menus" => true,
+            "query_var" => true,
+            "rewrite" => [ 'slug' => '/reviews/books', 'with_front' => true, ],
+            "show_admin_column" => false,
+            "show_in_rest" => true,
+            "show_tagcloud" => false,
+            "rest_base" => "books",
+            "rest_controller_class" => "WP_REST_Terms_Controller",
+            "rest_namespace" => "wp/v2",
+            "show_in_quick_edit" => false,
+            "sort" => false,
+            "show_in_graphql" => false,
+        ];
+        register_taxonomy( "review_book", [ "review" ], $args );
+    }
+
+    public function campaign_to_reviews(){
+        $labels = [
+            "name" => esc_html__( "Campaigns", "wbr" ),
+            "singular_name" => esc_html__( "Campaign", "wbr" ),
+        ];
+
+        $args = [
+            "label" => esc_html__( "Campaign", "wbr" ),
+            "labels" => $labels,
+            "public" => true,
+            "publicly_queryable" => true,
+            "hierarchical" => true,
+            "show_ui" => true,
+            "show_in_menu" => true,
+            "show_in_nav_menus" => true,
+            "query_var" => true,
+            "rewrite" => [ 'slug' => '/reviews/campaign', 'with_front' => true, ],
+            "show_admin_column" => false,
+            "show_in_rest" => true,
+            "show_tagcloud" => false,
+            "rest_base" => "campaign",
+            "rest_controller_class" => "WP_REST_Terms_Controller",
+            "rest_namespace" => "wp/v2",
+            "show_in_quick_edit" => false,
+            "sort" => false,
+            "show_in_graphql" => false,
+        ];
+        register_taxonomy( "campaign_review", [ "review" ], $args );
+    }
+}

@@ -1354,3 +1354,164 @@ body.author .author-info {
 	border-radius:5px;
 	display:inline-flex;
 }
+
+
+/*****************
+ Review Single Page Custom CSS Code By Masud  // 13/05/23
+*******************/
+.wpr-card-body .right-title{
+    min-height: auto;
+}
+.main-page-wrapper{
+    background-color: #edf6f9 !important;
+}
+
+.wbr-archive-page-cls  .wpr-card{
+    border-radius: 20px;
+}
+
+.wbr-archive-page-cls  .wpr-card .comment-entry.wpr-single-comment{
+    border-top: 2px solid #DDDDDD;
+    margin-top: 20px;
+}
+
+.wbr-archive-page-cls .wpr-card-body .title-description a{
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.wbr-archive-page-cls .archive-promo-wrapper{
+    background-color: #F6E6FC;
+    color: #333;
+    border-top: 20px solid #1D0073;
+    border-radius: 15px 15px 15px 15px;
+}
+.wbr-archive-page-cls  .archive-promo-wrapper .title h2{
+    color: #272927;
+    font-size: 36px;
+}
+.wbr-archive-page-cls  .archive-promo-wrapper .cta a{
+    font-weight: 800;
+    background-color: #fff;
+}
+.wbr-archive-page-cls  .archive-promo-wrapper .review-outcome h4{
+    color: #272927;
+    font-weight: 700;
+    font-size: 20px;
+}
+.wbr-archive-page-cls  .archive-promo-wrapper .review-outcome ul li{
+    color: #272927;
+}
+
+.wbr-campaign-page-cls{
+    border: none;
+    background-color: #F6E6FC;
+    border-top: 20px solid #1D0073;
+    border-radius: 15px 15px 15px 15px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 40px -15px, rgba(0, 0, 0, 0.3) 0px 0px 0px -10px;
+}
+.wbr-campaign-page-cls .featured-campaign-cta{
+    justify-content: center;
+}
+
+.wbr-leaderboard-page-cls .leaderboard-title{
+    text-align: center;
+    margin-top: 40px;
+}
+.wbr-leaderboard-page-cls .single-leaderboard ul li{
+    display: flex;
+    align-items: center;
+
+    background-color: #D4C8EE;
+    border-radius: 3px;
+    padding:10px 5px;
+}
+.wbr-leaderboard-page-cls .single-leaderboard ul li:nth-child(2){
+    background-color: #C6D1EE;
+}
+.wbr-leaderboard-page-cls .single-leaderboard ul li:nth-child(3){
+    background-color: #C6DDEE;
+}
+.wbr-leaderboard-page-cls .single-leaderboard ul li:nth-child(4){
+    background-color: #C6E4D5;
+}
+.wbr-leaderboard-page-cls .single-leaderboard ul li a{
+    border: none ;
+    font-size: 18px;
+    padding-bottom: 0px;
+}
+.wbr-leaderboard-page-cls .single-leaderboard ul li a img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.wbr-leaderboard-page-cls .single-leaderboard ul li a img{
+    margin-right: 20px;
+}
+.wbr-archive-page-leaderboard .single-leaderboard{
+    background-color: #E6E9FA;
+    border: 1px solid #F6E6FC;
+}
+.winner-review-books.single-leaderboard{
+    margin-top: 20px;
+}
+@media only screen and (max-width: 568px) {
+    .wbr-archive-page-cls .archive-promo-wrapper .title h2{
+        font-size: 24px;
+    }
+    .archive-promo-wrapper .description {
+        font-size: 16px;
+    }
+    .wbr-archive-page-cls .archive-promo-wrapper .review-outcome ul li{
+        font-size: 16px;
+    }
+    .wbr-featured-campaign-archive .campaign-benefit h2{
+        font-size: 32px;
+        line-height: 1.3;
+    }
+    .wbr-featured-campaign-archive .fetured-campaign-info{
+        margin-top: 30px;
+    }
+    .wbr-featured-campaign-archive .fetured-campaign-info .featured-sub-last-date{
+        margin-bottom: 10px;
+    }
+    .wbr-featured-campaign-archive .fetured-campaign-info .timer > div{
+        font-size: 18px;
+        min-width: 60px;
+    }
+    .wbr-leaderboard-page-cls .single-leaderboard ul li a{
+        font-size: 16px;
+    }
+    .winner-review-books.single-leaderboard{
+        margin-top: 20px;
+    }
+    .wpr-card-body .right-title h2{
+        font-size: 22px;
+    }
+    .wbr-archive-page-cls .wpr-card-body .title-description a{
+        font-size: 16px;
+        line-height: 26px;
+    }
+    .wbr-featured-campaign-archive .campaign-benefit h2 {
+        font-size: 28px;
+        line-height: 1.3;
+    }
+    .wbr-featured-campaign-archive .fetured-campaign-info h2 {
+        font-size: 28px;
+    }
+    .wbr-archive-page-leaderboard .leaderboard-title h2{
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+}
+@media only screen and (max-width: 375px) {
+    .wbr-archive-page-cls .archive-promo-wrapper .title h2{
+        font-size: 20px;
+    }
+    .archive-promo-wrapper .review-outcome ul{
+        padding-left: 0px;
+    }
+    .wbr-archive-page-cls .wpr-card-body .title-description a {
+        font-size: 14px;
+    }
+}

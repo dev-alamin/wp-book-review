@@ -25,7 +25,7 @@ $options = get_option('wbr_archive_promo_options');
         </div>
     </div>
 </div>
-<div class="wbr-archive-featured-promo section-padding">
+<div class="wbr-archive-featured-promo section-padding wbr-archive-page-cls">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -47,30 +47,29 @@ $options = get_option('wbr_archive_promo_options');
                 </div>
             </div>
             <div class="col-lg-6">
-            <div class="archive-promo-wrapper">
-                <div class="title">
-                    <h2><?php echo esc_html( $options['archive_promo_title'] ); ?></h2>
+                <div class="archive-promo-wrapper">
+                    <div class="title">
+                        <h2><?php echo esc_html( $options['archive_promo_title'] ); ?></h2>
+                    </div>
+                    <div class="description">
+                        <p><?php echo wp_kses_post( $options['archive_promo_description'] ); ?></p>
+                    </div>
+                    <div class="cta">
+                        <a href="<?php echo esc_url( $options['archive_promo_cta_link'] ); ?>"><?php echo esc_html( $options['archive_promo_cta_text'] ); ?></a>
+                    </div>
+                    <div class="review-outcome">
+                    <h4><?php echo esc_html( $options['archive_promo_list_heading'] ); ?></h4>
+                        <ul>
+                            <?php
+                            // Explode list items and display as list items
+                            $list_items = explode( PHP_EOL, $options['archive_promo_list_items'] );
+                            foreach( $list_items as $list ) {
+                                echo '<li>' . $list . '</li>';
+                            }
+                            ?>
+                        </ul>
+                    </div>
                 </div>
-                <div class="description">
-                    <p><?php echo wp_kses_post( $options['archive_promo_description'] ); ?></p>
-                </div>
-                <div class="cta">
-                    <a href="<?php echo esc_url( $options['archive_promo_cta_link'] ); ?>"><?php echo esc_html( $options['archive_promo_cta_text'] ); ?></a>
-                </div>
-                <div class="review-outcome">
-                <h4><?php echo esc_html( $options['archive_promo_list_heading'] ); ?></h4>
-                    <ul>
-                        <?php
-                        // Explode list items and display as list items
-                        $list_items = explode( PHP_EOL, $options['archive_promo_list_items'] );
-                       foreach( $list_items as $list ) {
-                        echo '<li>' . $list . '</li>';
-                       }
-                        ?>
-                    </ul>
-                </div>
-            </div>
-
             </div>
         </div>
         <!-- Additional row for three posts -->
@@ -117,7 +116,7 @@ if ($latest_campaign_query->have_posts()) {
         
 if ($last_submission_date_obj >= $today_date_obj) {
 ?>
-<div class="wbr-featured-campaign-archive section-padding">
+<div class="wbr-featured-campaign-archive section-padding wbr-campaign-page-cls">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -127,6 +126,9 @@ if ($last_submission_date_obj >= $today_date_obj) {
                     $prizes = carbon_get_post_meta( get_the_ID(), 'prizes' );
                     ?>
                     <h2><?php echo wp_kses_post( $prizes[0]['prize_name']); ?></h2>
+                    <div class="featured-campaign-cta">
+                        <a href="<?php echo get_permalink(); ?>">See more</a>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -141,9 +143,6 @@ if ($last_submission_date_obj >= $today_date_obj) {
                         <div class="hour">0</div>
                         <div class="minutes">0</div>
                         <div class="second">0</div>
-                    </div>
-                    <div class="featured-campaign-cta">
-                        <a href="<?php echo get_permalink(); ?>">See more</a>
                     </div>
                 </div>
             </div>
@@ -194,7 +193,7 @@ setInterval(function() {
 }
 ?>
 
-<div class="wbr-archive-page-leaderboard section-padding">
+<div class="wbr-archive-page-leaderboard section-padding wbr-leaderboard-page-cls">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -265,7 +264,7 @@ setInterval(function() {
 </div>
 <?php 
 if ( have_posts() ) {
-    echo '<div class="container mt-3">';
+    echo '<div class="container mt-3 wbr-archive-page-cls">';
     echo '<div class="row" id="reviews-container">';
     while ( have_posts() ) {
         the_post();

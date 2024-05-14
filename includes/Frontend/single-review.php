@@ -15,9 +15,11 @@ $regular_price       = get_post_meta( $product_id, '_regular_price', true );
 $sale_price          = get_post_meta( $product_id, '_sale_price', true );
 $total_post =   count_user_posts($author_id, 'review' );
 $total_review =  wpr_get_total_review_and_average( $product_id );
+
+$campaing = get_post_meta(get_the_ID(), '_campaign_id', true);
 ?>
 
-<section class="wp-single-wbr">
+<section class="wp-single-wbr wbr-single-bg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -39,6 +41,7 @@ $total_review =  wpr_get_total_review_and_average( $product_id );
                             <?php endif; ?>
                             <p>মোট <?php echo ff_english_to_bengali( $total_post ); ?>  রিভিউ লিখেছেন </p>
                         </div>
+                        <a class="campaing" href="<?php echo get_the_permalink($campaing); ?>"><?php echo get_the_title($campaing); ?></a>
                         <!-- <button>Button</button> -->
                     </div>
                         <div class="wbr-book-meta-info">
@@ -62,6 +65,7 @@ $total_review =  wpr_get_total_review_and_average( $product_id );
                         <div class="review-header">
                             <h5>যে বই সম্পর্কে রিভিউ লেখা হয়েছে</h5>
                         </div>
+                        <div class="author-review book-info">
                         <div class="review-book-img">
                             <?php 
                             $book_image = ! empty( $book_image ) ? $book_image : BOOK_REVIEW_ASSETS . '/images/default-book.png';
@@ -90,6 +94,7 @@ $total_review =  wpr_get_total_review_and_average( $product_id );
                                     ?>
                                 </li>
                             </ul>
+                        </div>
                         </div>
                         <div class="book-price">
                             <ul>
@@ -122,11 +127,7 @@ $total_review =  wpr_get_total_review_and_average( $product_id );
                         <p><?php echo wp_kses_post(get_the_content()); ?></p>
                     </div>
                 </div>
-                <?php 
-                if ( comments_open() || get_comments_number() ) :
-                    comments_template();
-                endif;
-                ?>
+               
             </div>
         </div>
     </div>

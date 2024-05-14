@@ -8,9 +8,9 @@ get_header(); ?>
                     <div class="thumb">
                         <?php the_post_thumbnail( 'large' ); ?>
                         <div class="desc">
-                       <?php the_title( '<h2>', '</h2>' ); ?>
-                        <?php the_excerpt(); ?>
-                    </div>
+                            <?php the_title( '<h2>', '</h2>' ); ?>
+                            <?php the_excerpt(); ?>
+                        </div>
                     </div>
                 </div>
                 <?php

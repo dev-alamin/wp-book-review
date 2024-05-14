@@ -162,6 +162,7 @@ $(document).on('click', '#load-more-reviews', function () {
             beforeSend: function() {
                 // Disable submit button and show loading spinner if needed
                 submitButton.prop('disabled', true);
+                $('body').css('background-color', 'white');
             },
             success: function(response) {
                 if (response.success === false ) {

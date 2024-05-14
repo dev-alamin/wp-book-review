@@ -141,6 +141,8 @@ $(document).on('click', '#load-more-reviews', function () {
     // Handle form submission via AJAX
     $('#review-form').on('submit', function(e) {
         e.preventDefault();
+
+       	
         
         var form = $(this);
         var formData = new FormData(form[0]); // Create FormData object from form
@@ -151,6 +153,10 @@ $(document).on('click', '#load-more-reviews', function () {
         formData.append('action', 'submit_review');
         
         var submitButton = form.find('input[type="submit"]');
+
+       
+                
+         
         
         // AJAX request
         $.ajax({
@@ -319,4 +325,23 @@ $(document).on('click', '#load-more-reviews', function () {
                 swal("Error!", "Please check the agreement checkbox before proceeding.", "error");
             }
         });
+});
+
+jQuery(function($){
+    $(document).ajaxSend(function() {
+        $("#overlay").fadeIn(300);　
+      });
+    
+    $('.ct-form-submit-btn').click(function(){
+        $.ajax({
+          type: 'GET',
+          success: function(data){
+            console.log(data);
+          }
+        }).done(function() {
+          setTimeout(function(){
+            $("#overlay").fadeOut(300);
+          }, 500);
+        });
+      });
 });

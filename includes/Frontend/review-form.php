@@ -1,3 +1,8 @@
+<div id="overlay">
+    <div class="cv-spinner">
+        <span class="spinner"></span>
+    </div>
+</div>
 <div class="container">
     <div class="row">
             <div class="col-lg-12">
@@ -26,23 +31,22 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                <div id="review-submission-form">
+                <div id="review-submission-form form-submission">
                         <h2>Submit a Review</h2>
                         <form id="review-form" class="form row gx-3 gy-2 align-items-center" action="" method="post" enctype="multipart/form-data">
-                        <div class="col-lg-12">
+                            <div class="col-lg-12">
                                 <input type="hidden" name="review_nonce" id="review-nonce" value="<?php echo wp_create_nonce( 'submit_review' ); ?>">
                                 
                                 <div class="form-group">
                                     <label for="review-title">Review Title:</label>
-                                    <input type="text" class="form-control" name="review-title" id="review-title">
+                                    <input type="text" class="form-control submit-review-text" name="review-title" id="review-title">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="review-content">Your Review:</label>
-                                    <textarea class="form-control" name="review-content" id="review-contents"></textarea>
+                                    <textarea class="form-control textarea-book-reviwe" name="review-content" id="review-contents"></textarea>
                                 </div>
                             </div>
-
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="visually-hidden" for="product-id">Select Product:</label>
@@ -69,7 +73,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="visually-hidden" for="review-rating">Rating:</label>
@@ -83,22 +86,20 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-lg-4">
                                 <?php include __DIR__ . '/views/component/image-uploader.php'; ?> 
                                 <input type="hidden" name="user-id" id="user-id" value="<?php echo get_current_user_id(); ?>">
                             </div>
                             <div class="col-auto">
-                            <label class="visually-hidden" for="publish-status">Publish later:</label>
-                                    <select class="form-select" name="publish-status" id="publish-status">
-                                        <option selected value="">Choose status</option>
-                                        <option value="publish">Publish</option>
-                                        <option value="draft">Draft</option>
-                                    </select>
+                                <label class="visually-hidden" for="publish-status">Publish later:</label>
+                                <select class="form-select" name="publish-status" id="publish-status">
+                                    <option selected value="">Choose status</option>
+                                    <option value="publish">Publish</option>
+                                    <option value="draft">Draft</option>
+                                </select>
                             </div>
-
                             <div class="col-auto">
-                            <div class="form-group">
+                                <div class="form-group">
                                     <label class="visually-hidden" for="campaign_id">Select Campaign:</label>
                                     <select class="form-select form-control" style="width: 100%" name="campaign_id" id="campaign_id">
                                         <option value="">Select a Campaign</option>
@@ -131,9 +132,8 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-auto">
-                                <input type="submit" name="publish" value="Submit Review">
+                                <input type="submit" class="ct-form-submit-btn" name="publish" value="Submit Review">
                             </div>
                         </form>
                     </div>

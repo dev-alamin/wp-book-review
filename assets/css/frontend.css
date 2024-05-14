@@ -1574,3 +1574,84 @@ body.author .author-info {
         font-size: 10px;
     }
 }
+
+.form-submission .form-group{
+    margin-top: 20px !important;
+}
+.submit-review-text{
+    background-color: #fff !important;
+    border: 1px solid var(--btn-accented-bgcolor) !important;
+    
+}
+.submit-review-text:focus,  .form-control:focus{
+    box-shadow: none !important;
+}
+.form-submission .form-control:focus, .form-control:focus{
+    outline: none;
+    border: none;
+    box-shadow: none !important;
+}
+.textarea-book-reviwe{
+    height: 180px !important;
+    border: 1px solid var(--btn-accented-bgcolor) !important;
+}
+
+.select2-container .select2-selection--single{
+    height: 42px !important;
+}
+.select2-container--default .select2-selection--single{
+    border: 1px solid var(--btn-accented-bgcolor);
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    margin-top: 5px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+    top: 7px;
+    right: 4px;
+}
+.form-select{
+    border: 1px solid var(--btn-accented-bgcolor);
+}
+.ct-form-submit-btn{
+    background-color: var(--btn-accented-bgcolor);
+    border-radius: 5px;
+    color: #fff;
+}
+.custom-file-upload{
+    max-width: 100% !important;
+}
+.ct-form-submit-btn:hover{
+    background-color: #fff;
+    border: 1px solid  var(--btn-accented-bgcolor);
+    color: var(--btn-accented-bgcolor);
+}
+
+
+  #overlay{	
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height:100%;
+    display: none;
+    background: rgba(0,0,0,0.6);
+  }
+  .cv-spinner {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px #ddd solid;
+    border-top: 4px #2e93e6 solid;
+    border-radius: 50%;
+    animation: sp-anime 0.8s infinite linear;
+  }
+  @keyframes sp-anime {
+    100% { 
+      transform: rotate(360deg); 
+    }
+  }

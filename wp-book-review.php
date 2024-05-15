@@ -161,3 +161,15 @@ function add_tinymce_referrer_policy($tag, $handle) {
 }
 
 add_filter('script_loader_tag', 'add_tinymce_referrer_policy', 10, 2);
+
+
+function sticky_header_code() {
+    echo '
+        <div id="wbrfs_overlay">
+            <div class="cv-spinner">
+                <span class="spinner"></span>
+            </div>
+        </div>
+    ';
+}
+add_action( 'wp_body_open', 'sticky_header_code' );

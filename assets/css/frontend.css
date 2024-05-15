@@ -1628,7 +1628,7 @@ body.author .author-info {
 }
 
 
-  #overlay{	
+  #wbrfs_overlay{	
     position: fixed;
     top: 0;
     z-index: 100;

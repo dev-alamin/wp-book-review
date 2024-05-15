@@ -1,8 +1,3 @@
-<div id="overlay">
-    <div class="cv-spinner">
-        <span class="spinner"></span>
-    </div>
-</div>
 <div class="container">
     <div class="row">
             <div class="col-lg-12">

@@ -168,23 +168,27 @@ $(document).on('click', '#load-more-reviews', function () {
             beforeSend: function() {
                 // Disable submit button and show loading spinner if needed
                 submitButton.prop('disabled', true);
-                $('body').css('background-color', 'white');
+                // $('body').css('background-color', 'white');
+                $("#wbrfs_overlay").fadeIn(300);
             },
             success: function(response) {
                 if (response.success === false ) {
+                    $("#wbrfs_overlay").fadeOut(300);
                     Swal.fire({
                         icon: 'error',
                         title: 'Error!',
                         text: response.data,
                     });
+                    
                 } else {
+                    $("#wbrfs_overlay").fadeOut(300);
                     // If no error, display success message
                     Swal.fire({
                         icon: 'success',
                         title: 'Success!',
                         text: 'Your review has been submitted successfully.',
                     });
-                    console.log(response);
+                    // console.log(response);
                     form[0].reset();
                     form.find(':input').not(':button, :submit, :reset, :hidden').val('');
                 }
@@ -327,21 +331,21 @@ $(document).on('click', '#load-more-reviews', function () {
         });
 });
 
-jQuery(function($){
-    $(".ct-form-submit-btn").click(function() {
-        $("#overlay").fadeIn(300);　
-      });
+// jQuery(function($){
+//     $(".ct-form-submit-btn").click(function() {
+//         $("#wbrfs_overlay").fadeIn(300);　
+//       });
     
-    $('.ct-form-submit-btn').click(function(){
-        $.ajax({
-          type: 'GET',
-          success: function(data){
-            console.log(data);
-          }
-        }).done(function() {
-          setTimeout(function(){
-            $("#overlay").fadeOut(300);
-          }, 700);
-        });
-      });
-});
+//     $('.ct-form-submit-btn').click(function(){
+//         $.ajax({
+//           type: 'GET',
+//           success: function(data){
+//             console.log(data);
+//           }
+//         }).done(function() {
+//           setTimeout(function(){
+//             $("#wbrfs_overlay").fadeOut(300);
+//           }, 700);
+//         });
+//       });
+// });

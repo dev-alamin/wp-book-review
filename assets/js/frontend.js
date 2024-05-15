@@ -328,7 +328,7 @@ $(document).on('click', '#load-more-reviews', function () {
 });
 
 jQuery(function($){
-    $(document).ajaxSend(function() {
+    $(".ct-form-submit-btn").click(function() {
         $("#overlay").fadeIn(300);　
       });
     
@@ -341,7 +341,7 @@ jQuery(function($){
         }).done(function() {
           setTimeout(function(){
             $("#overlay").fadeOut(300);
-          }, 500);
+          }, 700);
         });
       });
 });

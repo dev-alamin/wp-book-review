@@ -47,7 +47,11 @@
                                     <textarea class="form-control textarea-book-reviwe" name="review-content" id="review-contents"></textarea>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-12 review-upload-image">
+                                <?php include __DIR__ . '/views/component/image-uploader.php'; ?> 
+                                <input type="hidden" name="user-id" id="user-id" value="<?php echo get_current_user_id(); ?>">
+                            </div>
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="visually-hidden" for="product-id">Select Product:</label>
                                     <select class="form-select select2 js-example-basic-single js-states form-control" style="width: 100%" name="product-id" id="product-id" required>
@@ -73,7 +77,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="visually-hidden" for="review-rating">Rating:</label>
                                     <select class="form-select" name="review-rating" id="review-rating" required>
@@ -86,11 +90,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <?php include __DIR__ . '/views/component/image-uploader.php'; ?> 
-                                <input type="hidden" name="user-id" id="user-id" value="<?php echo get_current_user_id(); ?>">
-                            </div>
-                            <div class="col-auto">
+                            
+                            <div class="col-lg-6">
                                 <label class="visually-hidden" for="publish-status">Publish later:</label>
                                 <select class="form-select" name="publish-status" id="publish-status">
                                     <option selected value="">Choose status</option>
@@ -98,7 +99,7 @@
                                     <option value="draft">Draft</option>
                                 </select>
                             </div>
-                            <div class="col-auto">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="visually-hidden" for="campaign_id">Select Campaign:</label>
                                     <select class="form-select form-control" style="width: 100%" name="campaign_id" id="campaign_id">
@@ -132,7 +133,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-auto">
+                            <div class="col-lg-12 text-center">
                                 <input type="submit" class="ct-form-submit-btn" name="publish" value="Submit Review">
                             </div>
                         </form>

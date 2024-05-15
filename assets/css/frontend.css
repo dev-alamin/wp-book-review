@@ -303,7 +303,7 @@ height: initial;
 }
 
 .wpr-single-comment .author-meta .author-avatar, .wpr-single-comment .author-meta .author-avatar img {
-    height: 50px;
+    /* height: 50px; */
     width: 50px;
     border-radius: 50%;
 }
@@ -1581,6 +1581,7 @@ body.author .author-info {
 .submit-review-text{
     background-color: #fff !important;
     border: 1px solid var(--btn-accented-bgcolor) !important;
+    border-radius: 5px !important;
     
 }
 .submit-review-text:focus,  .form-control:focus{
@@ -1646,7 +1647,7 @@ body.author .author-info {
     width: 40px;
     height: 40px;
     border: 4px #ddd solid;
-    border-top: 4px #2e93e6 solid;
+    border-top: 4px var(--btn-accented-bgcolor) solid;
     border-radius: 50%;
     animation: sp-anime 0.8s infinite linear;
   }
@@ -1661,6 +1662,29 @@ body.author .author-info {
     display: inherit;
     font-size: 16px;
   }
+  .wpr-card-body .right-title h2{
+    font-size: 24px !important;
+  }
+  .wpr-single-comment .author-meta .author-and-count{
+    margin-left: 0px !important;
+  }
+  .wpr-single-comment .author-meta .author-avatar, .wpr-single-comment .author-meta .author-avatar img{
+    margin-right: 10px;
+  }
+
+  .load-more-rev-container #load-more-reviews{
+    background-color: var(--btn-accented-bgcolor);
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .load-more-rev-container #load-more-reviews:hover{
+    background-color: #fff;
+    border: 1px solid  var(--btn-accented-bgcolor);
+    color: var(--btn-accented-bgcolor);
+   
+}
 
 
 
@@ -1680,12 +1704,12 @@ body.author .author-info {
   .picture {
     width: 100%;
     aspect-ratio: 16/9;
-    background: #ddd;
+    background: rgba(131, 183, 53, .3);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #aaa;
-    border: 2px dashed currentcolor;
+    color: #fff;
+    border: 2px dashed var(--btn-accented-bgcolor);
     cursor: pointer;
     font-family: sans-serif;
     transition: color 300ms ease-in-out, background 300ms ease-in-out;
@@ -1695,8 +1719,8 @@ body.author .author-info {
   }
   
   .picture:hover {
-    color: #777;
-    background: #ccc;
+    color: #fff;
+    background: rgba(131, 183, 53, .7);
   }
   
   .picture:active {

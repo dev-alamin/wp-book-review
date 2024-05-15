@@ -133,7 +133,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-12 text-center">
+                            <div class="col-lg-12 text-center mb-4 mt-3">
                                 <input type="submit" class="ct-form-submit-btn" name="publish" value="Submit Review">
                             </div>
                         </form>

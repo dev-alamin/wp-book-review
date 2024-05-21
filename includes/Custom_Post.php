@@ -193,6 +193,14 @@ class Custom_Post {
             }
         }
 
+        if ( is_post_type_archive('review-campaign') ) {
+            $plugin_template = __DIR__ . '/Frontend/views/archive-campaign.php';
+
+            if (file_exists($plugin_template)) {
+                return $plugin_template;
+            }
+        }
+
         if ( is_author() ) {
             $author_template = __DIR__ . '/Frontend/views/author.php';
             if ( file_exists($author_template) ) {

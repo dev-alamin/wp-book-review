@@ -8,11 +8,11 @@
  */
 
 get_header();
-$author_id = get_query_var('author');
-$author_name = get_the_author_meta('display_name', $author_id);
-$join_date = get_the_author_meta('user_registered', $author_id);
-$author_bio = get_the_author_meta('description', $author_id);
-$review_count = count_user_posts($author_id, 'review');
+$author_id     = get_query_var('author');
+$author_name   = get_the_author_meta('display_name', $author_id);
+$join_date     = get_the_author_meta('user_registered', $author_id);
+$author_bio    = get_the_author_meta('description', $author_id);
+$review_count  = count_user_posts($author_id, 'review');
 $author_avatar = get_avatar(get_the_author_meta('user_email', $author_id), 150);
 ?>
 <div id="primary" class="content-area">
@@ -31,7 +31,7 @@ $author_avatar = get_avatar(get_the_author_meta('user_email', $author_id), 150);
                         </div>
                     </div>
                     <div class="write-review-button">
-                        <a href="<?php echo esc_url(home_url('/review-shrtocode/')); ?>" class="btn btn-primary">Write a Review</a>
+                        <a href="<?php echo esc_url(home_url('/submit-review/')); ?>" class="btn btn-primary">Write a Review</a>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,13 @@ $join_date     = get_the_author_meta('user_registered', $author_id);
 $author_bio    = get_the_author_meta('description', $author_id);
 $review_count  = count_user_posts($author_id, 'review');
 $author_avatar = get_avatar(get_the_author_meta('user_email', $author_id), 150);
+
+$author_id = get_query_var('author');
+$review_posts_args = array(
+    'post_type' => 'review',
+    'author'    => $author_id
+);
+$review_posts = new WP_Query($review_posts_args);
 ?>
 <div id="primary" class="content-area">
     <main id="main" class="site-main container" role="main">
@@ -30,22 +37,65 @@ $author_avatar = get_avatar(get_the_author_meta('user_email', $author_id), 150);
                             <p class="review-count">Total Reviews: <?php echo $review_count; ?></p>
                         </div>
                     </div>
+                    <?php if( is_user_logged_in() && get_current_user_id() == $author_id ): ?>
                     <div class="write-review-button">
                         <a href="<?php echo esc_url(home_url('/submit-review/')); ?>" class="btn btn-primary">Write a Review</a>
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         <hr>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <?php if( is_user_logged_in() && get_current_user_id() == $author_id ): ?>
+                        <?php 
+                        if ( $review_posts->have_posts() ) {
+                            echo '<table>';
+                            echo '<tr>';
+                            echo '<th>#</th>';
+                            echo '<th>Review Title</th>';
+                            echo '<th> Book</th>';
+                            echo '<th>Date</th>';
+                            echo '<th>Actions</th>';
+                            echo '</tr>';
+                            
+                            $serial = 1;
+                            while ($review_posts->have_posts()) {
+                                $serial_number = $serial++;
 
+                                $review_posts->the_post();
+                                $post_id = get_the_ID();
+                                $post_title = get_the_title();
+                                $post_date = get_the_date();
+                                $reivew_book = get_post_meta( get_the_ID(), '_product_id', true );
+                                $review_book_id = $reivew_book ? $reivew_book : '0';
+                        
+                                echo '<tr>';
+                                echo '<td>' . esc_html($serial_number) . '</td>';
+                                echo '<td>' . esc_html($post_title) . '</td>';
+                                echo '<td><a href="'.get_the_permalink( $review_book_id ) . '"> ' . esc_html( get_the_title( $review_book_id ) ) .  ' </a></td>';
+                                echo '<td>' . esc_html($post_date) . '</td>';
+                                echo '<td>';
+                                echo '<a href="' . esc_url('/submit-review?reviewid=' . get_the_ID() ) . '">Edit</a> | ';
+                                echo '<a href="' . esc_url(get_delete_post_link($post_id)) . '" onclick="return confirm(\'Are you sure to delete?\');">Delete</a>';
+                                echo '</td>';
+                                echo '</tr>';
+                            }
+                        
+                            echo '</table>';
+                        } else {
+                            echo 'No reviews found.';
+                        }    
+                        ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
         <div class="author-reviews">
             <?php
             // Display posts from the 'review' custom post type by the author
-            $author_id = get_query_var('author');
-            $review_posts_args = array(
-                'post_type' => 'review',
-                'author'    => $author_id
-            );
-            $review_posts = new WP_Query($review_posts_args);
 
             if ($review_posts->have_posts()) :
                 echo '<div class="container mt-3">';

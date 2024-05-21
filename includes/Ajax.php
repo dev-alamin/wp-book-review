@@ -122,14 +122,11 @@ class Ajax {
         if (isset($_FILES['product-image-id']) && !empty($_FILES['product-image-id']['tmp_name'])) {
             $file_validation_result = validate_image_and_upload($_FILES['product-image-id']);
             if (is_int($file_validation_result)) {
-                // Upload successful
                 $product_image_id = $file_validation_result;
             } else {
-                // Validation failed
                 wp_send_json_error($file_validation_result);
             }
         } else {
-            // No file uploaded
             wp_send_json_error('Please upload a product image.');
         }
 
@@ -143,7 +140,6 @@ class Ajax {
                 '_review_rating'    => $review_rating,
                 '_product_image_id' => $product_image_id,
                 '_campaign_id'      => $campaign_id,
-                // '_comment_author_url'   => get_author_posts_url( $user_id, get_userdata( $user_id )->nickname  )
             )
         );
 

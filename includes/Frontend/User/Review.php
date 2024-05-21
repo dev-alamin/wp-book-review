@@ -32,15 +32,15 @@ class Review {
     }
 
     public function display_review_submission_form() {
-        $file = __DIR__ . '/../review-form.php';
-        
-        if( file_exists( $file ) ) {
+        $review_id = isset($_GET['reviewid']) ? intval($_GET['reviewid']) : null;
+        $file = $review_id ? __DIR__ . '/../Form/edit-review.php' : __DIR__ . '/../Form/submit-review.php';
+    
+        if (file_exists($file)) {
             include $file;
-            wp_enqueue_script( 'wbr-script' );
+            wp_enqueue_script('wbr-script');
         }
-
-    }
-
+    }    
+    
     public function review_list() {
         $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
         $args = array(
@@ -51,8 +51,6 @@ class Review {
             'orderby'   => 'comment_date',
             'order'     => 'ASC',
         );
-        
-        $comments = get_comments( $args );
         
         $file = __DIR__ . '/../views/review-list.php';
         

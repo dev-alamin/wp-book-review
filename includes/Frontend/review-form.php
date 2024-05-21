@@ -97,8 +97,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="visually-hidden" for="campaign_id">Select Campaign:</label>
-                                    <select class="form-select form-control" style="width: 100%" name="campaign_id" id="campaign_id">
-                                        <option value="">Select a Campaign</option>
+                                    
                                         <?php
                                         // Query to retrieve all products
                                         $products_query = new WP_Query(array(
@@ -115,13 +114,19 @@
                                             )
                                         ));
                                         
-                                        if ($products_query->have_posts()) {
+                                        if ($products_query->have_posts()) { ?>
+                                        <select class="form-select form-control" style="width: 100%" name="campaign_id" id="campaign_id">
+                                        <option value="">Select a Campaign</option>
+                                        <?php 
                                             while ($products_query->have_posts()) {
                                                 $products_query->the_post();
                                                 ?>
                                                 <option value="<?php echo get_the_ID(); ?>"><?php the_title(); ?></option>
                                                 <?php
                                             }
+                                            ?>
+                                            </select>
+                                            <?php 
                                         }
                                         wp_reset_postdata(); // Restore global post data
                                         ?>

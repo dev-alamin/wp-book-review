@@ -23,6 +23,10 @@ class Ajax {
 
         add_action( 'wp_ajax_submit_review', [ $this, 'submit_review_callback' ] );
         add_action( 'wp_ajax_edit_review', [ $this, 'edit_review_callback'] );
+
+
+        add_action( 'wp_ajax_load_author_reviews', [ $this, 'load_author_reviews' ] );
+        add_action( 'wp_ajax_nopriv_load_author_reviews', [ $this, 'load_author_reviews' ] );
         // add_action( 'wp_ajax_nopriv_submit_review', [ $this, 'submit_review_callback' ] );
 
         add_action('wp_ajax_update_user_agreement', [ $this, 'update_user_agreement_callback' ]);
@@ -352,5 +356,50 @@ class Ajax {
         }
 
         wp_die();
-    }   
+    }
+
+    public function load_author_reviews() {
+        $author_id      = isset($_POST['author_id']) ? intval($_POST['author_id']) : 0;
+        $paged          = isset($_POST['page']) ? intval($_POST['page']) : 1;
+        $posts_per_page = 5;
+    
+        $author_review_posts_args = array(
+            'post_type'      => 'review',
+            'author'         => $author_id,
+            'posts_per_page' => $posts_per_page,
+            'paged'          => $paged,
+        );
+    
+        $author_review_posts = new \WP_Query($author_review_posts_args);
+    
+        if ($author_review_posts->have_posts()) {
+            $serial = (($paged - 1) * $posts_per_page) + 1;
+            while ($author_review_posts->have_posts()) {
+                $author_review_posts->the_post();
+                $post_id        = get_the_ID();
+                $post_title     = get_the_title();
+                $post_date      = get_the_date();
+                $review_book    = get_post_meta(get_the_ID(), '_product_id', true);
+                $review_book_id = $review_book ? $review_book : '0';
+    
+                echo '<tr>';
+                echo '<td>' . esc_html($serial++) . '</td>';
+                echo '<td>' . esc_html(wp_trim_words($post_title, 8, '')) . '</td>';
+                echo '<td><img width="100px" src="' . get_the_post_thumbnail_url(get_the_ID(), 'medium') . '"></td>';
+                echo '<td><a href="' . get_the_permalink($review_book_id) . '">' . esc_html(get_the_title($review_book_id)) . '</a></td>';
+                echo '<td>' . esc_html($post_date) . '</td>';
+                echo '<td>';
+                echo '<a href="' . esc_url('/submit-review?reviewid=' . get_the_ID()) . '">Edit</a> | ';
+                echo '<a href="' . esc_url(get_delete_post_link($post_id)) . '" onclick="return confirm(\'Are you sure to delete?\');">Delete</a>';
+                echo '</td>';
+                echo '</tr>';
+            }
+        } else {
+            echo '<tr><td colspan="6">No reviews found.</td></tr>';
+        }
+    
+        wp_reset_postdata();
+        wp_die();
+    }
+    
 }

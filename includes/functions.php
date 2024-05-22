@@ -302,3 +302,34 @@ function wbr_get_most_commented_posts( $post = 'review', $container_element = 'u
 
     return $output;
 }
+
+/**
+ * Expected campaign winner position
+ * @since 1.0.0
+ * @param mixed $name
+ * @return array
+ */
+function wbr_campaign_positions():array{
+    return [
+        'first',
+        'second',
+        'third',
+        'fourth',
+        'fifth',
+        'sixth',
+        'seventh',
+        'eighth',
+        'ninth',
+        'tenth',
+        'eleventh',
+        'twelfth',
+        'thirteenth',
+        'fourteenth',
+        'fifteenth',
+        'sixteenth',
+        'seventeenth',
+        'eighteenth',
+        'nineteenth',
+        'twentieth'
+    ];
+}

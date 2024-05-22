@@ -180,6 +180,7 @@ $(document).on('click', '#load-more-reviews', function () {
                     // console.log(response);
                     form[0].reset();
                     form.find(':input').not(':button, :submit, :reset, :hidden').val('');
+                    $(".picture__image").empty();
                 }
             },
             error: function(xhr, status, error) {
@@ -322,4 +323,26 @@ $(document).on('click', '#load-more-reviews', function () {
             swal("Error!", "Please check the agreement checkbox before proceeding.", "error");
         }
     });
+
+    jQuery(document).ready(function($) {
+        $(document).on('click', '.wbr_author_review_pagination', function() {
+            var page = $(this).data('page');
+            var author_id = wbrFrontendScripts.CurrentAuthor;
+    
+            $.ajax({
+                url: wbrFrontendScripts.ajaxUrl,
+                type: 'POST',
+                data: {
+                    action: 'load_author_reviews',
+                    author_id: author_id,
+                    page: page
+                },
+                success: function(response) {
+                    $('#reviews-table').find('tr:gt(0)').remove();
+                    $('#reviews-table').append(response);
+                }
+            });
+        });
+    });
+    
 });

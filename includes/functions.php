@@ -206,44 +206,6 @@ function wpr_get_total_review_and_average($product_id) {
     );
 }
 
-
-function validate_image_and_upload($file) {
-    $file_type = wp_check_filetype_and_ext($file['tmp_name'], $file['name']);
-
-    if (!$file_type['type'] || !in_array($file_type['type'], array('image/jpeg', 'image/png', 'image/gif'))) {
-        return 'Invalid file type. Please upload a JPEG, PNG, or GIF image.';
-    }
-
-    if ($file['size'] > 2 * 1024 * 1024) {
-        return 'File size exceeds the maximum limit of 2MB.';
-    }
-
-    list($width, $height) = getimagesize($file['tmp_name']);
-    // if ($width < 1280 || $height < 720) {
-    //     return 'Image resolution must be at least 1280x720 pixels.';
-    // }
-
-    // Crop the image if larger than 1280x720, keeping the aspect ratio
-    if ($width > 1280 || $height > 720) {
-        $editor = wp_get_image_editor($file['tmp_name']);
-        if (!is_wp_error($editor)) {
-            $editor->resize(1280, 720, true); // Crop to 1280x720
-            $resized_file = $editor->save(); // Save the resized image
-            $file['tmp_name'] = $resized_file['path']; // Update the temporary file path
-        } else {
-            return 'Failed to resize image. Please try again.';
-        }
-    }
-
-    $attachment_id = media_handle_upload('product-image-id', 0); // 0 means no parent post
-    if (is_wp_error($attachment_id)) {
-        return 'Failed to upload image. Please try again.';
-    }
-
-    return $attachment_id;
-}
-
-
 if( ! function_exists( 'ff_english_to_bengali' ) ) {
     // Convert Arabic numbers to Bengali numbers
     function ff_english_to_bengali( $number = '' ) {
@@ -339,4 +301,35 @@ function wbr_get_most_commented_posts( $post = 'review', $container_element = 'u
     $output .= '</' . $container_element . '>';
 
     return $output;
+}
+
+/**
+ * Expected campaign winner position
+ * @since 1.0.0
+ * @param mixed $name
+ * @return array
+ */
+function wbr_campaign_positions():array{
+    return [
+        'first',
+        'second',
+        'third',
+        'fourth',
+        'fifth',
+        'sixth',
+        'seventh',
+        'eighth',
+        'ninth',
+        'tenth',
+        'eleventh',
+        'twelfth',
+        'thirteenth',
+        'fourteenth',
+        'fifteenth',
+        'sixteenth',
+        'seventeenth',
+        'eighteenth',
+        'nineteenth',
+        'twentieth'
+    ];
 }

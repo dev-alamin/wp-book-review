@@ -173,3 +173,58 @@ function sticky_header_code() {
     ';
 }
 add_action( 'wp_body_open', 'sticky_header_code' );
+
+
+// Add a new column to the users table
+function add_review_count_column($columns) {
+    $columns['review_count'] = 'Review Count';
+    return $columns;
+}
+add_filter('manage_users_columns', 'add_review_count_column');
+
+// Populate the review count column with data
+function show_review_count_column_content($value, $column_name, $user_id) {
+    if ('review_count' === $column_name) {
+        $review_count = count_user_posts($user_id, 'review');
+        return $review_count;
+    }
+    return $value;
+}
+add_filter('manage_users_custom_column', 'show_review_count_column_content', 10, 3);
+
+// Ensure the column is sortable
+function make_review_count_column_sortable($columns) {
+    $columns['review_count'] = 'review_count';
+    return $columns;
+}
+add_filter('manage_users_sortable_columns', 'make_review_count_column_sortable');
+
+// Handle the sorting by review count
+function sort_users_by_review_count($query) {
+    if (!is_admin()) {
+        return;
+    }
+
+    $screen = get_current_screen();
+    if ('users' !== $screen->id) {
+        return;
+    }
+
+    if (isset($_GET['orderby']) && 'review_count' === $_GET['orderby']) {
+        $query->query_vars['meta_key'] = 'review_count';
+        $query->query_vars['orderby'] = 'meta_value_num';
+    }
+}
+add_action('pre_get_users', 'sort_users_by_review_count');
+
+// Update user meta with review count upon saving a review post
+function update_user_review_count($post_id) {
+    if (get_post_type($post_id) !== 'review') {
+        return;
+    }
+
+    $author_id = get_post_field('post_author', $post_id);
+    $review_count = count_user_posts($author_id, 'review');
+    update_user_meta($author_id, 'review_count', $review_count);
+}
+add_action('save_post', 'update_user_review_count');

@@ -101,11 +101,6 @@ $(document).on('click', '#load-more-reviews', function () {
         button.hide();
     });
 
-//     $(document).ready(function() {
-//         new SimpleBar($('.wpr-card-body'));
-//         new SimpleBar($('.wpr-card-header'));
-//       });
-
     // Initialize Select2 for the select dropdown
     $('.select2').select2();
 
@@ -142,8 +137,6 @@ $(document).on('click', '#load-more-reviews', function () {
     $('#review-form').on('submit', function(e) {
         e.preventDefault();
 
-       	
-        
         var form = $(this);
         var formData = new FormData(form[0]); // Create FormData object from form
         
@@ -154,10 +147,6 @@ $(document).on('click', '#load-more-reviews', function () {
         
         var submitButton = form.find('input[type="submit"]');
 
-       
-                
-         
-        
         // AJAX request
         $.ajax({
             type: 'POST',
@@ -191,6 +180,7 @@ $(document).on('click', '#load-more-reviews', function () {
                     // console.log(response);
                     form[0].reset();
                     form.find(':input').not(':button, :submit, :reset, :hidden').val('');
+                    $(".picture__image").empty();
                 }
             },
             error: function(xhr, status, error) {
@@ -211,141 +201,148 @@ $(document).on('click', '#load-more-reviews', function () {
             }
         });
     });
-    
-    /**
-     * File upload beautifier
-     */
-        var droppedFiles = false;
-        var fileName = '';
-        var $dropzone = $('.dropzone');
-        var $button = $('.upload-btn');
-        var uploading = false;
-        var $syncing = $('.syncing');
-        var $done = $('.done');
-        var $bar = $('.bar');
-        var timeOut;
 
-        $dropzone.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+    // Handle form submission via AJAX
+    $('#review-edit-form').on('submit', function(e) {
         e.preventDefault();
-        e.stopPropagation();
-        })
-        .on('dragover dragenter', function() {
-        $dropzone.addClass('is-dragover');
-        })
-        .on('dragleave dragend drop', function() {
-        $dropzone.removeClass('is-dragover');
-        })
-        .on('drop', function(e) {
-        droppedFiles = e.originalEvent.dataTransfer.files;
-        fileName = droppedFiles[0]['name'];
-        $('.filename').html(fileName);
-        $('.dropzone .upload').hide();
-        });
 
-        $button.bind('click', function() {
-        startUpload();
-        });
+        var form = $(this);
+        var formData = new FormData(form[0]); // Create FormData object from form
+        
+        formData.append('nonce', $('#review-nonce').val());
+        formData.append('action', 'edit_review');
+        
+        var submitButton = form.find('input[type="submit"]');
 
-        $("input:file").change(function (){
-        fileName = $(this)[0].files[0].name;
-        $('.filename').html(fileName);
-        $('.dropzone .upload').hide();
-        });
-
-        function startUpload() {
-        if (!uploading && fileName != '' ) {
-            uploading = true;
-            $button.html('Uploading...');
-            $dropzone.fadeOut();
-            $syncing.addClass('active');
-            $done.addClass('active');
-            $bar.addClass('active');
-            timeoutID = window.setTimeout(showDone, 3200);
-        }
-        }
-
-        function showDone() {
-        $button.html('Done');
-        }
-      
-        /**
-         * Review form toggler btn
-         * 
-         */
-        $('.wbr-review-form-toggler button.old-user').on('click', function(){
-            $('#review-submission-form').slideToggle();
-        });
-
-        /**
-         * Handle user agreement form / Popup
-         * 
-         */
-        $('#ff_user_agreement_form').on('submit', function(event) {
-            // Prevent default form submission
-            event.preventDefault();
-            
-            // Check if the agreement checkbox is checked
-            if ($('#agreement').is(':checked')) {
-                $.ajax({
-                    url: wbrFrontendScripts.ajaxUrl, // WordPress AJAX URL
-                    type: 'POST',
-                    data: {
-                        action: 'update_user_agreement', // Custom AJAX action name
-                        user_agreement_consent: 1, // Value to be saved in the metadata
-                        ff_user_agreement_nonce_field: $('#ff_user_agreement_nonce_field').val(), // Include nonce value
-                    },
-                    success: function(response) {
-                        $('#wbrUserAgreement').modal('hide');
-
-                        if( response.success == true ){
-                            setTimeout(() => {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Success!',
-                                    text: 'Thank you for your confirmation. Now you can submit your reviews.',
-                                });
-
-                                $('#review-submission-form').slideToggle();
-                                $('.first-reviewer').removeClass('first-reviewer').addClass('old-user');    
-                            }, 1000); 
-
-                        }else{
-                            setTimeout(() => {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error!',
-                                    text: response.data,
-                                });
-                            }, 1000); 
-                        }
-                                               
-                    },
-                    error: function(error) {
-                        swal("Error!", "An error occurred while saving agreement.", "error");
-                    }
+        // AJAX request
+        $.ajax({
+            type: 'POST',
+            url: wbrFrontendScripts.ajaxUrl,
+            data: formData,
+            contentType: false, // Don't set contentType, let jQuery handle it automatically
+            processData: false, // Don't process data, let jQuery handle it automatically
+            beforeSend: function() {
+                // Disable submit button and show loading spinner if needed
+                submitButton.prop('disabled', true);
+                $("#wbrfs_overlay").fadeIn(300);
+            },
+            success: function(response) {
+                if (response.success === false) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: response.data,
+                    });
+                } else {
+                    // If no error, display success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Your review has been updated successfully.',
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                // Log detailed error information
+                console.error('AJAX Request Error:');
+                console.error('Status:', status);
+                console.error('Error:', error);
+                console.error('Response Text:', xhr.responseText);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'An error occurred while updating your review. Please try again later.',
                 });
-            } else {
-                // If agreement checkbox is not checked, display SweetAlert error message
-                swal("Error!", "Please check the agreement checkbox before proceeding.", "error");
+            },
+            complete: function() {
+                // Re-enable submit button and hide loading spinner if needed
+                submitButton.prop('disabled', false);
+                $("#wbrfs_overlay").fadeOut(300);
             }
         });
-});
+    });
 
-// jQuery(function($){
-//     $(".ct-form-submit-btn").click(function() {
-//         $("#wbrfs_overlay").fadeIn(300);　
-//       });
+    /**
+     * Review form toggler btn
+     * 
+     */
+    $('.wbr-review-form-toggler button.old-user').on('click', function(){
+        $('#review-submission-form').slideToggle();
+    });
+
+    /**
+     * Handle user agreement form / Popup
+     * 
+     */
+    $('#ff_user_agreement_form').on('submit', function(event) {
+        // Prevent default form submission
+        event.preventDefault();
+        
+        // Check if the agreement checkbox is checked
+        if ($('#agreement').is(':checked')) {
+            $.ajax({
+                url: wbrFrontendScripts.ajaxUrl, // WordPress AJAX URL
+                type: 'POST',
+                data: {
+                    action: 'update_user_agreement', // Custom AJAX action name
+                    user_agreement_consent: 1, // Value to be saved in the metadata
+                    ff_user_agreement_nonce_field: $('#ff_user_agreement_nonce_field').val(), // Include nonce value
+                },
+                success: function(response) {
+                    $('#wbrUserAgreement').modal('hide');
+
+                    if( response.success == true ){
+                        setTimeout(() => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: 'Thank you for your confirmation. Now you can submit your reviews.',
+                            });
+
+                            $('#review-submission-form').slideToggle();
+                            $('.first-reviewer').removeClass('first-reviewer').addClass('old-user');    
+                        }, 1000); 
+
+                    }else{
+                        setTimeout(() => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: response.data,
+                            });
+                        }, 1000); 
+                    }
+                                            
+                },
+                error: function(error) {
+                    swal("Error!", "An error occurred while saving agreement.", "error");
+                }
+            });
+        } else {
+            // If agreement checkbox is not checked, display SweetAlert error message
+            swal("Error!", "Please check the agreement checkbox before proceeding.", "error");
+        }
+    });
+
+    jQuery(document).ready(function($) {
+        $(document).on('click', '.wbr_author_review_pagination', function() {
+            var page = $(this).data('page');
+            var author_id = wbrFrontendScripts.CurrentAuthor;
     
-//     $('.ct-form-submit-btn').click(function(){
-//         $.ajax({
-//           type: 'GET',
-//           success: function(data){
-//             console.log(data);
-//           }
-//         }).done(function() {
-//           setTimeout(function(){
-//             $("#wbrfs_overlay").fadeOut(300);
-//           }, 700);
-//         });
-//       });
-// });
+            $.ajax({
+                url: wbrFrontendScripts.ajaxUrl,
+                type: 'POST',
+                data: {
+                    action: 'load_author_reviews',
+                    author_id: author_id,
+                    page: page
+                },
+                success: function(response) {
+                    $('#reviews-table').find('tr:gt(0)').remove();
+                    $('#reviews-table').append(response);
+                }
+            });
+        });
+    });
+    
+});

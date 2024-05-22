@@ -110,7 +110,8 @@ class Assets {
             'wbrFrontendScripts',
             [
                 'ajaxUrl' => admin_url( 'admin-ajax.php'),
-                'nonce'    => wp_create_nonce( 'wbr_readmore' )
+                'nonce'    => wp_create_nonce( 'wbr_readmore' ),
+                'CurrentAuthor' => get_current_user_id(),
             ]
         );
 

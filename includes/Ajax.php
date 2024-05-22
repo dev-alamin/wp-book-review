@@ -22,6 +22,11 @@ class Ajax {
         add_action('wp_ajax_nopriv_load_more_reviews', [ $this, 'load_more_reviews' ] );
 
         add_action( 'wp_ajax_submit_review', [ $this, 'submit_review_callback' ] );
+        add_action( 'wp_ajax_edit_review', [ $this, 'edit_review_callback'] );
+
+
+        add_action( 'wp_ajax_load_author_reviews', [ $this, 'load_author_reviews' ] );
+        add_action( 'wp_ajax_nopriv_load_author_reviews', [ $this, 'load_author_reviews' ] );
         // add_action( 'wp_ajax_nopriv_submit_review', [ $this, 'submit_review_callback' ] );
 
         add_action('wp_ajax_update_user_agreement', [ $this, 'update_user_agreement_callback' ]);
@@ -73,126 +78,257 @@ class Ajax {
     }
 
     public function submit_review_callback() {
-        if( ! $_SERVER["REQUEST_METHOD"] == "POST" ) {
-            wp_send_json_error( 'Invalid Request' );
+        if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+            wp_send_json_error('Invalid Request');
         }
-
-        if ( ! isset($_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'submit_review' ) ) {
+    
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'submit_review')) {
             wp_send_json_error('Invalid nonce.');
         }
     
-        $errors = array();
-
-        $review_title   = isset($_POST['review-title']) ? sanitize_text_field($_POST['review-title']) : '';
-        $review_content = isset($_POST['review-content']) ? wp_kses_post($_POST['review-content']) : '';
-        $product_id     = isset($_POST['product-id']) ? absint($_POST['product-id']) : 0;
-        $review_rating  = isset($_POST['review-rating']) ? intval($_POST['review-rating']) : '';
-        $post_status    = isset($_POST['publish-status']) ? sanitize_text_field( $_POST['publish-status'] ) : '';
-        $campaign_id    = isset( $_POST['campaign_id'] ) ? absint( $_POST['campaign_id'] ) : 0;
-        
-        // Check for errors
-        if ( empty( $review_title ) ) {
-            $errors[] = 'You must provide a review title.';
+        $errors = $this->validate_review_submission($_POST, $_FILES);
+        if (!empty($errors)) {
+            wp_send_json_error($errors);
         }
-
-        if ( empty( $review_content ) ) {
-            $errors[] = 'You must provide review content.';
+    
+        $product_image_id = $this->validate_image_and_upload($_FILES['product-image-id']);
+        if (is_wp_error($product_image_id)) {
+            wp_send_json_error($product_image_id->get_error_message());
+        } elseif (is_string($product_image_id)) {
+            wp_send_json_error($product_image_id);
         }
-
-        if( ! isset( $_FILES['product-image-id'] ) || empty( $_FILES['product-image-id'] ) || $_FILES['product-image-id']['error'] == 4 ) {
-            $errors[] = 'You must provide image for review.';
-        }
-
-        if( ! isset( $_POST['review-rating'] ) || empty( $_POST['review-rating'] ) ) {
-            $errors[] = 'You must put a rating.';
-        }
-
-        if( ! isset( $_POST['publish-status'] ) || empty( $_POST['publish-status'] ) ) {
-            $errors[] = 'You must choose publish status.';
-        }
-
-        if ( ! empty( $errors ) ) {
-            foreach ($errors as $error) {
-                wp_send_json_error( $error );
-            }
-        }
-
-
-        // Usage
-        if (isset($_FILES['product-image-id']) && !empty($_FILES['product-image-id']['tmp_name'])) {
-            $file_validation_result = validate_image_and_upload($_FILES['product-image-id']);
-            if (is_int($file_validation_result)) {
-                // Upload successful
-                $product_image_id = $file_validation_result;
-            } else {
-                // Validation failed
-                wp_send_json_error($file_validation_result);
-            }
-        } else {
-            // No file uploaded
-            wp_send_json_error('Please upload a product image.');
-        }
-
-        $review_post = array(
-            'post_title'             => $review_title,
-            'post_content'           => $review_content,
-            'post_status'            => $post_status,
-            'post_type'              => 'review',
-            'meta_input'             => array(
-                '_product_id'       => $product_id,
-                '_review_rating'    => $review_rating,
-                '_product_image_id' => $product_image_id,
-                '_campaign_id'      => $campaign_id,
-                // '_comment_author_url'   => get_author_posts_url( $user_id, get_userdata( $user_id )->nickname  )
-            )
-        );
-
-        $review_post_id = wp_insert_post($review_post); // Insert review type post
-
-        if ($review_post_id) {
-            set_post_thumbnail($review_post_id, $product_image_id);
-            $product_name = get_the_title($product_id);
-            
-            $existing_review_book_term = get_term_by('name', $product_name, 'review_book');
-        
-            if ($existing_review_book_term) {
-                $review_book_term_id = $existing_review_book_term->term_id;
-            } else {
-                $review_book_term = wp_insert_term($product_name, 'review_book');
-        
-                if (!is_wp_error($review_book_term)) {
-                    $review_book_term_id = $review_book_term['term_id'];
-                } else {
-                    wp_send_json_error('Failed to create term in review_book taxonomy.');
-                }
-            }
-        
-            $campaign_name = get_the_title($campaign_id);
-            $existing_campaign_review_term = get_term_by('name', $campaign_name, 'campaign_review');
-        
-            if( $campaign_id ) {
-                    if ($existing_campaign_review_term) {
-                        $campaign_review_term_id = $existing_campaign_review_term->term_id;
-                } else {
-                    $campaign_review_term = wp_insert_term($campaign_name, 'campaign_review');
-                    
-                    if (!is_wp_error($campaign_review_term)) {
-                        $campaign_review_term_id = $campaign_review_term['term_id'];
-                    } else {
-                        wp_send_json_error('Failed to create term in campaign_review taxonomy.');
-                    }
-                }
-            }
-        
-            wp_set_post_terms($review_post_id, array($review_book_term_id), 'review_book', true);
-            wp_set_post_terms($review_post_id, array($campaign_review_term_id), 'campaign_review', true);
-        
-            wp_send_json_success('Review submitted successfully.');
-        } else {
+    
+        $review_post_id = $this->create_review_post($_POST, $product_image_id);
+        if (is_wp_error($review_post_id)) {
             wp_send_json_error('Failed to submit review.');
         }
-        
+    
+        if( ! empty( $_POST['campaign_id'] ) ) {
+            $this->set_review_terms($review_post_id, $_POST['product-id'], $_POST['campaign_id']);
+        }
+    
+        wp_send_json_success('Review submitted successfully.');
         wp_die();
+    }
+    
+    /**
+    * Validates the review submission data.
+    *
+    * @param array $post_data The POST data.
+    * @param array $file_data The FILE data.
+    * @return array An array of error messages, or an empty array if no errors.
+    */
+    private function validate_review_submission($post_data, $file_data) {
+        $errors = array();
+    
+        if (empty($post_data['review-title'])) {
+            $errors[] = 'You must provide a review title.';
+        }
+    
+        if (empty($post_data['review-content'])) {
+            $errors[] = 'You must provide review content.';
+        }
+    
+        if (!isset($file_data['product-image-id']) || empty($file_data['product-image-id']['tmp_name']) || $file_data['product-image-id']['error'] == 4) {
+            $errors[] = 'You must provide an image for review.';
+        }
+    
+        if (empty($post_data['review-rating'])) {
+            $errors[] = 'You must provide a rating.';
+        }
+    
+        if (empty($post_data['publish-status'])) {
+            $errors[] = 'You must choose a publish status.';
+        }
+    
+        return $errors;
+    }
+    
+    /**
+    * Validates and uploads an image file.
+    *
+    * @param array $file The file data.
+    * @return int|string The attachment ID on success, or an error message on failure.
+    */
+    private function validate_image_and_upload($file) {
+        $file_type = wp_check_filetype_and_ext($file['tmp_name'], $file['name']);
+    
+        if (!$file_type['type'] || !in_array($file_type['type'], array('image/jpeg', 'image/png', 'image/gif'))) {
+            return 'Invalid file type. Please upload a JPEG, PNG, or GIF image.';
+        }
+    
+        if ($file['size'] > 2 * 1024 * 1024) {
+            return 'File size exceeds the maximum limit of 2MB.';
+        }
+    
+        list($width, $height) = getimagesize($file['tmp_name']);
+    
+        // Crop the image if larger than 1280x720, keeping the aspect ratio
+        if ($width > 1280 || $height > 720) {
+            $editor = wp_get_image_editor($file['tmp_name']);
+            if (!is_wp_error($editor)) {
+                $editor->resize(1280, 720, true); // Crop to 1280x720
+                $resized_file = $editor->save(); // Save the resized image
+                $file['tmp_name'] = $resized_file['path']; // Update the temporary file path
+            } else {
+                return 'Failed to resize image. Please try again.';
+            }
+        }
+    
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        require_once(ABSPATH . 'wp-admin/includes/media.php');
+    
+        $attachment_id = media_handle_upload('product-image-id', 0); // 0 means no parent post
+        if (is_wp_error($attachment_id)) {
+            return 'Failed to upload image. Please try again.';
+        }
+    
+        return $attachment_id;
+    }
+    
+    /**
+     * Creates a new review post.
+     *
+     * @param array $post_data The POST data.
+     * @param int $product_image_id The ID of the uploaded image.
+     * @return int|\WP_Error The ID of the created post, or a WP_Error object on failure.
+     */
+    private function create_review_post($post_data, $product_image_id) {
+        $review_post = array(
+            'post_title' => sanitize_text_field($post_data['review-title']),
+            'post_content' => wp_kses_post($post_data['review-content']),
+            'post_status' => sanitize_text_field($post_data['publish-status']),
+            'post_type' => 'review',
+            'meta_input' => array(
+                '_product_id' => absint($post_data['product-id']),
+                '_review_rating' => intval($post_data['review-rating']),
+                '_product_image_id' => $product_image_id,
+                '_campaign_id' => absint($post_data['campaign_id']),
+            )
+        );
+    
+        $review_post_id = wp_insert_post($review_post);
+    
+        if ($review_post_id && !is_wp_error($review_post_id)) {
+            set_post_thumbnail($review_post_id, $product_image_id);
+        }
+    
+        return $review_post_id;
+    }
+    
+    /**
+     * Sets the review terms (taxonomy) for a review post.
+     *
+     * @param int $review_post_id The ID of the review post.
+     * @param int $product_id The ID of the product.
+     * @param int $campaign_id The ID of the campaign.
+     * @return void
+     */
+    private function set_review_terms($review_post_id, $product_id, $campaign_id) {
+        $product_name = get_the_title($product_id);
+        $campaign_name = get_the_title($campaign_id);
+    
+        $review_book_term = $this->get_or_create_term($product_name, 'review_book');
+        if (is_wp_error($review_book_term)) {
+            wp_send_json_error('Failed to create or get term in review_book taxonomy.');
+        }
+    
+        $campaign_review_term = $this->get_or_create_term($campaign_name, 'campaign_review');
+        if (is_wp_error($campaign_review_term)) {
+            wp_send_json_error('Failed to create or get term in campaign_review taxonomy.');
+        }
+    
+        wp_set_post_terms($review_post_id, array($review_book_term), 'review_book', true);
+        if ($campaign_id) {
+            wp_set_post_terms($review_post_id, array($campaign_review_term), 'campaign_review', true);
+        }
+    }
+    
+    private function get_or_create_term($term_name, $taxonomy) {
+        $existing_term = get_term_by('name', $term_name, $taxonomy);
+        if ($existing_term) {
+            return $existing_term->term_id;
+        }
+    
+        $new_term = wp_insert_term($term_name, $taxonomy);
+        if (is_wp_error($new_term)) {
+            return $new_term;
+        }
+    
+        return $new_term['term_id'];
+    }
+
+    public function edit_review_callback() {
+        if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+            wp_send_json_error('Invalid Request');
+        }
+    
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'edit_review')) {
+            wp_send_json_error('Invalid nonce.');
+        }
+    
+        $errors = $this->validate_review_submission($_POST, $_FILES);
+        $has_image = $_POST['existing_image'];
+
+        if( ! isset( $has_image ) && ! empty( $has_image ) ) {
+            if (!empty($errors)) {
+                wp_send_json_error($errors);
+            }
+        }
+    
+        if( isset( $_FILES['product-image-id'] ) && empty( $has_image ) ) {
+            $product_image_id = $this->validate_image_and_upload($_FILES['product-image-id']);
+            if (is_wp_error($product_image_id)) {
+                wp_send_json_error($product_image_id->get_error_message());
+            } elseif (is_string($product_image_id)) {
+                wp_send_json_error($product_image_id);
+            }
+        }else{
+            $product_image_id = $this->validate_image_and_upload($_FILES['product-image-id']);
+        }
+    
+        $review_id = isset($_POST['review_id']) ? absint($_POST['review_id']) : 0;
+    
+        if ($review_id > 0) {
+            $review_post_id = $this->update_review_post($review_id, $_POST, $product_image_id);
+        } else {
+            wp_send_json_error('Review ID is missing.');
+        }
+    
+        if (is_wp_error($review_post_id)) {
+            wp_send_json_error('Failed to update review.');
+        }
+    
+        if( ! empty( $_POST['campaign_id'] ) ) {
+            $this->set_review_terms($review_post_id, $_POST['product-id'], $_POST['campaign_id']);
+        }
+    
+        wp_send_json_success('Review updated successfully.');
+        wp_die();
+    }
+
+    private function update_review_post($review_id, $post_data, $product_image_id) {
+        $review_post = array(
+            'ID' => $review_id,
+            'post_title' => sanitize_text_field($post_data['review-title']),
+            'post_content' => wp_kses_post($post_data['review-content']),
+            'post_status' => sanitize_text_field($post_data['publish-status']),
+            'meta_input' => array(
+                '_product_id' => absint($post_data['product-id']),
+                '_review_rating' => intval($post_data['review-rating']),
+                '_product_image_id' => $product_image_id,
+                '_campaign_id' => absint($post_data['campaign_id']),
+            )
+        );
+    
+        $review_post_id = wp_update_post($review_post);
+    
+        if ($review_post_id && !is_wp_error($review_post_id)) {
+            set_post_thumbnail($review_post_id, $product_image_id);
+        }
+    
+        return $review_post_id;
     }
 
     public function update_user_agreement_callback() {
@@ -220,5 +356,50 @@ class Ajax {
         }
 
         wp_die();
-    }   
+    }
+
+    public function load_author_reviews() {
+        $author_id      = isset($_POST['author_id']) ? intval($_POST['author_id']) : 0;
+        $paged          = isset($_POST['page']) ? intval($_POST['page']) : 1;
+        $posts_per_page = 5;
+    
+        $author_review_posts_args = array(
+            'post_type'      => 'review',
+            'author'         => $author_id,
+            'posts_per_page' => $posts_per_page,
+            'paged'          => $paged,
+        );
+    
+        $author_review_posts = new \WP_Query($author_review_posts_args);
+    
+        if ($author_review_posts->have_posts()) {
+            $serial = (($paged - 1) * $posts_per_page) + 1;
+            while ($author_review_posts->have_posts()) {
+                $author_review_posts->the_post();
+                $post_id        = get_the_ID();
+                $post_title     = get_the_title();
+                $post_date      = get_the_date();
+                $review_book    = get_post_meta(get_the_ID(), '_product_id', true);
+                $review_book_id = $review_book ? $review_book : '0';
+    
+                echo '<tr>';
+                echo '<td>' . esc_html($serial++) . '</td>';
+                echo '<td>' . esc_html(wp_trim_words($post_title, 8, '')) . '</td>';
+                echo '<td><img width="100px" src="' . get_the_post_thumbnail_url(get_the_ID(), 'medium') . '"></td>';
+                echo '<td><a href="' . get_the_permalink($review_book_id) . '">' . esc_html(get_the_title($review_book_id)) . '</a></td>';
+                echo '<td>' . esc_html($post_date) . '</td>';
+                echo '<td>';
+                echo '<a href="' . esc_url('/submit-review?reviewid=' . get_the_ID()) . '">Edit</a> | ';
+                echo '<a href="' . esc_url(get_delete_post_link($post_id)) . '" onclick="return confirm(\'Are you sure to delete?\');">Delete</a>';
+                echo '</td>';
+                echo '</tr>';
+            }
+        } else {
+            echo '<tr><td colspan="6">No reviews found.</td></tr>';
+        }
+    
+        wp_reset_postdata();
+        wp_die();
+    }
+    
 }

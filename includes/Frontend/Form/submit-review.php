@@ -25,6 +25,7 @@
                     <?php endif; ?>
                 </div>
             </div>
+
             <div class="col-lg-12">
                 <div id="review-submission-form form-submission">
                         <h2>Submit a Review</h2>
@@ -43,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 review-upload-image">
-                                <?php include __DIR__ . '/views/component/image-uploader.php'; ?> 
+                                <?php include __DIR__ . '/../views/component/image-uploader.php'; ?> 
                                 <input type="hidden" name="user-id" id="user-id" value="<?php echo get_current_user_id(); ?>">
                             </div>
                             <div class="col-lg-6">

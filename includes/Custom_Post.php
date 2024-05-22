@@ -131,6 +131,7 @@ class Custom_Post {
             case 'review_book':
                 $product_id = get_post_meta( get_the_ID(), '_product_id', true );
                 $product = wc_get_product( $product_id );
+                if( ! $product ) return;
                 echo '<a href="' . get_the_permalink( $product->get_id() ) .'">';
                 echo  esc_html( $product->get_title() );
                 echo '</a>';

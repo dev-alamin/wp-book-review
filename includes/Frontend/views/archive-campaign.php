@@ -23,16 +23,10 @@ if ($products_query->have_posts()) { ?>
         ?>
         <div class="bk-campaign-heading">
             <div class="heading">
-                <h2><?php the_title(); ?></h2>
+                <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                 <?php the_content(); ?>
             </div>
         </div>
-        <!-- <div class="bk-o-compaign">
-            <div class="bk-oc-heading">
-                <h5>This is a Title</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, dignissimos.</p>
-            </div>
-        </div> -->
         <div class="wrapper">
             <div class="card">
                 <div class="card-banner" style="background-image: url(https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg)">

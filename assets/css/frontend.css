@@ -1892,8 +1892,8 @@ body.author .author-info {
     background: white;
     border-radius: 8px;
     position: relative;
-    width: 350px;
-    margin: 0 16px 32px;
+    width: 390px;
+    margin: 0 0px 32px;
     transition: 250ms all ease-in-out;
     cursor: pointer;
   }
@@ -1925,7 +1925,6 @@ body.author .author-info {
     font-size: 12.8;
     font-weight: bold;
     color: white;
-    /* background: red; */
     padding: 8px 20px 8px 16px;
     text-transform: uppercase;
     position: absolute;
@@ -1940,11 +1939,11 @@ body.author .author-info {
 
   
   .card-body {
-    margin: 8rem 0rem 0rem 0rem;
+    margin: 128px 0px 0px 0px;
   }
   
   .blog-hashtag {
-    font-size: 0.9rem;
+    font-size: 14px;
     font-weight: 500;
     color: #4d97b2;
   }
@@ -1984,7 +1983,7 @@ body.author .author-info {
   
   .profile-followers {
     color: #616b74;
-    font-size: 0.9rem;
+    font-size: 14px;
   }
 
   .item-price {
@@ -2056,4 +2055,81 @@ body.author .author-info {
         font-size: 28px;
         line-height: 40px;
     }
+  }
+
+  .campaign-single-bg{
+    margin: 30px 0px;
+  }
+
+  .bk-campaign-heading.campaign-single {
+    padding-bottom: 0px !important;
+  }
+  .bk-campaign-heading.campaign-single .heading h3{
+    font-size: 24px;
+    line-height: 40px;
+    margin: 0px;
+  }
+  .bk-campaign-heading.campaign-single .heading p{
+    margin: 0px;
+    font-size: 16px;
+    line-height: 18px;
+  }
+  .last-submisstion-wrap {
+    margin: 20px 0 ;
+  }
+  .submisstion-heading {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .submisstion-heading h2{
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: normal;
+    margin: 0px;
+  }
+  .submisstion-heading a{
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    padding: 6px 15px;
+    height: 100%;
+    border-radius: 7px;
+  }
+  .author{
+    display: flex;
+    align-items: center;
+  }
+  .author .author-img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .author .author-img img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .author .author-info{
+    margin-left: 15px;
+  }
+  .author .author-info h4,  .author .author-info p{
+    margin: 0px;
+  }
+  .last-submission-container{
+    padding: 0px 0 40px;
+  }
+  .last-submisstion-wrap .post-image a img{
+    border-radius: 10px;
+  }
+  .last-submisstion-wrap .post-info h2{
+    margin: 0px;
+    font-size: 21px;
+  }
+
+  @media screen and (max-width: 375px) {
+   .last-submission-container .last-submisstion-wrap .post-image a{
+        display: block;
+        width: 100%;
+   }
   }

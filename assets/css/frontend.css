@@ -1743,3 +1743,317 @@ body.author .author-info {
     height: 250px !important;
     margin: 30px 0;
   }
+  .bk-campaign-heading{
+    padding-bottom: 40px;
+  }
+.bk-campaign-heading .heading h2{
+    line-height: 34px;
+    font-size: 47px;
+    color: #000;
+    text-transform: capitalize;
+}
+
+.bk-campaign-heading .heading p{
+    color: #999;
+    font-size: 1.0625rem;
+    line-height: 1.625rem;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-top: 16px;
+    max-width: 54ch;
+}
+
+.bk-o-items{
+    max-height: 442px;
+    width: 100%;
+}
+.bk-o-items .bk-o-item{
+    width: 32%;
+    height: 100%;
+    background-position: center center;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.bk-o-items .bk-o-item .item-body{
+    margin-top: 60px;
+}
+.bk-o-items .bk-o-item .item-body h3 {
+    margin: 0px;
+}
+.bk-o-items .bk-o-item .item-body h3 a{
+    font-size: 34px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: capitalize;
+}
+.bk-o-items .bk-o-item .item-body p{
+    color: #fff;
+}
+.bk-recent-posts{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.bk-recent-post{
+    width: 23%;
+    border-radius: 10px;
+}
+.bk-recent-posts .bk-thumbnail-img a {
+    display: block;
+}
+.bk-recent-posts .bk-thumbnail-img a img{
+    border-radius: 10px 10px 0 0;
+}
+.bk-recent-posts .bk-user-avatar a img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: -25px;
+    margin-bottom: 10px;
+    border: 2px solid #fff;
+}
+.bk-recent-post{
+    background-color: #222222;
+    color: #fff;
+}
+.bk-recent-posts .bk-user-avatar{
+    position: relative;
+}
+.bk-recent-posts .bk-user-avatar a svg{
+    position: absolute;
+    top: -26px;
+    left: 50%;
+}
+.bk-recent-info a{
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.bk-recent-info h3 a{
+    font-size: 20px;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.bk-o-compaign h5{
+    font-size: 26px;
+    line-height: 40px;
+    color: #222;
+    margin: 0;
+    text-transform: capitalize;
+}
+
+.bk-o-compaign p{
+    font-size: 17px;
+    line-height: 30px;
+    color: #999;
+    margin: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0px;
+  }
+  
+  .card {
+    overflow: hidden;
+    box-shadow: 0px 2px 20px #d7dfe2;
+    background: white;
+    border-radius: 8px;
+    position: relative;
+    width: 350px;
+    margin: 0 16px 32px;
+    transition: 250ms all ease-in-out;
+    cursor: pointer;
+  }
+
+  
+  .banner-img {
+    position: absolute;
+    object-fit: cover;
+    height: 224px;
+    width: 100%;
+  }
+  .card-banner{
+    position: relative;
+    background-position: center center;
+    background-size: cover;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-banner::before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: hsla(0, 0%, 20%, 0.13);
+    display: block;
+  }
+  .card-banner .category-tag {
+    font-size: 12.8;
+    font-weight: bold;
+    color: white;
+    /* background: red; */
+    padding: 8px 20px 8px 16px;
+    text-transform: uppercase;
+    position: absolute;
+    z-index: 1;
+    top: 16px;
+    border-radius: 0 32px 32px 0;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 999;
+  }
+
+  
+  .card-body {
+    margin: 8rem 0rem 0rem 0rem;
+  }
+  
+  .blog-hashtag {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #4d97b2;
+  }
+  
+  .blog-title {
+    font-size: 34px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: capitalize;
+  }
+  
+  .blog-description {
+    font-size: 17px;
+    color: #fff;
+  }
+  
+  .card-profile {
+    display: flex;
+    margin-top: 32px;
+    align-items: center;
+  }
+  
+  .profile-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .card-profile-info {
+    margin-left: 16px;
+  }
+  
+  .profile-name {
+    font-size: 16px;
+  }
+  
+  .profile-followers {
+    color: #616b74;
+    font-size: 0.9rem;
+  }
+
+  .item-price {
+    padding: 10px 20px;
+    background-color: #222;
+  }
+
+  .item-price .price svg, .item-price .price-time svg{
+    margin-right: 10px;
+  }
+  .item-price .price-time, .item-price .price {
+    color: #fff;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .card{
+        width: 300px;
+    }
+    .blog-title {
+        font-size: 28px;
+    }
+    .bk-recent-posts{
+        gap: 15px;
+    }
+    .bk-recent-post{
+        width: 31%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .bk-campaign-heading .heading p{
+        max-width: 100%;
+    }
+    .card{
+        width: 360px;
+        margin: 0px;
+        margin-bottom: 16px;
+    }
+    .bk-recent-posts{
+        gap: 10px;
+    }
+    .bk-recent-post{
+        width: 48%;
+    }
+  }
+
+  @media screen and (max-width: 568px) {
+    .bk-campaign-heading .heading h2{
+        font-size: 36px;
+        line-height: 46px;
+    }
+    .card{
+        width: 100%;
+    }
+    .bk-recent-post{
+        width: 100%;
+    }
+    .bk-recent-info h3{
+        margin: 0px;
+    }
+    .bk-recent-info p{
+        width: 90%;
+        margin: 0px auto 20px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .bk-campaign-heading .heading h2{
+        font-size: 28px;
+        line-height: 40px;
+    }
+  }

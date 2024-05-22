@@ -17,8 +17,9 @@ $author_avatar = get_avatar(get_the_author_meta('user_email', $author_id), 150);
 
 $author_id = get_query_var('author');
 $review_posts_args = array(
-    'post_type' => 'review',
-    'author'    => $author_id
+    'post_type'      => 'review',
+    'author'         => $author_id,
+    'posts_per_page' => 5,
 );
 $review_posts = new WP_Query($review_posts_args);
 ?>
@@ -56,6 +57,7 @@ $review_posts = new WP_Query($review_posts_args);
                             echo '<tr>';
                             echo '<th>#</th>';
                             echo '<th>Review Title</th>';
+                            echo '<th>Thumbnail</th>';
                             echo '<th> Book</th>';
                             echo '<th>Date</th>';
                             echo '<th>Actions</th>';
@@ -74,7 +76,8 @@ $review_posts = new WP_Query($review_posts_args);
                         
                                 echo '<tr>';
                                 echo '<td>' . esc_html($serial_number) . '</td>';
-                                echo '<td>' . esc_html($post_title) . '</td>';
+                                echo '<td>' . esc_html( wp_trim_words( $post_title, '8', '' )) . '</td>';
+                                echo '<td> <img width="100px" src="'.get_the_post_thumbnail_url(get_the_ID(), 'medium').'"> </td>';
                                 echo '<td><a href="'.get_the_permalink( $review_book_id ) . '"> ' . esc_html( get_the_title( $review_book_id ) ) .  ' </a></td>';
                                 echo '<td>' . esc_html($post_date) . '</td>';
                                 echo '<td>';

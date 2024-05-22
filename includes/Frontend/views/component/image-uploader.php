@@ -2,7 +2,12 @@
     <label class="picture" for="product-image-id" tabIndex="0">
         <span class="picture__image"></span>
     </label>
-    <input type="file" name="product-image-id" id="product-image-id">
+    <?php if( isset( $_GET['reviewid'] ) ): ?>
+        <input type="hidden" name="existing_image" value="<?php echo get_post_thumbnail_id( $post_id ); ?>">
+        <input type="file" name="product-image-id" id="product-image-id">
+    <?php else: ?>
+        <input type="file" name="product-image-id" id="product-image-id">
+    <?php endif; ?>
     <input type="hidden" id="review-id" value="<?php echo isset($_GET['reviewid']) ? esc_attr($_GET['reviewid']) : ''; ?>">
 </div>
 

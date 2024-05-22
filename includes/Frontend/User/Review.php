@@ -24,8 +24,7 @@ class Review {
         }
         
         if( $review ) {
-            // Display existing reviews
-            $this->review_list();
+            // $this->review_list();
         }
         
         return ob_get_clean();
@@ -35,9 +34,13 @@ class Review {
         $review_id = isset($_GET['reviewid']) ? intval($_GET['reviewid']) : null;
         $file = $review_id ? __DIR__ . '/../Form/edit-review.php' : __DIR__ . '/../Form/submit-review.php';
     
+        $error_message = $this->get_error_message();
+
         if (file_exists($file)) {
             include $file;
             wp_enqueue_script('wbr-script');
+        }else{
+            echo esc_html_e( $error_message, 'wbr' );
         }
     }    
     
@@ -54,11 +57,7 @@ class Review {
         
         $file = __DIR__ . '/../views/review-list.php';
         
-        $error_message = sprintf(
-            'The file %s at line %d could not be found. Please ask the developer to fix this issue.',
-            __FILE__,
-            __LINE__
-        );
+        $error_message = $this->get_error_message( __FILE__, __LINE__ );
 
         $rev_file =__DIR__ . '/../views/review-archive.php';
 
@@ -90,4 +89,11 @@ class Review {
         }
     }
 
+    public function get_error_message( $file = __FILE__, $line = __LINE__ ){
+        sprintf(
+            'The file %s at line %d could not be found. Please ask the developer to fix this issue.',
+            $file,
+            $line
+        );
+    }
 }

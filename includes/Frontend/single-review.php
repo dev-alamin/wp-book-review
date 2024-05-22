@@ -36,7 +36,7 @@ $campaing = get_post_meta(get_the_ID(), '_campaign_id', true);
                     <div class="wbr-product-user">
                     <a href="<?php echo esc_url($author_url); ?>"><?php echo get_avatar( $author_id, 96, '', '', ); ?></a>
                         <div class="wbr-product-team">
-                        <?php if ($authors): ?>
+                        <?php if (! empty( $authors ) ): ?>
                             <h3><a href="<?php echo esc_url($author_url); ?>"><strong><?php echo esc_html( strtoupper( $author_name ) ); ?></strong></a></h3>
                             <?php endif; ?>
                             <p>মোট <?php echo ff_english_to_bengali( $total_post ); ?>  রিভিউ লিখেছেন </p>
@@ -79,9 +79,12 @@ $campaing = get_post_meta(get_the_ID(), '_campaign_id', true);
                             <ul>
                                 <li>বই: <a style="color: var(--wd-primary-color);" href="<?php echo esc_url( get_the_permalink( $product_id ) ); ?>"><?php echo esc_html( get_the_title( $product_id ) ); ?></a> </li>
                                 <li>লেখক: 
-                                <?php  foreach ($authors as $author): ?>
-                                <a style="color: var(--wd-primary-color);" href="<?php echo get_term_link($author); ?>"><?php echo esc_html($author->name); ?></a>
-                                <?php endforeach; ?>
+                                <?php
+                                if( ! empty( $authors ) ):
+                                    foreach ( $authors as $author ): ?>
+                                    <a style="color: var(--wd-primary-color);" href="<?php echo get_term_link($author); ?>"><?php echo esc_html($author->name); ?></a>
+                                <?php endforeach; 
+                                endif; ?>
                                 </li>
                                 <li>বিষয়:
                                     <?php 

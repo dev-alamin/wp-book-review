@@ -5,14 +5,14 @@ $products_query = new WP_Query(array(
     'post_type'      => 'review-campaign',
     'posts_per_page' => -1,
     'post_status'    => 'publish',
-    'meta_query'     => array(
-        array(
-            'key'     => '_last_submission_date',
-            'value'   => date('Y-m-d'),
-            'compare' => '>=',
-            'type'    => 'DATE'
-        )
-    )
+    // 'meta_query'     => array(
+    //     array(
+    //         'key'     => '_last_submission_date',
+    //         'value'   => date('Y-m-d'),
+    //         'compare' => '>=',
+    //         'type'    => 'DATE'
+    //     )
+    // )
 ));
 
 if ($products_query->have_posts()) { ?>

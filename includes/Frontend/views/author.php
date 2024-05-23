@@ -98,6 +98,10 @@ get_header();
 .pagination-button:hover {
     background-color: #005177;
 }
+.wbr_author_review_pagination.current {
+    background: var(--wd-primary-color);
+    color: #fff;
+}
 
 </style>
 <?php 
@@ -113,6 +117,7 @@ $author_id = get_query_var('author');
 $campaign_posts = new WP_Query( [
     'post_type' => 'review',
     'posts_per_page' => -1,
+    'author' => $author_id,
     'meta_query' => [
         [
             'key'     => '__review_winner_option',
@@ -177,6 +182,7 @@ $campaign_posts = new WP_Query( [
         <div class="container mt-3 mb-5 bg-white pt-3">
             <div class="row">
                 <div class="col-lg-12">
+                    <h2>Your Post List - You can edit, request for delete. </h2>
                     <?php if( is_user_logged_in() && get_current_user_id() == $author_id ): ?>
                         <?php 
                         $posts_per_page = 5;
@@ -226,9 +232,15 @@ $campaign_posts = new WP_Query( [
                         
                             $total_pages = $author_review_posts->max_num_pages;
                             if ($total_pages > 1) {
+                                $class = 'wbr_author_review_pagination';
                                 echo '<div id="pagination">';
                                 for ($i = 1; $i <= $total_pages; $i++) {
-                                    echo '<button class="wbr_author_review_pagination" data-page="' . $i . '">' . $i . '</button>';
+                                    if( $i == 1 ) {
+                                        $class = 'wbr_author_review_pagination current';
+                                    }else{
+                                        $class = 'wbr_author_review_pagination';
+                                    }
+                                    echo '<button class="'. $class .'" data-page="' . $i . '">' . $i . '</button>';
                                 }
                                 echo '</div>';
                             }

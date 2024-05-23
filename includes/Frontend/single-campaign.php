@@ -170,7 +170,7 @@ get_header(); ?>
 </div>
 <div class="campaign-wrapper campaign-single-bg">
         <div class="card">
-            <div class="card-banner" style="background-image: url(https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg)">
+            <div class="card-banner" style="background-image: url(https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg);">
                 <div class="category-tag">
                     <svg width="35px" height="20px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
                         <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>

@@ -1743,6 +1743,7 @@ body.author .author-info {
   }
   .bk-campaign-heading{
     padding-bottom: 40px;
+    padding-top: 30px;
   }
 .bk-campaign-heading .heading h2{
     line-height: 34px;
@@ -1885,7 +1886,7 @@ body.author .author-info {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 0px;
+    padding: 0px 5px;
   }
   
   .campaign-wrapper .card {
@@ -1899,6 +1900,7 @@ body.author .author-info {
     transition: 250ms all ease-in-out;
     cursor: pointer;
   }
+
 
   
   .campaign-wrapper .banner-img {
@@ -2000,6 +2002,10 @@ body.author .author-info {
     color: #fff;
   }
 
+    .bk-recent-posts{
+        padding: 0px 10px;
+    }
+
   @media screen and (max-width: 1024px) {
     .card{
         width: 300px;
@@ -2012,6 +2018,17 @@ body.author .author-info {
     }
     .bk-recent-post{
         width: 31%;
+    }
+    .campaign-wrapper .card {
+        overflow: hidden;
+        box-shadow: 0px 2px 20px #d7dfe2;
+        background: white;
+        border-radius: 8px;
+        position: relative;
+        width: 330px;
+        margin: 0 0px 32px;
+        transition: 250ms all ease-in-out;
+        cursor: pointer;
     }
   }
 
@@ -2029,6 +2046,17 @@ body.author .author-info {
     }
     .bk-recent-post{
         width: 48%;
+    }
+    .campaign-wrapper .card {
+        overflow: hidden;
+        box-shadow: 0px 2px 20px #d7dfe2;
+        background: white;
+        border-radius: 8px;
+        position: relative;
+        width: 375px;
+        margin: 0 0px 32px;
+        transition: 250ms all ease-in-out;
+        cursor: pointer;
     }
   }
 
@@ -2054,6 +2082,9 @@ body.author .author-info {
         width: 100%;
     }
     .last-submission-wrap .post-image a img{
+        width: 100%;
+    }
+    .campaign-wrapper .card{
         width: 100%;
     }
   }

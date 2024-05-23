@@ -1403,7 +1403,6 @@ body.author .author-info {
 .wbr-leaderboard-page-cls .single-leaderboard ul li{
     display: flex;
     align-items: center;
-
     background-color: #D4C8EE;
     border-radius: 3px;
     padding:10px 5px;
@@ -1424,7 +1423,6 @@ body.author .author-info {
 }
 .wbr-leaderboard-page-cls .single-leaderboard ul li a img{
     width: 40px;
-    height: 40px;
     border-radius: 50%;
 }
 .wbr-leaderboard-page-cls .single-leaderboard ul li a img{
@@ -2048,6 +2046,12 @@ body.author .author-info {
         width: 90%;
         margin: 0px auto 20px;
     }
+    .last-submisstion-wrap .post-image a{
+        width: 100%;
+    }
+    .last-submisstion-wrap .post-image a img{
+        width: 100%;
+    }
   }
 
   @media screen and (max-width: 375px) {
@@ -2133,3 +2137,7 @@ body.author .author-info {
         width: 100%;
    }
   }
+  .last-submisstion-wrap .post-info h2{
+    text-transform: capitalize;
+    margin-top: 10px;
+ }

@@ -60,7 +60,7 @@ get_header(); ?>
 </div>
 <div class="last-submission-container">
     <div class="row justify-content-between">
-        <div class="col-12 col-lg-3 col-md-6">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-6">
             <div class="last-submisstion-wrap">
                 <div class="post-image">
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
@@ -80,7 +80,7 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-3 col-md-6">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-6">
             <div class="last-submisstion-wrap">
                 <div class="post-image">
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
@@ -100,7 +100,7 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-3 col-md-6">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-6">
             <div class="last-submisstion-wrap">
                 <div class="post-image">
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
@@ -120,7 +120,7 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-3 col-md-6">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-6">
             <div class="last-submisstion-wrap">
                 <div class="post-image">
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
@@ -140,7 +140,7 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-3 col-md-6">
+        <div class="col-12 col-lg-3 col-md-6 col-sm-6">
             <div class="last-submisstion-wrap">
                 <div class="post-image">
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>

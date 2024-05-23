@@ -324,25 +324,35 @@ $(document).on('click', '#load-more-reviews', function () {
         }
     });
 
-    jQuery(document).ready(function($) {
-        $(document).on('click', '.wbr_author_review_pagination', function() {
-            var page = $(this).data('page');
-            var author_id = wbrFrontendScripts.CurrentAuthor;
+    $(document).on('click', '.wbr_author_review_pagination', function() {
+        var page = $(this).data('page');
+        var author_id = wbrFrontendScripts.CurrentAuthor;
     
-            $.ajax({
-                url: wbrFrontendScripts.ajaxUrl,
-                type: 'POST',
-                data: {
-                    action: 'load_author_reviews',
-                    author_id: author_id,
-                    page: page
-                },
-                success: function(response) {
-                    $('#reviews-table').find('tr:gt(0)').remove();
-                    $('#reviews-table').append(response);
-                }
-            });
+        $.ajax({
+            url: wbrFrontendScripts.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: 'load_author_reviews',
+                author_id: author_id,
+                page: page
+            },
+            success: function(response) {
+                $('#reviews-table').find('tr:gt(0)').remove();
+                $('#reviews-table').append(response);
+            }
         });
     });
     
+    
+});
+
+document.querySelectorAll('.wbr_author_review_pagination').forEach(function (ele, idx) {
+    ele.addEventListener('click', function (e) {
+        var clickedEle = document.querySelector('.wbr_author_review_pagination.current');
+        console.log( this);
+        if (clickedEle != null)
+            clickedEle.classList.remove('current');
+
+        this.classList.add('current');
+    })
 });

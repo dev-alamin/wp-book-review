@@ -233,7 +233,9 @@ setInterval(function() {
                                     echo '<li>';
                                     echo '<a href="' . esc_url( $term_link ) . '">';
                                     echo '<div class="thumbnail-title-wrapper">';
-                                    echo '<img src="'. $product_thumbnail . '" alt="' . get_the_title( $product_id ) . '" >';
+                                    if( $product_thumbnail ) {
+                                        echo '<img src="'. $product_thumbnail . '" alt="' . get_the_title( $product_id ) . '" >';
+                                    }
                                     echo esc_html( wp_trim_words( $result->name, 7 ) ) . ' <span class="review-count">('. $result->review_count  . ')</span></div>';
                                     echo '<span class="book-authors">';
                                     $authors = wp_get_post_terms( $product_id, 'authors' );

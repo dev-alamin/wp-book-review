@@ -1800,7 +1800,7 @@ body.author .author-info {
     text-align: center;
     width: 100%;
     flex-wrap: wrap;
-    padding: 60px 0px;
+    padding: 0px 0px 40px;
 }
 .bk-recent-post{
     width: 23%;
@@ -1812,7 +1812,7 @@ body.author .author-info {
 .bk-recent-posts .bk-thumbnail-img a img{
     border-radius: 10px 10px 0 0;
     width: 100%;
-    max-height: 350px;
+    max-height: 300px;
     object-fit: cover;
 }
 .bk-recent-posts .bk-user-avatar a img{
@@ -2176,4 +2176,16 @@ body.author .author-info {
 
   .campaign-wrapper .card-body{
     z-index: 999;
+  }
+
+  .bk-recent-posts .bk-recent-post .bk-thumbnail-img a img{
+    opacity: .8;
+    transition: .3s;
+  }
+  .bk-recent-posts .bk-recent-post:hover .bk-thumbnail-img a img{
+    opacity: 1;
+  }
+
+  .bk-recent-posts .bk-recent-post:hover .bk-recent-info h3 a{
+    text-decoration: underline;
   }

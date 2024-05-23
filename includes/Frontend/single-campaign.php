@@ -54,14 +54,14 @@ get_header(); ?>
         </div>
     </div>
 </div>
-<div class="submisstion-heading">
+<div class="submission-heading">
     <h2>Latest submissions</h2>
     <a href="#">Explore all</a>
 </div>
 <div class="last-submission-container">
     <div class="row justify-content-between">
         <div class="col-12 col-lg-3 col-md-6 col-sm-6">
-            <div class="last-submisstion-wrap">
+            <div class="last-submission-wrap">
                 <div class="post-image">
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                 </div>
@@ -81,7 +81,7 @@ get_header(); ?>
             </div>
         </div>
         <div class="col-12 col-lg-3 col-md-6 col-sm-6">
-            <div class="last-submisstion-wrap">
+            <div class="last-submission-wrap">
                 <div class="post-image">
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                 </div>
@@ -101,7 +101,7 @@ get_header(); ?>
             </div>
         </div>
         <div class="col-12 col-lg-3 col-md-6 col-sm-6">
-            <div class="last-submisstion-wrap">
+            <div class="last-submission-wrap">
                 <div class="post-image">
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                 </div>
@@ -121,7 +121,7 @@ get_header(); ?>
             </div>
         </div>
         <div class="col-12 col-lg-3 col-md-6 col-sm-6">
-            <div class="last-submisstion-wrap">
+            <div class="last-submission-wrap">
                 <div class="post-image">
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                 </div>
@@ -141,7 +141,7 @@ get_header(); ?>
             </div>
         </div>
         <div class="col-12 col-lg-3 col-md-6 col-sm-6">
-            <div class="last-submisstion-wrap">
+            <div class="last-submission-wrap">
                 <div class="post-image">
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                 </div>
@@ -168,7 +168,7 @@ get_header(); ?>
         <p>Challenges you can enter now for a chance to win.</p>
     </div>
 </div>
-<div class="wrapper campaign-single-bg">
+<div class="campaign-wrapper campaign-single-bg">
         <div class="card">
             <div class="card-banner" style="background-image: url(https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg)">
                 <div class="category-tag">

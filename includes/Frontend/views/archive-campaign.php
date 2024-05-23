@@ -27,7 +27,7 @@ if ($products_query->have_posts()) { ?>
                 <?php the_content(); ?>
             </div>
         </div>
-        <div class="wrapper">
+        <div class="campaign-wrapper">
             <div class="card">
                 <div class="card-banner" style="background-image: url(https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg)">
                     <div class="category-tag">
@@ -101,8 +101,6 @@ if ($products_query->have_posts()) { ?>
                         <p class="blog-description">Mediation has transformed my life. These are the best practices to get into the habit</p>
                     </div>
                 </div>
-                
-
                 <div class="item-price">
                     <div class="price"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" width="16" class="css-1ug5ziw-ChallengeTile"><path d="M8 13.5v-3m-2 3h4a2 2 0 012 2H4a2 2 0 012-2zm6-12h3v3c0 .796-.316 1.559-.879 2.121A2.996 2.996 0 0112 7.5m-8-6H1v3c0 .796.316 1.559.879 2.121A2.996 2.996 0 004 7.5" fill="none" stroke="#fff"></path><path d="M4 .5h8v6a3.995 3.995 0 01-1.172 2.828 3.995 3.995 0 01-5.656 0A3.995 3.995 0 014 6.5v-6z" fill="none" stroke="#fff"></path></svg>$500<!-- --> Grand Prize</div>
                     <div class="price-time"><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" class="css-1jdzpf4-TimeRemaining"><path d="M8 15A7 7 0 108 1a7 7 0 000 14z" fill="none" stroke="#fff"></path><path d="M8 4v4h4" fill="none" stroke="#fff"></path></svg>3 days left</div>
@@ -149,7 +147,7 @@ if ($products_query->have_posts()) { ?>
                 </div>
             </div>
         </div>
-        <div class="bk-o-compaign">
+        <div class="bk-o-campaign">
             <div class="bk-oc-heading">
                 <h5>Recent Winners</h5>
             </div>

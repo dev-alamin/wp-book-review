@@ -1842,7 +1842,7 @@ body.author .author-info {
     text-transform: capitalize;
 }
 
-.bk-o-compaign h5{
+.bk-o-campaign h5{
     font-size: 26px;
     line-height: 40px;
     color: #222;
@@ -1850,7 +1850,7 @@ body.author .author-info {
     text-transform: capitalize;
 }
 
-.bk-o-compaign p{
+.bk-o-campaign p{
     font-size: 17px;
     line-height: 30px;
     color: #999;
@@ -1877,14 +1877,14 @@ body.author .author-info {
 
 
 
-.wrapper {
+.campaign-wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 0px;
   }
   
-  .card {
+  .campaign-wrapper .card {
     overflow: hidden;
     box-shadow: 0px 2px 20px #d7dfe2;
     background: white;
@@ -1897,13 +1897,13 @@ body.author .author-info {
   }
 
   
-  .banner-img {
+  .campaign-wrapper .banner-img {
     position: absolute;
     object-fit: cover;
     height: 224px;
     width: 100%;
   }
-  .card-banner{
+  .campaign-wrapper .card-banner{
     position: relative;
     background-position: center center;
     background-size: cover;
@@ -1912,14 +1912,14 @@ body.author .author-info {
     display: flex;
     flex-direction: column;
   }
-  .card-banner::before{
+  .campaign-wrapper .card-banner::before{
     content: "";
     width: 100%;
     height: 100%;
     background-color: hsla(0, 0%, 20%, 0.13);
     display: block;
   }
-  .card-banner .category-tag {
+  .campaign-wrapper .card-banner .category-tag {
     font-size: 12.8;
     font-weight: bold;
     color: white;
@@ -1936,24 +1936,24 @@ body.author .author-info {
   }
 
   
-  .card-body {
+  .campaign-wrapper .card-body {
     margin: 128px 0px 0px 0px;
   }
   
-  .blog-hashtag {
+  .campaign-wrapper .blog-hashtag {
     font-size: 14px;
     font-weight: 500;
     color: #4d97b2;
   }
   
-  .blog-title {
+  .campaign-wrapper .blog-title {
     font-size: 34px;
     font-weight: 600;
     color: #fff;
     text-transform: capitalize;
   }
   
-  .blog-description {
+  .campaign-wrapper .blog-description {
     font-size: 17px;
     color: #fff;
   }
@@ -1984,15 +1984,15 @@ body.author .author-info {
     font-size: 14px;
   }
 
-  .item-price {
+  .campaign-wrapper .item-price {
     padding: 10px 20px;
     background-color: #222;
   }
 
-  .item-price .price svg, .item-price .price-time svg{
+  .campaign-wrapper  .item-price .price svg, .campaign-wrapper .item-price .price-time svg{
     margin-right: 10px;
   }
-  .item-price .price-time, .item-price .price {
+  .campaign-wrapper .item-price .price-time, .campaign-wrapper .item-price .price {
     color: #fff;
   }
 
@@ -2046,10 +2046,10 @@ body.author .author-info {
         width: 90%;
         margin: 0px auto 20px;
     }
-    .last-submisstion-wrap .post-image a{
+    .last-submission-wrap .post-image a{
         width: 100%;
     }
-    .last-submisstion-wrap .post-image a img{
+    .last-submission-wrap .post-image a img{
         width: 100%;
     }
   }
@@ -2078,21 +2078,21 @@ body.author .author-info {
     font-size: 16px;
     line-height: 18px;
   }
-  .last-submisstion-wrap {
+  .last-submission-wrap {
     margin: 20px 0 ;
   }
-  .submisstion-heading {
+  .submission-heading {
     margin-top: 30px;
     display: flex;
     justify-content: space-between;
   }
-  .submisstion-heading h2{
+  .submission-heading h2{
     font-size: 24px;
     line-height: 30px;
     font-weight: normal;
     margin: 0px;
   }
-  .submisstion-heading a{
+  .submission-heading a{
     border: 1px solid #000;
     display: flex;
     align-items: center;
@@ -2100,44 +2100,44 @@ body.author .author-info {
     height: 100%;
     border-radius: 7px;
   }
-  .author{
+  .last-submission-wrap .author{
     display: flex;
     align-items: center;
   }
-  .author .author-img{
+  .last-submission-wrap .author .author-img{
     width: 50px;
     height: 50px;
     border-radius: 50%;
   }
-  .author .author-img img{
+ .last-submission-wrap .author .author-img img{
     width: 50px;
     height: 50px;
     border-radius: 50%;
   }
-  .author .author-info{
+  .last-submission-wrap .author .author-info{
     margin-left: 15px;
   }
-  .author .author-info h4,  .author .author-info p{
+ .last-submission-wrap .author .author-info h4,  .author .author-info p{
     margin: 0px;
   }
   .last-submission-container{
     padding: 0px 0 40px;
   }
-  .last-submisstion-wrap .post-image a img{
+  .last-submission-wrap .post-image a img{
     border-radius: 10px;
   }
-  .last-submisstion-wrap .post-info h2{
+  .last-submission-wrap .post-info h2{
     margin: 0px;
     font-size: 21px;
   }
 
   @media screen and (max-width: 375px) {
-   .last-submission-container .last-submisstion-wrap .post-image a{
+   .last-submission-container .last-submission-wrap .post-image a{
         display: block;
         width: 100%;
    }
   }
-  .last-submisstion-wrap .post-info h2{
+  .last-submission-wrap .post-info h2{
     text-transform: capitalize;
     margin-top: 10px;
- }
+   }

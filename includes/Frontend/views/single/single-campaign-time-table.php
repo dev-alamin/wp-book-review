@@ -4,13 +4,6 @@
         </div>
         <div class="single-time">
         <?php
-        // Get the start date from Carbon Fields
-        $start_date     = carbon_get_post_meta( get_the_ID(), 'first_submission_date' );
-        $current_date   = new DateTime();
-        $start_date_obj = new DateTime( $start_date );
-        $interval       = $current_date->diff( $start_date_obj );
-        $days_left      = $interval->days;
-
         $first_submission_date = carbon_get_post_meta( get_the_ID(), 'first_submission_date' );
         $last_submission_date  = carbon_get_post_meta( get_the_ID(), 'last_submission_date' );
         $result_publish_date   = carbon_get_post_meta( get_the_ID(), 'result_publish_date' );
@@ -18,7 +11,7 @@
 
         <div class="single-time">
             <div class="schedule-headline">
-                <h4><?php echo $days_left; ?> days left</h4>
+                <h4> <?php echo esc_html( wbr_get_campaign_days_left( get_the_ID() ) ); ?></h4>
             </div>
             <div class="single-schedule">
                 <h3>Submission open</h3>

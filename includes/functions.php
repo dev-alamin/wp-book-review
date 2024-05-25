@@ -333,3 +333,30 @@ function wbr_campaign_positions():array{
         'twentieth'
     ];
 }
+
+
+function wbr_get_campaign_days_left(int $post_id) {
+    if (!function_exists('carbon_get_post_meta')) return;
+
+    $start_date = carbon_get_post_meta($post_id, 'first_submission_date');
+
+    // If start date is not set, return an empty string
+    if (!$start_date) {
+        return '';
+    }
+
+    // Calculate the days left
+    $current_date = new DateTime();
+    $start_date_obj = new DateTime($start_date);
+    $interval = $current_date->diff($start_date_obj);
+    $days_left = $interval->days;
+
+    if ($start_date_obj < $current_date) {
+        $message = 'The campaign has started';
+    } else {
+        $message = sprintf('%s days left', $days_left);
+    }
+
+    return $message;
+}
+

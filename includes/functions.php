@@ -250,58 +250,34 @@ function ff_get_term_link( $post_id ) {
         LIMIT $limit
     ";
 
-    $results = $wpdb->get_results( $query );
+    return $wpdb->get_results( $query );
 
-    return $results;
 }
 
 /**
- * Retrieves the most commented posts.
+ * Get the most liked reviews posts of a specific post type.
  *
- * Retrieves the most commented posts from the WordPress database and formats them into
- * an HTML list based on the provided container element and class.
- *
- * @param string $post              Optional. Post type to retrieve. Default is 'review'.
- * @param string $container_element Optional. Container element for the list. Default is 'ul'.
- * @param string $container_class   Optional. Class for the container element. Default is 'leaderboard-list'.
- * @return string                   The formatted HTML list of most commented posts.
+ * @param string $post_type The type of posts to retrieve. Default is 'review'.
+ * @return array The array of the most commented posts.
  */
-function wbr_get_most_commented_posts( $post = 'review', $container_element = 'ul', $container_class = 'leaderboard-list' ) {
+function wbr_get_most_commented_posts($post_type = 'review') {
     global $wpdb;
 
-    $query = "
+    $query = $wpdb->prepare("
         SELECT p.ID, p.post_title, COUNT(c.comment_ID) AS comment_count
         FROM {$wpdb->prefix}posts AS p
         LEFT JOIN {$wpdb->prefix}comments AS c ON p.ID = c.comment_post_ID
-        WHERE p.post_type = '$post'
+        WHERE p.post_type = %s
         AND p.post_status = 'publish'
         GROUP BY p.ID
         ORDER BY comment_count DESC
         LIMIT 5
-    ";
+    ", $post_type);
 
-    // Execute the query
-    $results = $wpdb->get_results( $query );
-
-    // Start building the output HTML
-    $output = '<' . $container_element . ' class="' . esc_attr($container_class) . '">';
-    foreach ( $results as $result ) {
-        $output .= '<li>';
-        // Check if the post has a featured image
-        if ( has_post_thumbnail( $result->ID ) ) {
-            // Get the featured image URL
-            $featured_image_url = get_the_post_thumbnail_url( $result->ID, 'thumbnail' ); // Adjust the image size as needed
-            // Output the featured image as a link
-            $output .= '<a href="' . get_permalink( $result->ID ) . '"><img src="' . $featured_image_url . '" alt="' . esc_attr( $result->post_title ) . '"></a>';
-        }
-        $output .= '<a href="' . get_permalink( $result->ID ) . '">' . esc_html( wp_trim_words( $result->post_title, 7 ) ) . '</a>';
-        $output .= '</li>';
-    }
-    
-    $output .= '</' . $container_element . '>';
-
-    return $output;
+    return $wpdb->get_results($query);
 }
+
+
 
 /**
  * Expected campaign winner position
@@ -334,24 +310,38 @@ function wbr_campaign_positions():array{
     ];
 }
 
-
+/**
+ * Get the number of days left until the campaign starts, or a message if the campaign has started or ended.
+ *
+ * This function retrieves the start date and end date from the post meta, calculates the number of days left
+ * until the campaign starts, and returns a message based on the current date in relation to these dates.
+ *
+ * @param int $post_id The ID of the post from which to retrieve the meta fields.
+ *
+ * @return string A message indicating the number of days left until the campaign starts, that the campaign has started, 
+ *                or that the submission date is over.
+ */
 function wbr_get_campaign_days_left(int $post_id) {
     if (!function_exists('carbon_get_post_meta')) return;
 
     $start_date = carbon_get_post_meta($post_id, 'first_submission_date');
+    $last_date = carbon_get_post_meta($post_id, 'last_submission_date');
 
     // If start date is not set, return an empty string
     if (!$start_date) {
         return '';
     }
 
-    // Calculate the days left
     $current_date = new DateTime();
     $start_date_obj = new DateTime($start_date);
+    $end_date_obj = new DateTime($last_date);
     $interval = $current_date->diff($start_date_obj);
     $days_left = $interval->days;
 
-    if ($start_date_obj < $current_date) {
+    // Determine the message based on the dates
+    if ($end_date_obj < $current_date) {
+        $message = 'Submission date is over.';
+    } elseif ($start_date_obj < $current_date) {
         $message = 'The campaign has started';
     } else {
         $message = sprintf('%s days left', $days_left);
@@ -360,3 +350,40 @@ function wbr_get_campaign_days_left(int $post_id) {
     return $message;
 }
 
+/**
+ * Get the badge class for a given post's status.
+ *
+ * This function retrieves the post status of a given post ID and returns a corresponding 
+ * badge class for displaying the post status in a styled manner.
+ *
+ * @param int $post_id The ID of the post.
+ * @return string The CSS class for the badge corresponding to the post status.
+ */
+function wbr_get_post_status_badge_class( int $post_id ) {
+    $post_statuses = get_post_status( $post_id );
+
+    // Determine badge class based on post status
+    $badge_class = '';
+    switch ( $post_statuses ) {
+        case 'publish':
+            $badge_class = 'text-bg-primary';
+            break;
+        case 'pending':
+            $badge_class = 'text-bg-warning';
+            break;
+        case 'draft':
+            $badge_class = 'text-bg-secondary';
+            break;
+        case 'private':
+            $badge_class = 'text-bg-dark';
+            break;
+        case 'trash':
+            $badge_class = 'text-bg-danger';
+            break;
+        default:
+            $badge_class = 'text-bg-info';
+            break;
+    }
+
+    return $badge_class;
+}

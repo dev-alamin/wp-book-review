@@ -179,10 +179,6 @@ $campaign_posts = new WP_Query( [
             </div>
         <hr>
         
-        <div class="container mt-3 mb-5 bg-white pt-3">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>Your Post List - You can edit, request for delete. </h2>
                     <?php if( is_user_logged_in() && get_current_user_id() == $author_id ): ?>
                         <?php 
                         $posts_per_page = 5;
@@ -191,14 +187,18 @@ $campaign_posts = new WP_Query( [
                             'post_type'      => 'review',
                             'author'         => $author_id,
                             'posts_per_page' => $posts_per_page,
-                            'post_status'    => ['publish', 'pending', 'draft', 'trash', 'private' ],
+                            'post_status'    => ['publish', 'pending', 'draft', 'trash', 'private', 'delete_request' ],
                             'orderby'        => 'date',
                             'order'          => 'DESC',
                         );
                         
                         $author_review_posts = new WP_Query($author_review_posts_args);
                         
-                        if ($author_review_posts->have_posts()) {
+                        if ( $author_review_posts->have_posts() ) {
+                            echo '<div class="container mt-3 mb-5 bg-white pt-3">';
+                            echo '<div class="row">';
+                            echo '<div class="col-lg-12">';
+                            echo '<h2>Your Post List - You can edit, request for delete. </h2>';
                             echo '<table id="reviews-table">';
                             echo '<tr>';
                             echo '<th>#</th>';
@@ -211,7 +211,7 @@ $campaign_posts = new WP_Query( [
                             echo '</tr>';
                         
                             $serial = 1;
-                            while ($author_review_posts->have_posts()) {
+                            while ( $author_review_posts->have_posts() ) {
                                 $author_review_posts->the_post();
                                 $post_id = get_the_ID();
                                 $post_title = get_the_title();
@@ -230,10 +230,13 @@ $campaign_posts = new WP_Query( [
                                 }
                                 echo '</td>';
                                 echo '<td>' . esc_html($post_date) . '</td>';
-                                echo '<td><span class="badge '. esc_attr( $post_statuses ) . '">' . esc_html( ucwords( get_post_status( $post_id ) ) ) . '</span></td>';
+                                echo '<td><span class="badge '. esc_attr( $post_statuses ) . '">' . esc_html( ucwords( str_replace( '_', ' ', get_post_status( $post_id ) ) ) ) . '</span></td>';
                                 echo '<td>';
-                                echo '<a href="' . esc_url('/submit-review?reviewid=' . get_the_ID()) . '">Edit</a> | ';
-                                echo '<a href="' . esc_url(get_delete_post_link($post_id)) . '" onclick="return confirm(\'Are you sure to delete?\');">Delete</a>';
+                                if( get_post_status( $post_id ) == 'draft' ) {
+                                    echo '<a class="me-2" href="' . esc_url( '/publish' ) . '"><span class="badge text-bg-info">Publish</span></a>';
+                                }
+                                echo '<a class="me-2" href="' . esc_url('/submit-review?reviewid=' . get_the_ID()) . '"><span class="badge text-bg-primary">Edit</span></a>';
+                                echo '<a id="wbrDeleteRequestReview" data-id="' . esc_attr( $post_id ) . '" href="#"><span class="badge text-bg-danger">Delete</span></a>';
                                 echo '</td>';
                                 echo '</tr>';
                             }
@@ -254,6 +257,7 @@ $campaign_posts = new WP_Query( [
                                 }
                                 echo '</div>';
                             }
+                            echo '</div></div></div>';
                         } else {
                             echo 'No reviews found.';
                         }
@@ -261,9 +265,7 @@ $campaign_posts = new WP_Query( [
                         wp_reset_postdata();
                     endif;
                     ?>
-                </div>
-            </div>
-        </div>
+
         <div class="author-reviews">
         <?php
 // Get the current page number

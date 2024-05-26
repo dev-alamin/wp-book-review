@@ -346,6 +346,31 @@ $(document).on('click', '#load-more-reviews', function () {
     
 });
 
+jQuery(document).ready(function($) {
+    // Target each element with the class '.wbrDeleteRequestReview'
+    $('.wbrDeleteRequestReview').click(function(e) {
+        e.preventDefault();
+        var postId = $(this).data('id'); // Get the post ID from the data attribute of the clicked element
+        var data = {
+            action: 'wbr_set_review_status',
+            post_id: postId
+        };
+
+        // Send AJAX request
+        $.post(wbrFrontendScripts.ajaxUrl, data, function(response) {
+            // Alert success or error message
+            if (response.success) {
+                alert(response.data);
+                // Optionally, update UI or perform other actions upon success
+            } else {
+                alert(response.data);
+            }
+        });
+    });
+});
+
+
+
 document.querySelectorAll('.wbr_author_review_pagination').forEach(function (ele, idx) {
     ele.addEventListener('click', function (e) {
         var clickedEle = document.querySelector('.wbr_author_review_pagination.current');
@@ -356,3 +381,4 @@ document.querySelectorAll('.wbr_author_review_pagination').forEach(function (ele
         this.classList.add('current');
     })
 });
+

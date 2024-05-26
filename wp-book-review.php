@@ -228,3 +228,53 @@ function update_user_review_count($post_id) {
     update_user_meta($author_id, 'review_count', $review_count);
 }
 add_action('save_post', 'update_user_review_count');
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Register a custom post status 'delete_request' for the 'review' post type.
+ */
+function wbr_register_delete_request_post_status() {
+    register_post_status('delete_request', array(
+        'label'                     => _x('Delete Request', 'post status label'),
+        'public'                    => true,
+        'exclude_from_search'       => false,
+        'show_in_admin_all_list'    => true,
+        'show_in_admin_status_list' => true,
+        'label_count'               => _n_noop('Delete Request <span class="count">(%s)</span>', 'Delete Requests <span class="count">(%s)</span>'),
+    ));
+}
+add_action('init', 'wbr_register_delete_request_post_status');
+/**
+ * Display the custom post status 'delete_request' in the post list table.
+ *
+ * @param array $post_states An array of post display states.
+ * @param WP_Post $post The current post object.
+ * @return array The modified array of post display states.
+ */
+function wbr_display_delete_request_post_state($post_states, $post) {
+    if ($post->post_status === 'delete_request') {
+        $post_states['delete_request'] = _x('Delete Request', 'post status');
+    }
+    return $post_states;
+}
+add_filter('display_post_states', 'wbr_display_delete_request_post_state', 10, 2);
+/**
+ * Add the 'delete_request' status to the quick edit dropdown.
+ *
+ * @param array $post_statuses The array of post statuses.
+ * @return array The modified array of post statuses.
+ */
+function wbr_add_delete_request_to_quick_edit($post_statuses) {
+    $post_statuses['delete_request'] = _x('Delete Request', 'post status');
+    return $post_statuses;
+}
+add_filter('quick_edit_dropdown_post_status', 'wbr_add_delete_request_to_quick_edit');

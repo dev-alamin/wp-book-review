@@ -20,7 +20,6 @@ function wbr_get_authors( $post, $all_authors = true ) {
     return esc_html( $all_authors ? implode( ', ', $authors_names ) : reset( $authors_names ) );
 }
 
-
 /**
  * Get Book publisher
  *
@@ -35,7 +34,6 @@ function wbr_get_publisher( $post, $name ) {
         return  esc_html__( $name . $publishers[0]->name );
     }
 }
-
 
 /**
  * Get Book Cover Photo with anchor tag
@@ -94,22 +92,18 @@ function wbr_get_comment_author_name( $comment ) {
  * @since 1.0.0
  * @param int $post Post ID.
  */
-function wbr_output_review_card( $post_id, $user_id = '' ) {
+function wbr_output_review_card( $post_id ) {
     $post_title          = get_the_title($post_id);
     $author_id           = get_post_field('post_author', $post_id);
     $comment_author_data = get_userdata($author_id);
-    $author_url          = get_author_posts_url($author_id);
     $author_avatar       = get_avatar($author_id, 96); 
     $product_id          = get_post_meta($post_id, '_associated_product_id', true);
     $remove_review       = str_replace('Review', ' ', $post_title);
-    $comment_author_id   = get_post_meta($post_id, '_comment_author_id', true);
     $author_avatar       = get_avatar($author_id, 96);
     $comment_author_name = get_post_meta($post_id, '_comment_author_name', true);
-    $comment_author_url  = get_post_meta($post_id, '_comment_author_url', true);
     $comment_count       = count_user_posts( $author_id, 'review' );
     $author_name         = $comment_author_data ? $comment_author_data->display_name : 'Anonymous';
     $authors             = get_the_terms($product_id, 'authors');
-    $product             = wc_get_product($product_id);
     ?>
 
         <div class="wpr-card mb-5">
@@ -233,7 +227,6 @@ function ff_get_term_link( $post_id ) {
     }
  }
 
-
  function wbr_get_top_reviewed_books( int $limit = 5 ) {
     global $wpdb;
 
@@ -276,8 +269,6 @@ function wbr_get_most_commented_posts($post_type = 'review') {
 
     return $wpdb->get_results($query);
 }
-
-
 
 /**
  * Expected campaign winner position
@@ -377,7 +368,7 @@ function wbr_get_post_status_badge_class( int $post_id ) {
         case 'private':
             $badge_class = 'text-bg-dark';
             break;
-        case 'trash':
+        case 'trash' || 'delete_request':
             $badge_class = 'text-bg-danger';
             break;
         default:

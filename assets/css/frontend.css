@@ -1694,6 +1694,98 @@ body.author .author-info {
 
 
 
+.review-post {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+.campaign-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.campaign-title,
+.review-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.campaign-title a,
+.review-title a {
+    text-decoration: none;
+    color: #0073aa;
+}
+
+.campaign-title a:hover,
+.review-title a:hover {
+    text-decoration: underline;
+}
+
+.winner-position {
+    color: #ff9800;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.fa-trophy {
+    color: #ff9800;
+    margin-right: 5px;
+}
+
+.fa-pen {
+    color: #0073aa;
+    margin-right: 5px;
+}
+
+.review-title i,
+.campaign-title i {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+#reviews-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    min-height: 350px;
+}
+
+#reviews-table th,
+#reviews-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#reviews-table th {
+    background-color: #f2f2f2;
+}
+
+#pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pagination-button {
+    background-color: #0073aa;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.pagination-button:hover {
+    background-color: #005177;
+}
+.wbr_author_review_pagination.current {
+    background: var(--wd-primary-color);
+    color: #fff;
+}
 
 
 
@@ -2256,13 +2348,11 @@ body.author .author-info {
   .book-review-info a:hover{
     color: #fff;
   }
-
   .winner-review-books .leaderboard-list li a{
     width: 100% !important;
   }
   .winner-review-books .leaderboard-list li a .thumbnail-title-wrapper{
     display: flex;
-    align-items: center;
     gap: 10px;
   }
   .winner-review-books .leaderboard-list li a .thumbnail-title-wrapper img{
@@ -2271,4 +2361,64 @@ body.author .author-info {
 
   .winner-review-books .book-authors{
     height: 25px;
+  }
+
+  .single-leaderboard .book-review-bk-info{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .single-leaderboard .book-review-bk-info a{
+    width: 100% !important;
+    display: block;
+  }
+  .single-leaderboard .book-review-bk-info a:last-child, .wbr-leaderboard-page-cls .single-leaderboard ul li a > span{
+    font-size: 70%;
+  }
+
+  .author-profile{
+    display: flex;
+    align-items: start;
+    gap: 40px;
+  }
+  .author-profile .author-avatar img{
+    border-radius: 50%;
+    border: 5px solid #fff;
+  }
+
+  .author-profile .author-details .author-name{
+    text-transform: uppercase;
+  }
+
+  .author-profile .author-join-review{
+    display: flex;
+    gap: 10px;
+  }
+  .author-profile .author-join-review p i{
+    margin-right: 5px;
+  }
+  .author-profile .author-achievement-price {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+  }
+  .author-profile .author-achievement-price .review-post{
+    width: 31%;
+  }
+  .author-profile .campaign-details .campaign-title a,   .author-profile .campaign-details .campaign-title{
+    font-size: 16px;
+    color: #000;
+  }
+  .author-profile .campaign-details .campaign-title svg{
+    margin-right: 5px;
+  }
+  .author-profile .author-achievement-price  .review-post{
+    box-shadow: unset !important;
+    background-color: unset !important;
+    border: unset !important;
+  }
+
+  .author-profile .author-achievement-price .review-title{
+    font-size: 16px;
+    color: #fff;
   }

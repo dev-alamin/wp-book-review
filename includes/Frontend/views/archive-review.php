@@ -231,13 +231,15 @@ setInterval(function() {
                                     </a>
                                 <?php endif; ?>
                     
-                                <a href="<?php echo esc_url(get_permalink($result->ID)); ?>">
-                                    <?php echo esc_html(wp_trim_words($result->post_title, 7)); ?>
-                                </a>
-                                <?php if( $product ): ?>
-                                <a href="<?php echo esc_url( get_permalink( $product ) ); ?>">
-                                    <?php echo esc_html( get_the_title( $product ) ); ?>
-                                </a>
+                                <div class="book-review-bk-info">
+                                    <a href="<?php echo esc_url(get_permalink($result->ID)); ?>">
+                                        <?php echo esc_html(wp_trim_words($result->post_title, 7)); ?>
+                                    </a>
+                                    <?php if( $product ): ?>
+                                    <a href="<?php echo esc_url( get_permalink( $product ) ); ?>">
+                                        <?php echo esc_html( get_the_title( $product ) ); ?>
+                                    </a>
+                                </div>
                                 <?php endif; ?>
                             </li>
                         <?php endforeach; ?>

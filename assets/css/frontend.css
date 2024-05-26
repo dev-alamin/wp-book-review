@@ -2268,3 +2268,7 @@ body.author .author-info {
   .winner-review-books .leaderboard-list li a .thumbnail-title-wrapper img{
     width: 40px;
   }
+
+  .winner-review-books .book-authors{
+    height: 25px;
+  }

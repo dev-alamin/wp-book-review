@@ -276,26 +276,26 @@ function wbr_get_most_commented_posts($post_type = 'review') {
  */
 function wbr_campaign_positions():array{
     return [
-        'first',
-        'second',
-        'third',
-        'fourth',
-        'fifth',
-        'sixth',
-        'seventh',
-        'eighth',
-        'ninth',
-        'tenth',
-        'eleventh',
-        'twelfth',
-        'thirteenth',
-        'fourteenth',
-        'fifteenth',
-        'sixteenth',
-        'seventeenth',
-        'eighteenth',
-        'nineteenth',
-        'twentieth'
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '10',
+        '11',
+        '12',
+        '13',
+        '14',
+        '15',
+        '16',
+        '17',
+        '18',
+        '19',
+        '20'
     ];
 }
 
@@ -375,4 +375,31 @@ function wbr_get_post_status_badge_class( int $post_id ) {
     }
 
     return $badge_class;
+}
+
+function wbr_number_to_word( int $number ) : string {
+    $words = array(
+        1 => 'First',
+        2 => 'Second',
+        3 => 'Third',
+        4 => 'Fourth',
+        5 => 'Fifth',
+        6 => 'Sixth',
+        7 => 'Seventh',
+        8 => 'Eighth',
+        9 => 'Ninth',
+        10 => 'Tenth',
+        11 => 'Eleventh',
+        12 => 'Twelfth',
+        13 => 'Thirteenth',
+        14 => 'Fourteenth',
+        15 => 'Fifteenth',
+        16 => 'Sixteenth',
+        17 => 'Seventeenth',
+        18 => 'Eighteenth',
+        19 => 'Nineteenth',
+        20 => 'Twentieth'
+    );
+
+    return isset($words[$number]) ? $words[$number] : '';
 }

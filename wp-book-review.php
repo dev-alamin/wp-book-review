@@ -25,7 +25,6 @@
  * Prefix:      Book_Review
  */
 
-
  if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }

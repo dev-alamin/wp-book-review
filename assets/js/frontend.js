@@ -106,29 +106,29 @@ $(document).on('click', '#load-more-reviews', function () {
 
     // Initialize TinyMCE for the review content textarea
 
-    tinymce.init({
-        selector: 'textarea#review-content',
-        height: 200,
-        menubar: false,
-        block_formats: 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;',
-        plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount',
-            'textcolor',
-            'toc'
-        ],
-        toolbar: 'undo redo | formatselect | ' +
-            'bold italic underline strikethrough | ' +
-            'forecolor backcolor | removeformat | ' +
-            'alignleft aligncenter alignright alignjustify | ' +
-            'bullist numlist outdent indent | ' +
-            'blockquote | link unlink | image media | ' +
-            'table | hr | toc | ' +
-            'code | fullscreen | help | ' +
-            'heading1 heading2 heading3 | paragraph', // Add heading and paragraph options
-        content_style: 'body { font-family: Arial, sans-serif; font-size: 14px; }'
-    });
+    // tinymce.init({
+    //     selector: 'textarea#review-content',
+    //     height: 200,
+    //     menubar: false,
+    //     block_formats: 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;',
+    //     plugins: [
+    //         'advlist autolink lists link image charmap print preview anchor',
+    //         'searchreplace visualblocks code fullscreen',
+    //         'insertdatetime media table paste code help wordcount',
+    //         'textcolor',
+    //         'toc'
+    //     ],
+    //     toolbar: 'undo redo | formatselect | ' +
+    //         'bold italic underline strikethrough | ' +
+    //         'forecolor backcolor | removeformat | ' +
+    //         'alignleft aligncenter alignright alignjustify | ' +
+    //         'bullist numlist outdent indent | ' +
+    //         'blockquote | link unlink | image media | ' +
+    //         'table | hr | toc | ' +
+    //         'code | fullscreen | help | ' +
+    //         'heading1 heading2 heading3 | paragraph', // Add heading and paragraph options
+    //     content_style: 'body { font-family: Arial, sans-serif; font-size: 14px; }'
+    // });
 
     
     
@@ -243,11 +243,6 @@ $(document).on('click', '#load-more-reviews', function () {
                 }
             },
             error: function(xhr, status, error) {
-                // Log detailed error information
-                console.error('AJAX Request Error:');
-                console.error('Status:', status);
-                console.error('Error:', error);
-                console.error('Response Text:', xhr.responseText);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -322,8 +317,10 @@ $(document).on('click', '#load-more-reviews', function () {
             // If agreement checkbox is not checked, display SweetAlert error message
             swal("Error!", "Please check the agreement checkbox before proceeding.", "error");
         }
-    });
-
+    });  
+});
+jQuery(document).ready(function($) {
+    // Delegate click event to a parent element that exists on page load
     $(document).on('click', '.wbr_author_review_pagination', function() {
         var page = $(this).data('page');
         var author_id = wbrFrontendScripts.CurrentAuthor;
@@ -343,8 +340,46 @@ $(document).on('click', '#load-more-reviews', function () {
         });
     });
     
-    
+    // Delegate click event to a parent element that exists on page load
+    $(document).on('click', '.wbrDeleteRequestReview', function(e) {
+        e.preventDefault();
+        var postId = $(this).data('id'); // Get the post ID from the data attribute of the clicked element
+        var data = {
+            action: 'wbr_set_review_status',
+            post_id: postId
+        };
+
+        // Send AJAX request
+        $.post(wbrFrontendScripts.ajaxUrl, data, function(response) {
+            // Alert success or error message
+            if (response.success) {
+                if (response.success === false) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: response.data,
+                    });
+                } else {
+                    // If no error, display success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Your request for deletion has been sent successfully.',
+                    });
+                }
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'An error occurred while sending request for deletion. Please try again later.',
+                });
+            }
+        });
+    });
 });
+
+
+
 
 document.querySelectorAll('.wbr_author_review_pagination').forEach(function (ele, idx) {
     ele.addEventListener('click', function (e) {
@@ -356,3 +391,4 @@ document.querySelectorAll('.wbr_author_review_pagination').forEach(function (ele
         this.classList.add('current');
     })
 });
+

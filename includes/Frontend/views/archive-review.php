@@ -102,6 +102,14 @@ $latest_campaign_args = array(
     'posts_per_page' => 1,
     'orderby'        => 'date',
     'order'          => 'DESC',
+    'meta_query'     => array(
+        array(
+            'key'     => '_last_submission_date',
+            'value'   => date('Y-m-d'),
+            'compare' => '>=',
+            'type'    => 'DATE'
+        )
+    )
 );
 
 $latest_campaign_query = new WP_Query($latest_campaign_args);
@@ -112,9 +120,8 @@ if ($latest_campaign_query->have_posts()) {
         $campaign_name            = carbon_get_post_meta(get_the_ID(), 'campaign_name' );
         $last_submission_date     = carbon_get_post_meta(get_the_ID(), 'last_submission_date' );
         $last_submission_date_obj = date_create($last_submission_date);
-        $today_date_obj           = new DateTime(); // This will automatically use today's date
-        
-if ($last_submission_date_obj >= $today_date_obj) {
+        $today_date_obj           = new DateTime();
+    if ($last_submission_date_obj >= $today_date_obj) {
 ?>
 <div class="wbr-featured-campaign-archive section-padding wbr-campaign-page-cls">
     <div class="container">
@@ -150,7 +157,6 @@ if ($last_submission_date_obj >= $today_date_obj) {
     </div>
 </div>
 <?php }
-
 ?>
 
 <script>

@@ -29,6 +29,8 @@ class Ajax {
         add_action( 'wp_ajax_nopriv_load_author_reviews', [ $this, 'load_author_reviews' ] );
         // add_action( 'wp_ajax_nopriv_submit_review', [ $this, 'submit_review_callback' ] );
 
+        add_action('wp_ajax_wbr_set_review_status', [ $this, 'wbr_request_deletion' ] );
+
         add_action('wp_ajax_update_user_agreement', [ $this, 'update_user_agreement_callback' ]);
     }
 
@@ -368,7 +370,7 @@ class Ajax {
             'author'         => $author_id,
             'posts_per_page' => $posts_per_page,
             'paged'          => $paged,
-            'post_status'    => ['publish', 'pending', 'draft', 'trash', 'private' ],
+            'post_status'    => ['publish', 'pending', 'draft', 'trash', 'private', 'delete_request' ],
             'orderby'        => 'date',
             'order'          => 'DESC',
         );
@@ -396,10 +398,13 @@ class Ajax {
                 }
                 echo '</td>';
                 echo '<td>' . esc_html($post_date) . '</td>';
-                echo '<td><span class="badge '. esc_attr( $post_statuses ) . '">' . esc_html( ucwords( get_post_status( $post_id ) ) ) . '</span></td>';
+                echo '<td><span class="badge '. esc_attr( $post_statuses ) . '">' . esc_html( ucwords( str_replace( '_', ' ', get_post_status( $post_id ) ) ) ) . '</span></td>';
                 echo '<td>';
-                echo '<a href="' . esc_url('/submit-review?reviewid=' . get_the_ID()) . '">Edit</a> | ';
-                echo '<a href="' . esc_url(get_delete_post_link($post_id)) . '" onclick="return confirm(\'Are you sure to delete?\');">Delete</a>';
+                if( get_post_status( $post_id ) == 'draft' ) {
+                    echo '<a class="me-2" href="' . esc_url( '/publish' ) . '"><span class="badge text-bg-info">Publish</span></a>';
+                }
+                echo '<a class="me-2" href="' . esc_url('/submit-review?reviewid=' . get_the_ID()) . '"><span class="badge text-bg-primary">Edit</span></a>';
+                echo '<a href="#" class="wbrDeleteRequestReview" data-id="' . esc_attr( $post_id ) . '"><span class="badge text-bg-danger">Delete</span></a>';
                 echo '</td>';
                 echo '</tr>';
             }
@@ -410,5 +415,24 @@ class Ajax {
         wp_reset_postdata();
         wp_die();
     }
-    
+
+    public function wbr_request_deletion() {
+        if (isset($_POST['post_id'])) {
+            $post_id = intval($_POST['post_id']);
+            $post = get_post($post_id);
+
+            if ($post && $post->post_type === 'review') {
+                wp_update_post(array(
+                    'ID' => $post_id,
+                    'post_status' => 'delete_request',
+                ));
+
+                wp_send_json_success('Post status updated successfully.');
+            } else {
+                wp_send_json_error('Invalid post ID or post type.');
+            }
+        }
+
+        wp_send_json_error('Post ID not provided.');
+    }
 }

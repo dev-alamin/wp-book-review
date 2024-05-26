@@ -155,6 +155,7 @@ class Custom_Post {
                 if (!function_exists('carbon_get_post_meta')) break;
                 $winner_position = carbon_get_post_meta(get_the_ID(), '_review_winner_option');
                 if ($winner_position == 'default') break;
+                $winner_position = wbr_number_to_word( $winner_position );
                 echo esc_html(ucwords($winner_position));
                 break;
 

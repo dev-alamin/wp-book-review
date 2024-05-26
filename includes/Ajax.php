@@ -94,12 +94,12 @@ class Ajax {
         }
     
         $product_image_id = $this->validate_image_and_upload($_FILES['product-image-id']);
-        if (is_wp_error($product_image_id)) {
+        if ( is_wp_error( $product_image_id ) ) {
             wp_send_json_error($product_image_id->get_error_message());
         } elseif (is_string($product_image_id)) {
             wp_send_json_error($product_image_id);
         }
-    
+        // wp_send_json_error( $_POST );
         $review_post_id = $this->create_review_post($_POST, $product_image_id);
         if (is_wp_error($review_post_id)) {
             wp_send_json_error('Failed to submit review.');
@@ -197,10 +197,18 @@ class Ajax {
      * @return int|\WP_Error The ID of the created post, or a WP_Error object on failure.
      */
     private function create_review_post($post_data, $product_image_id) {
+        $post_status = sanitize_text_field( $post_data['publish-status'] );
+        $status = '';
+        if( $post_status == 'publish' ) {
+            $status = 'pending';
+        }elseif( $post_status == 'draft' ) {
+            $status = 'draft';
+        }
+
         $review_post = array(
             'post_title' => sanitize_text_field($post_data['review-title']),
             'post_content' => wp_kses_post($post_data['review-content']),
-            'post_status' => sanitize_text_field($post_data['publish-status']),
+            'post_status' => $status,
             'post_type' => 'review',
             'meta_input' => array(
                 '_product_id' => absint($post_data['product-id']),
@@ -311,11 +319,19 @@ class Ajax {
     }
 
     private function update_review_post($review_id, $post_data, $product_image_id) {
+        $post_status = sanitize_text_field( $post_data['publish-status'] );
+        $status = '';
+        if( $post_status == 'publish' ) {
+            $status = 'pending';
+        }elseif( $post_status == 'draft' ) {
+            $status = 'draft';
+        }
+
         $review_post = array(
             'ID' => $review_id,
             'post_title' => sanitize_text_field($post_data['review-title']),
             'post_content' => wp_kses_post($post_data['review-content']),
-            'post_status' => sanitize_text_field($post_data['publish-status']),
+            'post_status' => $status,
             'meta_input' => array(
                 '_product_id' => absint($post_data['product-id']),
                 '_review_rating' => intval($post_data['review-rating']),

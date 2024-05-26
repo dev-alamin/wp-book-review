@@ -236,7 +236,7 @@ $campaign_posts = new WP_Query( [
                                     echo '<a class="me-2" href="' . esc_url( '/publish' ) . '"><span class="badge text-bg-info">Publish</span></a>';
                                 }
                                 echo '<a class="me-2" href="' . esc_url('/submit-review?reviewid=' . get_the_ID()) . '"><span class="badge text-bg-primary">Edit</span></a>';
-                                echo '<a id="wbrDeleteRequestReview" data-id="' . esc_attr( $post_id ) . '" href="#"><span class="badge text-bg-danger">Delete</span></a>';
+                                echo '<a href="#" class="wbrDeleteRequestReview" data-id="' . esc_attr( $post_id ) . '"><span class="badge text-bg-danger">Delete</span></a>';
                                 echo '</td>';
                                 echo '</tr>';
                             }

@@ -1097,19 +1097,20 @@ height: initial;
     font-size: 20px;
     /* text-align: center; */
 }
-
+.wbr-archive-page-leaderboard .single-leaderboard ul li{
+    transition: .3s;
+}
 .wbr-archive-page-leaderboard .single-leaderboard ul li a {
     border-bottom: 1px solid #ddd;
     display: block;
     padding-bottom: 15px;
-    transition: .3s;
 }
 
 .wbr-archive-page-leaderboard .single-leaderboard ul li:last-child a {
     border-bottom: none;
 }
 
-.wbr-archive-page-leaderboard .single-leaderboard ul li a:hover {
+.wbr-archive-page-leaderboard .single-leaderboard ul li:hover {
     margin-left: 10px;
 }
 
@@ -1403,6 +1404,7 @@ body.author .author-info {
 .wbr-leaderboard-page-cls .single-leaderboard ul li{
     display: flex;
     align-items: center;
+    gap: 10px;
     background-color: #D4C8EE;
     border-radius: 3px;
     padding:10px 5px;
@@ -1421,12 +1423,15 @@ body.author .author-info {
     font-size: 18px;
     padding-bottom: 0px;
 }
-.wbr-leaderboard-page-cls .single-leaderboard ul li a img{
+.wbr-leaderboard-page-cls .single-leaderboard ul li a:first-child{
     width: 40px;
+}
+.wbr-leaderboard-page-cls .single-leaderboard ul li a:first-child img{
     border-radius: 50%;
+   
 }
 .wbr-leaderboard-page-cls .single-leaderboard ul li a img{
-    margin-right: 20px;
+   width: 100%;
 }
 .wbr-archive-page-leaderboard .single-leaderboard{
     background-color: #E6E9FA;
@@ -2250,4 +2255,16 @@ body.author .author-info {
   }
   .book-review-info a:hover{
     color: #fff;
+  }
+
+  .winner-review-books .leaderboard-list li a{
+    width: 100% !important;
+  }
+  .winner-review-books .leaderboard-list li a .thumbnail-title-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .winner-review-books .leaderboard-list li a .thumbnail-title-wrapper img{
+    width: 40px;
   }

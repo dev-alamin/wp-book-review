@@ -25,7 +25,7 @@ $campaign_query = new WP_Query(array(
 ));
 
 if ($campaign_query->have_posts()) { ?>
-        <div class="campaign-wrapper">
+        <div class="book-review-campaign-wrapper">
         <?php 
             while ($campaign_query->have_posts()) {
                 $campaign_query->the_post(); ?>
@@ -38,7 +38,7 @@ if ($campaign_query->have_posts()) { ?>
                                 </svg>
                             </div>
                             <div class="card-body">
-                                <?php the_title('<h2 class="blog-title">', '</h2>' ); ?>
+                                <h2 class="blog-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
                                 <p class="blog-description"><?php echo wp_trim_words( wp_kses_post( get_the_content(get_the_ID() ) ), 15, '' );?></p>
                             </div>
                         </div>
@@ -65,87 +65,87 @@ if ($campaign_query->have_posts()) { ?>
 wp_reset_postdata();
 ?>
 
-    <div class="bk-o-campaign">
-        <div class="bk-oc-heading">
+    <div class="book-review-open-campaign">
+        <div class="book-review-heading">
             <h5>Recent Winners</h5>
         </div>
     </div>
-        <div class="bk-recent-posts">
-            <div class="bk-recent-post">
-                <div class="bk-thumbnail-img">
-                    <a href="#"><img src="<?php echo  $post_thumbnail; ?>" alt=""></a>
-                </div>
-                <div class="bk-user-avatar">
-                    <a href="#">
-                        <svg width="30px" height="17px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
-                            <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
-                        </svg>
-                        <img class="author-img" src="<?php echo  $post_thumbnail; ?>" alt="">
-                    </a>
-                </div>
-                <div class="bk-recent-info">
-                    <a href="#">Admin</a>
-                    <h3><a href="#">this is a title</a></h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
-                </div>
+    <div class="book-review-posts">
+        <div class="book-review-post">
+            <div class="bk-thumbnail-img">
+                <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
             </div>
-            <div class="bk-recent-post">
-                <div class="bk-thumbnail-img">
-                    <a href="#"><img src="<?php echo  $post_thumbnail; ?>" alt=""></a>
-                </div>
-                <div class="bk-user-avatar">
-                    <a href="#">
-                        <svg width="30px" height="17px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
-                            <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
-                        </svg>
-                        <img class="author-img" src="<?php echo  $post_thumbnail; ?>" alt="">
-                    </a>
-                </div>
-                <div class="bk-recent-info">
-                    <a href="#">Admin</a>
-                    <h3><a href="#">this is a title</a></h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
-                </div>
+            <div class="book-review-avatar">
+                <a href="#">
+                    <svg width="30px" height="17px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
+                        <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
+                    </svg>
+                    <img class="author-img" src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt="">
+                </a>
             </div>
-            <div class="bk-recent-post">
-                <div class="bk-thumbnail-img">
-                    <a href="#"><img src="<?php echo  $post_thumbnail; ?>" alt=""></a>
-                </div>
-                <div class="bk-user-avatar">
-                    <a href="#">
-                        <svg width="30px" height="17px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
-                            <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
-                        </svg>
-                        <img class="author-img" src="<?php echo  $post_thumbnail; ?>" alt="">
-                    </a>
-                </div>
-                <div class="bk-recent-info">
-                    <a href="#">Admin</a>
-                    <h3><a href="#">this is a title</a></h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
-                </div>
-            </div>
-            <div class="bk-recent-post">
-                <div class="bk-thumbnail-img">
-                    <a href="#"><img src="<?php echo  $post_thumbnail; ?>" alt=""></a>
-                </div>
-                <div class="bk-user-avatar">
-                    <a href="#">
-                        <svg width="30px" height="17px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
-                            <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
-                        </svg>
-                        <img class="author-img" src="<?php echo  $post_thumbnail; ?>" alt="">
-                    </a>
-                </div>
-                <div class="bk-recent-info">
-                    <a href="#">Admin</a>
-                    <h3><a href="#">this is a title</a></h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
-                </div>
+            <div class="book-review-info">
+                <a href="#">Admin</a>
+                <h3><a href="#">this is a title</a></h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
             </div>
         </div>
+        <div class="book-review-post">
+            <div class="bk-thumbnail-img">
+                <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
+            </div>
+            <div class="book-review-avatar">
+                <a href="#">
+                    <svg width="30px" height="17px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
+                        <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
+                    </svg>
+                    <img class="author-img" src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt="">
+                </a>
+            </div>
+            <div class="book-review-info">
+                <a href="#">Admin</a>
+                <h3><a href="#">this is a title</a></h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
+            </div>
+        </div>
+        <div class="book-review-post">
+            <div class="bk-thumbnail-img">
+                <a href="#"><img src="" alt=""></a>
+            </div>
+            <div class="book-review-avatar">
+                <a href="#">
+                    <svg width="30px" height="17px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
+                        <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
+                    </svg>
+                    <img class="author-img" src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt="">
+                </a>
+            </div>
+            <div class="book-review-info">
+                <a href="#">Admin</a>
+                <h3><a href="#">this is a title</a></h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
+            </div>
+        </div>
+        <div class="book-review-post">
+            <div class="bk-thumbnail-img">
+                <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
+            </div>
+            <div class="book-review-avatar">
+                <a href="#">
+                    <svg width="30px" height="17px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
+                        <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
+                    </svg>
+                    <img class="author-img" src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt="">
+                </a>
+            </div>
+            <div class="book-review-info">
+                <a href="#">Admin</a>
+                <h3><a href="#">this is a title</a></h3>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
+            </div>
+        </div>
+    </div>
 <?php get_footer();

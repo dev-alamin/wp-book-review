@@ -1793,7 +1793,7 @@ body.author .author-info {
 .bk-o-items .bk-o-item .item-body p{
     color: #fff;
 }
-.bk-recent-posts{
+.book-review-posts{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1803,20 +1803,21 @@ body.author .author-info {
     flex-wrap: wrap;
     padding: 0px 0px 40px;
 }
-.bk-recent-post{
+.book-review-post{
     width: 23%;
     border-radius: 10px;
 }
-.bk-recent-posts .bk-thumbnail-img a {
+.book-review-posts .bk-thumbnail-img a {
     display: block;
+    height: 100%;
 }
-.bk-recent-posts .bk-thumbnail-img a img{
+.book-review-posts .bk-thumbnail-img a img{
     border-radius: 10px 10px 0 0;
     width: 100%;
-    max-height: 300px;
     object-fit: cover;
+    height: 100%;
 }
-.bk-recent-posts .bk-user-avatar a img{
+.book-review-posts .book-review-avatar a img{
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -1824,30 +1825,30 @@ body.author .author-info {
     margin-bottom: 10px;
     border: 2px solid #fff;
 }
-.bk-recent-post{
+.book-review-post{
     background-color: #222222;
     color: #fff;
 }
-.bk-recent-posts .bk-user-avatar{
+.book-review-posts .book-review-avatar{
     position: relative;
 }
-.bk-recent-posts .bk-user-avatar a svg{
+.book-review-posts .book-review-avatar a svg{
     position: absolute;
     top: -26px;
     left: 50%;
 }
-.bk-recent-info a{
+.book-review-info a{
     color: #fff;
     text-transform: capitalize;
 }
 
-.bk-recent-info h3 a{
+.book-review-info h3 a{
     font-size: 20px;
     color: #fff;
     text-transform: capitalize;
 }
 
-.bk-o-campaign h5{
+.book-review-open-campaign h5{
     font-size: 26px;
     line-height: 40px;
     color: #222;
@@ -1855,7 +1856,7 @@ body.author .author-info {
     text-transform: capitalize;
 }
 
-.bk-o-campaign p{
+.book-review-open-campaign p{
     font-size: 17px;
     line-height: 30px;
     color: #999;
@@ -1882,20 +1883,21 @@ body.author .author-info {
 
 
 
-.campaign-wrapper {
+.book-review-campaign-wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 0px 5px;
   }
   
-  .campaign-wrapper .card {
+  .book-review-campaign-wrapper .card {
     overflow: hidden;
     box-shadow: 0px 2px 20px #d7dfe2;
     background: white;
     border-radius: 8px;
     position: relative;
     width: 390px;
+    min-height: 360px;
     margin: 0 0px 32px;
     transition: 250ms all ease-in-out;
     cursor: pointer;
@@ -1903,13 +1905,13 @@ body.author .author-info {
 
 
   
-  .campaign-wrapper .banner-img {
+  .book-review-campaign-wrapper .banner-img {
     position: absolute;
     object-fit: cover;
     height: 224px;
     width: 100%;
   }
-  .campaign-wrapper .card-banner{
+  .book-review-campaign-wrapper .card-banner{
     position: relative;
     background-position: center center;
     background-size: cover;
@@ -1918,14 +1920,14 @@ body.author .author-info {
     display: flex;
     flex-direction: column;
   }
-  .campaign-wrapper .card-banner::before{
+  .book-review-campaign-wrapper .card-banner::before{
     content: "";
     width: 100%;
     height: 100%;
     background-color: hsla(0, 0%, 20%, 0.13);
     display: block;
   }
-  .campaign-wrapper .card-banner .category-tag {
+  .book-review-campaign-wrapper .card-banner .category-tag {
     font-size: 12.8;
     font-weight: bold;
     color: white;
@@ -1942,24 +1944,24 @@ body.author .author-info {
   }
 
   
-  .campaign-wrapper .card-body {
+  .book-review-campaign-wrapper .card-body {
     margin: 128px 0px 0px 0px;
   }
   
-  .campaign-wrapper .blog-hashtag {
+  .book-review-campaign-wrapper .blog-hashtag {
     font-size: 14px;
     font-weight: 500;
     color: #4d97b2;
   }
   
-  .campaign-wrapper .blog-title {
+  .book-review-campaign-wrapper .blog-title {
     font-size: 34px;
     font-weight: 600;
     color: #fff;
     text-transform: capitalize;
   }
   
-  .campaign-wrapper .blog-description {
+  .book-review-campaign-wrapper .blog-description {
     font-size: 17px;
     color: #fff;
   }
@@ -1990,19 +1992,20 @@ body.author .author-info {
     font-size: 14px;
   }
 
-  .campaign-wrapper .item-price {
+  .book-review-campaign-wrapper .item-price {
     padding: 10px 20px;
     background-color: #222;
+    height: 100%;
   }
 
-  .campaign-wrapper  .item-price .price svg, .campaign-wrapper .item-price .price-time svg{
+  .book-review-campaign-wrapper  .item-price .price svg, .book-review-campaign-wrapper .item-price .price-time svg{
     margin-right: 10px;
   }
-  .campaign-wrapper .item-price .price-time, .campaign-wrapper .item-price .price {
+  .book-review-campaign-wrapper .item-price .price-time, .book-review-campaign-wrapper .item-price .price {
     color: #fff;
   }
 
-    .bk-recent-posts{
+    .book-review-posts{
         padding: 0px 10px;
     }
 
@@ -2025,22 +2028,14 @@ body.author .author-info {
     .blog-title {
         font-size: 28px;
     }
-    .bk-recent-posts{
+    .book-review-posts{
         gap: 15px;
     }
-    .bk-recent-post{
+    .book-review-post{
         width: 31%;
     }
-    .campaign-wrapper .card {
-        overflow: hidden;
-        box-shadow: 0px 2px 20px #d7dfe2;
-        background: white;
-        border-radius: 8px;
-        position: relative;
+    .book-review-campaign-wrapper .card {
         width: 330px;
-        margin: 0 0px 32px;
-        transition: 250ms all ease-in-out;
-        cursor: pointer;
     }
   }
 
@@ -2053,22 +2048,17 @@ body.author .author-info {
         margin: 0px;
         margin-bottom: 16px;
     }
-    .bk-recent-posts{
+    .book-review-posts{
         gap: 10px;
     }
-    .bk-recent-post{
+    .book-review-post{
         width: 48%;
     }
-    .campaign-wrapper .card {
-        overflow: hidden;
-        box-shadow: 0px 2px 20px #d7dfe2;
-        background: white;
-        border-radius: 8px;
-        position: relative;
+    .book-review-campaign-wrapper .card {
         width: 375px;
-        margin: 0 0px 32px;
-        transition: 250ms all ease-in-out;
-        cursor: pointer;
+    }
+    .book-review-campaign-wrapper .blog-title {
+        font-size: 32px;
     }
   }
 
@@ -2080,13 +2070,13 @@ body.author .author-info {
     .card{
         width: 100%;
     }
-    .bk-recent-post{
+    .book-review-post{
         width: 100%;
     }
-    .bk-recent-info h3{
+    .book-review-info h3{
         margin: 0px;
     }
-    .bk-recent-info p{
+    .book-review-info p{
         width: 90%;
         margin: 0px auto 20px;
     }
@@ -2096,8 +2086,11 @@ body.author .author-info {
     .last-submission-wrap .post-image a img{
         width: 100%;
     }
-    .campaign-wrapper .card{
+    .book-review-campaign-wrapper .card{
         width: 100%;
+    }
+    .book-review-campaign-wrapper .blog-title {
+        font-size: 30px;
     }
   }
 
@@ -2105,6 +2098,9 @@ body.author .author-info {
     .bk-campaign-heading .heading h2{
         font-size: 28px;
         line-height: 40px;
+    }
+    .book-review-campaign-wrapper .blog-title {
+        font-size: 28px;
     }
   }
 
@@ -2170,11 +2166,18 @@ body.author .author-info {
   .last-submission-container{
     padding: 0px 0 40px;
   }
+  .last-submission-wrap .post-image{
+    min-height: 184px;
+}
+  .last-submission-wrap .post-image a{
+    display: block;
+  }
   .last-submission-wrap .post-image a img{
     border-radius: 10px;
     position: relative;
     opacity: .8;
     transition: .3s;
+    width: 100%;
   }
   .last-submission-wrap .post-image a img:hover{
     opacity: 1;
@@ -2185,6 +2188,16 @@ body.author .author-info {
     font-size: 21px;
   }
 
+  @media screen and (max-width: 1024px) {
+    .last-submission-wrap .post-image{
+        min-height: 323px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .last-submission-wrap .post-image{
+        min-height: 240px;
+    }
+  }
   @media screen and (max-width: 375px) {
    .last-submission-container .last-submission-wrap .post-image a{
         display: block;
@@ -2196,7 +2209,7 @@ body.author .author-info {
     margin-top: 10px;
    }
 
-.campaign-wrapper .card-banner::before {
+.book-review-campaign-wrapper .card-banner::before {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -2206,7 +2219,7 @@ body.author .author-info {
     background-color: #00000090;
     transition:  background-color .2s ease-out 100ms;
   }
-.campaign-wrapper .card-banner:hover::before {
+.book-review-campaign-wrapper .card-banner:hover::before {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -2217,18 +2230,24 @@ body.author .author-info {
     background-color: #9f9f9f9e;
   }
 
-  .campaign-wrapper .card-body{
+  .book-review-campaign-wrapper .card-body{
     z-index: 999;
   }
-
-  .bk-recent-posts .bk-recent-post .bk-thumbnail-img a img{
+  .book-review-posts .book-review-post .bk-thumbnail-img{
+    height: 170px;
+  }
+  .book-review-posts .book-review-post .bk-thumbnail-img a img{
     opacity: .8;
     transition: .3s;
   }
-  .bk-recent-posts .bk-recent-post:hover .bk-thumbnail-img a img{
+  .book-review-posts .book-review-post:hover .bk-thumbnail-img a img{
     opacity: 1;
   }
 
-  .bk-recent-posts .bk-recent-post:hover .bk-recent-info h3 a{
+  .book-review-posts .book-review-post:hover .book-review-info h3 a{
     text-decoration: underline;
+    color: #fff;
+  }
+  .book-review-info a:hover{
+    color: #fff;
   }

@@ -66,7 +66,7 @@ get_header(); ?>
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                 </div>
                 <div class="post-info">
-                    <h2>this is a title</h2>
+                    <h2><a href="#">this is a title</a></h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam iste fugit quasi alias, incidunt minus. Soluta quae architecto voluptas eveniet.</p>
                 </div>
                 <div class="author">
@@ -74,7 +74,7 @@ get_header(); ?>
                         <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                     </div>
                     <div class="author-info">
-                        <h4>Jhon Dho</h4>
+                       <h4><a href="#">Jhon Dho</a></h4>
                         <p>about 3 hours ago in Wander</p>
                     </div>
                 </div>
@@ -86,7 +86,7 @@ get_header(); ?>
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                 </div>
                 <div class="post-info">
-                    <h2>this is a title</h2>
+                    <h2><a href="#">this is a title</a></h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam iste fugit quasi alias, incidunt minus. Soluta quae architecto voluptas eveniet.</p>
                 </div>
                 <div class="author">
@@ -94,7 +94,7 @@ get_header(); ?>
                         <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                     </div>
                     <div class="author-info">
-                        <h4>Jhon Dho</h4>
+                        <h4><a href="#">Jhon Dho</a></h4>
                         <p>about 3 hours ago in Wander</p>
                     </div>
                 </div>
@@ -106,7 +106,7 @@ get_header(); ?>
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                 </div>
                 <div class="post-info">
-                    <h2>this is a title</h2>
+                    <h2><a href="#">this is a title</a></h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam iste fugit quasi alias, incidunt minus. Soluta quae architecto voluptas eveniet.</p>
                 </div>
                 <div class="author">
@@ -114,7 +114,7 @@ get_header(); ?>
                         <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                     </div>
                     <div class="author-info">
-                        <h4>Jhon Dho</h4>
+                       <h4><a href="#">Jhon Dho</a></h4>
                         <p>about 3 hours ago in Wander</p>
                     </div>
                 </div>
@@ -126,7 +126,7 @@ get_header(); ?>
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                 </div>
                 <div class="post-info">
-                    <h2>this is a title</h2>
+                    <h2><a href="#">this is a title</a></h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam iste fugit quasi alias, incidunt minus. Soluta quae architecto voluptas eveniet.</p>
                 </div>
                 <div class="author">
@@ -134,7 +134,7 @@ get_header(); ?>
                         <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                     </div>
                     <div class="author-info">
-                        <h4>Jhon Dho</h4>
+                       <h4><a href="#">Jhon Dho</a></h4>
                         <p>about 3 hours ago in Wander</p>
                     </div>
                 </div>
@@ -146,7 +146,7 @@ get_header(); ?>
                     <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                 </div>
                 <div class="post-info">
-                    <h2>this is a title</h2>
+                    <h2><a href="#">this is a title</a></h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam iste fugit quasi alias, incidunt minus. Soluta quae architecto voluptas eveniet.</p>
                 </div>
                 <div class="author">
@@ -154,7 +154,7 @@ get_header(); ?>
                         <a href="#"><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg" alt=""></a>
                     </div>
                     <div class="author-info">
-                        <h4>Jhon Dho</h4>
+                       <h4><a href="#">Jhon Dho</a></h4>
                         <p>about 3 hours ago in Wander</p>
                     </div>
                 </div>
@@ -168,7 +168,7 @@ get_header(); ?>
         <p>Challenges you can enter now for a chance to win.</p>
     </div>
 </div>
-<div class="campaign-wrapper campaign-single-bg">
+<div class="book-review-campaign-wrapper campaign-single-bg">
         <div class="card">
             <div class="card-banner" style="background-image: url(https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nfz3z2osldbm8ymanmoq.jpg);">
                 <div class="category-tag">
@@ -178,7 +178,7 @@ get_header(); ?>
                     </svg>
                 </div>
                 <div class="card-body">
-                    <h2 class="blog-title">What is the most popular burger?</h2>
+                    <h2 class="blog-title"><a href="#">What is the most popular burger?</a></h2>
                     <p class="blog-description">Mediation has transformed my life. These are the best practices to get into the habit</p>
                 </div>
             </div>
@@ -198,7 +198,7 @@ get_header(); ?>
                     </svg>
                 </div>
                 <div class="card-body">
-                    <h2 class="blog-title">What is the most popular burger?</h2>
+                    <h2 class="blog-title"><a href="#">What is the most popular burger?</a></h2>
                     <p class="blog-description">Mediation has transformed my life. These are the best practices to get into the habit</p>
                 </div>
             </div>
@@ -218,7 +218,7 @@ get_header(); ?>
                     </svg>
                 </div>
                 <div class="card-body">
-                    <h2 class="blog-title">What is the most popular burger?</h2>
+                    <h2 class="blog-title"><a href="#">What is the most popular burger?</a></h2>
                     <p class="blog-description">Mediation has transformed my life. These are the best practices to get into the habit</p>
                 </div>
             </div>
@@ -238,7 +238,7 @@ get_header(); ?>
                     </svg>
                 </div>
                 <div class="card-body">
-                    <h2 class="blog-title">What is the most popular burger?</h2>
+                    <h2 class="blog-title"><a href="#">What is the most popular burger?</a></h2>
                     <p class="blog-description">Mediation has transformed my life. These are the best practices to get into the habit</p>
                 </div>
             </div>
@@ -258,7 +258,7 @@ get_header(); ?>
                     </svg>
                 </div>
                 <div class="card-body">
-                    <h2 class="blog-title">What is the most popular burger?</h2>
+                    <h2 class="blog-title"><a href="#">What is the most popular burger?</a></h2>
                     <p class="blog-description">Mediation has transformed my life. These are the best practices to get into the habit</p>
                 </div>
             </div>
@@ -278,7 +278,7 @@ get_header(); ?>
                     </svg>
                 </div>
                 <div class="card-body">
-                    <h2 class="blog-title">What is the most popular burger?</h2>
+                    <h2 class="blog-title"><a href="#">What is the most popular burger?</a></h2>
                     <p class="blog-description">Mediation has transformed my life. These are the best practices to get into the habit</p>
                 </div>
             </div>

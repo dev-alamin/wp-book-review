@@ -119,15 +119,12 @@ $campaign_posts = new WP_Query( [
     'posts_per_page' => -1,
     'author' => $author_id,
     'meta_query' => [
-            [
-                'key'     => '__review_winner_option',
-                'value'   => wbr_campaign_positions(),
-                'compare' => 'IN',
-            ]
-        ],
-    'meta_key' => '__review_winner_option',
-    'order'    => 'ASC',
-    'orderby' => 'meta_value_num',
+        [
+            'key'     => '__review_winner_option',
+            'value'   => wbr_campaign_positions(),
+            'compare' => 'IN',
+        ]
+    ]
 ] );
 ?>
 <div id="primary" class="content-area">
@@ -164,7 +161,7 @@ $campaign_posts = new WP_Query( [
                                 
                                     echo '<div class="review-post">';
                                     echo '<div class="campaign-details">';
-                                    echo '<div class="campaign-title"><i class="fa-solid fa-trophy"></i> ' . esc_html( wbr_number_to_word( $winner_position ) ) . ' <a href="' . get_the_permalink($campaign_id) . '">' . esc_html($campaign_title) . '</a></div>';
+                                    echo '<div class="campaign-title"><i class="fa-solid fa-trophy"></i> ' . esc_html( ucwords( $winner_position ) ) . ' <a href="' . get_the_permalink($campaign_id) . '">' . esc_html($campaign_title) . '</a></div>';
                                     echo '<div class="review-title"><i class="fa-solid fa-pen"></i> <a href="' . get_permalink(get_the_ID()) . '">' . esc_html($review_title) . '</a></div>';
                                     echo '</div>';
                                     echo '</div>';

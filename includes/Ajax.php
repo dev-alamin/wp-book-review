@@ -354,10 +354,10 @@ class Ajax {
                 wp_send_json_error( 'Failed to save user agreement consent.' );
             }
         }
-
+    
         wp_die();
     }
-
+    
     public function load_author_reviews() {
         $author_id      = isset($_POST['author_id']) ? intval($_POST['author_id']) : 0;
         $paged          = isset($_POST['page']) ? intval($_POST['page']) : 1;
@@ -368,6 +368,9 @@ class Ajax {
             'author'         => $author_id,
             'posts_per_page' => $posts_per_page,
             'paged'          => $paged,
+            'post_status'    => ['publish', 'pending', 'draft', 'trash', 'private' ],
+            'orderby'        => 'date',
+            'order'          => 'DESC',
         );
     
         $author_review_posts = new \WP_Query($author_review_posts_args);
@@ -381,13 +384,19 @@ class Ajax {
                 $post_date      = get_the_date();
                 $review_book    = get_post_meta(get_the_ID(), '_product_id', true);
                 $review_book_id = $review_book ? $review_book : '0';
+                $post_statuses = wbr_get_post_status_badge_class( $post_id );
     
                 echo '<tr>';
                 echo '<td>' . esc_html($serial++) . '</td>';
                 echo '<td>' . esc_html(wp_trim_words($post_title, 8, '')) . '</td>';
                 echo '<td><img width="100px" src="' . get_the_post_thumbnail_url(get_the_ID(), 'medium') . '"></td>';
-                echo '<td><a href="' . get_the_permalink($review_book_id) . '">' . esc_html(get_the_title($review_book_id)) . '</a></td>';
+                echo '<td>';
+                if( $review_book_id && $review_book_id != 0 ) {
+                    echo '<a href="' . get_the_permalink($review_book_id) . '">' . esc_html(get_the_title($review_book_id)) . '</a>';
+                }
+                echo '</td>';
                 echo '<td>' . esc_html($post_date) . '</td>';
+                echo '<td><span class="badge '. esc_attr( $post_statuses ) . '">' . esc_html( ucwords( get_post_status( $post_id ) ) ) . '</span></td>';
                 echo '<td>';
                 echo '<a href="' . esc_url('/submit-review?reviewid=' . get_the_ID()) . '">Edit</a> | ';
                 echo '<a href="' . esc_url(get_delete_post_link($post_id)) . '" onclick="return confirm(\'Are you sure to delete?\');">Delete</a>';

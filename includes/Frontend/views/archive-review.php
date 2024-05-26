@@ -212,7 +212,30 @@ setInterval(function() {
                 <div class="col-lg-6">
                     <div class="winner-review single-leaderboard">
                         <h4 class="leaderboard-subtitle">Great reviews</h4>
-                        <?php echo wbr_get_most_commented_posts(); ?>
+                        <?php $most_liked_reviews = wbr_get_most_commented_posts( 'review' ); ?>
+
+                        <ul class="leaderboard-list">
+                        <?php foreach ($most_liked_reviews as $result): 
+                            $product = get_post_meta( $result->ID, '_product_id', true );
+                            ?>
+                            <li>
+                                <?php if (has_post_thumbnail($result->ID)): ?>
+                                    <a href="<?php echo esc_url(get_permalink($result->ID)); ?>">
+                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url($result->ID, 'thumbnail')); ?>" alt="<?php echo esc_attr($result->post_title); ?>">
+                                    </a>
+                                <?php endif; ?>
+                    
+                                <a href="<?php echo esc_url(get_permalink($result->ID)); ?>">
+                                    <?php echo esc_html(wp_trim_words($result->post_title, 7)); ?>
+                                </a>
+                                <?php if( $product ): ?>
+                                <a href="<?php echo esc_url( get_permalink( $product ) ); ?>">
+                                    <?php echo esc_html( get_the_title( $product ) ); ?>
+                                </a>
+                                <?php endif; ?>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -222,37 +245,41 @@ setInterval(function() {
                         if ( $results ) {
                             echo '<h4 class="leaderboard-subtitle">Great reviewed books</h4>';
                             echo '<ul class="leaderboard-list">';
-                            foreach ( $results as $result ) {
+                                foreach ($results as $result):
                                 $review_id = $result->id;
-                                $product_id = get_post_meta( $review_id, '_product_id', true );
-                                $product_thumbnail = get_the_post_thumbnail_url( $product_id, 'thumbnail' );
-                                $term_link = get_the_permalink( $product_id );
-
-                                $term = get_term( $result->term_id, 'review_book' );
-                                if ( $term && ! is_wp_error( $term ) ) {
-                                    echo '<li>';
-                                    echo '<a href="' . esc_url( $term_link ) . '">';
-                                    echo '<div class="thumbnail-title-wrapper">';
-                                    if( $product_thumbnail ) {
-                                        echo '<img src="'. $product_thumbnail . '" alt="' . get_the_title( $product_id ) . '" >';
-                                    }
-                                    echo esc_html( wp_trim_words( $result->name, 7 ) ) . ' <span class="review-count">('. $result->review_count  . ')</span></div>';
-                                    echo '<span class="book-authors">';
-                                    $authors = wp_get_post_terms( $product_id, 'authors' );
-                                    if ( $authors && ! is_wp_error( $authors ) ) {
-                                        $author_names = array();
-                                        foreach ( $authors as $index => $author ) {
-                                            $author_names[] = $author->name;
-                                        }
-                                        echo implode( ', ', $author_names );
-                                    }
-                                    echo '</span>';
-                                    echo '</a>';
-                                    echo '</li>';
-                                } else {
-                                    echo '<li>' . $result->name . ' | Reviews: ' . $result->review_count . ' | Error: Empty Term</li>';
-                                }
-                            }
+                                $product_id = get_post_meta($review_id, '_product_id', true);
+                                $product_thumbnail = get_the_post_thumbnail_url($product_id, 'thumbnail');
+                                $term_link = get_the_permalink($product_id);
+                            
+                                $term = get_term($result->term_id, 'review_book');
+                                ?>
+                                <?php if ($term && !is_wp_error($term)): ?>
+                                    <li>
+                                        <a href="<?php echo esc_url($term_link); ?>">
+                                            <div class="thumbnail-title-wrapper">
+                                                <?php if ($product_thumbnail): ?>
+                                                    <img src="<?php echo esc_url($product_thumbnail); ?>" alt="<?php echo esc_attr(get_the_title($product_id)); ?>">
+                                                <?php endif; ?>
+                                                <?php echo esc_html(wp_trim_words($result->name, 7)); ?> 
+                                                <span class="review-count">(<?php echo esc_html($result->review_count); ?>)</span>
+                                            </div>
+                                            <span class="book-authors">
+                                                <?php
+                                                $authors = wp_get_post_terms($product_id, 'authors');
+                                                if ($authors && !is_wp_error($authors)) {
+                                                    $author_names = array_map(function($author) {
+                                                        return $author->name;
+                                                    }, $authors);
+                                                    echo esc_html(implode(', ', $author_names));
+                                                }
+                                                ?>
+                                            </span>
+                                        </a>
+                                    </li>
+                                <?php else: ?>
+                                    <li><?php echo esc_html($result->name); ?> | Reviews: <?php echo esc_html($result->review_count); ?> | Error: Empty Term</li>
+                                <?php endif; ?>
+                            <?php endforeach; 
                             echo '</ul>';
                         } else {
                             echo 'No reviews found.';

@@ -2006,6 +2006,18 @@ body.author .author-info {
         padding: 0px 10px;
     }
 
+    .last-submission-wrap{
+        background: #fff;
+        border-radius: 10px;
+    }
+
+    .last-submission-wrap .post-info{
+        padding: 10px 10px 0px;
+    }
+    .last-submission-wrap .author{
+        padding: 0px 10px 10px;
+    }
+
   @media screen and (max-width: 1024px) {
     .card{
         width: 300px;

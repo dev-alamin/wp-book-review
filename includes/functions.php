@@ -73,7 +73,6 @@ function wbr_get_comment_author_name( $comment ) {
         $comment_author_data->last_name;
     }
 
-
     if( ! empty( $first_name ) || ! empty( $last_name ) ) {
         $author_name = $first_name . ' ' . $last_name;
     }else{
@@ -83,7 +82,6 @@ function wbr_get_comment_author_name( $comment ) {
     $author_url  = get_author_posts_url($comment->user_id);
 
    return ($author_url ? '<a href="' . $author_url . '">' . esc_html($author_name) . '</a>' : esc_html($author_name));
-
 }
 
 /**

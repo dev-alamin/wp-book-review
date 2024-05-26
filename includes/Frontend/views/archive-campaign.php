@@ -72,7 +72,7 @@ wp_reset_postdata();
     </div>
     <div class="book-review-posts">
         <div class="book-review-post">
-            <div class="bk-thumbnail-img">
+            <div class="book-review-thumbnail-img">
                 <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
             </div>
             <div class="book-review-avatar">
@@ -91,7 +91,7 @@ wp_reset_postdata();
             </div>
         </div>
         <div class="book-review-post">
-            <div class="bk-thumbnail-img">
+            <div class="book-review-thumbnail-img">
                 <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
             </div>
             <div class="book-review-avatar">
@@ -110,7 +110,7 @@ wp_reset_postdata();
             </div>
         </div>
         <div class="book-review-post">
-            <div class="bk-thumbnail-img">
+            <div class="book-review-thumbnail-img">
                 <a href="#"><img src="" alt=""></a>
             </div>
             <div class="book-review-avatar">
@@ -129,7 +129,7 @@ wp_reset_postdata();
             </div>
         </div>
         <div class="book-review-post">
-            <div class="bk-thumbnail-img">
+            <div class="book-review-thumbnail-img">
                 <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
             </div>
             <div class="book-review-avatar">

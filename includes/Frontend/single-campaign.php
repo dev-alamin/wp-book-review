@@ -162,7 +162,7 @@ get_header(); ?>
         </div>
     </div>
 </div>
-<div class="bk-campaign-heading campaign-single">
+<div class="book-review-campaign-heading campaign-single">
     <div class="heading">
         <h3><a href="#">Open challenges</a></h3>
         <p>Challenges you can enter now for a chance to win.</p>

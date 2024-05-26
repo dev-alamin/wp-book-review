@@ -1751,7 +1751,6 @@ body.author .author-info {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-    min-height: 350px;
 }
 
 #reviews-table th,
@@ -1842,14 +1841,14 @@ body.author .author-info {
     padding-bottom: 40px;
     padding-top: 30px;
   }
-.bk-campaign-heading .heading h2{
+.book-review-campaign-heading .heading h2{
     line-height: 34px;
     font-size: 47px;
     color: #000;
     text-transform: capitalize;
 }
 
-.bk-campaign-heading .heading p{
+.book-review-campaign-heading .heading p{
     color: #999;
     font-size: 1.0625rem;
     line-height: 1.625rem;
@@ -1904,11 +1903,11 @@ body.author .author-info {
     width: 23%;
     border-radius: 10px;
 }
-.book-review-posts .bk-thumbnail-img a {
+.book-review-posts .book-review-thumbnail-img a {
     display: block;
     height: 100%;
 }
-.book-review-posts .bk-thumbnail-img a img{
+.book-review-posts .book-review-thumbnail-img a img{
     border-radius: 10px 10px 0 0;
     width: 100%;
     object-fit: cover;
@@ -2137,7 +2136,7 @@ body.author .author-info {
   }
 
   @media screen and (max-width: 768px) {
-    .bk-campaign-heading .heading p{
+    .book-review-campaign-heading .heading p{
         max-width: 100%;
     }
     .card{
@@ -2160,7 +2159,7 @@ body.author .author-info {
   }
 
   @media screen and (max-width: 568px) {
-    .bk-campaign-heading .heading h2{
+    .book-review-campaign-heading .heading h2{
         font-size: 36px;
         line-height: 46px;
     }
@@ -2192,7 +2191,7 @@ body.author .author-info {
   }
 
   @media screen and (max-width: 375px) {
-    .bk-campaign-heading .heading h2{
+    .book-review-campaign-heading .heading h2{
         font-size: 28px;
         line-height: 40px;
     }
@@ -2330,14 +2329,14 @@ body.author .author-info {
   .book-review-campaign-wrapper .card-body{
     z-index: 999;
   }
-  .book-review-posts .book-review-post .bk-thumbnail-img{
+  .book-review-posts .book-review-post .book-review-thumbnail-img{
     height: 170px;
   }
-  .book-review-posts .book-review-post .bk-thumbnail-img a img{
+  .book-review-posts .book-review-post .book-review-thumbnail-img a img{
     opacity: .8;
     transition: .3s;
   }
-  .book-review-posts .book-review-post:hover .bk-thumbnail-img a img{
+  .book-review-posts .book-review-post:hover .book-review-thumbnail-img a img{
     opacity: 1;
   }
 
@@ -2381,6 +2380,9 @@ body.author .author-info {
     align-items: start;
     gap: 40px;
   }
+  .author-profile .author-avatar {
+    width: 50%;
+  }
   .author-profile .author-avatar img{
     border-radius: 50%;
     border: 5px solid #fff;
@@ -2421,4 +2423,73 @@ body.author .author-info {
   .author-profile .author-achievement-price .review-title{
     font-size: 16px;
     color: #fff;
+  }
+
+
+
+
+  @media screen and (max-width: 1024px) {
+    .author-profile .author-avatar {
+        width: 75%;
+    }
+    .author-profile .author-achievement-price .review-post{
+        width: 48%;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .author-profile{
+       flex-direction: column;
+       align-items: center;
+       gap: 0px;
+    }
+    .author-profile .author-avatar .write-review-button{
+        margin-top: 0px;
+        margin-bottom: 10px;
+    }
+    .author-profile .author-avatar {
+        width: 100%;
+        text-align: center;
+    }
+    .author-profile .author-avatar{
+        margin-right: 0px;
+    }
+    .author-profile .author-details .author-name{
+        text-align: center;
+    }
+    .author-profile .author-achivement h2{
+        margin-bottom: 0px;
+        margin-top: 20px;
+    }
+  }
+  @media screen and (max-width: 568px) {
+    .author-profile .author-achievement-price{
+        flex-direction: column;
+        gap: 0px;
+    }
+    .author-profile .author-details .author-bio{
+        text-align: justify;
+    }
+    .author-profile .author-join-review{
+        margin-top: 20px;
+    }
+   
+    .author-profile .author-achievement-price .review-post{
+        width: 100%;
+        margin-bottom: 0px;
+    }
+    .author-profile .author-achievement-price .review-post{
+        padding-left: 0px;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .author-profile .author-join-review{
+        flex-direction: column;
+    }
+  }
+
+
+  .book-review-table{
+    overflow-x: auto;
+    width: 100%;
   }

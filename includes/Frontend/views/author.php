@@ -56,13 +56,14 @@ $campaign_posts = new WP_Query( [
                                 <h2><?php echo esc_html( ucwords( $author_name . "'s" ) ); ?> Achivement</h2>
                                 <div class="author-achievement-price">
                                     <?php 
-                                    $i = 1;
+                           
                                     while ($campaign_posts->have_posts()) {
                                         $campaign_posts->the_post();
+                                        $winner_position = get_post_meta(get_the_ID(), '__review_winner_option', true);
 
-                                        if($i == 1){
+                                        if("first" == $winner_position){
                                             $icon = '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none"><path fill="#D4AF37" fill-rule="evenodd" d="m31.858 4.41.035.01c.91.248 1.689.791 2.259 1.363.567.568 1.106 1.343 1.355 2.247l1.007 3.553.006.022c.195.718.69 1.915 1.032 2.508l.013.024 1.818 3.237.01.019c.444.81.607 1.725.607 2.526 0 .8-.163 1.717-.607 2.526l-.01.019-1.812 3.227c-.364.666-.86 1.875-1.056 2.56l-1.005 3.624-.001.006c-.248.907-.788 1.685-1.357 2.255-.567.569-1.341 1.11-2.246 1.36l-3.544 1.01-.023.005c-.715.196-1.908.69-2.5 1.034l-.023.013-3.23 1.822-.02.01c-.808.446-1.725.61-2.526.61-.8 0-1.717-.164-2.526-.61l-.019-.01-3.22-1.816c-.664-.364-1.869-.86-2.552-1.058L8.107 35.5l-.006-.002c-.907-.25-1.684-.791-2.253-1.362-.567-.568-1.106-1.343-1.355-2.247l-1.007-3.553-.006-.022c-.195-.718-.69-1.915-1.032-2.508l-.013-.024-1.818-3.237-.01-.019C.163 21.716 0 20.801 0 20c0-.8.163-1.717.607-2.526l.01-.019 1.812-3.227c.365-.668.862-1.881 1.058-2.566v-.002l1.006-3.549c.25-.904.788-1.679 1.355-2.247.567-.569 1.341-1.11 2.246-1.36l3.544-1.01.023-.006c.715-.195 1.908-.69 2.5-1.033l.023-.013L17.414.62l.02-.01C18.241.164 19.158 0 19.96 0c.8 0 1.717.164 2.526.61l.019.01 3.22 1.816c.657.36 1.845.851 2.532 1.052l3.601.922Zm-4.186 1.222c-.848-.243-2.22-.81-3.028-1.255l-3.23-1.82c-.808-.446-2.1-.446-2.908 0l-3.23 1.82c-.768.446-2.14 1.012-3.03 1.255L8.694 6.644c-.888.243-1.817 1.174-2.06 2.064L5.625 12.27c-.242.85-.807 2.226-1.251 3.035l-1.818 3.238c-.444.81-.444 2.105 0 2.914l1.818 3.238c.444.769 1.009 2.145 1.251 3.035l1.01 3.562c.242.89 1.17 1.821 2.06 2.064l3.634 1.012c.848.243 2.22.81 3.028 1.255l3.23 1.82c.808.446 2.1.446 2.908 0l3.23-1.82c.768-.446 2.14-1.012 3.03-1.255l3.553-1.012c.888-.243 1.817-1.174 2.06-2.064l1.009-3.643c.242-.85.807-2.226 1.252-3.035l1.817-3.238c.444-.81.444-2.105 0-2.914l-1.818-3.238c-.444-.769-1.009-2.145-1.251-3.035l-1.01-3.562c-.242-.89-1.17-1.821-2.06-2.064l-3.634-.93Z" clip-rule="evenodd"/><path fill="#D4AF37" d="M15.547 15.754c.488 0 .962-.041 1.423-.122.46-.082.873-.217 1.239-.407.38-.19.698-.433.955-.731.27-.298.447-.664.528-1.097h1.89v14.222h-2.54V17.582h-3.495v-1.828Z"/></svg>';
-                                        }else if($i == 2){
+                                        }else if("second" == $winner_position){
                                             $icon = '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none"><path fill="#BBB" fill-rule="evenodd" d="M31.858 4.41l.035.01c.91.248 1.689.791 2.259 1.363.567.568 1.106 1.343 1.355 2.247l1.007 3.553.006.022c.195.718.69 1.915 1.032 2.508l.013.024 1.818 3.237.01.019c.444.81.607 1.725.607 2.526 0 .8-.163 1.717-.607 2.526l-.01.019-1.812 3.227c-.364.666-.86 1.875-1.056 2.56l-1.005 3.624-.001.006c-.248.907-.788 1.685-1.357 2.255-.567.569-1.341 1.11-2.246 1.36l-3.544 1.01-.023.005c-.715.196-1.908.69-2.5 1.034l-.023.013-3.23 1.822-.02.01c-.808.446-1.725.61-2.526.61-.8 0-1.717-.164-2.526-.61l-.019-.01-3.22-1.816c-.664-.364-1.869-.86-2.552-1.058L8.107 35.5l-.006-.002c-.907-.25-1.684-.791-2.253-1.362-.567-.568-1.106-1.343-1.355-2.247l-1.007-3.553-.006-.022c-.195-.718-.69-1.915-1.032-2.508l-.013-.024-1.818-3.237-.01-.019C.163 21.716 0 20.801 0 20c0-.8.163-1.717.607-2.526l.01-.019 1.812-3.227c.365-.668.862-1.881 1.058-2.566v-.002l1.006-3.549c.25-.904.788-1.679 1.355-2.247.567-.569 1.341-1.11 2.246-1.36l3.544-1.01.023-.006c.715-.195 1.908-.69 2.5-1.033l.023-.013L17.414.62l.02-.01C18.241.164 19.158 0 19.96 0c.8 0 1.717.164 2.526.61l.019.01 3.22 1.816c.657.36 1.845.851 2.532 1.052l3.601.922zm-4.186 1.222c-.848-.243-2.22-.81-3.028-1.255l-3.23-1.82c-.808-.446-2.1-.446-2.908 0l-3.23 1.82c-.768.446-2.14 1.012-3.03 1.255L8.694 6.644c-.888.243-1.817 1.174-2.06 2.064L5.625 12.27c-.242.85-.807 2.226-1.251 3.035l-1.818 3.238c-.444.81-.444 2.105 0 2.914l1.818 3.238c.444.769 1.009 2.145 1.251 3.035l1.01 3.562c.242.89 1.17 1.821 2.06 2.064l3.634 1.012c.848.243 2.22.81 3.028 1.255l3.23 1.82c.808.446 2.1.446 2.908 0l3.23-1.82c.768-.446 2.14-1.012 3.03-1.255l3.553-1.012c.888-.243 1.817-1.174 2.06-2.064l1.009-3.643c.242-.85.807-2.226 1.252-3.035l1.817-3.238c.444-.81.444-2.105 0-2.914l-1.818-3.238c-.444-.769-1.009-2.145-1.251-3.035l-1.01-3.562c-.242-.89-1.17-1.821-2.06-2.064l-3.634-.93z" clip-rule="evenodd"/><path fill="#BBB" d="M24.632 26.888h-9.711c.013-1.179.298-2.208.853-3.089.555-.88 1.314-1.645 2.275-2.296.461-.338.942-.663 1.443-.975.501-.325.962-.67 1.382-1.036.42-.366.765-.759 1.036-1.178.27-.434.413-.928.427-1.483 0-.258-.034-.529-.102-.813a1.974 1.974 0 00-.345-.813 1.967 1.967 0 00-.732-.63c-.311-.176-.718-.264-1.219-.264-.46 0-.846.095-1.158.285a2.052 2.052 0 00-.732.751 4.001 4.001 0 00-.406 1.118c-.081.433-.128.9-.142 1.402h-2.316c0-.786.101-1.51.304-2.174.217-.678.535-1.26.955-1.748.42-.487.928-.867 1.524-1.137.61-.285 1.314-.427 2.113-.427.867 0 1.592.142 2.174.427.583.284 1.05.643 1.402 1.076.366.434.623.908.772 1.423.15.5.224.982.224 1.442 0 .57-.088 1.084-.264 1.544a5.15 5.15 0 01-.712 1.28c-.297.38-.636.732-1.015 1.057-.38.325-.772.63-1.179.914a31.62 31.62 0 01-1.219.813 20.74 20.74 0 00-1.138.772 6.512 6.512 0 00-.894.813c-.257.27-.433.562-.528.873h6.928v2.073z"/></svg>';
                                         }else{
                                             $icon = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="46" height="46">
@@ -77,15 +78,14 @@ $campaign_posts = new WP_Query( [
                                         // Get campaign title
                                         $campaign_title  = $campaign ? get_the_title($campaign_id) : 'Campaign not found';
                                         $review_title    = get_the_title(get_the_ID());
-                                        $winner_position = get_post_meta(get_the_ID(), '__review_winner_option', true);
+                                       
                                     
                                         echo '<div class="review-post">';
                                         echo '<div class="campaign-details">';
-                                        echo '<div class="campaign-title">'. $icon .' ' . esc_html( ucwords( $winner_position ) ) . ' <a href="' . get_the_permalink($campaign_id) . '">' . esc_html($campaign_title) . '</a></div>';
+                                        echo '<div class="campaign-title">'. $icon .' <a href="' . get_the_permalink($campaign_id) . '">' . esc_html($campaign_title) . '</a></div>';
                                         echo '<div class="review-title"><i class="fa-solid fa-pen"></i> <a href="' . get_permalink(get_the_ID()) . '">' . esc_html($review_title) . '</a></div>';
                                         echo '</div>';
                                         echo '</div>';
-                                        $i++;
                                     }
                                     
                                     wp_reset_postdata();
@@ -121,6 +121,7 @@ $campaign_posts = new WP_Query( [
                             echo '<div class="row">';
                             echo '<div class="col-lg-12">';
                             echo '<h2>Your Post List - You can edit, request for delete. </h2>';
+                            echo '<div class="book-review-table">';
                             echo '<table id="reviews-table">';
                             echo '<tr>';
                             echo '<th>#</th>';
@@ -131,39 +132,40 @@ $campaign_posts = new WP_Query( [
                             echo '<th> Status </th>';
                             echo '<th>Actions</th>';
                             echo '</tr>';
-                        
-                            $serial = 1;
-                            while ( $author_review_posts->have_posts() ) {
-                                $author_review_posts->the_post();
-                                $post_id = get_the_ID();
-                                $post_title = get_the_title();
-                                $post_date = get_the_date();
-                                $review_book = get_post_meta(get_the_ID(), '_product_id', true);
-                                $review_book_id = $review_book ? $review_book : '0';
-                                $post_statuses = wbr_get_post_status_badge_class( $post_id );
-                        
-                                echo '<tr>';
-                                echo '<td>' . esc_html($serial++) . '</td>';
-                                echo '<td><a href="'.get_the_permalink(get_the_ID()).'">' . esc_html(wp_trim_words($post_title, 8, '')) . '</a></td>';
-                                echo '<td><img width="100px" src="' . get_the_post_thumbnail_url(get_the_ID(), 'medium') . '"></td>';
-                                echo '<td>';
-                                if( $review_book_id && $review_book_id != 0 ) {
-                                    echo '<a href="' . get_the_permalink($review_book_id) . '">' . esc_html(get_the_title($review_book_id)) . '</a>';
-                                }
-                                echo '</td>';
-                                echo '<td>' . esc_html($post_date) . '</td>';
-                                echo '<td><span class="badge '. esc_attr( $post_statuses ) . '">' . esc_html( ucwords( str_replace( '_', ' ', get_post_status( $post_id ) ) ) ) . '</span></td>';
-                                echo '<td>';
-                                if( get_post_status( $post_id ) == 'draft' ) {
-                                    echo '<a class="me-2" href="' . esc_url( '/publish' ) . '"><span class="badge text-bg-info">Publish</span></a>';
-                                }
-                                echo '<a class="me-2" href="' . esc_url('/submit-review?reviewid=' . get_the_ID()) . '"><span class="badge text-bg-primary">Edit</span></a>';
-                                echo '<a href="#" class="wbrDeleteRequestReview" data-id="' . esc_attr( $post_id ) . '"><span class="badge text-bg-danger">Delete</span></a>';
-                                echo '</td>';
-                                echo '</tr>';
-                            }
-                        
-                            echo '</table>';
+                       
+                           $serial = 1;
+                           while ( $author_review_posts->have_posts() ) {
+                               $author_review_posts->the_post();
+                               $post_id = get_the_ID();
+                               $post_title = get_the_title();
+                               $post_date = get_the_date();
+                               $review_book = get_post_meta(get_the_ID(), '_product_id', true);
+                               $review_book_id = $review_book ? $review_book : '0';
+                               $post_statuses = wbr_get_post_status_badge_class( $post_id );
+                       
+                               echo '<tr>';
+                               echo '<td>' . esc_html($serial++) . '</td>';
+                               echo '<td><a href="'.get_the_permalink(get_the_ID()).'">' . esc_html(wp_trim_words($post_title, 8, '')) . '</a></td>';
+                               echo '<td><img width="50px" src="' . get_the_post_thumbnail_url(get_the_ID(), 'medium') . '"></td>';
+                               echo '<td>';
+                               if( $review_book_id && $review_book_id != 0 ) {
+                                   echo '<a href="' . get_the_permalink($review_book_id) . '">' . esc_html(get_the_title($review_book_id)) . '</a>';
+                               }
+                               echo '</td>';
+                               echo '<td>' . esc_html($post_date) . '</td>';
+                               echo '<td><span class="badge '. esc_attr( $post_statuses ) . '">' . esc_html( ucwords( str_replace( '_', ' ', get_post_status( $post_id ) ) ) ) . '</span></td>';
+                               echo '<td>';
+                               if( get_post_status( $post_id ) == 'draft' ) {
+                                   echo '<a class="me-2" href="' . esc_url( '/publish' ) . '"><span class="badge text-bg-info">Publish</span></a>';
+                               }
+                               echo '<a class="me-2" href="' . esc_url('/submit-review?reviewid=' . get_the_ID()) . '"><span class="badge text-bg-primary">Edit</span></a>';
+                               echo '<a href="#" class="wbrDeleteRequestReview" data-id="' . esc_attr( $post_id ) . '"><span class="badge text-bg-danger">Delete</span></a>';
+                               echo '</td>';
+                               echo '</tr>';
+                           }
+                       
+                           echo '</table>';
+                           echo '</div>;';
                         
                             $total_pages = $author_review_posts->max_num_pages;
                             if ($total_pages > 1) {

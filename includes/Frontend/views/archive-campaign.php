@@ -1,6 +1,6 @@
 <?php
 get_header(); ?>
-        <div class="bk-campaign-heading">
+        <div class="book-review-campaign-heading">
             <div class="heading">
                 <h2><a href="#">Lorem ipsum dolor sit amet.</a></h2>
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 

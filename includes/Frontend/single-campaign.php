@@ -87,7 +87,7 @@ $query = new WP_Query($args);
 // Check if there are any posts to display
 if ($query->have_posts()) : ?>
 <div class="last-submission-container">
-    <div class="row justify-content-between">
+    <div class="row">
     <?php while ($query->have_posts()) : $query->the_post(); 
     $author_id     = get_the_author_meta('ID');
     $author_name   = get_the_author_meta('display_name');
@@ -95,7 +95,7 @@ if ($query->have_posts()) : ?>
     $post_time     = human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago';
     ?>
 
-        <div class="col-12 col-lg-3 col-md-6 col-sm-6">
+        <div class="col-12 col-lg-3 col-md-4 col-sm-6">
             <div class="last-submission-wrap">
                 <div class="post-image">
                     <a href="<?php the_permalink(); ?>">
@@ -120,9 +120,6 @@ if ($query->have_posts()) : ?>
         <?php endwhile; ?>
        </div>
 </div>
-<<<<<<< HEAD
-<div class="book-review-campaign-heading campaign-single">
-=======
 <?php else :
     echo '<p>No reviews found for this campaign.</p>';
 endif; 
@@ -132,8 +129,7 @@ wp_reset_postdata();
 
 ?>
 
-<div class="bk-campaign-heading campaign-single">
->>>>>>> 609d9b3052b47b75dece7e26e56a7a91c7e2a2af
+<div class="book-review-campaign-heading campaign-single">
     <div class="heading">
         <h3><a href="#">Open challenges</a></h3>
         <p>Challenges you can enter now for a chance to win.</p>

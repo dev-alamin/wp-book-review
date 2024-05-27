@@ -57,7 +57,7 @@ $campaign_posts = new WP_Query( [
                            
                             <div class="author-achivement mt-3">
                                 <h2><?php echo esc_html( ucwords( $author_name . "'s" ) ); ?> Achivement</h2>
-                                <div class="author-achievement-price">
+                                <div class="author-achievement-wrapper">
                                     <?php 
                            
                                     while ($campaign_posts->have_posts()) {

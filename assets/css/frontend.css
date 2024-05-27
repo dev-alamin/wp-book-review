@@ -1322,6 +1322,9 @@ body.author .author-info {
 .join-date, .author-bio, .review-count {
     margin-bottom: 5px;
 }
+.join-date i, .review-count i{
+    color: var(--wd-primary-color);
+}
 
 
 .write-review-button {
@@ -1837,8 +1840,8 @@ body.author .author-info {
     height: 250px !important;
     margin: 30px 0;
   }
-  .bk-campaign-heading{
-    padding-bottom: 40px;
+  .book-review-campaign-heading .heading{
+    padding-bottom: 10px;
     padding-top: 30px;
   }
 .book-review-campaign-heading .heading h2{
@@ -1959,6 +1962,11 @@ body.author .author-info {
     margin: 0px;
 }
 
+@media screen and (max-width: 568px) {
+    .sing-review-campaign-container .desc{
+        top: 15px;
+    }
+}
 
 
 
@@ -1982,8 +1990,8 @@ body.author .author-info {
 .book-review-campaign-wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 0px 5px;
+    justify-content: start;
+    gap: 10px;
   }
   
   .book-review-campaign-wrapper .card {
@@ -2118,6 +2126,9 @@ body.author .author-info {
     }
 
   @media screen and (max-width: 1024px) {
+    .book-review-campaign-wrapper {
+        gap: 5px;
+      }
     .card{
         width: 300px;
     }
@@ -2151,7 +2162,7 @@ body.author .author-info {
         width: 48%;
     }
     .book-review-campaign-wrapper .card {
-        width: 375px;
+        width: 365px;
     }
     .book-review-campaign-wrapper .blog-title {
         font-size: 32px;
@@ -2188,6 +2199,7 @@ body.author .author-info {
     .book-review-campaign-wrapper .blog-title {
         font-size: 30px;
     }
+   
   }
 
   @media screen and (max-width: 375px) {
@@ -2204,15 +2216,15 @@ body.author .author-info {
     margin: 30px 0px;
   }
 
-  .bk-campaign-heading.campaign-single {
+  .book-review-campaign-heading.campaign-single {
     padding-bottom: 0px !important;
   }
-  .bk-campaign-heading.campaign-single .heading h3{
+  .book-review-campaign-heading.campaign-single .heading h3{
     font-size: 24px;
     line-height: 40px;
     margin: 0px;
   }
-  .bk-campaign-heading.campaign-single .heading p{
+  .book-review-campaign-heading.campaign-single .heading p{
     margin: 0px;
     font-size: 16px;
     line-height: 18px;
@@ -2399,12 +2411,12 @@ body.author .author-info {
   .author-profile .author-join-review p i{
     margin-right: 5px;
   }
-  .author-profile .author-achievement-price {
+  .author-profile .author-achievement-wrapper {
     display: flex;
     gap: 20px;
     width: 100%;
   }
-  .author-profile .author-achievement-price .review-post{
+  .author-profile .author-achievement-wrapper .review-post{
     width: 31%;
   }
   .author-profile .campaign-details .campaign-title a,   .author-profile .campaign-details .campaign-title{
@@ -2414,13 +2426,13 @@ body.author .author-info {
   .author-profile .campaign-details .campaign-title svg{
     margin-right: 5px;
   }
-  .author-profile .author-achievement-price  .review-post{
+  .author-profile .author-achievement-wrapper  .review-post{
     box-shadow: unset !important;
     background-color: unset !important;
     border: unset !important;
   }
 
-  .author-profile .author-achievement-price .review-title{
+  .author-profile .author-achievement-wrapper .review-title{
     font-size: 16px;
     color: #fff;
   }
@@ -2432,7 +2444,7 @@ body.author .author-info {
     .author-profile .author-avatar {
         width: 75%;
     }
-    .author-profile .author-achievement-price .review-post{
+    .author-profile .author-achievement-wrapper .review-post{
         width: 48%;
     }
   }
@@ -2462,7 +2474,7 @@ body.author .author-info {
     }
   }
   @media screen and (max-width: 568px) {
-    .author-profile .author-achievement-price{
+    .author-profile .author-achievement-wrapper{
         flex-direction: column;
         gap: 0px;
     }
@@ -2473,12 +2485,18 @@ body.author .author-info {
         margin-top: 20px;
     }
    
-    .author-profile .author-achievement-price .review-post{
+    .author-profile .author-achievement-wrapper .review-post{
         width: 100%;
         margin-bottom: 0px;
     }
-    .author-profile .author-achievement-price .review-post{
+    .author-profile .author-achievement-wrapper .review-post{
         padding-left: 0px;
+    }
+    .book-review-table #reviews-table{
+        width: 800px;
+    }
+    #reviews-table th, #reviews-table td{
+        text-align: center;
     }
   }
 

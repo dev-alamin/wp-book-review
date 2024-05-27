@@ -379,14 +379,14 @@ class Ajax {
     public function load_author_reviews() {
         $author_id      = isset($_POST['author_id']) ? intval($_POST['author_id']) : 0;
         $paged          = isset($_POST['page']) ? intval($_POST['page']) : 1;
-        $posts_per_page = 5;
+        $posts_per_page = 10;
     
         $author_review_posts_args = array(
             'post_type'      => 'review',
             'author'         => $author_id,
             'posts_per_page' => $posts_per_page,
             'paged'          => $paged,
-            'post_status'    => ['publish', 'pending', 'draft', 'trash', 'private', 'delete_request' ],
+            'post_status'    => ['publish', 'pending', 'draft', 'private', 'delete_request' ],
             'orderby'        => 'date',
             'order'          => 'DESC',
         );
@@ -407,7 +407,7 @@ class Ajax {
                 echo '<tr>';
                 echo '<td>' . esc_html($serial++) . '</td>';
                 echo '<td>' . esc_html(wp_trim_words($post_title, 8, '')) . '</td>';
-                echo '<td><img width="100px" src="' . get_the_post_thumbnail_url(get_the_ID(), 'medium') . '"></td>';
+                echo '<td><img width="50px" src="' . get_the_post_thumbnail_url(get_the_ID(), 'medium') . '"></td>';
                 echo '<td>';
                 if( $review_book_id && $review_book_id != 0 ) {
                     echo '<a href="' . get_the_permalink($review_book_id) . '">' . esc_html(get_the_title($review_book_id)) . '</a>';

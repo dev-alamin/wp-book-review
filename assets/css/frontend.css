@@ -2390,10 +2390,12 @@ body.author .author-info {
   .author-profile{
     display: flex;
     align-items: start;
-    gap: 40px;
+    gap: 15px;
   }
   .author-profile .author-avatar {
-    width: 50%;
+    max-width: 200px;
+    width: 100%;
+    margin-right: 0px;
   }
   .author-profile .author-avatar img{
     border-radius: 50%;
@@ -2413,11 +2415,22 @@ body.author .author-info {
   }
   .author-profile .author-achievement-wrapper {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     width: 100%;
+    flex-wrap: wrap;
   }
   .author-profile .author-achievement-wrapper .review-post{
     width: 31%;
+    margin-bottom: 0px;
+  }
+  
+  .author-profile .author-achievement-wrapper .review-post .campaign-title{
+    margin-bottom: 0px;
+    display: flex;
+    align-items: center ;
+  }
+  .author-profile .campaign-details .campaign-title svg{
+    max-width: 60px;
   }
   .author-profile .campaign-details .campaign-title a,   .author-profile .campaign-details .campaign-title{
     font-size: 16px;
@@ -2441,9 +2454,6 @@ body.author .author-info {
 
 
   @media screen and (max-width: 1024px) {
-    .author-profile .author-avatar {
-        width: 75%;
-    }
     .author-profile .author-achievement-wrapper .review-post{
         width: 48%;
     }

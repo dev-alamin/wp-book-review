@@ -86,7 +86,7 @@ $campaign_posts = new WP_Query( [
                                         echo '<div class="review-post">';
                                         echo '<div class="campaign-details">';
                                         echo '<div class="campaign-title">'. $icon .' <a href="' . get_the_permalink($campaign_id) . '">' . esc_html($campaign_title) . '</a></div>';
-                                        echo '<div class="review-title"><i class="fa-solid fa-pen"></i> <a href="' . get_permalink(get_the_ID()) . '">' . esc_html($review_title) . '</a></div>';
+                                        // echo '<div class="review-title"><i class="fa-solid fa-pen"></i> <a href="' . get_permalink(get_the_ID()) . '">' . esc_html($review_title) . '</a></div>';
                                         echo '</div>';
                                         echo '</div>';
                                     }

@@ -1697,7 +1697,7 @@ body.author .author-info {
 
 
 
-.review-post {
+.single-achievement {
     border: 1px solid #ddd;
     padding: 15px;
     margin-bottom: 20px;
@@ -1892,7 +1892,7 @@ body.author .author-info {
 .bk-o-items .bk-o-item .item-body p{
     color: #fff;
 }
-.book-review-posts{
+.book-single-achievements{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1902,21 +1902,21 @@ body.author .author-info {
     flex-wrap: wrap;
     padding: 0px 0px 40px;
 }
-.book-review-post{
+.book-single-achievement{
     width: 23%;
     border-radius: 10px;
 }
-.book-review-posts .book-review-thumbnail-img a {
+.book-single-achievements .book-review-thumbnail-img a {
     display: block;
     height: 100%;
 }
-.book-review-posts .book-review-thumbnail-img a img{
+.book-single-achievements .book-review-thumbnail-img a img{
     border-radius: 10px 10px 0 0;
     width: 100%;
     object-fit: cover;
     height: 100%;
 }
-.book-review-posts .book-review-avatar a img{
+.book-single-achievements .book-review-avatar a img{
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -1924,14 +1924,14 @@ body.author .author-info {
     margin-bottom: 10px;
     border: 2px solid #fff;
 }
-.book-review-post{
+.book-single-achievement{
     background-color: #222222;
     color: #fff;
 }
-.book-review-posts .book-review-avatar{
+.book-single-achievements .book-review-avatar{
     position: relative;
 }
-.book-review-posts .book-review-avatar a svg{
+.book-single-achievements .book-review-avatar a svg{
     position: absolute;
     top: -26px;
     left: 50%;
@@ -2109,7 +2109,7 @@ body.author .author-info {
     color: #fff;
   }
 
-    .book-review-posts{
+    .book-single-achievements{
         padding: 0px 10px;
     }
 
@@ -2135,10 +2135,10 @@ body.author .author-info {
     .blog-title {
         font-size: 28px;
     }
-    .book-review-posts{
+    .book-single-achievements{
         gap: 15px;
     }
-    .book-review-post{
+    .book-single-achievement{
         width: 31%;
     }
     .book-review-campaign-wrapper .card {
@@ -2155,10 +2155,10 @@ body.author .author-info {
         margin: 0px;
         margin-bottom: 16px;
     }
-    .book-review-posts{
+    .book-single-achievements{
         gap: 10px;
     }
-    .book-review-post{
+    .book-single-achievement{
         width: 48%;
     }
     .book-review-campaign-wrapper .card {
@@ -2177,7 +2177,7 @@ body.author .author-info {
     .card{
         width: 100%;
     }
-    .book-review-post{
+    .book-single-achievement{
         width: 100%;
     }
     .book-review-info h3{
@@ -2341,18 +2341,18 @@ body.author .author-info {
   .book-review-campaign-wrapper .card-body{
     z-index: 999;
   }
-  .book-review-posts .book-review-post .book-review-thumbnail-img{
+  .book-single-achievements .book-single-achievement .book-review-thumbnail-img{
     height: 170px;
   }
-  .book-review-posts .book-review-post .book-review-thumbnail-img a img{
+  .book-single-achievements .book-single-achievement .book-review-thumbnail-img a img{
     opacity: .8;
     transition: .3s;
   }
-  .book-review-posts .book-review-post:hover .book-review-thumbnail-img a img{
+  .book-single-achievements .book-single-achievement:hover .book-review-thumbnail-img a img{
     opacity: 1;
   }
 
-  .book-review-posts .book-review-post:hover .book-review-info h3 a{
+  .book-single-achievements .book-single-achievement:hover .book-review-info h3 a{
     text-decoration: underline;
     color: #fff;
   }
@@ -2419,18 +2419,19 @@ body.author .author-info {
     width: 100%;
     flex-wrap: wrap;
   }
-  .author-profile .author-achievement-wrapper .review-post{
+  .author-profile .author-achievement-wrapper .single-achievement{
     width: 31%;
     margin-bottom: 0px;
   }
   
-  .author-profile .author-achievement-wrapper .review-post .campaign-title{
+  .author-profile .author-achievement-wrapper .single-achievement .campaign-title{
     margin-bottom: 0px;
     display: flex;
     align-items: center ;
   }
   .author-profile .campaign-details .campaign-title svg{
-    max-width: 60px;
+    max-width: 45px;
+    width: 100%;
   }
   .author-profile .campaign-details .campaign-title a,   .author-profile .campaign-details .campaign-title{
     font-size: 16px;
@@ -2439,7 +2440,7 @@ body.author .author-info {
   .author-profile .campaign-details .campaign-title svg{
     margin-right: 5px;
   }
-  .author-profile .author-achievement-wrapper  .review-post{
+  .author-profile .author-achievement-wrapper  .single-achievement{
     box-shadow: unset !important;
     background-color: unset !important;
     border: unset !important;
@@ -2454,7 +2455,7 @@ body.author .author-info {
 
 
   @media screen and (max-width: 1024px) {
-    .author-profile .author-achievement-wrapper .review-post{
+    .author-profile .author-achievement-wrapper .single-achievement{
         width: 48%;
     }
   }
@@ -2495,11 +2496,11 @@ body.author .author-info {
         margin-top: 20px;
     }
    
-    .author-profile .author-achievement-wrapper .review-post{
+    .author-profile .author-achievement-wrapper .single-achievement{
         width: 100%;
         margin-bottom: 0px;
     }
-    .author-profile .author-achievement-wrapper .review-post{
+    .author-profile .author-achievement-wrapper .single-achievement{
         padding-left: 0px;
     }
     .book-review-table #reviews-table{

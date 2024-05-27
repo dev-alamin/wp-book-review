@@ -70,8 +70,8 @@ wp_reset_postdata();
             <h5>Recent Winners</h5>
         </div>
     </div>
-    <div class="book-review-posts">
-        <div class="book-review-post">
+    <div class="book-single-achievements">
+        <div class="book-single-achievement">
             <div class="book-review-thumbnail-img">
                 <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
             </div>
@@ -90,7 +90,7 @@ wp_reset_postdata();
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
             </div>
         </div>
-        <div class="book-review-post">
+        <div class="book-single-achievement">
             <div class="book-review-thumbnail-img">
                 <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
             </div>
@@ -109,7 +109,7 @@ wp_reset_postdata();
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
             </div>
         </div>
-        <div class="book-review-post">
+        <div class="book-single-achievement">
             <div class="book-review-thumbnail-img">
                 <a href="#"><img src="" alt=""></a>
             </div>
@@ -128,7 +128,7 @@ wp_reset_postdata();
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
             </div>
         </div>
-        <div class="book-review-post">
+        <div class="book-single-achievement">
             <div class="book-review-thumbnail-img">
                 <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
             </div>

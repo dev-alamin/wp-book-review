@@ -446,6 +446,7 @@ height: initial;
     font-weight: 500;
     font-family: "Hind Siliguri";
     margin: 10px;
+    margin-left: 0px;
 }
 .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team p{
     font-size: 16px;
@@ -751,9 +752,7 @@ height: initial;
     }
 }
 
-@media only screen and (max-width: 768px) {
-
-    
+@media only screen and (max-width: 768px) {    
     .wp-single-wbr .wbr-review-content .wbr-review-image img {
         margin-top: 40px;
     }
@@ -811,7 +810,7 @@ height: initial;
 
 @media only screen and (max-width: 425px) {
     .wp-single-wbr .wbr-review-content h2 {
-        font-size: 32px;
+        font-size: 28px;
     }
     .wp-single-wbr .wbr-review-content .wbr-product-user {
         gap: 10px;
@@ -2251,8 +2250,9 @@ body.author .author-info {
     padding: 0px 0 40px;
   }
   .last-submission-wrap .post-image{
-    min-height: 184px;
-}
+        max-height: 250px;
+        overflow: hidden;
+    }
   .last-submission-wrap .post-image a{
     display: block;
   }
@@ -2274,12 +2274,12 @@ body.author .author-info {
 
   @media screen and (max-width: 1024px) {
     .last-submission-wrap .post-image{
-        min-height: 323px;
+        max-height: 323px;
     }
   }
   @media screen and (max-width: 768px) {
     .last-submission-wrap .post-image{
-        min-height: 240px;
+        max-height: 240px;
     }
   }
   @media screen and (max-width: 375px) {
@@ -2502,5 +2502,8 @@ body.author .author-info {
 
   .book-review-table{
     overflow-x: auto;
+    width: 100%;
+  }
+  .sing-review-campaign-container .thumb img{
     width: 100%;
   }

@@ -79,7 +79,7 @@ $options = get_option('wbr_archive_promo_options');
     while ($featured_rev->have_posts()) {
         $featured_rev->the_post();
         if ($count < 3) {
-            echo '<div class="col-lg-4">';
+            echo '<div class="col-lg-4 col-md-6 col-sm-6">';
             wbr_output_review_card(get_the_ID());
             echo '</div>';
         } else {

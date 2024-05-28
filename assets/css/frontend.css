@@ -433,7 +433,6 @@ height: initial;
 
 .wp-single-wbr .wbr-review-content .wbr-product-user img{
     width: 80px;
-    height: 80px;
     border-radius: 50%;
 }
 .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team{
@@ -446,6 +445,7 @@ height: initial;
     color: #333333;
     font-weight: 500;
     font-family: "Hind Siliguri";
+    margin: 10px;
 }
 .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team p{
     font-size: 16px;
@@ -689,15 +689,22 @@ height: initial;
         line-height: 45px;
         margin-top: 25px;
     }
+    .wp-single-wbr .wbr-review-content .wbr-product-user{
+        gap: 10px;
+        flex-direction: column;
+    }
+    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team{
+        text-align: center;
+    }
 
     .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team h3 {
         font-size: 24px;
-        line-height: 12px;
+        line-height: 20px;
     }
 
     .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team p {
         font-size: 14px;
-        line-height: 12px;
+        line-height: 20px;
     }
 
     .wp-single-wbr .wbr-review-content .wbr-book-meta-info .reviewer-rating h4 {
@@ -745,6 +752,8 @@ height: initial;
 }
 
 @media only screen and (max-width: 768px) {
+
+    
     .wp-single-wbr .wbr-review-content .wbr-review-image img {
         margin-top: 40px;
     }
@@ -805,17 +814,9 @@ height: initial;
         font-size: 32px;
     }
     .wp-single-wbr .wbr-review-content .wbr-product-user {
-        gap: 15px;
-    }
-    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team h3 {
-        font-size: 20px;
-        line-height: 10px;
+        gap: 10px;
     }
 
-    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team p {
-        font-size: 12px;
-        line-height: 10px;
-    }
     .wp-single-wbr .wbr-review-content .wbr-product-user button {
         padding: 15px;
     }
@@ -869,13 +870,6 @@ height: initial;
 }
 
 @media only screen and (max-width: 375px) {
-    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team h3 {
-        font-size: 17px;
-    }
-    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team p {
-        font-size: 10px;
-    }
-
     .wp-single-wbr .wbr-review-content .wbr-product-user button {
         padding: 12px;
     }
@@ -885,16 +879,10 @@ height: initial;
     }
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 320px) {
     .wp-single-wbr .wbr-review-content .wbr-product-user img {
         width: 70px;
         height: 70px;
-    }
-    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team h3 {
-        font-size: 12px;
-    }
-    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team p {
-        font-size: 8px;
     }
     .wp-single-wbr .wbr-review-content .wbr-product-user button {
         padding: 8px;
@@ -1512,10 +1500,6 @@ body.author .author-info {
 .wp-single-wbr .wbr-review-content .wbr-book-review-box .review-header h5{
     font-size: 16px;
 }
-.wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team h3{
-    font-size: 22px;
-    margin-bottom: 10px;
-}
 .wp-single-wbr .wbr-review-content .wbr-book-meta-info{
     margin: 50px 0 35px;
 }
@@ -1550,14 +1534,6 @@ body.author .author-info {
     justify-content: space-between;
 }
 @media only screen and (max-width: 568px) {
-    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team h3{
-        font-size: 18px;
-    }
-    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team p{
-        font-size: 10px;
-        line-height: 13px;
-        margin-top: 0px;
-    }
     .wbr-product-user .campaing{
         margin-left: 0px;
         font-size: 16px;
@@ -2457,6 +2433,12 @@ body.author .author-info {
   @media screen and (max-width: 1024px) {
     .author-profile .author-achievement-wrapper .single-achievement{
         width: 48%;
+    }
+    .wbr-leaderboard-page-cls{
+        padding-top: 0px;
+    }
+    .wbr-leaderboard-page-cls .leaderboard-title{
+        margin-top: 0px;
     }
   }
   @media screen and (max-width: 768px) {

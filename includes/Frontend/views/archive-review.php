@@ -14,7 +14,7 @@ $featured_rev = new WP_Query($archive_featured_review);
 
 $options = get_option('wbr_archive_promo_options');
 ?>
-<div class="wbr-archive-page-container">
+<div class="wbr-archive-page-container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -29,7 +29,7 @@ $options = get_option('wbr_archive_promo_options');
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <div class="archive-featured-review">
+                <div class="archive-featured-review wow fadeInUp" data-wow-duration=".6s" data-wow-delay=".3s">
                     <?php                     
                     if ($featured_rev->have_posts()) {
                         echo '<div id="reviews-container">';
@@ -47,7 +47,7 @@ $options = get_option('wbr_archive_promo_options');
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="archive-promo-wrapper">
+                <div class="archive-promo-wrapper  wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
                     <div class="title">
                         <h2><?php echo esc_html( $options['archive_promo_title'] ); ?></h2>
                     </div>
@@ -76,16 +76,24 @@ $options = get_option('wbr_archive_promo_options');
         <div class="row mt-5">
     <?php
     $count = 0;
+    $duration = 1;  // Starting duration in seconds
+    $delay = 0.6;
     while ($featured_rev->have_posts()) {
         $featured_rev->the_post();
         if ($count < 3) {
-            echo '<div class="col-lg-4 col-md-6 col-sm-6">';
-            wbr_output_review_card(get_the_ID());
-            echo '</div>';
+            ?>
+                <div class="col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-duration="<?php echo $duration; ?>s" data-wow-delay="<?php echo $delay; ?>ss">
+                <?php
+                    wbr_output_review_card(get_the_ID());
+                ?>
+                </div>
+            <?php 
         } else {
             break; // Exit the loop if we have displayed three posts
         }
-        $count++;
+        $count++;     
+        $duration += 0.3;
+        $delay += 0.3;  
     }
     wp_reset_postdata();
     ?>
@@ -203,7 +211,7 @@ setInterval(function() {
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="leaderboard-title">
+                <div class="leaderboard-title wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
                     <h2>জানুয়ারি মাসের লিডারবোর্ড</h2>
                     <h4>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi, beatae!</h4>
                     <div class="description">
@@ -216,7 +224,7 @@ setInterval(function() {
                 </div>
             </div>
                 <div class="col-lg-6">
-                    <div class="winner-review single-leaderboard">
+                    <div class="winner-review single-leaderboard wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
                         <h4 class="leaderboard-subtitle">Great reviews</h4>
                         <?php $most_liked_reviews = wbr_get_most_commented_posts( 'review' ); ?>
 
@@ -247,7 +255,7 @@ setInterval(function() {
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="winner-review-books single-leaderboard">
+                    <div class="winner-review-books single-leaderboard wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">
                         <?php 
                         $results = wbr_get_top_reviewed_books();
                         if ( $results ) {
@@ -303,11 +311,19 @@ setInterval(function() {
 if ( have_posts() ) {
     echo '<div class="container mt-3 wbr-archive-page-cls">';
     echo '<div class="row" id="reviews-container">';
+    $duration = 1; 
+    $delay = 0.6;
     while ( have_posts() ) {
         the_post();
-        echo '<div class="col-lg-4 col-sm-6 col-xs-12">';
-        wbr_output_review_card( get_the_ID() );
-        echo '</div>';
+        ?>
+            <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="<?php echo $duration; ?>s" data-wow-delay="<?php echo $delay ; ?>s">
+                <?php
+                    wbr_output_review_card( get_the_ID() );
+                ?>
+            </div>
+        <?php
+        $duration += 0.3;
+        $delay += 0.3;
     }
     echo '</div>';
     the_posts_pagination();

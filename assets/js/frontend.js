@@ -392,3 +392,6 @@ document.querySelectorAll('.wbr_author_review_pagination').forEach(function (ele
     })
 });
 
+jQuery(document).ready(function($) {
+    new WOW().init();
+});

@@ -14,11 +14,11 @@
 						<button class="first-reviewer" data-bs-toggle="modal" data-bs-target="#wbrUserAgreement">Start Writing Review</button>
 					
                         <?php 
-							$file = __DIR__ . '/views/user-agreement-modal.php'; 
+							$file = __DIR__ . '/../views/user-agreement-modal.php'; 
 							if( file_exists( $file ) ) {
 								include $file;
 							}else{
-								echo 'File does not exist';
+								echo $file . ' File does not exist';
 							}
 						?>
 

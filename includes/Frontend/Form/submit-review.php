@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
                 <div class="wbr-review-form-toggler">
                     <?php 
                     $current_user_has_post = count_user_posts( get_current_user_id(), 'review', true );
@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-12">
+            <div class="col-lg-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
                 <div id="review-submission-form form-submission">
                         <h2>Submit a Review</h2>
                         <form id="review-form" class="form row gx-3 gy-2 align-items-center" action="" method="post" enctype="multipart/form-data">

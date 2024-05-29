@@ -1,13 +1,13 @@
 <?php
 get_header(); ?>
-        <div class="book-review-campaign-heading">
-            <div class="heading">
-                <h2><a href="#">Lorem ipsum dolor sit amet.</a></h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                    Nobis aspernatur vitae sed cum atque animi temporibus soluta, 
-                    itaque ut corporis?</p>
-            </div>
-        </div>
+<div class="book-review-campaign-heading wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+    <div class="heading">
+        <h2><a href="#">Lorem ipsum dolor sit amet.</a></h2>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+            Nobis aspernatur vitae sed cum atque animi temporibus soluta, 
+            itaque ut corporis?</p>
+    </div>
+</div>
 <?php 
 // Query to retrieve all products
 $campaign_query = new WP_Query(array(
@@ -27,9 +27,11 @@ $campaign_query = new WP_Query(array(
 if ($campaign_query->have_posts()) { ?>
         <div class="book-review-campaign-wrapper">
         <?php 
+            $duration = 1; 
+            $delay = 0.6;
             while ($campaign_query->have_posts()) {
                 $campaign_query->the_post(); ?>
-                    <div class="card">
+                    <div class="card  wow fadeInUp" data-wow-duration="<?php echo $duration; ?>s" data-wow-delay="<?php echo $delay ; ?>s">
                         <div class="card-banner" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>)">
                             <div class="category-tag">
                                 <svg width="35px" height="20px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +59,10 @@ if ($campaign_query->have_posts()) { ?>
                             <?php endif; ?>
                         </div>
                     </div>            
-            <?php }
+            <?php 
+             $duration += 0.3;
+             $delay += 0.3;
+            }
             ?>
         </div>
     <?php 
@@ -65,13 +70,13 @@ if ($campaign_query->have_posts()) { ?>
 wp_reset_postdata();
 ?>
 
-    <div class="book-review-open-campaign">
+    <div class="book-review-open-campaign  wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
         <div class="book-review-heading">
             <h5>Recent Winners</h5>
         </div>
     </div>
     <div class="book-single-achievements">
-        <div class="book-single-achievement">
+        <div class="book-single-achievement wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
             <div class="book-review-thumbnail-img">
                 <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
             </div>
@@ -90,7 +95,7 @@ wp_reset_postdata();
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
             </div>
         </div>
-        <div class="book-single-achievement">
+        <div class="book-single-achievement wow fadeInUp" data-wow-duration="1.3s" data-wow-delay=".9s">
             <div class="book-review-thumbnail-img">
                 <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
             </div>
@@ -109,7 +114,7 @@ wp_reset_postdata();
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
             </div>
         </div>
-        <div class="book-single-achievement">
+        <div class="book-single-achievement wow fadeInUp" data-wow-duration="1.6s" data-wow-delay="1.2s">
             <div class="book-review-thumbnail-img">
                 <a href="#"><img src="" alt=""></a>
             </div>
@@ -128,7 +133,7 @@ wp_reset_postdata();
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
             </div>
         </div>
-        <div class="book-single-achievement">
+        <div class="book-single-achievement wow fadeInUp" data-wow-duration="1.9s" data-wow-delay="1.5s">
             <div class="book-review-thumbnail-img">
                 <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
             </div>

@@ -4,7 +4,7 @@ get_header(); ?>
     <div class="container">
         <div class="row">
             <div class="col-lg-7">
-                <div class="top-left single-top">
+                <div class="top-left single-top wow fadeInUp" data-wow-duration=".8s" data-wow-delay=".4s">
                     <div class="thumb">
                         <?php the_post_thumbnail( 'large' ); ?>
                         <div class="desc">
@@ -32,12 +32,12 @@ get_header(); ?>
                     }
                 ?>
 
-                <div class="content">
+                <div class="content wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
                     <?php the_content(); ?>
                 </div>
             </div>
         <div class="col-lg-5">
-            <div class="single-top review-campaign-meta-info">
+            <div class="single-top review-campaign-meta-info wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
                 <div class="join-cta single-meta">
                     <a href="/login">Join FajrFair to Enter</a>
                     <p>Already have a FajrFair account? <a href="/login">Login</a></p>
@@ -62,7 +62,7 @@ get_header(); ?>
         </div>
     </div>
 </div>
-<div class="submission-heading">
+<div class="submission-heading wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
     <h2>Latest submissions</h2>
     <a href="#">Explore all</a>
 </div>
@@ -88,14 +88,19 @@ $query = new WP_Query($args);
 if ($query->have_posts()) : ?>
 <div class="last-submission-container">
     <div class="row">
-    <?php while ($query->have_posts()) : $query->the_post(); 
+    <?php 
+    $duration = 1; 
+    $delay = 0.6;
+
+    while ($query->have_posts()) : $query->the_post(); 
     $author_id     = get_the_author_meta('ID');
     $author_name   = get_the_author_meta('display_name');
     $author_avatar = get_avatar_url($author_id, ['size' => 80]);
     $post_time     = human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago';
+
     ?>
 
-        <div class="col-12 col-lg-3 col-md-4 col-sm-6">
+        <div class="col-12 col-lg-3 col-md-4 col-sm-6 data-wow-duration="<?php echo $duration; ?>s" data-wow-delay="<?php echo $delay ; ?>s">
             <div class="last-submission-wrap">
                 <div class="post-image">
                     <a href="<?php the_permalink(); ?>">
@@ -117,7 +122,11 @@ if ($query->have_posts()) : ?>
                 </div>
             </div>
         </div>
-        <?php endwhile; ?>
+        <?php 
+            $duration += 0.3;
+            $delay += 0.3;
+            endwhile; 
+        ?>
        </div>
 </div>
 <?php else :
@@ -129,7 +138,7 @@ wp_reset_postdata();
 
 ?>
 
-<div class="book-review-campaign-heading campaign-single">
+<div class="book-review-campaign-heading campaign-single wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
     <div class="heading">
         <h3><a href="#">Open challenges</a></h3>
         <p>Challenges you can enter now for a chance to win.</p>
@@ -154,9 +163,12 @@ $campaign_query = new WP_Query(array(
 if ($campaign_query->have_posts()) { ?>
         <div class="book-review-campaign-wrapper">
         <?php 
+            $duration = 1; 
+            $delay = 0.6;
+
             while ($campaign_query->have_posts()) {
                 $campaign_query->the_post(); ?>
-                    <div class="card">
+                    <div class="card wow fadeInUp" data-wow-duration="<?php echo $duration; ?>s" data-wow-delay="<?php echo $delay ; ?>s">
                         <div class="card-banner" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>)">
                             <div class="category-tag">
                                 <svg width="35px" height="20px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
@@ -184,7 +196,10 @@ if ($campaign_query->have_posts()) { ?>
                             <?php endif; ?>
                         </div>
                     </div>            
-            <?php }
+            <?php 
+            $duration += 0.3;
+            $delay += 0.3;    
+            }
             ?>
         </div>
     <?php 

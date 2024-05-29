@@ -2119,12 +2119,12 @@ body.author .author-info {
     .book-review-campaign-wrapper .card {
         width: 330px;
     }
-  }
-
-  @media screen and (max-width: 768px) {
     .book-review-campaign-heading .heading p{
         max-width: 100%;
     }
+  }
+
+  @media screen and (max-width: 768px) {
     .card{
         width: 360px;
         margin: 0px;
@@ -2506,4 +2506,8 @@ body.author .author-info {
   }
   .sing-review-campaign-container .thumb img{
     width: 100%;
+  }
+
+  .page-header h2{
+    margin-bottom: 0px;
   }

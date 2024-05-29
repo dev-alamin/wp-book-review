@@ -39,13 +39,13 @@ $campaign_posts = new WP_Query( [
             <div class="container">
                 <div class="row">
                     <div class="author-profile">
-                        <div class="author-avatar">
+                        <div class="author-avatar wow fadeInUp" data-wow-duration=".6s" data-wow-delay=".4s">
                             <?php echo $author_avatar; ?>
                             <div class="write-review-button">
                                 <a href="<?php echo esc_url(home_url('/submit-review/')); ?>" class="btn btn-primary">Write a Review</a>
                             </div>
                         </div>
-                        <div class="author-details">
+                        <div class="author-details wow fadeInUp" data-wow-duration=".8s" data-wow-delay=".6s">
                             <h2 class="author-name"><?php echo esc_html( ucwords( $author_name ) ); ?></h2>
                             <?php if ($author_bio) : ?>
                                 <p class="author-bio"><?php echo $author_bio; ?></p>
@@ -59,7 +59,8 @@ $campaign_posts = new WP_Query( [
                                 <h2><?php echo esc_html( ucwords( $author_name . "'s" ) ); ?> Achivement</h2>
                                 <div class="author-achievement-wrapper">
                                     <?php 
-                           
+                                     $duration = 1; 
+                                     $delay = 0.6;
                                     while ($campaign_posts->have_posts()) {
                                         $campaign_posts->the_post();
                                         $winner_position = get_post_meta(get_the_ID(), '__review_winner_option', true);
@@ -83,12 +84,14 @@ $campaign_posts = new WP_Query( [
                                         $review_title    = get_the_title(get_the_ID());
                                        
                                     
-                                        echo '<div class="single-achievement">';
-                                        echo '<div class="campaign-details">';
-                                        echo '<div class="campaign-title">'. $icon .' <a href="' . get_the_permalink($campaign_id) . '">' . esc_html($campaign_title) . '</a></div>';
-                                        // echo '<div class="review-title"><i class="fa-solid fa-pen"></i> <a href="' . get_permalink(get_the_ID()) . '">' . esc_html($review_title) . '</a></div>';
+                                        echo '<div class="single-achievement wow fadeInUp" data-wow-duration="'. $duration .'s" data-wow-delay="'. $delay .'">';
+                                            echo '<div class="campaign-details">';
+                                            echo '<div class="campaign-title">'. $icon .' <a href="' . get_the_permalink($campaign_id) . '">' . esc_html($campaign_title) . '</a></div>';
+                                            echo '</div>';
                                         echo '</div>';
-                                        echo '</div>';
+
+                                        $duration += 0.3;
+                                        $delay += 0.3;
                                     }
                                     
                                     wp_reset_postdata();
@@ -120,11 +123,11 @@ $campaign_posts = new WP_Query( [
                         $author_review_posts = new WP_Query($author_review_posts_args);
                         
                         if ( $author_review_posts->have_posts() ) {
-                            echo '<div class="container mt-3 mb-5 bg-white pt-3">';
+                            echo '<div class="container mt-3 mb-5 bg-white pt-3 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">';
                             echo '<div class="row">';
                             echo '<div class="col-lg-12">';
                             echo '<h2>Your Post List - You can edit, request for delete. </h2>';
-                            echo '<div class="book-review-table">';
+                            echo '<div class="book-review-table ">';
                             echo '<table id="reviews-table">';
                             echo '<tr>';
                             echo '<th>#</th>';
@@ -216,17 +219,24 @@ if ($review_posts->have_posts()) :
 
     // Display the page header
     ?>
-    <header class="page-header">
+    <div class="page-header">
         <h2 class="page-title"><?php printf(__('Reviews by %s', 'textdomain'), get_the_author()); ?></h2>
-    </header><!-- .page-header -->
+    </div><!-- .page-header -->
     <?php
-
+     $duration = 1; 
+     $delay = 0.6;
     // Loop through the posts
     while ($review_posts->have_posts()) :
         $review_posts->the_post();
-        echo '<div class="col-lg-4 col-sm-6 col-xs-12">';
-        wbr_output_review_card(get_the_ID());
-        echo '</div>';
+        ?>
+            <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="<?php echo $duration; ?>s" data-wow-delay="<?php echo $delay ; ?>s">
+                <?php
+                    wbr_output_review_card(get_the_ID());
+                ?>
+            </div>
+        <?php
+        $duration += 0.3;
+        $delay += 0.3;
     endwhile;
 
     echo '</div>'; // Close .row

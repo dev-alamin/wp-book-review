@@ -18,15 +18,17 @@
                 $post_count = $related_reviews_query->found_posts;
 
                 if ($related_reviews_query->have_posts()) {
+                    $duration = 1; 
+                    $delay = 0.6;
                     while ($related_reviews_query->have_posts()) {
                         $related_reviews_query->the_post(); ?>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="<?php echo $duration; ?>s" data-wow-delay="<?php echo $delay ; ?>s">
                             <div class="card mb-3">
                                 <?php if (has_post_thumbnail()): ?>
                                     <div class="thumbnail">
-                                    <a href="<?php the_permalink(); ?>">
-                                        <img src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img-top img-fluid" alt="<?php the_title_attribute(); ?>">
-                                    </a>
+                                        <a href="<?php the_permalink(); ?>">
+                                            <img src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img-top img-fluid" alt="<?php the_title_attribute(); ?>">
+                                        </a>
                                     </div>
                                 <?php endif; ?>
                                 <div class="card-body product-user">
@@ -46,7 +48,10 @@
                                 </div>
                             </div>
                         </div>
-                    <?php }
+                    <?php 
+                    $duration += 0.3;
+                    $delay += 0.3;
+                    }
                     wp_reset_postdata();
                 } else {
                     echo '<p>No other reviews found for this product.</p>';

@@ -19,21 +19,21 @@ $total_review =  wpr_get_total_review_and_average( $product_id );
 $campaing = get_post_meta(get_the_ID(), '_campaign_id', true);
 ?>
 
-<section class="wp-single-wbr wbr-single-bg">
+<section class="wp-single-wbr wbr-single-bg wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="wbr-review-content">
-                    <div class="wbr-review-image">
+                    <div class="wbr-review-image wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">'
                         <?php 
                             if (has_post_thumbnail()) {
                                 the_post_thumbnail('large', array('class' => 'img-fluid'));
                             }
                         ?>
                     </div>
-                    <h2><?php echo wp_kses_post(get_the_title()); ?></h2>
+                    <h2 class="wow fadeInDown" data-wow-duration=".6s" data-wow-delay=".4s"><?php echo wp_kses_post(get_the_title()); ?></h2>
 
-                    <div class="wbr-product-user">
+                    <div class="wbr-product-user wow fadeInUp" data-wow-duration=".6s" data-wow-delay=".4s">
                     <a href="<?php echo esc_url($author_url); ?>"><?php echo get_avatar( $author_id, 96, '', '', ); ?></a>
                         <div class="wbr-product-team">
                         <?php if (! empty( $authors ) ): ?>
@@ -44,24 +44,24 @@ $campaing = get_post_meta(get_the_ID(), '_campaign_id', true);
                         <a class="campaing" href="<?php echo get_the_permalink($campaing); ?>"><?php echo get_the_title($campaing); ?></a>
                         <!-- <button>Button</button> -->
                     </div>
-                        <div class="wbr-book-meta-info">
-                            <div class="reviewer-rating">
-                                <h4>রেটিং দিয়েছেন</h4>
-                                <?php 
-                                    $rating = intval($book_rating); // Convert rating to an integer
-                                    $filled_stars = min(5, max(0, $rating)); // Ensure the rating is between 0 and 5
+                    <div class="wbr-book-meta-info wow fadeInUp" data-wow-duration=".6s" data-wow-delay=".4s">
+                        <div class="reviewer-rating">
+                            <h4>রেটিং দিয়েছেন</h4>
+                            <?php 
+                                $rating = intval($book_rating); // Convert rating to an integer
+                                $filled_stars = min(5, max(0, $rating)); // Ensure the rating is between 0 and 5
 
-                                    for ($i = 0; $i < $filled_stars; $i++) {
-                                        echo '<i class="fas fa-star text-warning"></i>';
-                                    }
+                                for ($i = 0; $i < $filled_stars; $i++) {
+                                    echo '<i class="fas fa-star text-warning"></i>';
+                                }
 
-                                    for ($i = $filled_stars; $i < 5; $i++) {
-                                        echo '<i class="far fa-star text-warning"></i>';
-                                    }
-                                ?>
-                            </div>
+                                for ($i = $filled_stars; $i < 5; $i++) {
+                                    echo '<i class="far fa-star text-warning"></i>';
+                                }
+                            ?>
+                        </div>
                     </div>
-                    <div class="wbr-book-review-box">
+                    <div class="wbr-book-review-box wow fadeInDown" data-wow-duration=".6s" data-wow-delay=".4s">
                         <div class="review-header">
                             <h5>যে বই সম্পর্কে রিভিউ লেখা হয়েছে</h5>
                         </div>

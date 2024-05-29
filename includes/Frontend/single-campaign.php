@@ -100,7 +100,7 @@ if ($query->have_posts()) : ?>
 
     ?>
 
-        <div class="col-12 col-lg-3 col-md-4 col-sm-6 data-wow-duration="<?php echo $duration; ?>s" data-wow-delay="<?php echo $delay ; ?>s">
+        <div class="col-12 col-lg-3 col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="<?php echo $duration; ?>s" data-wow-delay="<?php echo $delay ; ?>s">
             <div class="last-submission-wrap">
                 <div class="post-image">
                     <a href="<?php the_permalink(); ?>">

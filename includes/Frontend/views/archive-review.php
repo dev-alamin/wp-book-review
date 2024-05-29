@@ -76,18 +76,15 @@ $options = get_option('wbr_archive_promo_options');
         <div class="row mt-5">
     <?php
     $count = 0;
-    $duration = 1;  // Starting duration in seconds
+    $duration = 1;
     $delay = 0.6;
     while ($featured_rev->have_posts()) {
         $featured_rev->the_post();
-        if ($count < 3) {
-            ?>
-                <div class="col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-duration="<?php echo $duration; ?>s" data-wow-delay="<?php echo $delay; ?>ss">
-                <?php
-                    wbr_output_review_card(get_the_ID());
-                ?>
-                </div>
-            <?php 
+        if ($count < 3) { ?>
+            <div class="col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-duration="<?php echo $duration; ?>s" data-wow-delay="<?php echo $delay; ?>ss">
+                <?php wbr_output_review_card(get_the_ID()); ?>
+            </div>
+        <?php 
         } else {
             break; // Exit the loop if we have displayed three posts
         }
@@ -97,8 +94,7 @@ $options = get_option('wbr_archive_promo_options');
     }
     wp_reset_postdata();
     ?>
-</div>
-
+        </div>
     </div>
 </div>
 
@@ -137,9 +133,7 @@ if ($latest_campaign_query->have_posts()) {
             <div class="col-lg-6">
                 <div class="campaign-benefit">
                     <h2><?php the_title( '<h2>', '</h2>'); ?></h2>
-                    <?php 
-                    $prizes = carbon_get_post_meta( get_the_ID(), 'prizes' );
-                    ?>
+                    <?php  $prizes = carbon_get_post_meta( get_the_ID(), 'prizes' ); ?>
                     <h2><?php echo wp_kses_post( $prizes[0]['prize_name']); ?></h2>
                     <div class="featured-campaign-cta">
                         <a href="<?php echo get_permalink(); ?>">See more</a>
@@ -150,7 +144,7 @@ if ($latest_campaign_query->have_posts()) {
                 <div class="fetured-campaign-info">
                     <h4>The last date of submission</h4>
                     <div class="featured-sub-last-date">
-                    <?php echo date('Y/m/d', strtotime($last_submission_date)); ?> <!-- Format the date as 'Y/m/d' -->
+                        <?php echo date('Y/m/d', strtotime($last_submission_date)); ?> <!-- Format the date as 'Y/m/d' -->
                     </div>
                     <h2>Time remaining</h2>
                     <div class="timer">
@@ -219,16 +213,17 @@ setInterval(function() {
                             similique itaque quam placeat porro sed doloribus modi a ex facere atque qui molestias, 
                             dolores accusantium, voluptates saepe optio tempora. Voluptate earum vitae repellendus itaque 
                             debitis necessitatibus nisi dolorum? Illum molestias suscipit aliquam asperiores nesciunt
-                            quod corrupti, sequi velit.</p>
+                            quod corrupti, sequi velit.
+                        </p>
                     </div>
                 </div>
             </div>
-                <div class="col-lg-6">
-                    <div class="winner-review single-leaderboard wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-                        <h4 class="leaderboard-subtitle">Great reviews</h4>
-                        <?php $most_liked_reviews = wbr_get_most_commented_posts( 'review' ); ?>
+            <div class="col-lg-6">
+                <div class="winner-review single-leaderboard wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+                    <h4 class="leaderboard-subtitle">Great reviews</h4>
+                    <?php $most_liked_reviews = wbr_get_most_commented_posts( 'review' ); ?>
 
-                        <ul class="leaderboard-list">
+                    <ul class="leaderboard-list">
                         <?php foreach ($most_liked_reviews as $result): 
                             $product = get_post_meta( $result->ID, '_product_id', true );
                             ?>
@@ -238,7 +233,7 @@ setInterval(function() {
                                         <img src="<?php echo esc_url(get_the_post_thumbnail_url($result->ID, 'thumbnail')); ?>" alt="<?php echo esc_attr($result->post_title); ?>">
                                     </a>
                                 <?php endif; ?>
-                    
+                        
                                 <div class="book-review-bk-info">
                                     <a href="<?php echo esc_url(get_permalink($result->ID)); ?>">
                                         <?php echo esc_html(wp_trim_words($result->post_title, 7)); ?>
@@ -252,58 +247,57 @@ setInterval(function() {
                             </li>
                         <?php endforeach; ?>
                     </ul>
-                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="winner-review-books single-leaderboard wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">
-                        <?php 
-                        $results = wbr_get_top_reviewed_books();
-                        if ( $results ) {
-                            echo '<h4 class="leaderboard-subtitle">Great reviewed books</h4>';
-                            echo '<ul class="leaderboard-list">';
-                                foreach ($results as $result):
-                                $review_id = $result->id;
-                                $product_id = get_post_meta($review_id, '_product_id', true);
-                                $product_thumbnail = get_the_post_thumbnail_url($product_id, 'thumbnail');
-                                $term_link = get_the_permalink($product_id);
-                            
-                                $term = get_term($result->term_id, 'review_book');
-                                ?>
-                                <?php if ($term && !is_wp_error($term)): ?>
-                                    <li>
-                                        <a href="<?php echo esc_url($term_link); ?>">
-                                            <div class="thumbnail-title-wrapper">
-                                                <?php if ($product_thumbnail): ?>
-                                                    <img src="<?php echo esc_url($product_thumbnail); ?>" alt="<?php echo esc_attr(get_the_title($product_id)); ?>">
-                                                <?php endif; ?>
-                                                <?php echo esc_html(wp_trim_words($result->name, 7)); ?> 
-                                                <span class="review-count">(<?php echo esc_html($result->review_count); ?>)</span>
-                                            </div>
-                                            <span class="book-authors">
-                                                <?php
-                                                $authors = wp_get_post_terms($product_id, 'authors');
-                                                if ($authors && !is_wp_error($authors)) {
-                                                    $author_names = array_map(function($author) {
-                                                        return $author->name;
-                                                    }, $authors);
-                                                    echo esc_html(implode(', ', $author_names));
-                                                }
-                                                ?>
-                                            </span>
-                                        </a>
-                                    </li>
-                                <?php else: ?>
-                                    <li><?php echo esc_html($result->name); ?> | Reviews: <?php echo esc_html($result->review_count); ?> | Error: Empty Term</li>
-                                <?php endif; ?>
-                            <?php endforeach; 
-                            echo '</ul>';
-                        } else {
-                            echo 'No reviews found.';
-                        }
-
-                        ?>
-                    </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="winner-review-books single-leaderboard wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">
+                    <?php 
+                    $results = wbr_get_top_reviewed_books();
+                    if ( $results ) {
+                        echo '<h4 class="leaderboard-subtitle">Great reviewed books</h4>';
+                        echo '<ul class="leaderboard-list">';
+                            foreach ($results as $result):
+                            $review_id = $result->id;
+                            $product_id = get_post_meta($review_id, '_product_id', true);
+                            $product_thumbnail = get_the_post_thumbnail_url($product_id, 'thumbnail');
+                            $term_link = get_the_permalink($product_id);
+                        
+                            $term = get_term($result->term_id, 'review_book');
+                            ?>
+                            <?php if ($term && !is_wp_error($term)): ?>
+                                <li>
+                                    <a href="<?php echo esc_url($term_link); ?>">
+                                        <div class="thumbnail-title-wrapper">
+                                            <?php if ($product_thumbnail): ?>
+                                                <img src="<?php echo esc_url($product_thumbnail); ?>" alt="<?php echo esc_attr(get_the_title($product_id)); ?>">
+                                            <?php endif; ?>
+                                            <?php echo esc_html(wp_trim_words($result->name, 7)); ?> 
+                                            <span class="review-count">(<?php echo esc_html($result->review_count); ?>)</span>
+                                        </div>
+                                        <span class="book-authors">
+                                            <?php
+                                            $authors = wp_get_post_terms($product_id, 'authors');
+                                            if ($authors && !is_wp_error($authors)) {
+                                                $author_names = array_map(function($author) {
+                                                    return $author->name;
+                                                }, $authors);
+                                                echo esc_html(implode(', ', $author_names));
+                                            }
+                                            ?>
+                                        </span>
+                                    </a>
+                                </li>
+                            <?php else: ?>
+                                <li><?php echo esc_html($result->name); ?> | Reviews: <?php echo esc_html($result->review_count); ?> | Error: Empty Term</li>
+                            <?php endif; ?>
+                        <?php endforeach; 
+                        echo '</ul>';
+                    } else {
+                        echo 'No reviews found.';
+                    }
+                    ?>
                 </div>
+            </div>
         </div>
     </div>
 </div>

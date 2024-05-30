@@ -15,7 +15,7 @@ $featured_rev = new WP_Query($archive_featured_review);
 $options = get_option('wbr_archive_promo_options');
 ?>
 <div class="wbr-archive-page-container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-    <div class="container">
+    <div class="container p-0">
         <div class="row">
             <div class="col-lg-12">
                 <div class="wbr-archive-slider" >

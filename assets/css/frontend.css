@@ -1427,9 +1427,6 @@ body.author .author-info {
     background-color: #E6E9FA;
     border: 1px solid #F6E6FC;
 }
-.winner-review-books.single-leaderboard{
-    margin-top: 20px;
-}
 @media only screen and (max-width: 568px) {
     .wbr-archive-page-cls .archive-promo-wrapper .title h2{
         font-size: 24px;
@@ -1456,9 +1453,6 @@ body.author .author-info {
     }
     .wbr-leaderboard-page-cls .single-leaderboard ul li a{
         font-size: 16px;
-    }
-    .winner-review-books.single-leaderboard{
-        margin-top: 20px;
     }
     .wpr-card-body .right-title h2{
         font-size: 22px;

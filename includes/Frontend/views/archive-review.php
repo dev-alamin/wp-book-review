@@ -18,8 +18,21 @@ $options = get_option('wbr_archive_promo_options');
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="slider">
-                    <img src="<?php echo $options['archive_promo_slider_image']; ?>" alt="Fajr Fair Review banner">
+                <div class="wbr-archive-slider" >
+                    <div class="wbr-archive-slider-single" style="background-image: url(<?php echo $options['archive_promo_slider_image']; ?>);">
+                       <div class="slider-content">
+                            <h2>This is a Title</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti eum maxime fuga aspernatur dolorum, qui recusandae molestias reiciendis error optio.</p>
+                            <a href="#">Read More</a>
+                       </div>
+                    </div>
+                    <div class="wbr-archive-slider-single" style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6A7J9PM23YKhAHvsEoTnFXNis1XXPqVrD9A&s);">
+                        <div class="slider-content">
+                            <h2>This is a Title</h2>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti eum maxime fuga aspernatur dolorum, qui recusandae molestias reiciendis error optio.</p>
+                            <a href="#">Read More</a>
+                       </div>
+                    </div>
                 </div>
             </div>
         </div>

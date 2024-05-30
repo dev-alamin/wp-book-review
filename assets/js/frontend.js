@@ -394,4 +394,14 @@ document.querySelectorAll('.wbr_author_review_pagination').forEach(function (ele
 
 jQuery(document).ready(function($) {
     new WOW().init();
+
+    $('.wbr-archive-slider').slick({
+        autoplay:true,
+        autoplaySpeed:3000,
+        arrows:true,
+        prevArrow:'<button type="button" class="slick-slider-prev"></button>',
+        nextArrow:'<button type="button" class="slick-slider-next"></button>',
+        slidesToShow:1,
+        slidesToScroll:1
+    });
 });

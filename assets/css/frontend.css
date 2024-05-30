@@ -2505,3 +2505,95 @@ body.author .author-info {
   .page-header h2{
     margin-bottom: 0px;
   }
+
+  .wbr-archive-slider{
+    width: 100%;
+    position: relative;
+  }
+  .wbr-archive-slider-single{
+    width: 100%;
+    height: 720px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  .wbr-archive-slider-single::before{
+    position: absolute;
+    content: "";
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #00000090;
+  }
+  .wbr-archive-slider button.slick-slider-prev{
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    z-index: 99;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+  .wbr-archive-slider button.slick-slider-prev:hover{
+    background-color: #83b735;
+    color: #fff;
+  }
+  .wbr-archive-slider button.slick-slider-prev::before{
+    content: "\f053" !important;
+    font-weight: 900;
+    font-family: "Font Awesome 6 Free";
+  }
+  .wbr-archive-slider button.slick-slider-next{
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+  .wbr-archive-slider button.slick-slider-next:hover{
+    background-color: #83b735;
+    color: #fff;
+  }
+  .wbr-archive-slider button.slick-slider-next::before{
+    content: "\f054" !important;
+    font-weight: 900;
+    font-family: "Font Awesome 6 Free";
+  }
+  .wbr-archive-slider-single .slider-content{
+    display: block;
+    z-index: 999;
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    transform: translateY(-50%);
+  }
+  .wbr-archive-slider-single .slider-content h2{
+    font-size: 48px;
+    line-height: 50px;
+    color: #fff;
+  }
+  .wbr-archive-slider-single .slider-content p{
+    font-size: 18px;
+    line-height: 24px;
+    color: #fff;
+    width: 60%;
+    text-align: justify;
+    margin: auto;
+    text-align: center;
+  }
+
+  .wbr-archive-slider-single .slider-content a{
+    background-color: #83b735;
+    border-radius: 15px;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 16px;
+    display: inline-block;
+    margin-top: 20px;
+  }
+
+  

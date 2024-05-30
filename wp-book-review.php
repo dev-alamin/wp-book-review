@@ -132,12 +132,15 @@ book_review();
 function enqueue_select2_assets() {
     wp_enqueue_style('book-review-wow-css', plugin_dir_url(__FILE__) . "/assets/css/animation.css", array(), '1.0.0');
     wp_enqueue_style('select2-css', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css', array(), '4.0.13');
+    wp_enqueue_style('slick-css', '//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css', array(), '4.0.13');
+    // wp_enqueue_style('slick-theme-css', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css', array(), '4.0.13');
 
     wp_enqueue_script('jquery');
 
     wp_enqueue_script('select2-js', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js', array('jquery'), '4.0.13', true);
 
     wp_enqueue_script( 'tiny-mce', '//cdn.tiny.cloud/1/6ab4ikdk4qmkiuookatavsi3nas1irrmrnf5e9allzgj3o2l/tinymce/7/tinymce.min.js', ['jquery'], time(), true );
+    wp_enqueue_script( 'slick-js', '//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js', ['jquery'], time(), true );
     wp_enqueue_script('book-review-wow-js',  plugin_dir_url(__FILE__) . "/assets/js/wow.js");
     wp_enqueue_script( 'wb-sweet-alert', 'https://cdn.jsdelivr.net/npm/sweetalert2@11', [], '1.0.0', true );
 }

@@ -12,7 +12,7 @@ get_header(); ?>
 // Query to retrieve all products
 $campaign_query = new WP_Query(array(
     'post_type'      => 'review-campaign',
-    'posts_per_page' => -1,
+    'posts_per_page' => 20,
     'post_status'    => 'publish',
     // 'meta_query'     => array(
     //     array(
@@ -70,87 +70,56 @@ if ($campaign_query->have_posts()) { ?>
 wp_reset_postdata();
 ?>
 
-    <div class="book-review-open-campaign  wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+    <div class="mb-3 book-review-open-campaign  wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
         <div class="book-review-heading">
             <h5>Recent Winners</h5>
         </div>
     </div>
-    <div class="book-single-achievements">
-        <div class="book-single-achievement wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-            <div class="book-review-thumbnail-img">
-                <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
-            </div>
-            <div class="book-review-avatar">
-                <a href="#">
-                    <svg width="30px" height="17px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
-                        <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
-                    </svg>
-                    <img class="author-img" src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt="">
-                </a>
-            </div>
-            <div class="book-review-info">
-                <a href="#">Admin</a>
-                <h3><a href="#">this is a title</a></h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
-            </div>
-        </div>
-        <div class="book-single-achievement wow fadeInUp" data-wow-duration="1.3s" data-wow-delay=".9s">
-            <div class="book-review-thumbnail-img">
-                <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
-            </div>
-            <div class="book-review-avatar">
-                <a href="#">
-                    <svg width="30px" height="17px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
-                        <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
-                    </svg>
-                    <img class="author-img" src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt="">
-                </a>
-            </div>
-            <div class="book-review-info">
-                <a href="#">Admin</a>
-                <h3><a href="#">this is a title</a></h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
-            </div>
-        </div>
-        <div class="book-single-achievement wow fadeInUp" data-wow-duration="1.6s" data-wow-delay="1.2s">
-            <div class="book-review-thumbnail-img">
-                <a href="#"><img src="" alt=""></a>
-            </div>
-            <div class="book-review-avatar">
-                <a href="#">
-                    <svg width="30px" height="17px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
-                        <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
-                    </svg>
-                    <img class="author-img" src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt="">
-                </a>
-            </div>
-            <div class="book-review-info">
-                <a href="#">Admin</a>
-                <h3><a href="#">this is a title</a></h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
-            </div>
-        </div>
-        <div class="book-single-achievement wow fadeInUp" data-wow-duration="1.9s" data-wow-delay="1.5s">
-            <div class="book-review-thumbnail-img">
-                <a href="#"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt=""></a>
-            </div>
-            <div class="book-review-avatar">
-                <a href="#">
-                    <svg width="30px" height="17px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
-                        <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
-                    </svg>
-                    <img class="author-img" src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>" alt="">
-                </a>
-            </div>
-            <div class="book-review-info">
-                <a href="#">Admin</a>
-                <h3><a href="#">this is a title</a></h3>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti, optio?</p>
-            </div>
-        </div>
+    <?php 
+    $winner_query = new WP_Query( [
+        'post_type'      => 'review',
+        'posts_per_page' => -1,
+        'meta_key' => '__review_winner_option',
+        'posts_per_page' => 20
+    ] );
+    ?>
+
+<?php if( $winner_query->have_posts() ) : ?>
+    <div class="book-single-achievements mb-5 mt-3">
+        <?php
+        while( $winner_query->have_posts() ) :
+            $winner_query->the_post();
+            $campaign_winner_position = carbon_get_post_meta(get_the_ID(), '_review_winner_option');
+            if( $campaign_winner_position !== 'default' ): 
+                $author_id          = get_the_author_meta('ID');
+                $author_name        = get_the_author_meta('display_name', $author_id);
+                $author_description = get_the_author_meta('description', $author_id);
+                $author_avatar      = get_avatar_url($author_id, array('size' => 96));
+                $campaign_id        = wbr_get_product_info_by_review(get_the_ID());
+                ?>
+                <div class="book-single-achievement wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+                    <div class="book-review-thumbnail-img">
+                        <a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ); ?>" alt=""></a>
+                    </div>
+                    <div class="book-review-avatar">
+                        <a href="<?php echo get_author_posts_url($author_id); ?>">
+                            <!-- <svg width="30px" height="17px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
+                                <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
+                            </svg> -->
+                            <img class="author-img" src="<?php echo esc_url($author_avatar); ?>" alt="<?php echo esc_attr($author_name); ?>">
+                        </a>
+                    </div>
+                    <div class="book-review-info">
+                        <a href="<?php echo get_author_posts_url($author_id); ?>"><?php echo esc_html($author_name); ?></a>
+                        <h3><a href="<?php the_permalink(); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), 6 ) ); ?></a></h3>
+                        <p><?php echo wbr_number_to_word( $campaign_winner_position ). ' place in ' .  wp_trim_words( get_the_title( $campaign_id['campaign'] ), 10, '...' ); ?></p>
+                    </div>
+                </div>
+            <?php endif;
+        endwhile;
+        ?>
     </div>
+<?php endif; ?>
+
 <?php get_footer();

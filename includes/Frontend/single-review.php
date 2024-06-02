@@ -79,7 +79,7 @@ $campaing = get_post_meta(get_the_ID(), '_campaign_id', true);
                                 <?php
                                 if( ! empty( $authors ) ):
                                     foreach ( $authors as $author ): ?>
-                                    <a style="color: var(--wd-primary-color);" href="<?php echo get_term_link($author); ?>"><?php echo esc_html($author->name); ?></a>
+                                    <a style="color: var(--wd-primary-color);" href="<?php echo get_term_link($author); ?>"><?php echo esc_html( $author->name ); ?></a>
                                 <?php endforeach; 
                                 endif; ?>
                                 </li>

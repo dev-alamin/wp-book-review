@@ -1863,7 +1863,7 @@ body.author .author-info {
 }
 .book-single-achievements{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: start;
     gap: 20px;
     text-align: center;
@@ -1937,7 +1937,11 @@ body.author .author-info {
     }
 }
 
-
+@media (min-width:768px) {
+    .book-single-achievement {
+        min-height: 380px;
+    }
+}
 
 
 

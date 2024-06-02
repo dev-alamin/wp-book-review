@@ -461,6 +461,7 @@ function wbr_get_product_info_by_review( $review_id = null ) {
         'sale_price'    => $product->get_sale_price(),
         'regular_price' => $product->get_regular_price(),
         'rating'        => get_post_meta($review_id, '_review_rating', true),
+        'campaign' => get_post_meta( $review_id, '_campaign_id', true ),
     );
 
     return $product_info;

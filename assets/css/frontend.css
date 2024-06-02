@@ -206,7 +206,7 @@ a, button, .btn-primary{
     text-decoration: none;
     color: #333;
     line-height: 30px;
-    font-weight: 600;
+    /* font-weight: 600; */
 }
 
 .wpr-card-body .title-description {
@@ -1344,12 +1344,12 @@ body.author .author-info {
 }
 
 .wbr-archive-page-cls  .wpr-card .comment-entry.wpr-single-comment{
-    border-top: 2px solid #DDDDDD;
+    border-top: 1px solid #eee;
     margin-top: 20px;
 }
 
 .wbr-archive-page-cls .wpr-card-body .title-description a{
-    font-weight: 800;
+    /* font-weight: 800; */
     font-size: 18px;
 }
 
@@ -2512,7 +2512,7 @@ body.author .author-info {
   }
   .wbr-archive-slider-single{
     width: 100%;
-    height: 720px;
+    height: 500px;
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -2662,3 +2662,27 @@ body.author .author-info {
   .wbr-featured-campaign-archive .fetured-campaign-info .timer .second{
     background-color: #ffcbda;
   }
+
+
+.review-meta-info .wpr-card-body {
+    display: flex;
+}
+
+.wpr-card-body .review-meta-info {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+}
+
+.wpr-card-body .review-meta-info a {
+    font-size: 12px !important;
+    font-weight: normal !important;
+}
+
+.wpr-card-body .review-meta-info p .fa {
+    color: var(--wd-primary-color);
+}
+
+.wpr-card-body .review-meta-info p {
+    margin-bottom: 0;
+}

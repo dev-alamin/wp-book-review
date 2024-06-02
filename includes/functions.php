@@ -94,7 +94,7 @@ function wbr_output_review_card( $post_id ) {
     $post_title          = get_the_title($post_id);
     $author_id           = get_post_field('post_author', $post_id);
     $comment_author_data = get_userdata($author_id);
-    $author_avatar       = get_avatar($author_id, 96); 
+    $author_avatar       = get_avatar($author_id, 96);
     $product_id          = get_post_meta($post_id, '_associated_product_id', true);
     $remove_review       = str_replace('Review', ' ', $post_title);
     $author_avatar       = get_avatar($author_id, 96);
@@ -102,6 +102,7 @@ function wbr_output_review_card( $post_id ) {
     $comment_count       = count_user_posts( $author_id, 'review' );
     $author_name         = $comment_author_data ? $comment_author_data->display_name : 'Anonymous';
     $authors             = get_the_terms($product_id, 'authors');
+    $book_info           = wbr_get_product_info_by_review( $post_id );
     ?>
 
         <div class="wpr-card mb-5">
@@ -136,6 +137,22 @@ function wbr_output_review_card( $post_id ) {
                     ?>
                 </div>
                 <div class="title-description">
+                    <div class="review-meta-info">
+                    <?php
+                        $post_time = get_the_time('U'); // Get the post time in Unix timestamp format
+                        $current_time = current_time('timestamp'); // Get the current time in Unix timestamp format
+                        $time_diff = human_time_diff($post_time, $current_time); // Calculate the difference
+                        $post_time = $time_diff . ' ago'; // Output the time difference in a human-readable format
+                    ?>
+                        <p class="post-time">
+                            <i class="fa fa-regular fa-clock"></i>
+                            <?php echo esc_html( $post_time ); ?>
+                        </p>
+                        <p>
+                            <i class="fa fa-book"></i>
+                            <a href="<?php echo esc_url( $book_info['permalink'] ); ?>"><?php echo esc_html( wp_trim_words( $book_info['title'], 5, '' ) ); ?></a>
+                        </p>
+                    </div>
                     <a href="<?php the_permalink(); ?>" target="_blank">
                         <?php echo wp_trim_words( get_the_content(), 20, '...' ); ?>
                     </a>
@@ -402,4 +419,49 @@ function wbr_number_to_word( int $number ) : string {
     );
 
     return isset($words[$number]) ? $words[$number] : '';
+}
+
+/**
+ * Retrieve basic information about the associated WooCommerce product by a given review ID.
+ *
+ * This function fetches the post meta value for '_product_id' associated
+ * with a specific review post, retrieves the associated product object,
+ * and returns an array containing basic information about the product.
+ *
+ * @param int $review_id The ID of the review post. Defaults to the current post ID.
+ * @return array|false An array containing basic information about the product if found, or false if not.
+ */
+function wbr_get_product_info_by_review( $review_id = null ) {
+    if ( is_null( $review_id ) ) {
+        $review_id = get_the_ID();
+    }
+
+    $review_id = intval( $review_id );
+    if ( $review_id <= 0 ) {
+        return false;
+    }
+
+    $product_id = get_post_meta( $review_id, '_product_id', true );
+
+    if (empty( $product_id )) {
+        return false;
+    }
+
+    $product = wc_get_product( $product_id );
+
+    if ( ! $product || is_wp_error( $product )) {
+        return false;
+    }
+
+    $product_info = array(
+        'id'            => $product->get_id(),
+        'title'         => $product->get_name(),
+        'permalink'     => get_permalink($product->get_id()),
+        'thumbnail_url' => get_the_post_thumbnail_url($product->get_id(), 'thumbnail'),
+        'sale_price'    => $product->get_sale_price(),
+        'regular_price' => $product->get_regular_price(),
+        'rating'        => get_post_meta($review_id, '_review_rating', true),
+    );
+
+    return $product_info;
 }

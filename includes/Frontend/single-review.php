@@ -4,17 +4,14 @@ get_header();
 $post_id             = get_the_ID();
 $author_id           = get_post_field('post_author', $post_id);
 $comment_author_data = get_userdata($author_id);
-$product_id          = get_post_meta($post_id, '_product_id', true);
+$book_info           = wbr_get_product_info_by_review( $post_id );
 $author_url          = get_author_posts_url($author_id);
 $author_avatar       = get_avatar($author_id, 96);
 $author_name         = $comment_author_data ? $comment_author_data->display_name : 'Anonymous';
-$authors             = get_the_terms($product_id, 'authors');
-$product             = wc_get_product($product_id);
-$book_rating         = get_post_meta($post_id, '_review_rating', true);
-$regular_price       = get_post_meta( $product_id, '_regular_price', true );
-$sale_price          = get_post_meta( $product_id, '_sale_price', true );
-$total_post =   count_user_posts($author_id, 'review' );
-$total_review =  wpr_get_total_review_and_average( $product_id );
+$authors             = get_the_terms($book_info['id'], 'authors');
+$product             = wc_get_product($book_info['id']);
+$total_post          = count_user_posts($author_id, 'review' );
+$total_review        = wpr_get_total_review_and_average( $book_info['id'] );
 
 $campaing = get_post_meta(get_the_ID(), '_campaign_id', true);
 ?>
@@ -48,7 +45,7 @@ $campaing = get_post_meta(get_the_ID(), '_campaign_id', true);
                         <div class="reviewer-rating">
                             <h4>রেটিং দিয়েছেন</h4>
                             <?php 
-                                $rating = intval($book_rating); // Convert rating to an integer
+                                $rating = intval( $book_info['rating'] ); // Convert rating to an integer
                                 $filled_stars = min(5, max(0, $rating)); // Ensure the rating is between 0 and 5
 
                                 for ($i = 0; $i < $filled_stars; $i++) {
@@ -71,13 +68,13 @@ $campaing = get_post_meta(get_the_ID(), '_campaign_id', true);
                             $book_image = ! empty( $book_image ) ? $book_image : BOOK_REVIEW_ASSETS . '/images/default-book.png';
 
                             ?>
-                            <a href="<?php esc_url( get_the_permalink( $product_id ) ); ?>">
-                                <img src="<?php echo esc_url( $book_image ); ?>" alt="<?php echo esc_attr( get_the_title( $product_id ) ); ?>">
+                            <a href="<?php esc_url( $book_info['permalink'] ); ?>">
+                                <img src="<?php echo esc_url( $book_image ); ?>" alt="<?php echo esc_attr( $book_info['title'] ); ?>">
                             </a>
                         </div>
                         <div class="book-info">
                             <ul>
-                                <li>বই: <a style="color: var(--wd-primary-color);" href="<?php echo esc_url( get_the_permalink( $product_id ) ); ?>"><?php echo esc_html( get_the_title( $product_id ) ); ?></a> </li>
+                                <li>বই: <a style="color: var(--wd-primary-color);" href="<?php echo esc_url( $book_info['permalink'] ); ?>"><?php echo esc_html( $book_info['title'] ); ?></a> </li>
                                 <li>লেখক: 
                                 <?php
                                 if( ! empty( $authors ) ):
@@ -88,7 +85,7 @@ $campaing = get_post_meta(get_the_ID(), '_campaign_id', true);
                                 </li>
                                 <li>বিষয়:
                                     <?php 
-                                        $categories = get_the_terms( $product_id, 'product_cat' );
+                                        $categories = get_the_terms( $book_info['id'], 'product_cat' );
                                         if( ! empty( $categories ) || is_countable( $categories ) || is_object( $categories ) ){
                                         foreach ( $categories as $cat ): ?>
                                             <a style="color: var(--wd-primary-color);" href="<?php echo get_term_link($cat); ?>"><?php echo esc_html($cat->name); ?></a>
@@ -104,25 +101,25 @@ $campaing = get_post_meta(get_the_ID(), '_campaign_id', true);
                                 <li>মোট রিভিউ: <?php echo ff_english_to_bengali( $total_review['total_reviews'] ); ?> টি  (<?php  echo ff_english_to_bengali( $total_review['average_rating'] ); ?> রেটিং )</li>
                                 <li>
                                     <?php 
-                                    if( ! empty( $regular_price ) && !empty( $sale_price ) ) {
+                                    if( ! empty( $book_info['regular_price'] ) && !empty( $book_info['sale_price'] ) ) {
                                         echo 'মূল্য: <del>';
-                                        echo  wc_price( $regular_price );
+                                        echo  wc_price( $book_info['regular_price'] );
                                         echo '</del>';
-                                       }elseif( !empty( $regular_price ) ) {
+                                       }elseif( !empty( $book_info['regular_price'] ) ) {
                                         echo 'মূল্য: ';
-                                        echo  wc_price( $regular_price );
+                                        echo  wc_price( $book_info['regular_price'] );
                                        }
                                     ?>
                                 <?php 
-                                if( ! empty( $sale_price ) ) {
-                                    echo wc_price( $sale_price );
+                                if( ! empty( $book_info['sale_price'] ) ) {
+                                    echo wc_price( $book_info['sale_price'] );
                                     echo ' টাকা';
                                    }
                                 ?>
                             </li>
                             </ul>
                             <div class="price-btn">
-                                <button><a style="color: #fff;" href="<?php echo esc_url( get_the_permalink( $product_id ) ); ?>">বইটি  কিনুন </a></button>
+                                <button><a style="color: #fff;" href="<?php echo esc_url( $book_info['permalink'] ); ?>">বইটি  কিনুন </a></button>
                             </div>
                         </div>
                     </div>

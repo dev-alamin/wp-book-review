@@ -11,7 +11,7 @@
                     'meta_query' => array(
                         array(
                             'key' => '_product_id',
-                            'value' => $product_id
+                            'value' => $book_info['id']
                         )
                     )
                 ));

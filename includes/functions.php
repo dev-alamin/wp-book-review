@@ -137,6 +137,7 @@ function wbr_output_review_card( $post_id ) {
                     ?>
                 </div>
                 <div class="title-description">
+                    <?php if( isset(  $book_info['title'] ) ): ?>
                     <div class="review-meta-info">
                     <?php
                         $post_time = get_the_time('U'); // Get the post time in Unix timestamp format
@@ -153,6 +154,7 @@ function wbr_output_review_card( $post_id ) {
                             <a href="<?php echo esc_url( $book_info['permalink'] ); ?>"><?php echo esc_html( wp_trim_words( $book_info['title'], 5, '' ) ); ?></a>
                         </p>
                     </div>
+                    <?php endif; ?>
                     <a href="<?php the_permalink(); ?>" target="_blank">
                         <?php echo wp_trim_words( get_the_content(), 20, '...' ); ?>
                     </a>
@@ -461,8 +463,36 @@ function wbr_get_product_info_by_review( $review_id = null ) {
         'sale_price'    => $product->get_sale_price(),
         'regular_price' => $product->get_regular_price(),
         'rating'        => get_post_meta($review_id, '_review_rating', true),
-        'campaign' => get_post_meta( $review_id, '_campaign_id', true ),
+        'campaign'      => get_post_meta( $review_id, '_campaign_id', true ),
     );
 
     return $product_info;
+}
+
+function wbr_custom_pagination($total_pages, $paged) {
+    $big = 999999999; // need an unlikely integer
+    
+    if ($total_pages > 1) {
+        $pages = paginate_links( array(
+            'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+            'format'    => '?paged=%#%',
+            'current'   => $paged,
+            'total'     => $total_pages,
+            'type'      => 'array',
+            'prev_text' => '←',
+            'next_text' => '→',
+        ) );
+
+        if ( is_array( $pages ) ) {
+            echo '<div class="wd-loop-footer products-footer">';
+            echo '<nav class="woocommerce-pagination wd-pagination">';
+            echo '<ul class="page-numbers">';
+            foreach ( $pages as $page ) {
+                echo '<li>' . $page . '</li>';
+            }
+            echo '</ul>';
+            echo '</nav>';
+            echo '</div>';
+        }
+    }
 }

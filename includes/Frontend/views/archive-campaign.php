@@ -2,7 +2,7 @@
 get_header(); ?>
 <div class="book-review-campaign-heading wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
     <div class="heading">
-        <h2><a href="#">Lorem ipsum dolor sit amet.</a></h2>
+        <h2>Lorem ipsum dolor sit amet.</h2>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
             Nobis aspernatur vitae sed cum atque animi temporibus soluta, 
             itaque ut corporis?</p>
@@ -14,14 +14,14 @@ $campaign_query = new WP_Query(array(
     'post_type'      => 'review-campaign',
     'posts_per_page' => 20,
     'post_status'    => 'publish',
-    // 'meta_query'     => array(
-    //     array(
-    //         'key'     => '_last_submission_date',
-    //         'value'   => date('Y-m-d'),
-    //         'compare' => '>=',
-    //         'type'    => 'DATE'
-    //     )
-    // )
+    'meta_query'     => array(
+        array(
+            'key'     => '_last_submission_date',
+            'value'   => date('Y-m-d'),
+            'compare' => '>=',
+            'type'    => 'DATE'
+        )
+    )
 ));
 
 if ($campaign_query->have_posts()) { ?>

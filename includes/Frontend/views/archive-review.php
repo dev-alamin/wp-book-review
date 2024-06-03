@@ -1,6 +1,8 @@
-<?php 
-get_header(); 
-$archive_featured_review = array(
+<?php
+get_header();
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+if( $paged == 1 ) :
+$archive_featured_review = array (
     'post_type'      => 'review',
     'post_status'    => 'publish',
     'posts_per_page' => 4,
@@ -11,8 +13,7 @@ $archive_featured_review = array(
 );
 
 $featured_rev = new WP_Query($archive_featured_review);
-
-$options = get_option('wbr_archive_promo_options');
+$options      = get_option('wbr_archive_promo_options');
 ?>
 <div class="wbr-archive-page-container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
     <div class="container p-0">
@@ -43,10 +44,10 @@ $options = get_option('wbr_archive_promo_options');
         <div class="row">
             <div class="col-lg-6">
                 <div class="archive-featured-review wow fadeInUp" data-wow-duration=".6s" data-wow-delay=".3s">
-                    <?php                     
-                    if ($featured_rev->have_posts()) {
+                    <?php
+                    if ( $featured_rev->have_posts() ) {
                         echo '<div id="reviews-container">';
-                        while ($featured_rev->have_posts()) {
+                        while ( $featured_rev->have_posts() ) {
                             $featured_rev->the_post();
                             wbr_output_review_card(get_the_ID());
                             break;
@@ -315,8 +316,10 @@ setInterval(function() {
     </div>
 </div>
 <?php 
+endif; // End pagination condition
+
 if ( have_posts() ) {
-    echo '<div class="container mt-3 wbr-archive-page-cls">';
+    echo '<div class="container mt-3 wbr-archive-page-cls mb-5">';
     echo '<div class="row" id="reviews-container">';
     $duration = 1; 
     $delay = 0.6;
@@ -333,7 +336,10 @@ if ( have_posts() ) {
         $delay += 0.3;
     }
     echo '</div>';
-    the_posts_pagination();
+    global $wp_query;
+    $total_pages = $wp_query->max_num_pages;
+    $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+    wbr_custom_pagination( $wp_query->max_num_pages, $paged);
     // echo '<div class="load-more-rev-container"><button id="load-more-reviews">Load More Reviews</button></div>';
     echo '</div>';
 }

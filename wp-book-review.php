@@ -231,3 +231,10 @@ function update_user_review_count($post_id) {
     update_user_meta($author_id, 'review_count', $review_count);
 }
 add_action('save_post', 'update_user_review_count');
+
+function add_custom_post_type_to_author_query( $query ) {
+    if ($query->is_author() && $query->is_main_query() && !is_admin()) {
+        $query->set('post_type', array('post', 'review')); // Include default posts and your custom post type
+    }
+}
+add_action('pre_get_posts', 'add_custom_post_type_to_author_query');

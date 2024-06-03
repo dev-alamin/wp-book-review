@@ -106,29 +106,29 @@ $(document).on('click', '#load-more-reviews', function () {
 
     // Initialize TinyMCE for the review content textarea
 
-    // tinymce.init({
-    //     selector: 'textarea#review-content',
-    //     height: 200,
-    //     menubar: false,
-    //     block_formats: 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;',
-    //     plugins: [
-    //         'advlist autolink lists link image charmap print preview anchor',
-    //         'searchreplace visualblocks code fullscreen',
-    //         'insertdatetime media table paste code help wordcount',
-    //         'textcolor',
-    //         'toc'
-    //     ],
-    //     toolbar: 'undo redo | formatselect | ' +
-    //         'bold italic underline strikethrough | ' +
-    //         'forecolor backcolor | removeformat | ' +
-    //         'alignleft aligncenter alignright alignjustify | ' +
-    //         'bullist numlist outdent indent | ' +
-    //         'blockquote | link unlink | image media | ' +
-    //         'table | hr | toc | ' +
-    //         'code | fullscreen | help | ' +
-    //         'heading1 heading2 heading3 | paragraph', // Add heading and paragraph options
-    //     content_style: 'body { font-family: Arial, sans-serif; font-size: 14px; }'
-    // });
+    tinymce.init({
+        selector: 'textarea#review-content',
+        height: 200,
+        menubar: false,
+        block_formats: 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;',
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount',
+            'textcolor',
+            'toc'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+            'bold italic underline strikethrough | ' +
+            'forecolor backcolor | removeformat | ' +
+            'alignleft aligncenter alignright alignjustify | ' +
+            'bullist numlist outdent indent | ' +
+            'blockquote | link unlink | image media | ' +
+            'table | hr | toc | ' +
+            'code | fullscreen | help | ' +
+            'heading1 heading2 heading3 | paragraph', // Add heading and paragraph options
+        content_style: 'body { font-family: Arial, sans-serif; font-size: 14px; }'
+    });
 
     
     

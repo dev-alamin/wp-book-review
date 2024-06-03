@@ -359,9 +359,6 @@ height: initial;
     margin: auto;
 }
 
-#review-submission-form {
-    display: none;
-}
 .custom-file-upload {
     display: inline-block;
     padding: 8px 20px;
@@ -1943,23 +1940,6 @@ body.author .author-info {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .book-review-campaign-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -2689,4 +2669,8 @@ body.author .author-info {
 
 .wpr-card-body .review-meta-info p {
     margin-bottom: 0;
+}
+
+#review-submission-form{
+    display: none;
 }

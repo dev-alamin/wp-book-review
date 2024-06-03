@@ -155,17 +155,6 @@ function custom_admin_column_width_css() {
 
 add_action('admin_head', 'custom_admin_column_width_css');
 
-
-function add_tinymce_referrer_policy($tag, $handle) {
-    if ($handle === 'tiny-mce') {
-        $tag = str_replace('></script>', ' referrerpolicy="origin"></script>', $tag);
-    }
-    return $tag;
-}
-
-add_filter('script_loader_tag', 'add_tinymce_referrer_policy', 10, 2);
-
-
 function sticky_header_code() {
     echo '
         <div id="wbrfs_overlay">

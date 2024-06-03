@@ -26,8 +26,8 @@
             </div>
         </div>
 
-        <div class="col-lg-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-            <div id="review-submission-form form-submission">
+        <div class="col-lg-12">
+            <div id="review-submission-form" class="form-submission">
                 <h2>Submit a Review</h2>
                 <form id="review-form" class="form row gx-3 gy-2 align-items-center" action="" method="post" enctype="multipart/form-data">
                     <div class="col-lg-12">

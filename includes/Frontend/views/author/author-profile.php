@@ -12,11 +12,11 @@
                         <?php if ($author_bio) : ?>
                             <p class="author-bio"><?php echo $author_bio; ?></p>
                         <?php endif; ?>
-                        <div class="author-join-review">
+                        <div class="author-join-review mt-3">
                             <p class="join-date"><i class="fa-solid fa-calendar-days"></i> Joined: <?php echo date('F j, Y', strtotime($join_date)); ?></p>
                             <p class="review-count"><i class="fa-solid fa-file-lines"></i> Total Reviews: <?php echo $review_count; ?></p>
                         </div>
-                        
+                        <?php if( $campaign_posts->have_posts() ): ?>
                         <div class="author-achivement mt-3">
                             <h2><?php echo esc_html( ucwords( $author_name . "'s" ) ); ?> Achivement</h2>
                             <div class="author-achievement-wrapper">
@@ -60,6 +60,7 @@
                                 ?>
                             </div>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

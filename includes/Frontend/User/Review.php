@@ -14,6 +14,7 @@ class Review {
         
 		wp_enqueue_script( 'wbr-bootstrap-js' );
         wp_enqueue_script( 'wbr-select2' );
+        wp_enqueue_script( 'tiny-mce' );
         wp_enqueue_script( 'wbr-script' );
         
         ob_start();

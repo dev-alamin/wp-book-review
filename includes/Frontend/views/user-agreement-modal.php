@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="wbrUserAgreementLabel">Submission guidelines</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close text-light" style="background-color: red;" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></button>
       </div>
       <div class="modal-body">
         <p>Before submitting to FajrFair, pelase review our <a href="#">Community Guidelines</a></p>

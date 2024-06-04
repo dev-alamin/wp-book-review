@@ -27,8 +27,8 @@ if ($rev_posts->have_posts()) {
         echo '</div>';
     }
     wp_reset_postdata();
-    echo '<div class="load-more-rev-container"><button id="load-more-reviews">Load More Reviews</button></div>';
     echo '</div>';
+    echo '<div class="load-more-rev-container"><button id="load-more-reviews">Load More Reviews</button></div>';
     echo '</div>';
 } else {
     esc_html_e('No review found.', 'wpr');

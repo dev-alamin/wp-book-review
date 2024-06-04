@@ -12,19 +12,28 @@ namespace Book\Review;
  */
 class Custom_Post {
     public function __construct() {
+        
         add_action( 'init', [ $this, 'cpt_cb' ] );
+        
         add_filter('manage_review_posts_columns', [ $this, 'custom_reviews_columns' ] );
+        
         add_action('manage_review_posts_custom_column', [ $this, 'custom_reviews_column_content' ], 10, 2 );
+        
         add_filter('template_include', [ $this, 'custom_post_type_template' ] );
+        
         add_action('pre_get_posts', array($this, 'modify_archive_query') );
+        
         add_action('init', [ $this, 'custom_product_statuses' ] );
+        
         add_action('save_post', [ $this, 'update_post_author_info' ], 10, 3 );
+        
         add_action('save_post', [ $this, 'wbr_preserve_original_author' ], 10, 3 );
-
+        
         add_action('init', [ $this, 'wbr_register_delete_request_post_status' ] );
+        
         add_filter('display_post_states', [ $this, 'wbr_display_delete_request_post_state' ], 10, 2 );
+        
         add_filter('quick_edit_dropdown_post_status', [ $this, 'wbr_add_delete_request_to_quick_edit' ] );
-    
     }
 
     /**

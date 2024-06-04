@@ -8,17 +8,18 @@ class Review {
 
     public function display_reviews( $atts ) {
         wp_enqueue_style( 'wbr-bootstrap' );
-		wp_enqueue_script( 'wbr-bootstrap-js' );
         wp_enqueue_style( 'wbr-fontawesome' );
+        wp_enqueue_style( 'wbr-select2' );
         wp_enqueue_style( 'wbr-style' );
         
+		wp_enqueue_script( 'wbr-bootstrap-js' );
+        wp_enqueue_script( 'wbr-select2' );
         wp_enqueue_script( 'wbr-script' );
         
         ob_start();
         $review = true;
 
         $has_review = current_user_can( 'submit_review' ); // Need to add cap
-        
         if( is_user_logged_in() ) {
             $this->display_review_submission_form();
         }

@@ -47,6 +47,26 @@ class Assets {
                 'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/frontend.js' ),
                 'deps'    => [ 'jquery' ]
             ],
+            'tiny-mce' => [
+                'src'     => '//cdn.tiny.cloud/1/6ab4ikdk4qmkiuookatavsi3nas1irrmrnf5e9allzgj3o2l/tinymce/7/tinymce.min.js',
+                'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/frontend.js' ),
+                'deps'    => [ 'jquery' ]
+            ],
+            'slick-js' => [
+                'src'     => '//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js',
+                'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/frontend.js' ),
+                'deps'    => [ 'jquery' ]
+            ],
+            'wbr-wow-js' => [
+                'src'     => BOOK_REVIEW_ASSETS . '/js/wow.js',
+                'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/frontend.js' ),
+                'deps'    => [ 'jquery' ]
+            ],
+            'wb-sweet-alert' => [
+                'src' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
+                'version' => fileatime( BOOK_REVIEW_PATH . '/assets/js/frontend.js' ),
+                'deps' => [ 'jquery' ]
+            ]
         ];
     }
 
@@ -80,7 +100,15 @@ class Assets {
             'wbr-select2' => [
                 'src' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css',
                 'version' => '4.0.13'
-            ]
+            ],
+            'slick-css' => [
+                'src' => '//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css',
+                'version' => '4.0.13'
+            ],
+            'wbr-wow-css' => [
+                'src' => BOOK_REVIEW_ASSETS . '/css/animation.css',
+                'version' => '1.0.0'
+            ],
         ];
     }
 
@@ -116,29 +144,29 @@ class Assets {
         );
 
         if( ! is_admin() ) {
-            if (is_singular() || is_archive() ) {
+            if ( is_singular() || is_archive() ) {
                     // Get the current post object
                 global $post;
                 
                 // Check if the post type is 'review'
-                if ( $post && $post->post_type === 'review' || $post && $post->post_type === 'review-campaign' || is_author()) {
+                if ( $post && $post->post_type === 'review' || $post && $post->post_type === 'review-campaign' || is_author() ) {
                     // wp_enqueue_style( 'wbr-simplebar' );
                     wp_enqueue_style( 'wbr-bootstrap' );
                     wp_enqueue_style( 'wbr-fontawesome' );
                     wp_enqueue_style( 'wbr-style' );
+                    wp_enqueue_style( 'slick-css' );
+                    wp_enqueue_style( 'wbr-wow-css' );
+                    wp_enqueue_style( 'wbr-select2' );
                     
                     wp_enqueue_script( 'wbr-simplebar' );
                     wp_enqueue_script( 'wbr-script' );
+                    wp_enqueue_script( 'tiny-mce' );
+                    wp_enqueue_script( 'slick-js' );
+                    wp_enqueue_script( 'wbr-wow-js' );
+                    wp_enqueue_script( 'wb-sweet-alert' );
+                    wp_enqueue_script( 'wbr-select2' );
                 }
             }
         }
-
-        // if( is_admin()){
-        //     global $post;
-        //     if( $post->post_type === 'review-campaign' ){
-        //         wp_enqueue_style( 'wbr-select2' );
-        //         wp_enqueue_script( 'wbr-select2' );
-        //     }
-        // }
     }
 }

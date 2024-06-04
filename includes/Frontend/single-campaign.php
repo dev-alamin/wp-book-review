@@ -64,7 +64,7 @@ get_header(); ?>
 </div>
 <div class="submission-heading wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
     <h2>Latest submissions</h2>
-    <a href="#">Explore all</a>
+    <a href="/book-review">Explore all</a>
 </div>
 
 <?php 
@@ -171,10 +171,10 @@ if ($campaign_query->have_posts()) { ?>
                     <div class="card wow fadeInUp" data-wow-duration="<?php echo $duration; ?>s" data-wow-delay="<?php echo $delay ; ?>s">
                         <div class="card-banner" style="background-image: url(<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'medium' ) ) ?>)">
                             <div class="category-tag">
-                                <svg width="35px" height="20px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
+                                <!-- <svg width="35px" height="20px" viewBox="0 0 35 20" xmlns="http://www.w3.org/2000/svg">
                                     <rect width="100%" height="100%" rx="4" fill="#FA2562"></rect>
                                     <path d="M13.571 14l2.656-8h-1.815l-1.804 5.625h-.023L10.804 6H9l2.588 8h1.983zM22.03 6h1.613v3.194h3.177v1.612h-3.177V14H22.03v-3.194h-3.178V9.194h3.178V6z" fill="#fff"></path>
-                                </svg>
+                                </svg> -->
                             </div>
                             <div class="card-body">
                                 <h2 class="blog-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>

@@ -209,13 +209,12 @@ function sort_users_by_review_count($query) {
 }
 add_action('pre_get_users', 'sort_users_by_review_count');
 
-// Update user meta with review count upon saving a review post
 function update_user_review_count($post_id) {
     if (get_post_type($post_id) !== 'review') {
         return;
     }
 
-    $author_id = get_post_field('post_author', $post_id);
+    $author_id    = get_post_field('post_author', $post_id);
     $review_count = count_user_posts($author_id, 'review');
     update_user_meta($author_id, 'review_count', $review_count);
 }
@@ -223,7 +222,21 @@ add_action('save_post', 'update_user_review_count');
 
 function add_custom_post_type_to_author_query( $query ) {
     if ($query->is_author() && $query->is_main_query() && !is_admin()) {
-        $query->set('post_type', array('post', 'review')); // Include default posts and your custom post type
+        $query->set('post_type', array('post', 'review'));
     }
 }
 add_action('pre_get_posts', 'add_custom_post_type_to_author_query');
+
+function add_reviewer_role() {
+    add_role(
+        'reviewer',
+        __('Reviewer'),
+        array(
+            'read'         => true,  // Allow this role to read posts
+            'edit_posts'   => true,  // Allow this role to edit their own posts
+            'upload_files' => true,  // Allow this role to upload files
+        )
+    );
+}
+
+add_action('init', 'add_reviewer_role');

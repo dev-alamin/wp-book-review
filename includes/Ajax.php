@@ -155,7 +155,7 @@ class Ajax {
     private function validate_image_and_upload($file) {
         $file_type = wp_check_filetype_and_ext($file['tmp_name'], $file['name']);
     
-        if (!$file_type['type'] || !in_array($file_type['type'], array('image/jpeg', 'image/png', 'image/gif'))) {
+        if ( ! $file_type['type'] || ! in_array($file_type['type'], array('image/jpeg', 'image/png', 'image/gif', 'image/avif' ) ) ) {
             return 'Invalid file type. Please upload a JPEG, PNG, or GIF image.';
         }
     
@@ -367,10 +367,16 @@ class Ajax {
         }else {
             $meta_saved = update_user_meta( $user_id, 'user_agreement_consent', $user_consent );
             if ( $meta_saved ) {
-                wp_send_json_success( 'You\'ve already agreed with our terms and conditions.' );
+                $user_id = wp_update_user( array( 'ID' => $user_id, 'role' => 'reviewer' ) );
+            
+                if ( is_wp_error( $user_id ) ) {
+                    wp_send_json_error( 'Failed to update user role.' );
+                } else {
+                    wp_send_json_success( 'You\'ve already agreed with our terms and conditions. Your role has been updated to Reviewer.' );
+                }
             } else {
                 wp_send_json_error( 'Failed to save user agreement consent.' );
-            }
+            }            
         }
     
         wp_die();

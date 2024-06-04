@@ -94,9 +94,10 @@ $campaign_posts = new WP_Query( [
             'author'         => $author_id,
             'post_type'      => 'post',
             'posts_per_page' => 8,
-            'post_status' => 'publish'
+            'post_status'    => 'publish'
         );
-        $post_query = new WP_Query($post_query_args);
+
+        $post_query = new WP_Query( $post_query_args );
 
         if( $post_query->have_posts() ): ?>
         <hr>
@@ -106,7 +107,6 @@ $campaign_posts = new WP_Query( [
             </div>
             <div class="row">
 
-                
             <?php
             while( $post_query->have_posts() ) {
                 $post_query->the_post();

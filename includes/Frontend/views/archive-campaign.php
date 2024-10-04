@@ -1,13 +1,286 @@
 <?php
 get_header(); ?>
-<div class="book-review-campaign-heading wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-    <div class="heading">
-        <h2>Lorem ipsum dolor sit amet.</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-            Nobis aspernatur vitae sed cum atque animi temporibus soluta, 
-            itaque ut corporis?</p>
-    </div>
+
+<div class="breadcrumb">
+    <ul>
+        <li>
+            <a href="<?php echo site_url('/'); ?>">হোম</a>
+        </li>
+        <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.78105 8.00047L5.4812 4.70062L6.42401 3.75781L10.6667 8.00047L6.42401 12.2431L5.4812 11.3003L8.78105 8.00047Z" fill="#9A9D9D"/>
+            </svg>
+        </li>
+        <li class="review-text">
+            ক্যাম্পেইন
+        </li>
+    </ul>
 </div>
+
+<!-- recent campaign review -->
+ <section class="campaign-review">
+    <div class="container">
+        <div class="book-review-top">
+            <h3>বর্তমান ক্যাম্পেইন</h3>
+            <a class="btn-white" href="/all-review">সব রিভিউ দেখুন</a>
+        </div>
+
+        <div class="recent-campaign-wrapper slider-arrow-center">
+            <div class="arrow-prev-btn recent-campaign-prev-btn"><button type="button"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"> <circle cx="24" cy="24" r="23" fill="white" stroke="#E0E0E0" stroke-width="2"/> <path d="M25.1714 24.0007L20.2217 19.0509L21.6359 17.6367L27.9999 24.0007L21.6359 30.3646L20.2217 28.9504L25.1714 24.0007Z" fill="#1C1E29"/> </svg></button></div>
+            <div class="arrow-next-btn recent-campaign-next-btn"><button type="button"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"> <circle cx="24" cy="24" r="23" fill="white" stroke="#E0E0E0" stroke-width="2"/> <path d="M25.1714 24.0007L20.2217 19.0509L21.6359 17.6367L27.9999 24.0007L21.6359 30.3646L20.2217 28.9504L25.1714 24.0007Z" fill="#1C1E29"/> </svg></button></div>
+            
+            <div class="campaign-review-slider">
+                <div class="campaign-review-card">
+                    <div class="campaign-review-card-inner">
+                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/cover.png'; ?>" class="cover-image" />
+                        <div class="campaign-content">
+                            <h3>আল ফাতাহ পাবলিশিং</h3>
+                            <div class="campaign-content-list">
+                                <div class="campaign-content-list-item">
+                                    <p>সর্বমোট প্রাইজ মানি</p>
+                                    <strong>৩০০০ টাকা</strong>
+                                </div>
+                                <div class="campaign-content-list-item">
+                                    <p>শেষ সময়</p>
+                                    <strong>১২ আগস্ট ২০২৪</strong>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-white">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-review-card">
+                    <div class="campaign-review-card-inner">
+                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/cover.png'; ?>" class="cover-image" />
+                        <div class="campaign-content">
+                            <h3>আল ফাতাহ পাবলিশিং</h3>
+                            <div class="campaign-content-list">
+                                <div class="campaign-content-list-item">
+                                    <p>সর্বমোট প্রাইজ মানি</p>
+                                    <strong>৩০০০ টাকা</strong>
+                                </div>
+                                <div class="campaign-content-list-item">
+                                    <p>শেষ সময়</p>
+                                    <strong>১২ আগস্ট ২০২৪</strong>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-white">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-review-card">
+                    <div class="campaign-review-card-inner">
+                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/cover.png'; ?>" class="cover-image" />
+                        <div class="campaign-content">
+                            <h3>আল ফাতাহ পাবলিশিং</h3>
+                            <div class="campaign-content-list">
+                                <div class="campaign-content-list-item">
+                                    <p>সর্বমোট প্রাইজ মানি</p>
+                                    <strong>৩০০০ টাকা</strong>
+                                </div>
+                                <div class="campaign-content-list-item">
+                                    <p>শেষ সময়</p>
+                                    <strong>১২ আগস্ট ২০২৪</strong>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-white">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-review-card">
+                    <div class="campaign-review-card-inner">
+                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/cover.png'; ?>" class="cover-image" />
+                        <div class="campaign-content">
+                            <h3>আল ফাতাহ পাবলিশিং</h3>
+                            <div class="campaign-content-list">
+                                <div class="campaign-content-list-item">
+                                    <p>সর্বমোট প্রাইজ মানি</p>
+                                    <strong>৩০০০ টাকা</strong>
+                                </div>
+                                <div class="campaign-content-list-item">
+                                    <p>শেষ সময়</p>
+                                    <strong>১২ আগস্ট ২০২৪</strong>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-white">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-review-card">
+                    <div class="campaign-review-card-inner">
+                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/cover.png'; ?>" class="cover-image" />
+                        <div class="campaign-content">
+                            <h3>আল ফাতাহ পাবলিশিং</h3>
+                            <div class="campaign-content-list">
+                                <div class="campaign-content-list-item">
+                                    <p>সর্বমোট প্রাইজ মানি</p>
+                                    <strong>৩০০০ টাকা</strong>
+                                </div>
+                                <div class="campaign-content-list-item">
+                                    <p>শেষ সময়</p>
+                                    <strong>১২ আগস্ট ২০২৪</strong>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-white">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-review-card">
+                    <div class="campaign-review-card-inner">
+                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/cover.png'; ?>" class="cover-image" />
+                        <div class="campaign-content">
+                            <h3>আল ফাতাহ পাবলিশিং</h3>
+                            <div class="campaign-content-list">
+                                <div class="campaign-content-list-item">
+                                    <p>সর্বমোট প্রাইজ মানি</p>
+                                    <strong>৩০০০ টাকা</strong>
+                                </div>
+                                <div class="campaign-content-list-item">
+                                    <p>শেষ সময়</p>
+                                    <strong>১২ আগস্ট ২০২৪</strong>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-white">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </section>
+
+
+
+ <!-- recent campaign review -->
+ <section class="campaign-review">
+    <div class="container">
+        <div class="book-review-top">
+            <h3>বিগত দিনের ক্যাম্পেইন</h3>
+        </div>
+
+        <div class="recent-campaign-wrapper-cards">
+
+            <div class="campaign-review-list">
+
+                <div class="campaign-review-card">
+                    <div class="campaign-review-card-inner">
+                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/cover.png'; ?>" class="cover-image" />
+                        <div class="campaign-content">
+                            <h3>আল ফাতাহ পাবলিশিং</h3>
+                            <div class="campaign-content-list">
+                                <div class="campaign-content-list-item">
+                                    <p>সর্বমোট প্রাইজ মানি</p>
+                                    <strong>৩০০০ টাকা</strong>
+                                </div>
+                                <div class="campaign-content-list-item">
+                                    <p>শেষ সময়</p>
+                                    <strong>১২ আগস্ট ২০২৪</strong>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-white">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-review-card">
+                    <div class="campaign-review-card-inner">
+                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/cover.png'; ?>" class="cover-image" />
+                        <div class="campaign-content">
+                            <h3>আল ফাতাহ পাবলিশিং</h3>
+                            <div class="campaign-content-list">
+                                <div class="campaign-content-list-item">
+                                    <p>সর্বমোট প্রাইজ মানি</p>
+                                    <strong>৩০০০ টাকা</strong>
+                                </div>
+                                <div class="campaign-content-list-item">
+                                    <p>শেষ সময়</p>
+                                    <strong>১২ আগস্ট ২০২৪</strong>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-white">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-review-card">
+                    <div class="campaign-review-card-inner">
+                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/cover.png'; ?>" class="cover-image" />
+                        <div class="campaign-content">
+                            <h3>আল ফাতাহ পাবলিশিং</h3>
+                            <div class="campaign-content-list">
+                                <div class="campaign-content-list-item">
+                                    <p>সর্বমোট প্রাইজ মানি</p>
+                                    <strong>৩০০০ টাকা</strong>
+                                </div>
+                                <div class="campaign-content-list-item">
+                                    <p>শেষ সময়</p>
+                                    <strong>১২ আগস্ট ২০২৪</strong>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-white">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-review-card">
+                    <div class="campaign-review-card-inner">
+                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/cover.png'; ?>" class="cover-image" />
+                        <div class="campaign-content">
+                            <h3>আল ফাতাহ পাবলিশিং</h3>
+                            <div class="campaign-content-list">
+                                <div class="campaign-content-list-item">
+                                    <p>সর্বমোট প্রাইজ মানি</p>
+                                    <strong>৩০০০ টাকা</strong>
+                                </div>
+                                <div class="campaign-content-list-item">
+                                    <p>শেষ সময়</p>
+                                    <strong>১২ আগস্ট ২০২৪</strong>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-white">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-review-card">
+                    <div class="campaign-review-card-inner">
+                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/cover.png'; ?>" class="cover-image" />
+                        <div class="campaign-content">
+                            <h3>আল ফাতাহ পাবলিশিং</h3>
+                            <div class="campaign-content-list">
+                                <div class="campaign-content-list-item">
+                                    <p>সর্বমোট প্রাইজ মানি</p>
+                                    <strong>৩০০০ টাকা</strong>
+                                </div>
+                                <div class="campaign-content-list-item">
+                                    <p>শেষ সময়</p>
+                                    <strong>১২ আগস্ট ২০২৪</strong>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-white">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-review-card">
+                    <div class="campaign-review-card-inner">
+                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/cover.png'; ?>" class="cover-image" />
+                        <div class="campaign-content">
+                            <h3>আল ফাতাহ পাবলিশিং</h3>
+                            <div class="campaign-content-list">
+                                <div class="campaign-content-list-item">
+                                    <p>সর্বমোট প্রাইজ মানি</p>
+                                    <strong>৩০০০ টাকা</strong>
+                                </div>
+                                <div class="campaign-content-list-item">
+                                    <p>শেষ সময়</p>
+                                    <strong>১২ আগস্ট ২০২৪</strong>
+                                </div>
+                            </div>
+                            <a href="#" class="btn-white">বিস্তারিত</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </section>
+
 <?php 
 // Query to retrieve all products
 $campaign_query = new WP_Query(array(

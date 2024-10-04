@@ -1,10 +1,65 @@
+$ = jQuery;
+
 jQuery(document).ready(function($) {
+    $(window).on('load', function() {
+        // Hide the loader
+        $('.loaderify').fadeOut('slow', function() {
+            $(this).remove(); // Optionally remove the loader from the DOM
+        });
+    });
+    
+    tinymce.init({
+     selector: '.textarea-book-reviwe',
+    });
+
+
+// Store the last clicked value
+var lastClickedValue = null;
+
+// Handle click event
+$('.review-star-icon input[type="radio"]').on("click", function () {
+    lastClickedValue = $(this).val(); // Store the value of the clicked radio button
+    var parentDiv = $(this).closest('.review-star-icon'); // Get the parent div containing the stars
+
+    // Remove 'active' class from all stars first
+    parentDiv.find('.star').removeClass('active');
+
+    // Add 'active' class to the first N stars, where N is the value of the clicked radio button
+    parentDiv.find('.star').slice(0, lastClickedValue).addClass('active');
+});
+
+// Handle hover (mouseenter)
+$('.review-star-icon input[type="radio"]').on("mouseenter", function () {
+    var selectedValue = $(this).val(); // Get the value of the hovered radio button
+    var parentDiv = $(this).closest('.review-star-icon'); // Get the parent div containing the stars
+
+    // Remove 'active' class from all stars first
+    parentDiv.find('.star').removeClass('active');
+
+    // Add 'active' class to the first N stars, where N is the value of the hovered radio button
+    parentDiv.find('.star').slice(0, selectedValue).addClass('active');
+});
+
+// Handle mouseleave to revert back to the clicked state
+$('.review-star-icon input[type="radio"]').on("mouseleave", function () {
+    var parentDiv = $(this).closest('.review-star-icon'); // Get the parent div containing the stars
+
+    // Remove 'active' class from all stars first
+    parentDiv.find('.star').removeClass('active');
+
+    // If a value was clicked before, restore the active stars based on the last clicked value
+    if (lastClickedValue) {
+        parentDiv.find('.star').slice(0, lastClickedValue).addClass('active');
+    }
+});
+
+    
 
     var page = 2; // Set the initial page value
     var loading = false;
     
-var page = 2; // Set the initial page value
-var loading = false;
+    var page = 2; // Set the initial page value
+    var loading = false;
 
 $(document).on('click', '#load-more-reviews', function () {
     if (!loading) {
@@ -396,12 +451,243 @@ jQuery(document).ready(function($) {
     new WOW().init();
 
     $('.wbr-archive-slider').slick({
-        autoplay:true,
-        autoplaySpeed:3000,
+        autoplay:4000,
+        speed:1000,
         arrows:true,
         prevArrow:'<button type="button" class="slick-slider-prev"></button>',
         nextArrow:'<button type="button" class="slick-slider-next"></button>',
         slidesToShow:1,
-        slidesToScroll:1
+        slidesToScroll:1,
+        dots:true,
     });
+
+// Recent Featured Review Slider
+$('.recent-featured-review-list').slick({
+    autoplay: false,
+    speed: 1000,
+    arrows: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    dots: false,
+    infinite: false,
+    prevArrow: $('.recent-prev-btn'),
+    nextArrow: $('.recent-next-btn'),
+    responsive: [
+        {
+            breakpoint: 1200,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 767,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 320,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }
+    ]
 });
+
+// Featured Slider Book
+$('.featured-slider-book').slick({
+    autoplay: false,
+    speed: 1000,
+    arrows: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    dots: false,
+    infinite: false,
+    prevArrow: $('.book-prev-btn'),
+    nextArrow: $('.book-next-btn'),
+    responsive: [
+        {
+            breakpoint: 1200,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 767,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 320,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }
+    ]
+});
+
+// Video Slider Review
+$('.video-slider-review').slick({
+    autoplay: false,
+    speed: 1000,
+    arrows: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    dots: false,
+    infinite: false,
+    prevArrow: $('.video-prev-btn'),
+    nextArrow: $('.video-next-btn'),
+    responsive: [
+        {
+            breakpoint: 1200,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 767,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 320,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }
+    ]
+});
+
+// campaign-review-slider
+$('.campaign-review-slider').slick({
+    autoplay: false,
+    speed: 1000,
+    arrows: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    dots: false,
+    infinite: false,
+    prevArrow: $('.recent-campaign-prev-btn'),
+    nextArrow: $('.recent-campaign-next-btn'),
+    responsive: [
+        {
+            breakpoint: 1200,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 767,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 320,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }
+    ]
+});
+
+
+
+    var btnPlay = $('.btn-play');
+
+    btnPlay.on("click", function() {
+    
+        // Pause all videos
+        $("video").each(function() {
+            this.pause();
+        });
+
+        $(".btn-pause").each(function() {
+            $(this).removeClass("activated");
+        });
+
+        $(".btn-play").each(function() {
+            $(this).addClass("activated");
+        });
+
+        var parentClass = $(this).parent().parent();
+
+       var pauseBtn = parentClass.find(".btn-pause");
+
+       pauseBtn.addClass("activated");
+    
+        var video = parentClass.find("video")[0];
+    
+        if (video.paused) {
+            video.play();
+        }
+    
+        $(this).removeClass("activated");
+    });
+    
+    var btnPause = $('.btn-pause');
+    
+    btnPause.on("click", function() {
+    
+        var parentClass = $(this).parent().parent();
+
+        var playBtn = parentClass.find(".btn-play");
+
+        playBtn.addClass("activated");
+        
+        var video = parentClass.find("video")[0];
+    
+        if (video.play) {
+            video.pause();
+        }
+    
+        $(this).removeClass("activated");
+
+    });
+    
+
+
+});
+

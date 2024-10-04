@@ -65,6 +65,7 @@ class Metabox {
             ->where( 'term_taxonomy', '=', 'authors' ) // Target the 'author' taxonomy
             ->add_fields( array(
                 Field::make( 'image', 'author_image', __( 'Author Image' ) ),
+                Field::make( 'checkbox', 'featured_author', __( 'Is Popular Author?')),
             ) );
 
             // Add fields to taxonomy 'publishers'
@@ -72,6 +73,7 @@ class Metabox {
             ->where( 'term_taxonomy', '=', 'publisher' ) // Target the 'publishers' taxonomy
             ->add_fields( array(
                 Field::make( 'image', 'publisher_image', __( 'Publisher Image' ) ),
+                Field::make( 'checkbox', 'featured_publisher', __( 'Is Popular Publisher?')),
             ) );
 
             Container::make( 'post_meta', 'Campaign Details' )

@@ -69,7 +69,7 @@ class Ajax {
         if ($rev_posts->have_posts()) {
             while ($rev_posts->have_posts()) {
                 $rev_posts->the_post();
-                echo '<div class="col-lg-4 col-sm-6 col-xs-12">';
+               	echo '<div class="col-lg-4 col-sm-6 col-xs-12">';
                 wbr_output_review_card( get_the_ID() );
                 echo '</div>';
             }

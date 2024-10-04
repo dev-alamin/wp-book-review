@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use Composer\Installers\RoundcubeInstaller;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -169,7 +172,7 @@ function wbr_output_review_card( $post_id ) {
                        echo '<a href="' . esc_url(get_author_posts_url( $author_id )) . '">';
                        echo '<strong>' . esc_html( strtoupper( $comment_author_name ? $comment_author_name : $author_name ) ) . '</strong>';
                        echo '</a>';
-                       echo '<p>মোট ' . ff_english_to_bengali( $comment_count ) . ' টি পর্যালোচনা লিখেছেন</p>';
+                       echo '<p>মোট ' . wbr_english_to_bengali( $comment_count ) . ' টি পর্যালোচনা লিখেছেন</p>';
                     echo '</div>';
                     echo '</div>';
                     ?>
@@ -217,9 +220,9 @@ function wpr_get_total_review_and_average($product_id) {
     );
 }
 
-if( ! function_exists( 'ff_english_to_bengali' ) ) {
+if( ! function_exists( 'wbr_english_to_bengali' ) ) {
     // Convert Arabic numbers to Bengali numbers
-    function ff_english_to_bengali( $number = '' ) {
+    function wbr_english_to_bengali( $number = '' ) {
         $bengali_numbers = array('০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯');
         return str_replace(range(0, 9), $bengali_numbers, $number);
     }
@@ -494,5 +497,25 @@ function wbr_custom_pagination($total_pages, $paged) {
             echo '</nav>';
             echo '</div>';
         }
+    }
+}
+
+function wbr_get_svg_star_rating_icon( $rating = 5 ) {
+    // Limit the rating between 1 and 5.
+    $rating = min( 5, max( 1, (int) round( $rating ) ) );
+
+    // SVG star icon.
+    $star_svg = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"/>
+        </svg>';
+
+    // Output the filled stars.
+    for ( $i = 0; $i < $rating; $i++ ) {
+        echo '<span>' . $star_svg . '</span>';
+    }
+
+    // Output empty stars (if any).
+    for ( $i = $rating; $i < 5; $i++ ) {
+        echo '<span style="opacity: 0.2;">' . $star_svg . '</span>';
     }
 }

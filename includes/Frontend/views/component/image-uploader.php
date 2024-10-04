@@ -1,6 +1,10 @@
 <div class="wbr-featured-image-container">
     <label class="picture" for="product-image-id" tabIndex="0">
         <span class="picture__image"></span>
+        <span class="first-upload-lebel">
+            <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/upload-image.png'; ?>" />
+            <span>কভার ফটো আপলোড করুন ( JPEG, PNG, GIF)</span>
+        </span>
     </label>
     <?php if( isset( $_GET['reviewid'] ) ): ?>
         <input type="hidden" name="existing_image" value="<?php echo get_post_thumbnail_id( $post_id ); ?>">

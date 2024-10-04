@@ -62,6 +62,11 @@ class Assets {
                 'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/frontend.js' ),
                 'deps'    => [ 'jquery' ]
             ],
+            'wbr-flip-js' => [
+                'src'     => BOOK_REVIEW_ASSETS . '/js/flip.min.js',
+                'version' => filemtime( BOOK_REVIEW_PATH . '/assets/js/frontend.js' ),
+                'deps'    => [ 'jquery' ]
+            ],
             'wb-sweet-alert' => [
                 'src' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
                 'version' => fileatime( BOOK_REVIEW_PATH . '/assets/js/frontend.js' ),
@@ -80,6 +85,10 @@ class Assets {
             'wbr-style' => [
                 'src'     => BOOK_REVIEW_ASSETS . '/css/frontend.css',
                 'version' => filemtime( BOOK_REVIEW_PATH . '/assets/css/frontend.css' )
+            ],
+            'wbr-style-flip' => [
+                'src'     => BOOK_REVIEW_ASSETS . '/css/flip.min.css',
+                'version' => filemtime( BOOK_REVIEW_PATH . '/assets/css/flip.min.css' )
             ],
             'wbr-admin-style' => [
                 'src'     => BOOK_REVIEW_ASSETS . '/css/admin.css',
@@ -154,9 +163,11 @@ class Assets {
                     wp_enqueue_style( 'wbr-bootstrap' );
                     wp_enqueue_style( 'wbr-fontawesome' );
                     wp_enqueue_style( 'wbr-style' );
+                    wp_enqueue_style( 'wbr-style-flip' );
                     wp_enqueue_style( 'slick-css' );
                     wp_enqueue_style( 'wbr-wow-css' );
                     wp_enqueue_style( 'wbr-select2' );
+                    wp_enqueue_style( 'wbr-style-summernote' );
                     
                     wp_enqueue_script( 'wbr-simplebar' );
                     wp_enqueue_script( 'wbr-script' );
@@ -164,7 +175,9 @@ class Assets {
                     wp_enqueue_script( 'slick-js' );
                     wp_enqueue_script( 'wbr-wow-js' );
                     wp_enqueue_script( 'wb-sweet-alert' );
+                    wp_enqueue_script( 'wbr-flip-js' );
                     wp_enqueue_script( 'wbr-select2' );
+                    wp_enqueue_script( 'wbr-summernote-js' );
                 }
             }
         }

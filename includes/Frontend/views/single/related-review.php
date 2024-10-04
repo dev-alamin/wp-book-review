@@ -41,7 +41,7 @@
                                         <?php if ($authors): ?>
                                             <h3><a href="<?php echo esc_url($author_url); ?>"><?php echo esc_html( strtoupper( $author_name ) ); ?></a></h3>
                                             <?php endif; ?>
-                                            <p>মোট <?php echo ff_english_to_bengali( $total_post ); ?>  রিভিউ লিখেছেন </p>
+                                            <p>মোট <?php echo wbr_english_to_bengali( $total_post ); ?>  রিভিউ লিখেছেন </p>
                                         </div>
                                         <!-- <button>Button</button> -->
                                     </div>

@@ -1,6 +1,9 @@
 <?php
 get_header();
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$sliders = carbon_get_theme_option( 'wbr_archive_slider' );
+
+$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+
 if( $paged == 1 ) :
 $archive_featured_review = array (
     'post_type'      => 'review',
@@ -13,7 +16,7 @@ $archive_featured_review = array (
 );
 
 $featured_rev = new WP_Query($archive_featured_review);
-$options      = get_option('wbr_archive_promo_options');
+$options      = get_option( 'wbr_archive_promo_options' );
 ?>
 
 <div class="loaderify">
@@ -21,53 +24,46 @@ $options      = get_option('wbr_archive_promo_options');
         <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/loader.gif'; ?>" class="background-bg" />
     </div>
 </div>
-<script>
-jQuery(document).ready(function($){
-    $(window).on('load', function() {
-        // Hide the loader
-        $('.loaderify').fadeOut('slow', function() {
-            $(this).remove(); // Optionally remove the loader from the DOM
-        });
-    });
-});
-</script>
+
+<?php if( ! empty( $sliders ) ): ?>
 <div class="wbr-archive-page-container">
     <div class="review__slider-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <div class="wbr-archive-slider" >
+                <div class="wbr-archive-slider">
+
+                    <?php                     
+                    if ( ! empty( $sliders ) ) : 
+                        foreach ( $sliders as $slider ) :
+                            $slider_image       = wp_get_attachment_image_url( $slider['slider_image'], 'full' );
+                            $slider_heading     = $slider['slider_heading'];
+                            $slider_button_text = $slider['slider_button_text'];
+                            $slider_button_link = $slider['slider_button_link'];
+                    ?>
+                    
                     <div class="wbr-archive-slider-single">
-                       <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/slider/banner-image-01.jpg'; ?>" class="background-bg" />
+                       <img src="<?php echo esc_url( $slider_image ); ?>" class="background-bg" />
                        <div class="container">
                             <div class="slider-content">
-                                <h2>রিভিউ করে জিতে নিন পুরস্কার</h2>
-                                <a href="#">বিস্তারিত</a>
+                                <h2><?php echo esc_html( $slider_heading ); ?></h2>
+                                <a href="<?php echo esc_url( $slider_button_link ); ?>">
+                                    <?php echo esc_html( $slider_button_text ); ?>
+                                </a>
                             </div>
                        </div>
                     </div>
-                    <div class="wbr-archive-slider-single">
-                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/slider/banner-image-01.jpg'; ?>" class="background-bg" />
-                        <div class="container">
-                            <div class="slider-content">
-                                <h2>রিভিউ করে জিতে নিন পুরস্কার</h2>
-                                <a href="#">বিস্তারিত</a>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="wbr-archive-slider-single">
-                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/slider/banner-image-01.jpg'; ?>" class="background-bg" />
-                        <div class="container">
-                            <div class="slider-content">
-                                <h2>রিভিউ করে জিতে নিন পুরস্কার</h2>
-                                <a href="#">বিস্তারিত</a>
-                        </div>
-                        </div>
-                    </div>
+
+                    <?php 
+                        endforeach; 
+                    endif;
+                    ?>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+<?php endif; ?>
 
 <!-- book review -->
 <div class="book-review-lists">
@@ -91,15 +87,14 @@ jQuery(document).ready(function($){
                             $author_data       = get_userdata($author_id);
                             $author_url        = get_author_posts_url($author_id);
                             $author_avatar     = get_avatar($author_id, 96);
-                            $author_name         = $author_data ? $author_data->display_name : 'Anonymous';
-                            $review_rating = get_post_meta( get_the_ID(), '_review_rating', true );
+                            $author_name       = $author_data ? $author_data->display_name : 'Anonymous';
+                            $review_rating     = get_post_meta( get_the_ID(), '_review_rating', true );
                             //wbr_output_review_card(get_the_ID());
                             ?>
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="book-review-card">
+                                <div class="book-review-card mb-5">
                                     <div class="book-review-thumbnail">
                                          <?php the_post_thumbnail('full'); ?>
-                    
                                         <div class="book-list">
                                             <img src="<?php echo esc_url( $product_thumbnail ); ?>" alt="<?php esc_attr( get_the_title( $product_id ) ); ?>" />
                                             <div class="book-list-content">
@@ -119,22 +114,22 @@ jQuery(document).ready(function($){
                                         <?php echo get_avatar( $author_id, 96, '', '', ); ?>
                                         <div class="book-user-info">
                                             <h4><a href="<?php echo esc_url($author_url); ?>"><?php echo esc_html( strtoupper( $author_name ) ); ?></a></h4>
-                                            <p>Posted <?php echo human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) ); ?> ago</p>
+                                            <p> <?php
+                                            printf( esc_html__( 'Posted %s ago', 'wbr' ),
+                                                human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) )
+                                            );
+                                            ?>
+                                            </p>
                                         </div>
                                         <div class="book-user-star">
-                                           <?php
-                                           echo $review_rating;
-                                           wbr_get_svg_star_rating_icon( $review_rating ); ?>
+                                           <?php wbr_get_svg_star_rating_icon( $review_rating ); ?>
                                         </div>
-                    
                                     </div>
-                    
                                     <div class="book-review-content">
                                         <a href="<?php the_permalink(); ?>"><?php the_title( '<h4>', '</h4>' ); ?></a>
-                                        <p>মানুষের ইগনোরেন্সের তুলনা করা চলে অনেকটা পোকা মাকড়ের সাথে।পোকা মাকড় যেমন আলো দেখে বোকার মতো আগুনে গিয়ে ঝাপ দিয়ে নিজের ধ্বংস ডেকে আনে,মানুষও তেমনি দুনিয়ার চাকচিক্যে বোকা বনে গিয়ে নিজেকে ধ্বংসের দিকে ঠেলে দেয়।সেই আগুন তাদেরকে গ্রাস করার আগেই অতীতে বোকা বনে যাওয়া কিছু মানুষ সক্ষম হয় আগুনের কাছ থেকে ফিরে আসতে...</p>
+                                        <p>  <?php echo esc_html( wp_trim_words( get_the_content(), '55', '' ) ); ?></p>
                                         <a href="<?php the_permalink(); ?>"><?php esc_html_e( 'সম্পূর্ণ রিভিউ পড়ুন ', 'wbr' ); ?></a>
                                     </div>
-                    
                                 </div>
                             </div>
                         <?
@@ -144,13 +139,12 @@ jQuery(document).ready(function($){
                         esc_html_e('No review found.', 'wpr');
                     }
                     ?>
-                
             </div>
         </div>
     </div>
 </div>
 <!-- end book review -->
-
+<?php if ( carbon_get_theme_option( 'wbr_post_review_show' ) ) : ?>
 <!-- post review -->
 <div class="post-a-review">
     <div class="container">
@@ -158,61 +152,69 @@ jQuery(document).ready(function($){
             <div class="row">
                 <div class="col-lg-4">
                     <div class="post-a-review-wrapper-item">
-                        <h3>ফজর ফেয়ার এ আপনার রিভিউ পাবলিশ করুন</h3>
-                        <p>ফজর ফেয়ার এ আপনার পছন্দের বই রিভিউ পাবলিশ করুন, কন্টেস্ট এ অংশগ্রহণ করে জিতে নিন পুরস্কার</p>
-                        <a href="#" class="btn-white">
-                            + রিভিউ পোস্ট করুন
+                        <h3><?php echo esc_html( carbon_get_theme_option( 'wbr_post_review_heading' ) ); ?></h3>
+                        <p><?php echo esc_html( carbon_get_theme_option( 'wbr_post_review_subheading' ) ); ?></p>
+                        <a href="<?php echo esc_url( carbon_get_theme_option( 'wbr_post_review_button_link' ) ); ?>" class="btn-white">
+                            <?php echo esc_html( carbon_get_theme_option( 'wbr_post_review_button_text' ) ); ?>
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-5">
-                    <h4 class="lead-text-one font-weight-bold text-white">কেন রিভিউ পোষ্ট করবেন</h4>
+                    <h4 class="lead-text-one font-weight-bold text-white"><?php esc_html_e( 'কেন রিভিউ পোষ্ট করবেন', 'wbr' ); ?></h4>
                     <ul>
-                        <li class="text-white lead-text-one">
+                        <?php
+                        $reasons = carbon_get_theme_option( 'wbr_post_review_reasons' );
+                        if ( ! empty( $reasons ) ) :
+                            foreach ( $reasons as $reason ) :
+                                $reason_text = $reason['reason_text'];
+                                $reason_icon = wp_get_attachment_image_url( $reason['reason_icon'], 'full' );
+                        ?>
+                            <li class="text-white lead-text-one">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z" fill="white"/>
-                            </svg>    
-                            রিভিউ প্রতিযোগীতায় অংশগ্রহণ করার সুযোগ
-                        </li>
-                        <li class="text-white lead-text-one">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z" fill="white"/>
-                            </svg>    
-                            লক্ষাধিক ব্যাবহার কারীর সামনে আসার সুযোগ
-                        </li>
-                        <li class="text-white lead-text-one">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z" fill="white"/>
-                            </svg>    
-                            পুরস্কার, পরিচিতি সহ লেখক দের মতামত গ্রহণের সুযোগ
-                        </li>
+                                <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM11.0026 16L18.0737 8.92893L16.6595 7.51472L11.0026 13.1716L8.17421 10.3431L6.75999 11.7574L11.0026 16Z" fill="white"></path>
+                            </svg>
+                                <?php echo esc_html( $reason_text ); ?>
+                            </li>
+                        <?php 
+                            endforeach;
+                        endif;
+                        ?>
                     </ul>
                 </div>
                 <div class="col-lg-3">
-                    <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/promo/promo.png'; ?>" class="promo-image" />
+                    <?php 
+                    $promo_image = wp_get_attachment_image_url( carbon_get_theme_option( 'wbr_post_review_promo_image' ), 'full' );
+                    if ( $promo_image ) : ?>
+                        <img src="<?php echo esc_url( $promo_image ); ?>" class="promo-image" />
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<?php endif; ?>
 <!-- end post review -->
-
+<?php if ( carbon_get_theme_option( 'wbr_book_review_show' ) ) : ?>
 <div class="book-review-price">
     <div class="container">
 
         <div class="book-review-wrapper">
 
             <div class="book-prize-left wow fadeInRight" data-wow-offset="100" data-wow-duration="1s" data-wow-delay=".3s">
-                <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/prize/logo.png'; ?>" class="prize-logo" />
-                <h3>বুক রিভিউ প্রতিযোগিতা</h3>
-                <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/prize/identifier.png'; ?>" class="prize-identifier" />
+                <img src="<?php echo esc_url( wp_get_attachment_image_url( carbon_get_theme_option( 'wbr_book_review_logo' ), 'full' ) ); ?>" class="prize-logo" />
+                <h3><?php echo esc_html( carbon_get_theme_option( 'wbr_book_review_heading' ) ); ?></h3>
+                <img src="<?php echo esc_url( wp_get_attachment_image_url( carbon_get_theme_option( 'wbr_book_review_identifier' ), 'full' ) ); ?>" class="prize-identifier" />
                 <div class="prize-title">
-                    <span>নিবেদনে</span>
-                    <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/prize/al-fatah.png'; ?>" class="prize-logo" />
+                    <span><?php echo esc_html( carbon_get_theme_option( 'wbr_book_review_presented_text' ) ); ?></span>
+                    <img src="<?php echo esc_url( wp_get_attachment_image_url( carbon_get_theme_option( 'wbr_book_review_presented_logo' ), 'full' ) ); ?>" class="prize-logo" />
                 </div>
                 <div class="btn-group">
-                    <a href="#" class="btn btn-style-rectangle btn-color-primary">+ রিভিউ পোস্ট করুন</a>
-                    <a href="#" class="btn-white">বিস্তারিত</a>
+                    <a href="<?php echo esc_url( carbon_get_theme_option( 'wbr_book_review_post_review_link' ) ); ?>" class="btn btn-style-rectangle btn-color-primary">
+                        <?php echo esc_html( carbon_get_theme_option( 'wbr_book_review_post_review_button' ) ); ?>
+                    </a>
+                    <a href="<?php echo esc_url( carbon_get_theme_option( 'wbr_book_review_details_link' ) ); ?>" class="btn-white">
+                        <?php echo esc_html( carbon_get_theme_option( 'wbr_book_review_details_button' ) ); ?>
+                    </a>
                 </div>
             </div>
 
@@ -220,48 +222,41 @@ jQuery(document).ready(function($){
                 <div class="prize-money-time">
                     <div class="item">
                         <p>সর্বমোট প্রাইজ মানি</p>
-                        <h4>৩০০০ টাকা</h4>
+                        <h4><?php echo esc_html( carbon_get_theme_option( 'wbr_book_review_prize_money' ) ); ?></h4>
                     </div>
                     <div class="item">
                         <p>শেষ সময়</p>
-                        <h4>১২ আগস্ট ২০২৪</h4>
+                        <h4><?php echo esc_html( carbon_get_theme_option( 'wbr_book_review_deadline' ) ); ?></h4>
                     </div>
                 </div>
                 <div class="time-remaining">
                     <p>সময় বাকি আছে</p>
-    
-                    <div class="tick"
-                    data-did-init="handleTickInit">
-                   <div data-repeat="true"
-                        data-layout="horizontal center fit"
-                        data-transform="preset(d, h, m, s) -> delay">
-                       <div class="tick-group">
-                           <div data-key="value"
-                                data-repeat="true"
-                                data-transform="pad(00) -> split -> delay">
-                               <!-- Changed 'flip' to 'text' -->
-                               <span data-view="text"></span>
+
+                    <div class="tick" data-did-init="handleTickInit">
+                       <div data-repeat="true"
+                            data-layout="horizontal center fit"
+                            data-transform="preset(d, h, m, s) -> delay">
+                           <div class="tick-group">
+                               <div data-key="value"
+                                    data-repeat="true"
+                                    data-transform="pad(00) -> split -> delay">
+                                   <span data-view="text"></span>
+                               </div>
+                               <span data-key="label"
+                                     data-view="text"
+                                     class="tick-label"></span>
                            </div>
-                           <span data-key="label"
-                                 data-view="text"
-                                 class="tick-label"></span>
                        </div>
                    </div>
-               </div>
-    
+
                     <script>
                         function handleTickInit(tick) {
-    
-                            var targetDate = '2024-11-31T23:59:59';
-    
-                            // Initialize the countdown
+                            var targetDate = '<?php echo esc_js( carbon_get_theme_option( 'wbr_book_review_countdown_target' ) ); ?>';
                             Tick.count.down(targetDate).onupdate = function(value) {
                                 tick.value = value;
                             };
-    
                         }
                     </script>
-    
                 </div>
             </div>
 
@@ -269,6 +264,7 @@ jQuery(document).ready(function($){
 
     </div>
 </div>
+<?php endif; ?>
 
 <?php
 // Query to retrieve the latest review campaign post
@@ -495,7 +491,7 @@ setInterval(function() {
                                                             echo esc_html( wbr_english_to_bengali( $average_rating['average_rating'] ) ); 
                                                         ?>
                                                     </span>
-                                                    <span>• <?php echo esc_html( wbr_english_to_bengali( $result->review_count ) ); ?> রিভিউ</span>
+                                                    <span>• <?php echo esc_html( wbr_english_to_bengali( $result->review_count ) ); ?> রিভিউ </span>
                                                 </div>
                                             </div>
                                         </a>
@@ -516,7 +512,19 @@ setInterval(function() {
     </div>
 </div>
 
+<?php 
+$featured_writer_args  = array (
+    'post_type'      => 'review',
+    'post_status'    => 'publish',
+    'posts_per_page' => 4,
+    'orderby'        => 'rand',
+    'order'          => 'ASC',
+    'meta_key'       => [ '_wbr_is_featured_review'],
+    'meta_value'     => 'yes', 
+);
 
+$featured_writer = new WP_Query( $featured_writer_args );
+?>
 <!-- recent featured review -->
 <div class="recent-featured-review">
     <div class="container">
@@ -525,315 +533,123 @@ setInterval(function() {
             <a class="btn-white" href="#">সব রিভিউ দেখুন</a>
         </div>
        <div class="recent-slider-wrapper">
-            <div class="recent-prev-btn"><button type="button"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"> <circle cx="24" cy="24" r="23" fill="white" stroke="#E0E0E0" stroke-width="2"/> <path d="M25.1714 24.0007L20.2217 19.0509L21.6359 17.6367L27.9999 24.0007L21.6359 30.3646L20.2217 28.9504L25.1714 24.0007Z" fill="#1C1E29"/> </svg></button></div>
-            <div class="recent-next-btn"><button type="button"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"> <circle cx="24" cy="24" r="23" fill="white" stroke="#E0E0E0" stroke-width="2"/> <path d="M25.1714 24.0007L20.2217 19.0509L21.6359 17.6367L27.9999 24.0007L21.6359 30.3646L20.2217 28.9504L25.1714 24.0007Z" fill="#1C1E29"/> </svg></button></div>
+            <div class="recent-prev-btn">
+                <button type="button">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="24" cy="24" r="23" fill="white" stroke="#E0E0E0" stroke-width="2"/>
+                        <path d="M25.1714 24.0007L20.2217 19.0509L21.6359 17.6367L27.9999 24.0007L21.6359 30.3646L20.2217 28.9504L25.1714 24.0007Z" fill="#1C1E29"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="recent-next-btn">
+                <button type="button">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="24" cy="24" r="23" fill="white" stroke="#E0E0E0" stroke-width="2"/>
+                        <path d="M25.1714 24.0007L20.2217 19.0509L21.6359 17.6367L27.9999 24.0007L21.6359 30.3646L20.2217 28.9504L25.1714 24.0007Z" fill="#1C1E29"/>
+                    </svg>
+                </button>
+            </div>
             <div class="recent-featured-review-list">
-                <!-- start feature review card -->
-                <div class="featured-review-card">
-                    <img class="user-image" src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/user-large.png'; ?>" />
-                    <h4 class="author-title">Ferdaus Kabir</h4>
-                    <p>১৫ টি রিভিউ দিয়েছেন</p>
-                    <p class="recent-review-title">সাম্প্রতিক রিভিউ</p>
-                    <h5>আপনারে খুঁজিয়া বেড়াই - প্রত্যাবর্তন</h5>
-                    <p class="post-date">Posted 2 days ago</p>
+                <?php if ( $featured_writer->have_posts() ) : ?>
+                    <?php while ( $featured_writer->have_posts() ) : $featured_writer->the_post(); ?>
+                        <!-- start feature review card -->
+                        <div class="featured-review-card">
+                            <?php 
+                            // Fetch author avatar
+                            $author_id     = get_the_author_meta('ID');
+                            $author_avatar = get_avatar_url( $author_id, ['size' => '150'] );
+                            $review_count  = count_user_posts($author_id, 'review');
+                            ?>
 
+                            <img class="user-image" src="<?php echo esc_url( $author_avatar ); ?>" alt="<?php the_author(); ?>" />
+                            <h4 class="author-title"><?php the_author(); ?></h4>
+                            <p><?php echo $review_count; ?> টি রিভিউ দিয়েছেন</p>
+                            <p class="recent-review-title">সাম্প্রতিক রিভিউ</p>
+                            <h5><?php the_title(); ?></h5>
+                            <p class="post-date">Posted <?php echo human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago'; ?></p>
 
-                    <div class="book-user-review">
-                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/book.png'; ?>" />
-                        <div class="book-user-info">
-                            <h4>প্রত্যাবর্তন</h4>
-                            <p>আরিফ আজাদ</p>
+                            <div class="book-user-review">
+                                <?php 
+                                // Assuming you have custom meta fields for the book title and author
+                                $product_id     = get_post_meta( get_the_ID(), '_product_id', true );
+                                $book_title     = get_the_title( $product_id );
+                                $authors        = get_the_terms( $product_id, 'authors' );
+                                $post_thumbnail = get_the_post_thumbnail_url( $product_id );
+                                ?>
+
+                                <img src="<?php echo esc_url( $post_thumbnail ); ?>" alt="<?php echo esc_attr( $book_title ); ?>" />
+                                <div class="book-user-info">
+                                    <h4><?php echo esc_html( $book_title ); ?></h4>
+                                    
+                                    <p><?php if( ! empty( $authors ) ):
+                                        foreach ( $authors as $author ): ?>
+                                        <?php echo esc_html( wp_trim_words( $author->name, '5', '...') ); ?>
+                                        <?php endforeach;
+                                            endif; ?>
+                                    </p>
+                                </div>
+                                <div class="book-user-star">
+                                    <!-- Display a star rating (assuming you have a rating system) -->
+                                    <?php
+                                    $review_rating = get_post_meta( get_the_ID(), '_review_rating', true );
+                                    wbr_get_svg_star_rating_icon($review_rating);
+                                    ?>
+                                </div>
+                            </div>
+
+                            <a href="<?php echo esc_url( get_author_posts_url( $author_id ) ); ?>" class="view-profile">প্রফাইল দেখুন</a>
                         </div>
-                        <div class="book-user-star">
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <a href="#" class="view-profile">প্রফাইল দেখুন</a>
-
-                </div>
-                <!-- end feature review card -->
-                <!-- start feature review card -->
-                <div class="featured-review-card">
-                    <img class="user-image" src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/user-large.png'; ?>" />
-                    <h4 class="author-title">Ferdaus Kabir</h4>
-                    <p>১৫ টি রিভিউ দিয়েছেন</p>
-                    <p class="recent-review-title">সাম্প্রতিক রিভিউ</p>
-                    <h5>আপনারে খুঁজিয়া বেড়াই - প্রত্যাবর্তন</h5>
-                    <p class="post-date">Posted 2 days ago</p>
-
-
-                    <div class="book-user-review">
-                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/book.png'; ?>" />
-                        <div class="book-user-info">
-                            <h4>প্রত্যাবর্তন</h4>
-                            <p>আরিফ আজাদ</p>
-                        </div>
-                        <div class="book-user-star">
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <a href="#" class="view-profile">প্রফাইল দেখুন</a>
-
-                </div>
-                <!-- end feature review card -->
-                <!-- start feature review card -->
-                <div class="featured-review-card">
-                    <img class="user-image" src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/user-large.png'; ?>" />
-                    <h4 class="author-title">Ferdaus Kabir</h4>
-                    <p>১৫ টি রিভিউ দিয়েছেন</p>
-                    <p class="recent-review-title">সাম্প্রতিক রিভিউ</p>
-                    <h5>আপনারে খুঁজিয়া বেড়াই - প্রত্যাবর্তন</h5>
-                    <p class="post-date">Posted 2 days ago</p>
-
-
-                    <div class="book-user-review">
-                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/book.png'; ?>" />
-                        <div class="book-user-info">
-                            <h4>প্রত্যাবর্তন</h4>
-                            <p>আরিফ আজাদ</p>
-                        </div>
-                        <div class="book-user-star">
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <a href="#" class="view-profile">প্রফাইল দেখুন</a>
-
-                </div>
-                <!-- end feature review card -->
-                <!-- start feature review card -->
-                <div class="featured-review-card">
-                    <img class="user-image" src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/user-large.png'; ?>" />
-                    <h4 class="author-title">Ferdaus Kabir</h4>
-                    <p>১৫ টি রিভিউ দিয়েছেন</p>
-                    <p class="recent-review-title">সাম্প্রতিক রিভিউ</p>
-                    <h5>আপনারে খুঁজিয়া বেড়াই - প্রত্যাবর্তন</h5>
-                    <p class="post-date">Posted 2 days ago</p>
-
-
-                    <div class="book-user-review">
-                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/book.png'; ?>" />
-                        <div class="book-user-info">
-                            <h4>প্রত্যাবর্তন</h4>
-                            <p>আরিফ আজাদ</p>
-                        </div>
-                        <div class="book-user-star">
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <a href="#" class="view-profile">প্রফাইল দেখুন</a>
-
-                </div>
-                <!-- end feature review card -->
-                <!-- start feature review card -->
-                <div class="featured-review-card">
-                    <img class="user-image" src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/user-large.png'; ?>" />
-                    <h4 class="author-title">Ferdaus Kabir</h4>
-                    <p>১৫ টি রিভিউ দিয়েছেন</p>
-                    <p class="recent-review-title">সাম্প্রতিক রিভিউ</p>
-                    <h5>আপনারে খুঁজিয়া বেড়াই - প্রত্যাবর্তন</h5>
-                    <p class="post-date">Posted 2 days ago</p>
-
-
-                    <div class="book-user-review">
-                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/book.png'; ?>" />
-                        <div class="book-user-info">
-                            <h4>প্রত্যাবর্তন</h4>
-                            <p>আরিফ আজাদ</p>
-                        </div>
-                        <div class="book-user-star">
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <a href="#" class="view-profile">প্রফাইল দেখুন</a>
-
-                </div>
-                <!-- end feature review card -->
-                <!-- start feature review card -->
-                <div class="featured-review-card">
-                    <img class="user-image" src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/user-large.png'; ?>" />
-                    <h4 class="author-title">Ferdaus Kabir</h4>
-                    <p>১৫ টি রিভিউ দিয়েছেন</p>
-                    <p class="recent-review-title">সাম্প্রতিক রিভিউ</p>
-                    <h5>আপনারে খুঁজিয়া বেড়াই - প্রত্যাবর্তন</h5>
-                    <p class="post-date">Posted 2 days ago</p>
-
-
-                    <div class="book-user-review">
-                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/book.png'; ?>" />
-                        <div class="book-user-info">
-                            <h4>প্রত্যাবর্তন</h4>
-                            <p>আরিফ আজাদ</p>
-                        </div>
-                        <div class="book-user-star">
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                            <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                </svg>
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <a href="#" class="view-profile">প্রফাইল দেখুন</a>
-
-                </div>
-                <!-- end feature review card -->
+                        <!-- end feature review card -->
+                    <?php endwhile; wp_reset_postdata(); ?>
+                <?php endif; ?>
             </div>
        </div>
     </div>
 </div>
 <!-- end recent featured review -->
 
+<?php
+// Step 1: Query the reviews where '_wbr_is_featured_review' is set to 'yes'
+$featured_review_args = array (
+    'post_type'      => 'review',
+    'post_status'    => 'publish',
+    'posts_per_page' => 4,
+    'orderby'        => 'rand',
+    'order'          => 'ASC',
+    'meta_key'       => '_wbr_is_featured_review',
+    'meta_value'     => 'yes',
+    'fields'         => 'ids', // Only fetch the IDs of the reviews to save memory
+);
+
+$featured_reviews = new WP_Query( $featured_review_args );
+
+// Step 2: Collect the product IDs linked to these reviews and ensure uniqueness
+$product_ids = array();
+if ( $featured_reviews->have_posts() ) {
+    foreach ( $featured_reviews->posts as $review_id ) {
+        $product_id = get_post_meta( $review_id, '_product_id', true );
+        if ( $product_id ) {
+            $product_ids[] = $product_id;
+        }
+    }
+}
+
+// Step 3: Make sure the product IDs are unique
+$product_ids = array_unique( $product_ids );
+
+// Step 4: If there are any unique product IDs, query the products (books)
+if ( !empty( $product_ids ) ) {
+    $featured_book_args = array(
+        'post_type'      => 'product', // Assuming 'product' is the post type for books
+        'post_status'    => 'publish',
+        'posts_per_page' => 4, // Match the number of reviews
+        'post__in'       => $product_ids, // Only query the products with the collected unique IDs
+        'orderby'        => 'post__in', // Maintain the same order as the product_ids array
+    );
+
+    $featured_books = new WP_Query( $featured_book_args );
+}
+?>
 
 <!-- recent featured review -->
 <div class="recent-featured-review">
@@ -842,131 +658,74 @@ setInterval(function() {
             <h3>ফিচারড বই</h3>
             <a class="btn-white" href="#">সবগুলো দেখুন</a>
         </div>
-       <div class="recent-slider-wrapper slider-arrow-center">
-            <div class="arrow-prev-btn book-prev-btn"><button type="button"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"> <circle cx="24" cy="24" r="23" fill="white" stroke="#E0E0E0" stroke-width="2"/> <path d="M25.1714 24.0007L20.2217 19.0509L21.6359 17.6367L27.9999 24.0007L21.6359 30.3646L20.2217 28.9504L25.1714 24.0007Z" fill="#1C1E29"/> </svg></button></div>
-            <div class="arrow-next-btn book-next-btn"><button type="button"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"> <circle cx="24" cy="24" r="23" fill="white" stroke="#E0E0E0" stroke-width="2"/> <path d="M25.1714 24.0007L20.2217 19.0509L21.6359 17.6367L27.9999 24.0007L21.6359 30.3646L20.2217 28.9504L25.1714 24.0007Z" fill="#1C1E29"/> </svg></button></div>
+        <div class="recent-slider-wrapper slider-arrow-center">
+            <div class="arrow-prev-btn book-prev-btn">
+                <button type="button">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"> 
+                        <circle cx="24" cy="24" r="23" fill="white" stroke="#E0E0E0" stroke-width="2"/> 
+                        <path d="M25.1714 24.0007L20.2217 19.0509L21.6359 17.6367L27.9999 24.0007L21.6359 30.3646L20.2217 28.9504L25.1714 24.0007Z" fill="#1C1E29"/> 
+                    </svg>
+                </button>
+            </div>
+            <div class="arrow-next-btn book-next-btn">
+                <button type="button">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"> 
+                        <circle cx="24" cy="24" r="23" fill="white" stroke="#E0E0E0" stroke-width="2"/> 
+                        <path d="M25.1714 24.0007L20.2217 19.0509L21.6359 17.6367L27.9999 24.0007L21.6359 30.3646L20.2217 28.9504L25.1714 24.0007Z" fill="#1C1E29"/> 
+                    </svg>
+                </button>
+            </div>
             <div class="featured-slider-book">
 
-                <!-- start feature review card -->
-                <div class="featured-review-card wow fadeInUp" data-wow-offset="100" data-wow-duration="1s" data-wow-delay=".4s">
-                    <img class="book-image" src="<?php echo BOOK_REVIEW_ASSETS . '/images/book/01.png'; ?>" />
-                    <h4 class="author-title">প্রত্যাবর্তন</h4>
-                    <p>আরিফ আজাদ</p>
+                <?php if ( $featured_books->have_posts() ) : ?>
+                    <?php while ( $featured_books->have_posts() ) : $featured_books->the_post(); ?>
+                        <?php 
+                            $product_id     = get_post_meta( get_the_ID(), '_product_id', true );
+                            $book_title     = get_the_title( $product_id );
+                            $authors        = get_the_terms( $product_id, 'authors' );
+                            $post_thumbnail = get_the_post_thumbnail_url( $product_id );
+                            $rating         = get_post_meta( $product_id, '_average_rating', true );
+                            $review_count   = get_post_meta( $product_id, '_review_count', true );
+                        ?>
+                        
+                        <!-- start feature review card -->
+                        <div class="featured-review-card wow fadeInUp" data-wow-offset="100" data-wow-duration="1s" data-wow-delay=".4s">
+                            <a href="<?php echo esc_url( get_the_permalink( $product_id ) ); ?>">
+                                <img class="book-image" src="<?php echo esc_url( $post_thumbnail ); ?>" alt="<?php echo esc_attr( $book_title ); ?>" />
+                            </a>
+                            <a href="<?php echo esc_url( get_the_permalink( $product_id ) ); ?>">
+                                <h4 class="author-title"><?php echo esc_html( $book_title ); ?></h4>
+                            </a>
+                            <?php if ( $authors && ! is_wp_error( $authors ) ) : ?>
+                                <?php foreach ( $authors as $author ) : ?>
+                                    <p><?php echo esc_html( $author->name ); ?></p>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
 
-                    <div class="total-review">
-                        <span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                            </svg>
-                        </span>
-                        <span>4.7</span>
-                        <span>• ২০০ রিভিউ</span>
-                    </div>
+                            <div class="total-review">
+                                <span>
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
+                                    </svg>
+                                </span>
+                                <?php 
+                                $review_rating = wpr_get_total_review_and_average( $product_id ); ?>
+                                <span><?php echo esc_html( wbr_english_to_bengali( $review_rating['average_rating'] ) );  ?></span>
+                                <span>• <?php echo esc_html(  wbr_english_to_bengali( $review_rating['total_reviews'] ) ); ?> রিভিউ</span> <!-- have to do -->
+                            </div>
+                        </div>
+                        <!-- end feature review card -->
+                    <?php endwhile; ?>
+                <?php else : ?>
+                    <p><?php esc_html_e( 'No featured books found.', 'webgen' ); ?></p>
+                <?php endif; ?>
+                <?php wp_reset_postdata(); ?>
 
-                </div>
-                <!-- end feature review card -->
-
-                <!-- start feature review card -->
-                <div class="featured-review-card  wow fadeInUp" data-wow-offset="100" data-wow-duration="1s" data-wow-delay=".6s">
-                    <img class="book-image" src="<?php echo BOOK_REVIEW_ASSETS . '/images/book/01.png'; ?>" />
-                    <h4 class="author-title">প্রত্যাবর্তন</h4>
-                    <p>আরিফ আজাদ</p>
-
-                    <div class="total-review">
-                        <span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                            </svg>
-                        </span>
-                        <span>4.7</span>
-                        <span>• ২০০ রিভিউ</span>
-                    </div>
-                    
-                </div>
-                <!-- end feature review card -->
-
-                <!-- start feature review card -->
-                <div class="featured-review-card  wow fadeInUp" data-wow-offset="100" data-wow-duration="1s" data-wow-delay=".8s">
-                    <img class="book-image" src="<?php echo BOOK_REVIEW_ASSETS . '/images/book/01.png'; ?>" />
-                    <h4 class="author-title">প্রত্যাবর্তন</h4>
-                    <p>আরিফ আজাদ</p>
-
-                    <div class="total-review">
-                        <span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                            </svg>
-                        </span>
-                        <span>4.7</span>
-                        <span>• ২০০ রিভিউ</span>
-                    </div>
-                    
-                </div>
-                <!-- end feature review card -->
-
-                <!-- start feature review card -->
-                <div class="featured-review-card">
-                    <img class="book-image" src="<?php echo BOOK_REVIEW_ASSETS . '/images/book/01.png'; ?>" />
-                    <h4 class="author-title">প্রত্যাবর্তন</h4>
-                    <p>আরিফ আজাদ</p>
-
-                    <div class="total-review">
-                        <span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                            </svg>
-                        </span>
-                        <span>4.7</span>
-                        <span>• ২০০ রিভিউ</span>
-                    </div>
-                    
-                </div>
-                <!-- end feature review card -->
-
-                <!-- start feature review card -->
-                <div class="featured-review-card">
-                    <img class="book-image" src="<?php echo BOOK_REVIEW_ASSETS . '/images/book/01.png'; ?>" />
-                    <h4 class="author-title">প্রত্যাবর্তন</h4>
-                    <p>আরিফ আজাদ</p>
-
-                    <div class="total-review">
-                        <span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                            </svg>
-                        </span>
-                        <span>4.7</span>
-                        <span>• ২০০ রিভিউ</span>
-                    </div>
-                    
-                </div>
-                <!-- end feature review card -->
-
-                <!-- start feature review card -->
-                <div class="featured-review-card">
-                    <img class="book-image" src="<?php echo BOOK_REVIEW_ASSETS . '/images/book/01.png'; ?>" />
-                    <h4 class="author-title">প্রত্যাবর্তন</h4>
-                    <p>আরিফ আজাদ</p>
-
-                    <div class="total-review">
-                        <span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                            </svg>
-                        </span>
-                        <span>4.7</span>
-                        <span>• ২০০ রিভিউ</span>
-                    </div>
-                    
-                </div>
-                <!-- end feature review card -->
-                
             </div>
-       </div>
+        </div>
     </div>
 </div>
 <!-- end recent featured review -->
-
 
 <!-- recent featured review -->
 <div class="recent-featured-review">
@@ -1011,31 +770,8 @@ setInterval(function() {
                                 <div class="user-bio-infor">
                                     <h4>Ferdaus Kabir</h4>
                                 <div class="book-user-star">
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
+                                <?php wbr_get_svg_star_rating_icon(); ?>
+
                                 </div>
                                 </div>
 
@@ -1080,31 +816,8 @@ setInterval(function() {
                                 <div class="user-bio-infor">
                                     <h4>Ferdaus Kabir</h4>
                                 <div class="book-user-star">
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
+                                <?php wbr_get_svg_star_rating_icon(); ?>
+
                                 </div>
                                 </div>
 
@@ -1149,31 +862,7 @@ setInterval(function() {
                                 <div class="user-bio-infor">
                                     <h4>Ferdaus Kabir</h4>
                                 <div class="book-user-star">
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
+                                <?php wbr_get_svg_star_rating_icon(); ?>
                                 </div>
                                 </div>
 
@@ -1218,39 +907,48 @@ setInterval(function() {
                                 <div class="user-bio-infor">
                                     <h4>Ferdaus Kabir</h4>
                                 <div class="book-user-star">
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
+                                <?php wbr_get_svg_star_rating_icon(); ?>
                                 </div>
                                 </div>
-
                                 <p>Posted 2 days ago</p>
                             </div>
+                        </div>
+                    </div>
 
-                            
-        
+                </div>
+                <!-- end feature review card video -->
+
+                <!-- start feature review card video -->
+                <div class="featured-review-card-video">
+                    <div class="featured-review-card-inner">
+                        <video controls="false">
+                            <source src="<?php echo BOOK_REVIEW_ASSETS . '/images/book/video.mp4'; ?>" type="video/mp4">
+                        </video>
+                        <div class="video-overlay"></div>
+                        <div class="play-pause-btn">
+                            <button type="button" class="btn-play activated">                                
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16 29.3334C8.63622 29.3334 2.66669 23.3638 2.66669 16.0001C2.66669 8.63628 8.63622 2.66675 16 2.66675C23.3638 2.66675 29.3334 8.63628 29.3334 16.0001C29.3334 23.3638 23.3638 29.3334 16 29.3334ZM14.1626 11.2195C14.075 11.1611 13.972 11.13 13.8667 11.13C13.5722 11.13 13.3334 11.3687 13.3334 11.6633V20.3369C13.3334 20.4422 13.3646 20.5451 13.423 20.6327C13.5863 20.8778 13.9175 20.9441 14.1626 20.7806L20.6678 16.4438C20.7263 16.4047 20.7766 16.3545 20.8156 16.2959C20.9791 16.0509 20.9128 15.7197 20.6678 15.5563L14.1626 11.2195Z" fill="white"/>
+                                </svg>   
+                                <span>Play</span> 
+                            </button>
+                            <button type="button" class="btn-pause">                                
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="M360-320h80v-320h-80v320Zm160 0h80v-320h-80v320ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>   
+                                <span>pause</span>
+                            </button>
+                        </div>
+                    
+                        <div class="book-user-review">
+                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/book.png'; ?>" />
+                            <div class="book-user-info">
+                                <div class="user-bio-infor">
+                                    <h4>Ferdaus Kabir</h4>
+                                <div class="book-user-star">
+                                <?php wbr_get_svg_star_rating_icon(); ?>
+                                </div>
+                                </div>
+                                <p>Posted 2 days ago</p>
+                            </div>
                         </div>
                     </div>
 
@@ -1287,100 +985,7 @@ setInterval(function() {
                                 <div class="user-bio-infor">
                                     <h4>Ferdaus Kabir</h4>
                                 <div class="book-user-star">
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                </div>
-                                </div>
-
-                                <p>Posted 2 days ago</p>
-                            </div>
-
-                            
-        
-                        </div>
-                    </div>
-
-                </div>
-                <!-- end feature review card video -->
-
-                <!-- start feature review card video -->
-                <div class="featured-review-card-video">
-                    
-                    <div class="featured-review-card-inner">
-
-                        <video controls="false">
-                            <source src="<?php echo BOOK_REVIEW_ASSETS . '/images/book/video.mp4'; ?>" type="video/mp4">
-                        </video>
-
-                        <div class="video-overlay"></div>
-
-                        <div class="play-pause-btn">
-                            <button type="button" class="btn-play activated">                                
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M16 29.3334C8.63622 29.3334 2.66669 23.3638 2.66669 16.0001C2.66669 8.63628 8.63622 2.66675 16 2.66675C23.3638 2.66675 29.3334 8.63628 29.3334 16.0001C29.3334 23.3638 23.3638 29.3334 16 29.3334ZM14.1626 11.2195C14.075 11.1611 13.972 11.13 13.8667 11.13C13.5722 11.13 13.3334 11.3687 13.3334 11.6633V20.3369C13.3334 20.4422 13.3646 20.5451 13.423 20.6327C13.5863 20.8778 13.9175 20.9441 14.1626 20.7806L20.6678 16.4438C20.7263 16.4047 20.7766 16.3545 20.8156 16.2959C20.9791 16.0509 20.9128 15.7197 20.6678 15.5563L14.1626 11.2195Z" fill="white"/>
-                                </svg>   
-                                <span>Play</span> 
-                            </button>
-                            <button type="button" class="btn-pause">                                
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="M360-320h80v-320h-80v320Zm160 0h80v-320h-80v320ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>   
-                                <span>pause</span>
-                            </button>
-                        </div>
-                    
-                        <div class="book-user-review">
-                        <img src="<?php echo BOOK_REVIEW_ASSETS . '/images/review-image/book.png'; ?>" />
-                            <div class="book-user-info">
-                                <div class="user-bio-infor">
-                                    <h4>Ferdaus Kabir</h4>
-                                <div class="book-user-star">
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
-                                    <span>
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.00041 12.1733L3.29811 14.8055L4.34833 9.51994L0.391937 5.86121L5.7433 5.22672L8.00041 0.333344L10.2575 5.22672L15.6088 5.86121L11.6525 9.51994L12.7027 14.8055L8.00041 12.1733Z" fill="#FFAC4B"></path>
-                                        </svg>
-                                    </span>
+                                    <?php wbr_get_svg_star_rating_icon(); ?>
                                 </div>
                                 </div>
                                 <p>Posted 2 days ago</p>

@@ -56,60 +56,60 @@
                         <div class="form-group review-star-icon">
                             <p class="form-title">বই এর রেটিং দিন *</p>
                             <label for="field_1" class="star">
-                                <input type="radio" id="field_1" name="review_star" value="1">                                
+                                <input type="radio" id="field_1" name="review-rating" value="1">                                
                                 <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M22.0011 33.4767L9.06973 40.715L11.9578 26.1798L1.07776 16.1183L15.794 14.3734L22.0011 0.916656L28.208 14.3734L42.9242 16.1183L32.0442 26.1798L34.9323 40.715L22.0011 33.4767Z" fill="#DADADA"/>
                                 </svg>
                             </label>
                             <label for="field_2" class="star">
-                                <input type="radio" id="field_2" name="review_star" value="2">                                
+                                <input type="radio" id="field_2" name="review-rating" value="2">                                
                                 <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M22.0011 33.4767L9.06973 40.715L11.9578 26.1798L1.07776 16.1183L15.794 14.3734L22.0011 0.916656L28.208 14.3734L42.9242 16.1183L32.0442 26.1798L34.9323 40.715L22.0011 33.4767Z" fill="#DADADA"/>
                                 </svg>
                             </label>
                             <label for="field_3" class="star">
-                                <input type="radio" id="field_3" name="review_star" value="3">                                
+                                <input type="radio" id="field_3" name="review-rating" value="3">                                
                                 <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M22.0011 33.4767L9.06973 40.715L11.9578 26.1798L1.07776 16.1183L15.794 14.3734L22.0011 0.916656L28.208 14.3734L42.9242 16.1183L32.0442 26.1798L34.9323 40.715L22.0011 33.4767Z" fill="#DADADA"/>
                                 </svg>
                             </label>
                             <label for="field_4" class="star">
-                                <input type="radio" id="field_4" name="review_star" value="4">                                
+                                <input type="radio" id="field_4" name="review-rating" value="4">                                
                                 <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M22.0011 33.4767L9.06973 40.715L11.9578 26.1798L1.07776 16.1183L15.794 14.3734L22.0011 0.916656L28.208 14.3734L42.9242 16.1183L32.0442 26.1798L34.9323 40.715L22.0011 33.4767Z" fill="#DADADA"/>
                                 </svg>
                             </label>
                             <label for="field_5" class="star">
-                                <input type="radio" id="field_5" name="review_star" value="5">                                
+                                <input type="radio" id="field_5" name="review-rating" value="5">                                
                                 <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M22.0011 33.4767L9.06973 40.715L11.9578 26.1798L1.07776 16.1183L15.794 14.3734L22.0011 0.916656L28.208 14.3734L42.9242 16.1183L32.0442 26.1798L34.9323 40.715L22.0011 33.4767Z" fill="#DADADA"/>
                                 </svg>
                             </label>
-                         </div>
+                        </div>
+
                             
-                            <div class="current-campign">
-                                <h4>আপনার রিভিউ চলমান ক্যাম্পেইন এ সাবমিট করুতে ইচ্ছুক?</h4>
-                                <p>চলমান রিভিউ গুলি</p>
-                                <div class="current-campign-form">
-                                    <div class="current-campigin-field">
-                                        <label for="al-fatah">
-                                            <input type="checkbox" name="al-fatah" id="al-fatah">
-                                            <span>আল ফাতাহ রিভিউ কন্টেস্ট</span>
-                                        </label>
-                                    </div>
-                                    <div class="current-campigin-field">
-                                        <label for="fajar-fair">
-                                            <input type="checkbox" name="fajar-fair" id="fajar-fair">
-                                            <span>ফাজার ফেয়ার ঈদ কন্টেস্ট</span>
-                                        </label>
-                                    </div>
+                        <div class="current-campign">
+                            <h4>আপনার রিভিউ চলমান ক্যাম্পেইন এ সাবমিট করুতে ইচ্ছুক?</h4>
+                            <p>চলমান রিভিউ গুলি</p>
+                            <div class="current-campign-form">
+                                <div class="current-campigin-field">
+                                    <label for="al-fatah">
+                                        <input type="checkbox" name="al-fatah" id="al-fatah">
+                                        <span>আল ফাতাহ রিভিউ কন্টেস্ট</span>
+                                    </label>
+                                </div>
+                                <div class="current-campigin-field">
+                                    <label for="fajar-fair">
+                                        <input type="checkbox" name="fajar-fair" id="fajar-fair">
+                                        <span>ফাজার ফেয়ার ঈদ কন্টেস্ট</span>
+                                    </label>
                                 </div>
                             </div>
-
-                            <div class="submit-button-here">
-                                <input type="submit" id="submit-here" class="ct-form-submit-btn" name="publish" value=" + এখনি সাবমিট করুন">
-                                <button type="submit" class="btn-white">ড্রাফট সেভ করুন</button>
-                            </div>
+                        </div>
+                        <div class="submit-button-here">
+                            <input type="submit" id="submit-here" class="ct-form-submit-btn" name="publish" value=" + এখনি সাবমিট করুন">
+                            <button type="submit" class="btn-white">ড্রাফট সেভ করুন</button>
+                        </div>
                         </form>
                     </div>
                     <!-- end review form -->

@@ -136,14 +136,14 @@ class Ajax {
         if (!isset($file_data['product-image-id']) || empty($file_data['product-image-id']['tmp_name']) || $file_data['product-image-id']['error'] == 4) {
             $errors[] = 'You must provide an image for review.';
         }
-    
-        if (empty($post_data['review-rating'])) {
+
+        if ( empty( $post_data['review-rating'] ) ) {
             $errors[] = 'You must provide a rating.';
         }
     
-        if (empty($post_data['publish-status'])) {
-            $errors[] = 'You must choose a publish status.';
-        }
+        // if ( empty( $post_data['publish-status'] ) ) {
+        //     $errors[] = 'You must choose a publish status.';
+        // }
     
         return $errors;
     }

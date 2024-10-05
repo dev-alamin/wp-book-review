@@ -94,6 +94,7 @@ final class Book_Review {
         new Book\Review\Custom_Post();
         new \Book\Review\Admin\Metabox();
         new \Book\Review\Miscellaneous();
+        new \Book\Review\Admin\Options();
 
         // new Book\Review\Woocommerce\Create_Post();
 

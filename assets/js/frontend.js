@@ -185,9 +185,6 @@ $(document).on('click', '#load-more-reviews', function () {
         content_style: 'body { font-family: Arial, sans-serif; font-size: 14px; }'
     });
 
-    
-    
-
     // Handle form submission via AJAX
     $('#review-form').on('submit', function(e) {
         e.preventDefault();
@@ -685,9 +682,6 @@ $('.campaign-review-slider').slick({
     
         $(this).removeClass("activated");
 
-    });
-    
-
-
+    }); 
 });
 

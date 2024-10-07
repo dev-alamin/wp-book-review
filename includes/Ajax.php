@@ -200,6 +200,7 @@ class Ajax {
      */
     private function create_review_post($post_data, $product_image_id) {
         $post_status = sanitize_text_field( $post_data['publish-status'] );
+        
         $status = '';
         if( $post_status == 'publish' ) {
             $status = 'pending';
@@ -208,22 +209,22 @@ class Ajax {
         }
 
         $review_post = array(
-            'post_title' => sanitize_text_field($post_data['review-title']),
-            'post_content' => wp_kses_post($post_data['review-content']),
-            'post_status' => $status,
-            'post_type' => 'review',
-            'meta_input' => array(
-                '_product_id' => absint($post_data['product-id']),
-                '_review_rating' => intval($post_data['review-rating']),
+            'post_title'   => sanitize_text_field( $post_data['review-title'] ),
+            'post_content' => wp_kses_post( $post_data['review-content'] ),
+            'post_status'  => $status,
+            'post_type'    => 'review',
+            'meta_input'   => array(
+                '_product_id'       => absint( $post_data['product-id'] ),
+                '_review_rating'    => intval( $post_data['review-rating'] ),
                 '_product_image_id' => $product_image_id,
-                '_campaign_id' => absint($post_data['campaign_id']),
+                '_campaign_id'      => absint($post_data['campaign_id']),
             )
         );
     
         $review_post_id = wp_insert_post($review_post);
     
-        if ($review_post_id && !is_wp_error($review_post_id)) {
-            set_post_thumbnail($review_post_id, $product_image_id);
+        if ( $review_post_id && ! is_wp_error( $review_post_id ) ) {
+            set_post_thumbnail( $review_post_id, $product_image_id );
         }
     
         return $review_post_id;

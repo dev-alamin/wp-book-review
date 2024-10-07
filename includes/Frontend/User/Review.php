@@ -26,9 +26,9 @@ class Review {
             $this->display_review_submission_form();
         }
         
-        if( $review ) {
-            $this->review_list();
-        }
+        // if( $review ) {
+        //     $this->review_list();
+        // }
         
         return ob_get_clean();
     }
@@ -62,7 +62,7 @@ class Review {
         
         $error_message = $this->get_error_message( __FILE__, __LINE__ );
 
-        $rev_file =__DIR__ . '/../views/review-archive.php';
+        $rev_file =__DIR__ . '/../views/review-list.php';
 
         if( file_exists( $file ) ) {
             include $rev_file;

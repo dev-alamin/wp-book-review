@@ -8,7 +8,7 @@ if( $paged == 1 ) :
 $archive_featured_review = array (
     'post_type'      => 'review',
     'post_status'    => 'publish',
-    'posts_per_page' => 4,
+    'posts_per_page' => 3,
     'orderby'        => 'rand',
     'order'          => 'ASC',
     'meta_key'       => ['_wbr_is_top_featured_review', '_wbr_is_featured_review'],
@@ -96,9 +96,13 @@ $options      = get_option( 'wbr_archive_promo_options' );
                                     <div class="book-review-thumbnail">
                                          <?php the_post_thumbnail('full'); ?>
                                         <div class="book-list">
-                                            <img src="<?php echo esc_url( $product_thumbnail ); ?>" alt="<?php esc_attr( get_the_title( $product_id ) ); ?>" />
+                                            <a href="<?php echo esc_url( get_the_permalink( $product_id ) ); ?>">
+                                                <img src="<?php echo esc_url( $product_thumbnail ); ?>" alt="<?php esc_attr( get_the_title( $product_id ) ); ?>" />
+                                            </a>
                                             <div class="book-list-content">
-                                                <h4><?php echo esc_html( get_the_title( $product_id ) ); ?></h4>
+                                               <a href="<?php echo esc_url( get_the_permalink( $product_id ) ); ?>">
+                                                    <h4><?php echo esc_html( get_the_title( $product_id ) ); ?></h4>
+                                               </a>
                                                 <p>
                                                 <?php if( ! empty( $authors ) ):
                                                 foreach ( $authors as $author ): ?>
@@ -126,7 +130,7 @@ $options      = get_option( 'wbr_archive_promo_options' );
                                         </div>
                                     </div>
                                     <div class="book-review-content">
-                                        <a href="<?php the_permalink(); ?>"><?php the_title( '<h4>', '</h4>' ); ?></a>
+                                        <a class="review-title" href="<?php the_permalink(); ?>"><?php the_title( '<h4>', '</h4>' ); ?></a>
                                         <p>  <?php echo esc_html( wp_trim_words( get_the_content(), '55', '' ) ); ?></p>
                                         <a href="<?php the_permalink(); ?>"><?php esc_html_e( 'সম্পূর্ণ রিভিউ পড়ুন ', 'wbr' ); ?></a>
                                     </div>
@@ -199,7 +203,6 @@ $options      = get_option( 'wbr_archive_promo_options' );
     <div class="container">
 
         <div class="book-review-wrapper">
-
             <div class="book-prize-left wow fadeInRight" data-wow-offset="100" data-wow-duration="1s" data-wow-delay=".3s">
                 <img src="<?php echo esc_url( wp_get_attachment_image_url( carbon_get_theme_option( 'wbr_book_review_logo' ), 'full' ) ); ?>" class="prize-logo" />
                 <h3><?php echo esc_html( carbon_get_theme_option( 'wbr_book_review_heading' ) ); ?></h3>

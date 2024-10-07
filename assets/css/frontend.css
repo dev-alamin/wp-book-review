@@ -2024,7 +2024,7 @@ p.author-title {
 }
 
 
-.book-review-list .book-review-content  a{
+.book-review-list .book-review-content  a:not(.review-title){
     background: #F6F2FF;
     padding: 8px 16px;
     border-radius: 8px;
@@ -3656,8 +3656,144 @@ div#review-submission-form {
     width: calc(30% - 20px);
     background: #fff;
     position: sticky;
-    height: 300px;
-    top: 100px;
+    height: 550px;
+    top: 60px;
+    padding: 24px;
+    box-shadow: 0px 2px 4px 0px #00000014;
+    border-radius: 12px;
+}
+
+
+
+.fajar_writer-description a {
+    color: #2A007C;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    display: block;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #EDEDED;
+    padding-bottom: 20px;
+}
+
+.book-sticky-bar .author-review.book-info{
+    flex-wrap: wrap;
+}
+
+.book-sticky-bar .book-info ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+}
+
+.book-sticky-bar .book-info ul li{
+    width: calc( 50% - 10px );
+}
+
+.book-sticky-bar .book-info ul li span{
+    color: #747378;
+    font-size: 12px;
+    line-height: 15px;
+    display: block;
+    width: 100%;
+}
+
+.book-sticky-bar .book-info ul li  strong,.book-sticky-bar .book-info ul li  a{
+    font-size: 14px;
+    line-height: 18px;
+    color: #1F1E22;
+}
+
+.book-sticky-bar .book-info ul li strong.price-item span bdi{
+    color: #1F1E22;
+}
+
+.book-sticky-bar .book-info ul li  strong.price-item {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.book-sticky-bar .book-info ul li strong.price-item span {
+    width: auto;
+    font-size: 14px;
+    font-weight: 700;
+    opacity: 1;
+    color: #1F1E22;
+}
+
+.book-sticky-bar .book-info ul li strong.price-item del {
+    margin-right: 10px;
+}
+
+.book-sticky-bar  .price-btn {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    justify-content: center;
+}
+
+.book-sticky-bar  .price-btn  .btn.btn-style-rectangle.btn-color-primary {
+    line-height: 28px;
+}
+
+.book-sticky-bar  .price-btn  .btn.btn-style-rectangle.btn-color-primary:hover{
+    background: #000000 !important;
+    color: #fff !important;
+}
+
+.price-top-title{
+    margin-bottom: 4px;
+}
+
+.book-sticky-bar .book-info ul li  strong.price-item span bdi{
+    display: flex;
+}
+
+.book-sticky-bar .book-info ul li strong.rating-title label {
+    font-size: 14px;
+    line-height: 18px;
+    color: #1F1E22;
+    font-weight: 700;
+}
+
+.book-sticky-bar .book-info .review-book-img {
+    width: 100%;
+}
+
+.book-sticky-bar .book-info .review-book-img a{
+    margin: 0 auto;
+    display: table;
+}
+
+.book-sticky-bar .book-info .review-book-img a img{
+    height: 200px;
+    object-fit: cover;
+    margin: auto;
+    display: table;
+}
+
+.book-sticky-bar .write-name-title {
+    text-align: center;
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 700;
+    color: #1F1E22;
+}
+
+.book-sticky-bar .write-name-title a{
+    color: #1F1E22;
+}
+
+.book-sticky-bar .write-name-title a{
+    display: block;
+    text-align: center;
+}
+
+.book-sticky-bar .book-info{
+    padding: 0;
+    width: 100%;
 }
 
 .breadcrumb ul li {
@@ -3682,7 +3818,56 @@ div#review-submission-form {
     color: #1F1E22;
 }
 
+
+/* fajar-post-a-comment */
+.fajar-post-a-comment{
+    box-shadow: 0px 2px 4px 0px #00000014;
+    padding: 40px;
+    margin: 20px 0;
+    background: #fff;
+    border-radius: 12px;
+}
+
+.fajar-post-a-comment .book-review-card {
+    box-shadow: none;
+    background: transparent;
+    border-radius: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #EDEDED;
+    padding-bottom: 20px;
+}
+
+.fajar-post-a-comment .book-review-card:last-child{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.fajar-post-a-comment .book-review-card .book-user-review{
+    border-bottom: 0;
+}
+
+/* end fajar-post-a-comment */
+
   @media screen and (max-width: 1024px) {
+
+    section.wp-single-wbr.wbr-single-bg {
+        padding: 0 15px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-review-content-wrapper .wbr-review-image img {
+        margin-top: 0;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-review-content-wrapper {
+        padding: 16px;
+        padding-top: 30px;
+    }
+
+    .fajar-post-a-comment {
+        padding: 24px;
+    }
+
     .wbr-archive-slider-single{
         height: 540px;
     }
@@ -3694,9 +3879,33 @@ div#review-submission-form {
     .post-a-review-wrapper-item{
         margin-bottom: 40px;
     }
+
+    .wp-single-wbr .wbr-review-content {
+        width: 100%;
+    }
+
+    .book-sticky-bar {
+        position: relative;
+        height: auto;
+        top: 0;
+        padding: 24px;
+        box-shadow: 0px 2px 4px 0px #00000014;
+        border-radius: 12px;
+        width: 100%;
+    }
+
+    .wp-single-wrapper {
+        flex-direction: column-reverse;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-review-text p {
+        font-size: 20px;
+        line-height: 32px;
+    }
   }
 
   @media screen and (max-width: 768px) {
+
     .wbr-archive-slider-single .slider-content h2{
         font-size: 40px;
         line-height: 50px;
@@ -3713,6 +3922,7 @@ div#review-submission-form {
   }
 
   @media screen and (max-width: 568px) {
+
     .wbr-archive-slider-single{
         height: 400px;
     }
@@ -3734,6 +3944,38 @@ div#review-submission-form {
         padding: 8px 16px;
         font-size: 14px;
       }
+
+      .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team {
+        text-align: center;
+        margin-top: 29px;
+        display: block;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-book-meta-info {
+        position: relative;
+        margin: 0 auto !important;
+        display: table;
+    }
+
+    .wbr-team-box {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-product-user .wbr-product-team ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0;
+        padding-left: 17px;
+        margin-bottom: 0 !important;
+        margin-top: 17px;
+        margin-bottom: 20px !important;
+    }
+
+    .wp-single-wbr .wbr-review-content .wbr-review-text p {
+        font-size: 16px;
+        line-height: 26px;
+    }
   }
 
   .wbr-featured-campaign-archive .fetured-campaign-info .timer div{

@@ -519,3 +519,34 @@ function wbr_get_svg_star_rating_icon( $rating = 5 ) {
         echo '<span style="opacity: 0.2;">' . $star_svg . '</span>';
     }
 }
+
+function wbr_convert_english_date_to_bengali( $english_date ) {
+    // Array to replace English month names with Bengali month names
+    $months = [
+        'January'   => 'জানুয়ারি',
+        'February'  => 'ফেব্রুয়ারি',
+        'March'     => 'মার্চ',
+        'April'     => 'এপ্রিল',
+        'May'       => 'মে',
+        'June'      => 'জুন',
+        'July'      => 'জুলাই',
+        'August'    => 'আগস্ট',
+        'September' => 'সেপ্টেম্বর',
+        'October'   => 'অক্টোবর',
+        'November'  => 'নভেম্বর',
+        'December'  => 'ডিসেম্বর'
+    ];
+    
+    // Convert the English date into the desired format (e.g., "12 August 2024")
+    $formatted_date = date( 'j F Y', strtotime( $english_date ) );
+
+    // Replace the English month names with Bengali month names
+    foreach ( $months as $english => $bengali ) {
+        $formatted_date = str_replace( $english, $bengali, $formatted_date );
+    }
+
+    // Replace English digits with Bengali digits
+    $formatted_date = wbr_english_to_bengali( $formatted_date );
+
+    return $formatted_date;
+}

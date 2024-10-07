@@ -81,6 +81,7 @@ class Metabox {
             ->add_fields( array(
                 // Repeater field for prizes
                 Field::make( 'text', 'campaign_name', 'Campaign Name' ),
+                Field::make( 'text', 'campaign_total_prize_amount', 'Total Prize Amount' ),
                 Field::make( 'complex', 'prizes', 'Prizes' )
                     ->set_layout( 'tabbed-horizontal' )
                     ->add_fields( array(

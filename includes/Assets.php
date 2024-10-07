@@ -170,7 +170,6 @@ class Assets {
                     wp_enqueue_style( 'wbr-style-summernote' );
                     
                     wp_enqueue_script( 'wbr-simplebar' );
-                    wp_enqueue_script( 'wbr-script' );
                     wp_enqueue_script( 'tiny-mce' );
                     wp_enqueue_script( 'slick-js' );
                     wp_enqueue_script( 'wbr-wow-js' );
@@ -178,6 +177,7 @@ class Assets {
                     wp_enqueue_script( 'wbr-flip-js' );
                     wp_enqueue_script( 'wbr-select2' );
                     wp_enqueue_script( 'wbr-summernote-js' );
+                    wp_enqueue_script( 'wbr-script' );
                 }
             }
         }

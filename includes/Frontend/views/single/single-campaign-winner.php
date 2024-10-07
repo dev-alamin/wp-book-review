@@ -81,18 +81,6 @@ if ($query->have_posts()) {
                                 <span class="css-1puhnsk-Text">By</span>
                                 <?php echo get_the_author_meta('display_name'); ?>
                                 <span aria-label="Published <?php echo human_time_diff(get_the_time('U'), current_time('timestamp')); ?> ago" role="text" class="css-8qj45b-TimeAgo"><?php echo human_time_diff(get_the_time('U'), current_time('timestamp')); ?> ago</span>
-                                <?php
-                                // $categories = get_the_category();
-                                // if ( ! empty( $categories ) ) {
-                                //     foreach ( $categories as $category ) {
-                                //         echo '<a class="css-edl77t-TextLink-TextLink" href="' . esc_url(get_category_link($category->term_id)) . '">';
-                                //         echo '<span class="css-hxndjc-Track-TextLink">';
-                                //         echo '<span class="css-12xm57y-Flex-Track">';
-                                //         echo '<span class="css-q7znrj-Text">' . $category->name . '</span>';
-                                //         echo '</span></span></a>';
-                                //     }
-                                // }
-                                ?>
                             </p>
                         </div>
                     </div>

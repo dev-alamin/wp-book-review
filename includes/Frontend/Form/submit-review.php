@@ -89,25 +89,50 @@
 
                             
                         <div class="current-campign">
-                            <h4>আপনার রিভিউ চলমান ক্যাম্পেইন এ সাবমিট করুতে ইচ্ছুক?</h4>
-                            <p>চলমান রিভিউ গুলি</p>
-                            <div class="current-campign-form">
-                                <div class="current-campigin-field">
-                                    <label for="al-fatah">
-                                        <input type="checkbox" name="al-fatah" id="al-fatah">
-                                        <span>আল ফাতাহ রিভিউ কন্টেস্ট</span>
-                                    </label>
-                                </div>
-                                <div class="current-campigin-field">
-                                    <label for="fajar-fair">
-                                        <input type="checkbox" name="fajar-fair" id="fajar-fair">
-                                        <span>ফাজার ফেয়ার ঈদ কন্টেস্ট</span>
-                                    </label>
-                                </div>
-                            </div>
+                            <h4><?php esc_html_e( 'আপনার রিভিউ চলমান ক্যাম্পেইন এ সাবমিট করুতে ইচ্ছুক?', 'wbr' ); ?></h4>
+                            <p><?php echo esc_html_e( 'চলমান রিভিউ গুলি', 'wbr' ); ?></p>
+
+                            <?php
+                                // Query to retrieve all products
+                                $campign_query = new WP_Query(array(
+                                    'post_type'      => 'review-campaign',
+                                    'posts_per_page' => -1,
+                                    'post_status'    => 'publish',
+                                    'meta_query'     => array(
+                                        array(
+                                            'key'     => '_last_submission_date',
+                                            'value'   => date('Y-m-d'),
+                                            'compare' => '>=',
+                                            'type'    => 'DATE'
+                                        )
+                                    )
+                                ));
+                                
+                                if ($campign_query->have_posts()) { ?>
+                                        <div class="current-campign-form">
+                                <?php 
+                                    while ($campign_query->have_posts()) {
+                                        $campign_query->the_post();
+                                        ?>
+                                        <div class="current-campigin-field">
+                                            <label for="<?php echo get_the_ID(); ?>">
+                                                <input type="checkbox" name="<?php echo get_the_ID(); ?>" id="<?php echo get_the_ID(); ?>">
+                                                <span><?php the_title(); ?></span>
+                                            </label>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+                                        </div>
+                                    <?php 
+                                }
+                                wp_reset_postdata(); // Restore global post data
+                                ?>
+                            </select>
                         </div>
                         <div class="submit-button-here">
                             <input type="submit" id="submit-here" class="ct-form-submit-btn" name="publish" value=" + এখনি সাবমিট করুন">
+                            <!-- <input type="submit" id="submit-draft" class="btn-white" name="draft" value="ড্রাফট সেভ করুন"> -->
                             <button type="submit" class="btn-white">ড্রাফট সেভ করুন</button>
                         </div>
                         </form>
@@ -138,10 +163,7 @@
                                     <span>কপিরাইট ইমেজ, বা কন্টেন্ট এর যথাযথ ক্রেডিট দিন।</span>
                                 </li>
                             </ul>
-
                             <button class="first-reviewer btn-white" data-bs-toggle="modal" data-bs-target="#wbrUserAgreement">সম্পূর্ণ নীতিমালা পড়ুন</button>
-
-                            
                         </div>
                     </div>
                 </div>
@@ -150,6 +172,14 @@
     </div>
 </div>
 
+<script> 
+jQuery(document).ready(function($){
+    $('.current-campign-form input[type="checkbox"]').on('change', function() {
+        // Uncheck all checkboxes except the one that was just clicked
+        $('.current-campign-form input[type="checkbox"]').not(this).prop('checked', false);
+    });
+});
+</script>
 
 <?php 
     $file = __DIR__ . '/../views/user-agreement-modal.php'; 

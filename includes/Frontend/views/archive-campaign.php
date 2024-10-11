@@ -38,8 +38,8 @@ if ($campaign_query->have_posts()) : ?>
  <section class="campaign-review">
     <div class="container">
         <div class="book-review-top">
-            <h3>বর্তমান ক্যাম্পেইন</h3>
-            <a class="btn-white" href="/all-review">সব রিভিউ দেখুন</a>
+            <h3><?php esc_html_e( 'বর্তমান ক্যাম্পেইন', 'wbr' ); ?></h3>
+            <a class="btn-white" href="/all-review"><?php esc_attr_e( 'সব রিভিউ দেখুন', 'wbr' ); ?></a>
         </div>
 
         <div class="recent-campaign-wrapper slider-arrow-center">
@@ -66,14 +66,14 @@ if ($campaign_query->have_posts()) : ?>
                             $prizes = carbon_get_post_meta( get_the_ID(), 'prizes' );
                             if ( ! empty( $prizes ) && ! empty( carbon_get_post_meta( get_the_ID(), 'campaign_total_prize_amount' ) ) ) : ?>
                                 <div class="campaign-content-list-item">
-                                    <p>সর্বমোট প্রাইজ মানি</p>
+                                    <p><?php esc_html_e( 'সর্বমোট প্রাইজ মানি', 'wbr' ); ?></p>
                                    <strong> <?php echo get_woocommerce_currency_symbol() .  carbon_get_post_meta( get_the_ID(), 'campaign_total_prize_amount' ); ?></strong>
                                 </div>
                             <?php endif; ?>
 
                             <?php if( ! empty( wbr_get_campaign_days_left( get_the_ID() ) ) ): ?>
                                 <div class="campaign-content-list-item">
-                                    <p>শেষ সময়</p>
+                                    <p><?php esc_html_e( 'শেষ সময়', 'wbr' ); ?></p>
                                     <?php $raw_date = carbon_get_post_meta( get_the_ID(), 'last_submission_date' ); ?>
                                     <strong><?php  echo wbr_convert_english_date_to_bengali( $raw_date ); ?></strong>
 
@@ -111,11 +111,11 @@ $recent_eneded_camp = new WP_Query(
 
 if ($recent_eneded_camp->have_posts()) : ?>
 <!-- recent campaign review -->
- <section class="campaign-review">
+ <section class="campaign-review mb-3">
     <div class="container">
         <div class="book-review-top">
-            <h3>বিগত দিনের ক্যাম্পেইন</h3>
-            <a class="btn-white" href="/all-review">সব রিভিউ দেখুন</a>
+            <h3><?php esc_html_e( 'বিগত দিনের ক্যাম্পেইন', 'wbr' ); ?></h3>
+            <a class="btn-white" href="/all-review"><?php esc_html_e( 'সব রিভিউ দেখুন', 'wbr' ); ?></a>
         </div>
 
         <div class="recent-campaign-wrapper slider-arrow-center">
@@ -129,7 +129,7 @@ if ($recent_eneded_camp->have_posts()) : ?>
                 <div class="campaign-review-card">
                     <div class="campaign-review-card-inner">
                         <a href="<?php the_permalink(); ?>">
-                            <?php 
+                            <?php
                             if( has_post_thumbnail() ) {
                                 the_post_thumbnail('medium', ['class'=> 'cover-image' ] );
                             }
@@ -138,25 +138,35 @@ if ($recent_eneded_camp->have_posts()) : ?>
                         <div class="campaign-content">
                             <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                             <div class="campaign-content-list">
-                            <?php
-                            $prizes = carbon_get_post_meta( get_the_ID(), 'prizes' );
-                            if ( ! empty( $prizes ) && ! empty( carbon_get_post_meta( get_the_ID(), 'campaign_total_prize_amount' ) ) ) : ?>
-                                <div class="campaign-content-list-item">
-                                    <p>সর্বমোট প্রাইজ মানি</p>
-                                   <strong> <?php echo get_woocommerce_currency_symbol() .  carbon_get_post_meta( get_the_ID(), 'campaign_total_prize_amount' ); ?></strong>
-                                </div>
-                            <?php endif; ?>
-
                             <?php if( ! empty( wbr_get_campaign_days_left( get_the_ID() ) ) ): ?>
                                 <div class="campaign-content-list-item">
-                                    <p>শেষ সময়</p>
-                                    <?php $raw_date = carbon_get_post_meta( get_the_ID(), 'last_submission_date' ); ?>
+                                    <p><?php esc_html_e( 'তারিখ', 'wbr' ); ?></p>
+                                    <?php $raw_date = carbon_get_post_meta( get_the_ID(), 'result_publish_date' ); ?>
                                     <strong><?php  echo wbr_convert_english_date_to_bengali( $raw_date ); ?></strong>
 
                                     <!-- <strong>১২ আগস্ট ২০২৪</strong> -->
                                 </div>
                             <?php endif; ?>
 
+                           <?php 
+                           $all_winners = wbr_get_campaign_winners( get_the_ID(), 1 ); // -1 for all winners
+
+                           if ( ! empty( $all_winners ) ) {
+                               foreach ( $all_winners as $winner ) {
+                                   $author_url = get_author_posts_url(  $winner['id'] );
+                                   echo '<div class="campaign-winner campaign-content-list-item">';
+                                   echo '<p>বিজয়ী</p>';
+                                   echo '<div class="author-box d-flex">';
+                                   echo '<a class="author-box-image" href="' . esc_url( $author_url ) . '">' . get_avatar( $author_id, 96, '', '', ). '</a>';
+                                   echo '<a href="' . esc_url( $author_url ) . '">';
+                                   echo '<strong>' . esc_html( ucwords( $winner['author'] ) ) . '</strong>';
+                                   echo '</a>';
+                                   echo '</div>';
+                                   echo '</div>';
+                               }
+                           }
+                           
+                           ?>
                             </div>
                             <a href="<?php the_permalink(); ?>" class="btn-white"><?php esc_html_e( 'বিস্তারিত', 'wbr' ); ?></a>
                         </div>

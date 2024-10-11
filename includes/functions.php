@@ -550,3 +550,76 @@ function wbr_convert_english_date_to_bengali( $english_date ) {
 
     return $formatted_date;
 }
+
+function wbr_get_campaign_winners( $post_id, $limit = -1 ) {
+    // Get the current post's slug based on the provided post ID
+    $current_post_slug = get_post_field( 'post_name', $post_id );
+
+    // Set up a custom query to fetch the 'review' posts associated with the current campaign
+    $query = new WP_Query( [
+        'post_type'      => 'review',
+        'posts_per_page' => $limit, // Control how many winners to return, -1 for all
+        'tax_query'      => [
+            [
+                'taxonomy' => 'campaign_review',
+                'field'    => 'slug',
+                'terms'    => $current_post_slug,
+            ],
+        ],
+        'meta_key' => '__review_winner_option',
+        'order'    => 'ASC',
+        'orderby'  => 'meta_value_num',
+    ] );
+
+    // Initialize an array to store the winners
+    $winners = [];
+
+    // Check if there are any 'review' posts
+    if ( $query->have_posts() ) {
+        // Loop through each review post
+        while ( $query->have_posts() ) {
+            $query->the_post();
+            $campaign_winner_position = carbon_get_post_meta( get_the_ID(), '_review_winner_option', true );
+
+            // If the winner option is set to something other than 'default'
+            if ( $campaign_winner_position !== 'default' ) {
+
+                // Determine the icon URL based on the winner's position
+                $icon_url = '';
+                switch ( $campaign_winner_position ) {
+                    case '1':
+                        $icon_url = 'https://res.cloudinary.com/jerrick/image/upload/c_fit,h_46,q_auto,w_46/65d3888a68c0b9001dff852f.svg';
+                        break;
+                    case '2':
+                        $icon_url = 'https://res.cloudinary.com/jerrick/image/upload/c_fit,h_46,q_auto,w_46/65d3889a003b2a001d60cadd.svg';
+                        break;
+                    case '3':
+                        $icon_url = 'https://res.cloudinary.com/jerrick/image/upload/c_fit,h_46,q_auto,w_46/65d388ab7c2af2001dc1ba43.png';
+                        break;
+                    default:
+                        $icon_url = 'https://res.cloudinary.com/jerrick/image/upload/c_fit,h_46,q_auto,w_46/65d388b5625c07001c2b1ca1.png';
+                        break;
+                }
+
+                $author_id   = get_post_field('post_author', get_the_ID());
+                $author_data = get_userdata($author_id);
+                $author_name = $author_data ? $author_data->display_name : 'Anonymous';
+                
+                // Add winner data to the array
+                $winners[] = [
+                    'id'       => $author_id,
+                    'title'    => get_the_title(),
+                    'position' => $campaign_winner_position,
+                    'icon_url' => $icon_url,
+                    'author'   => $author_name,
+                ];
+            }
+        }
+
+        // Reset post data
+        wp_reset_postdata();
+    }
+
+    // Return the list of winners
+    return $winners;
+}

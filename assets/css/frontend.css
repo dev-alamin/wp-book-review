@@ -1216,12 +1216,43 @@ height: initial;
 }
 
 .review-campaign-meta-info {
-    background: #171717;
-    padding: 15px;
-    padding-left: 30px;
-    color: #fff;
-    border-radius: 15px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 2px 4px 0px #00000014;
+    margin-bottom: 14px;
 }
+
+.review-campaign-meta-info.sticky{
+    position: sticky;
+    top: 90px;
+}
+
+.large-title-icon {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: #1F1E22;
+    font-size: 20px;
+    line-height: 25px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    width: 100%;
+}
+
+.all-review{
+    margin-bottom: 20px;
+}
+
+.all-review a{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 700;
+    color: #2A007C;
+}
+
+
 .sing-review-campaign-container .content {
     font-size: 18px;
     margin-top: 30px;
@@ -1233,13 +1264,16 @@ height: initial;
 }
 
 .review-campaign-meta-info .join-cta > a {
-    background: var(--wd-primary-color);
-    padding: 12px 20px;
+    background: #2A007C;
+    padding: 16px 20px;
     display: block;
     text-align: center;
     color: #fff;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: 14px;
+    line-height: 18px;
+    border-radius: 12px;
+    font-weight: 700;
 }
 
 .review-campaign-meta-info .join-cta p {
@@ -1283,6 +1317,113 @@ height: initial;
     margin-right: 12px;
     padding: 5px;
 }
+
+.review-campaign-meta-info .prize-details{
+    flex-wrap: wrap;
+}
+
+.small-title-icon {
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 10px;
+    margin-bottom: 14px;
+    width: 100%;
+}
+
+.small-title-icon img,.small-title-icon svg{
+    width: 24px;
+    object-fit: contain;
+}
+
+.small-title-icon .small-title-content{
+    width: calc(100% - 24px - 10px);
+    font-size: 16px;
+    line-height: 21px;
+    color: #1F1E22;
+}
+
+.small-title-icon.with-number .small-title-content {
+    width: calc(100% - 24px - 35px);
+    font-size: 16px;
+    line-height: 21px;
+    color: #1F1E22;
+}
+
+.mt-20{
+    margin-top: 20px;
+}
+
+
+.dashboard-user-info-card {
+    display: flex;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap:16px;
+}
+
+.dashboard-user-info-card .dashboard-user-content {
+    width: calc(100% - 20px - 80px);
+}
+
+.dashboard-user-info-card .dashboard-user-thumbnail {
+    width: 80px;
+    height:80px;
+}
+
+.dashboard-user-info-card .dashboard-user-content  h3{
+    font-size: 24px;
+    line-height: 31px;
+    font-weight: 700;
+    margin-bottom:8px;
+}
+
+.dashboard-user-info-card .dashboard-user-thumbnail img{
+    width: 100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.dashboard-user-info-card .dashboard-user-list{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding-left:0;
+}
+
+.dashboard-user-info-card .dashboard-user-list li{
+    display: flex;
+    gap: 10px;
+    color:#1F1E22;
+    font-size:14px;
+}
+
+.dashboard-user-info-card .dashboard-user-content  h4{
+    margin-bottom:8px;
+    font-size:14px;
+    line-height:18px;
+}
+.dashboard-bg-white{
+    box-shadow: 0px 2px 4px 0px #00000014;
+    background:#fff;
+    border-radius:12px;
+    padding:30px 20px;
+}
+
+@media( max-width:600px ){
+    .dashboard-user-info-card .dashboard-user-list {
+        gap: 4px 10px;
+    }
+
+    .dashboard-user-info-card .dashboard-user-content {
+        width: 100%;
+    }
+}
+
+.dashboard-user-info-card{
+    margin-top: 20px;
+}
+
 
 .review-campaign-meta-info .time-table {
     display: flex;
@@ -2024,7 +2165,7 @@ p.author-title {
 }
 
 
-.book-review-list .book-review-content  a:not(.review-title){
+.book-review-list .book-review-content  a{
     background: #F6F2FF;
     padding: 8px 16px;
     border-radius: 8px;
@@ -3723,10 +3864,6 @@ div#review-submission-form {
     color: #1F1E22;
 }
 
-.book-sticky-bar .book-info ul li strong.price-item del {
-    margin-right: 10px;
-}
-
 .book-sticky-bar  .price-btn {
     display: flex;
     align-items: center;
@@ -3848,6 +3985,133 @@ div#review-submission-form {
 }
 
 /* end fajar-post-a-comment */
+
+
+/* start sing-review-campaign-container */
+.sing-review-campaign-container .single-campaign-wrapper-list{
+    padding: 40px;
+    background: #fff;
+    box-shadow: 0px 2px 4px 0px #00000014;
+    border-radius: 12px;
+}
+
+.review-campaign-thumbnail{
+    border-radius: 12px;
+}
+
+.review-campaign-thumbnail img{
+    min-height: 292px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+
+.sing-review-campaign-container .book-prize-left {
+    width: 384px;
+    position: relative;
+}
+
+.sing-review-campaign-container .book-prize-left h3{
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 66px;
+    color: #2A007C;
+    max-width: 200px;
+}
+
+.sing-review-campaign-container .book-prize-left .prize-identifier {
+    position: absolute;
+    top: 34px;
+    right: 59px;
+}
+
+.sing-review-campaign-container .book-prize-left .prize-title {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.sing-review-campaign-container .book-prize-left .prize-title span{
+    font-size: 20px;
+    line-height: 24px;
+    color: #747378;
+}
+
+.sing-review-campaign-container .book-prize-left .btn-group {
+    gap: 12px;
+}
+
+.sing-review-campaign-container .book-prize-left .btn-group .btn.btn-style-rectangle {
+    border-radius: 12px !important;
+    font-size: 14px;
+    line-height: 18px;
+    padding-top: 11px;
+}
+
+.sing-review-campaign-container .book-prize-left .btn-group .btn-white{
+    padding-top: 13px;
+}
+
+.sing-review-campaign-container  .content h4{
+    font-size: 20px;
+    line-height: 24px;
+    color: #1F1E22;
+    margin-bottom: 20px;
+}
+
+.sing-review-campaign-container  .content ul li,.sing-review-campaign-container  .content ol li,.sing-review-campaign-container  .content p{
+    font-size: 16px;
+    color: #1F1E22;
+    line-height: 24px;
+}
+
+.sing-review-campaign-container  .content ul li,.sing-review-campaign-container  .content ol li{
+    margin-bottom: 4px;
+}
+
+.single-more-book ul{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-left: 0;
+}
+
+.single-more-book ul li{
+    width: 100px;
+}
+
+.single-more-book ul li img{
+    height: 140px;
+    width: 100%;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.single-more-book ul li h6{
+    font-size: 14px;
+    line-height: 18px;
+    color: #1F1E22;
+    margin-bottom: 5px;
+}
+
+.single-more-book ul li p{
+    margin-bottom: 0;
+    font-size: 12px !important;
+    color: #2A007C;
+}
+
+.single-more-book h4.publication {
+    font-size: 14px !important;
+    line-height: 16px !important;
+    color: #1F1E22;
+    margin-bottom: 12px !important;
+}
+
+/* end sing-review-campaign-container */
 
   @media screen and (max-width: 1024px) {
 
@@ -4143,7 +4407,7 @@ div#review-submission-form {
 
 /* tablet version */
 @media (max-width:1100px){
-    .book-review-wrapper .book-prize-left {
+    .book-prize-left {
         width: 100%;
         margin-bottom: 50px;
     }
@@ -4152,12 +4416,12 @@ div#review-submission-form {
         width: calc( 50% - 30px );
     }
 
-    .book-review-wrapper .book-prize-left .prize-identifier {
+    .book-prize-left .prize-identifier {
         top: 0;
         right: 0;
     }
 
-    .book-review-wrapper .book-prize-left h3 {
+    .book-prize-left h3 {
         max-width: calc(100% - 150px);
     }
 
@@ -4248,7 +4512,7 @@ div#review-submission-form {
 
 
 @media (max-width:576px){
-    .book-review-wrapper .book-prize-left .prize-identifier {
+    .book-prize-left .prize-identifier {
         width: 90px;
     }
 
@@ -4285,11 +4549,37 @@ div#review-submission-form {
         width: 100%;
     }
 
-    .book-review-wrapper .book-prize-left h3 {
+    .book-prize-left h3 {
         max-width: calc(100% - 100px);
-        font-size: 30px;
-        line-height: 40px;
-        margin-bottom: 20px;
+        font-size: 30px !important;
+        line-height: 40px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .sing-review-campaign-container .book-prize-left .prize-identifier {
+        right: 88px;
+    }
+
+    .review-campaign-meta-info.sticky {
+        position: relative;
+        top: 0px;
+        margin-top: 20px;
+    }
+
+    .recent-featured-review.book-review-lists {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .recent-slider-wrapper .recent-next-btn button, .recent-slider-wrapper .recent-prev-btn button, .arrow-next-btn button, .arrow-prev-btn button {
+        background-color: transparent;
+        padding: 0;
+        background: transparent;
+        width: 30px;
+    }
+
+    .sing-review-campaign-container .single-campaign-wrapper-list {
+        padding: 20px;
     }
 
     .book-review-wrapper .book-prize-right .prize-money-time .item {
@@ -4350,4 +4640,20 @@ div#review-submission-form {
     .recent-slider-wrapper .recent-prev-btn, .arrow-prev-btn {
         left: -8px;
     }
+}
+
+.campaign-winner.campaign-content-list-item {
+    gap: 8px;
+    align-items: center;
+}
+
+.campaign-content .author-box-image img {
+    max-width: 30px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.campaign-winner.campaign-content-list-item .author-box {
+    gap: 8px;
+    justify-content: center;
 }
